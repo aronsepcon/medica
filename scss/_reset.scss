@@ -1,0 +1,17 @@
+$negro: #000;
+$fondo: #c2c2c2;
+
+* { 
+    box-sizing:border-box; 
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+}
+
+a{
+    color:$negro;
+    text-decoration: none;
+}
+
+ul,li{
+    list-style: none;
+}

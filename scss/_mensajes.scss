@@ -1,0 +1,27 @@
+.modal_mensaje{
+    position: fixed;
+    bottom: 42px;
+    right: -100%;
+    padding: 20px;
+    transition: right .5s;
+    z-index: 3;
+    box-shadow: 13px 5px 6px #000;
+    right:-100%;
+}
+
+.msn_error{
+    background: rgba(253,26,44,.5);
+}
+
+.msn_correct{
+    background: lightgreen;
+}
+
+.msn_info{
+    background: lightskyblue;
+}
+
+.msn_error,.msn_correct,.msn_info{
+    color: #fff;
+    font-size: 2rem;
+}

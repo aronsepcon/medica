@@ -1,0 +1,18 @@
+.columnas_2 {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+}
+
+
+.columnas_4 {
+    display: grid;
+    grid-template-columns: repeat(4,fr);
+}
+
+.columnas_8 {
+    display: grid;
+    grid-template-columns: repeat(4,.5fr 1fr);
+    grid-template-rows: 2rem;
+    column-gap: 10px;
+
+}
