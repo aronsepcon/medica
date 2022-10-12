@@ -3,6 +3,9 @@
 @use "general.scss";
 @use "tamanios.scss";
 @use "distribucion.scss";
+@use "modal.scss";
+@use "margenes.scss";
+@use "loader.scss";
 
 
 /*PARTE DEL INDEX */
@@ -90,9 +93,7 @@ body {
       &:after {
         right:50%; 
       }
-      
     }
-
   }
 
   .highlight {
@@ -228,15 +229,10 @@ button {
       }
     }
     .main__loader { 
-      grid-area: 2 / 2 / 3 / 3;
-      background-color: #f2f7f1;
-      padding: 1rem;
-      border-radius: 10px; 
-
-      iframe {
-        width: 100%;
-        height: 100%;
-      }
+        background-color: #f2f7f1;
+        padding: 1rem;
+        border-radius: 10px;
+        overflow: hidden; 
     }
  }
 
@@ -340,6 +336,56 @@ button {
     }
 }
 
+#atencion__medica{
+    #funciones__vitales{
+      display:flex;
+      justify-content: space-between;
+    }
+    .atencion__medica-2-50cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      column-gap:30px;
+      margin-top: 20px;
+
+      .seccion__izquierda {
+        div {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          margin-bottom: 1rem;
+        }
+      }
+
+      .seccion__derecha {
+        div {
+          div{
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            margin-bottom: 1rem;
+          }
+        }
+      }
+    }
+}
+
+.wrap{
+  #formUpload__data {
+    text-align: center;
+
+    #formUpload__data__process {
+      background:rgba(234,189,196,0.6);
+      width:50%;
+      display:block;
+      margin: 4rem auto;
+      padding: 5rem;
+      border-radius: 20px;
+      border: 2rem dashed rgba(234,189,196,0.9);
+
+        i{
+          font-size: 5rem;
+        }
+    }
+  }
+}
 .bars::-webkit-scrollbar-track{
 	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
 	border-radius: 10px;
@@ -362,15 +408,25 @@ button {
   width: 100%;
   max-height: 62vh;
   overflow: auto;
-  background: #c2c2c2;
+  //background: #c2c2c2;
 
   table {
     font-size: 0.9rem;
     border-collapse: collapse;
   
     thead {
-      background-color: #000;
+      background-color: tomato;
       color: #fff;
+    }
+
+    tbody{
+      font-family: system;
+      font-size: 0.8rem;
+      line-height: 1rem !important;
+
+      tr{
+        border-bottom: 1px solid #c2c2c2;
+      }
     }
   }
 
@@ -388,3 +444,32 @@ button {
     }
 }
 
+.ficha__cabecera{
+  display:grid;
+  grid-template-columns: 1fr 3fr 1fr;
+
+  img {
+    width: 100%;
+  }
+}
+
+.ficha__cuerpo{
+  span{
+    display: block;
+    font-family: serif;
+    line-height: 1.5rem;
+    padding-left: 5px;
+    font-weight: bold;
+  }
+
+  .ficha__cuerpo__data {
+    line-height: 1rem;
+    padding: 4px 5px;
+    font-family: serif;
+
+    input {
+      border: none;
+      outline: none;
+    }
+  }
+}

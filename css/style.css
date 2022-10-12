@@ -15,34 +15,56 @@ ul, li {
   list-style: none;
 }
 
+iframe {
+  border: 1px;
+  width: 100%;
+  height: 100%;
+}
+
 .modal_mensaje {
   position: fixed;
   bottom: 42px;
-  right: -100%;
   padding: 20px;
   -webkit-transition: right 0.5s;
   transition: right 0.5s;
-  z-index: 3;
+  z-index: 9;
   -webkit-box-shadow: 13px 5px 6px #000;
           box-shadow: 13px 5px 6px #000;
   right: -100%;
 }
 
-.msn_error {
-  background: rgba(253, 26, 44, 0.5);
+.msj_error {
+  background: rgba(255, 99, 71, 0.8);
+}
+.msj_error span:before {
+  content: "\f057";
 }
 
-.msn_correct {
-  background: lightgreen;
+.msj_correct {
+  background: rgba(154, 205, 50, 0.8);
+}
+.msj_correct span:before {
+  content: "\f164";
 }
 
-.msn_info {
-  background: lightskyblue;
+.msj_info {
+  background: rgba(95, 158, 160, 0.8);
+}
+.msj_info span:before {
+  content: "\f05a";
 }
 
-.msn_error, .msn_correct, .msn_info {
+.msj_error span, .msj_correct span, .msj_info span {
+  font-size: 20px;
   color: #fff;
+}
+.msj_error span:before, .msj_correct span:before, .msj_info span:before {
+  margin-right: 30px;
   font-size: 2rem;
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .oculto {
@@ -60,6 +82,44 @@ ul, li {
           box-shadow: 5px 7px 6px #414141;
 }
 
+.info__sgi {
+  font-size: 0.8rem;
+  line-height: 1.5rem;
+}
+
+.bordes {
+  border: 1px solid #c2c2c2;
+}
+
+.bordes_izquierda_derecha {
+  border-left: 1px solid #c2c2c2;
+  border-right: 1px solid #c2c2c2;
+}
+
+.mayusculas {
+  text-transform: uppercase;
+}
+
+.enviado {
+  color: green !important;
+}
+
+.no__enviado {
+  color: red !important;
+}
+
+.w25porcen {
+  width: 25% !important;
+}
+
+.w30porcen {
+  width: 30% !important;
+}
+
+.w55porcen {
+  width: 55% !important;
+}
+
 .w150porcen {
   width: 150%;
 }
@@ -68,11 +128,25 @@ ul, li {
   width: 100%;
 }
 
+.h90p {
+  height: 90%;
+}
+
 .columnas_2 {
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: (1fr)[2];
   grid-template-columns: repeat(2, 1fr);
+}
+
+.columnas_8_1fr {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 4px 1fr 4px 1fr 4px 1fr 4px 1fr 4px 1fr 4px 1fr 4px 1fr;
+  grid-template-columns: repeat(8, 1fr);
+  -webkit-column-gap: 4px;
+     -moz-column-gap: 4px;
+          column-gap: 4px;
 }
 
 .columnas_4 {
@@ -114,6 +188,148 @@ ul, li {
   -ms-grid-column: 7;
 }
 
+.columnas_6-1-1-05_filas_2 {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  -ms-grid-columns: 1fr 5px 1fr 5px 0.5fr;
+  grid-template-columns: 1fr 1fr 0.5fr;
+  -webkit-column-gap: 5px;
+     -moz-column-gap: 5px;
+          column-gap: 5px;
+}
+
+.columnas_6-1-1-05_filas_2 > *:nth-child(1) {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+}
+
+.columnas_6-1-1-05_filas_2 > *:nth-child(2) {
+  -ms-grid-row: 1;
+  -ms-grid-column: 3;
+}
+
+.columnas_6-1-1-05_filas_2 > *:nth-child(3) {
+  -ms-grid-row: 1;
+  -ms-grid-column: 5;
+}
+
+.columnas_6-1-1-05_filas_2 > *:nth-child(4) {
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+}
+
+.columnas_6-1-1-05_filas_2 > *:nth-child(5) {
+  -ms-grid-row: 2;
+  -ms-grid-column: 3;
+}
+
+.columnas_6-1-1-05_filas_2 > *:nth-child(6) {
+  -ms-grid-row: 2;
+  -ms-grid-column: 5;
+}
+
+.modal {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.2);
+  top: 0;
+  left: 0;
+  z-index: 35;
+  display: none;
+}
+.modal .inside {
+  background: #fff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  width: 50%;
+  border-radius: 20px;
+  -webkit-box-shadow: 2px 3px 5px #a2a2a2;
+  box-shadow: 2px 3px 5px #a2a2a2;
+  padding: 10px;
+}
+.modal .inside .mail__data {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding: 2rem;
+}
+.modal .inside .mail__data input {
+  height: 2.5rem;
+  border: 1px solid #c2c2c2;
+  border-radius: 8px;
+  padding-left: 20px;
+}
+.modal .inside .mail__data label {
+  margin-top: 5px;
+}
+.modal .inside .mail__data .opciones {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.pl10px {
+  padding-left: 10px;
+}
+
+.textoCentro {
+  text-align: center;
+}
+
+.lds-dual-ring {
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+  position: absolute;
+  top: 45%;
+  left: 45%;
+  -webkit-transform: translate(50%, 50%);
+          transform: translate(50%, 50%);
+}
+
+.lds-dual-ring:after {
+  content: " ";
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border-radius: 50%;
+  border: 6px solid #fff;
+  border-color: #fff transparent #fff transparent;
+  -webkit-animation: lds-dual-ring 1.2s linear infinite;
+          animation: lds-dual-ring 1.2s linear infinite;
+}
+
+@-webkit-keyframes lds-dual-ring {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+@keyframes lds-dual-ring {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
 /*PARTE DEL INDEX */
 body {
   overflow: hidden;
@@ -345,18 +561,10 @@ button:hover {
   color: #000;
 }
 .main .main__loader {
-  -ms-grid-row: 2;
-  -ms-grid-row-span: 1;
-  -ms-grid-column: 2;
-  -ms-grid-column-span: 1;
-  grid-area: 2/2/3/3;
   background-color: #f2f7f1;
   padding: 1rem;
   border-radius: 10px;
-}
-.main .main__loader iframe {
-  width: 100%;
-  height: 100%;
+  overflow: hidden;
 }
 
 /*Historias*/
@@ -460,6 +668,56 @@ button:hover {
   padding-left: 20px;
 }
 
+#atencion__medica #funciones__vitales {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+#atencion__medica .atencion__medica-2-50cols {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 30px 1fr;
+  grid-template-columns: 1fr 1fr;
+  -webkit-column-gap: 30px;
+     -moz-column-gap: 30px;
+          column-gap: 30px;
+  margin-top: 20px;
+}
+#atencion__medica .atencion__medica-2-50cols .seccion__izquierda div {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+  margin-bottom: 1rem;
+}
+#atencion__medica .atencion__medica-2-50cols .seccion__derecha div div {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+  margin-bottom: 1rem;
+}
+
+.wrap #formUpload__data {
+  text-align: center;
+}
+
+.wrap #formUpload__data #formUpload__data__process {
+  background: rgba(234, 189, 196, 0.6);
+  width: 50%;
+  display: block;
+  margin: 4rem auto;
+  padding: 5rem;
+  border-radius: 20px;
+  border: 2rem dashed rgba(234, 189, 196, 0.9);
+}
+.wrap #formUpload__data #formUpload__data__process i {
+  font-size: 5rem;
+}
+
 .bars::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   border-radius: 10px;
@@ -482,15 +740,22 @@ button:hover {
   width: 100%;
   max-height: 62vh;
   overflow: auto;
-  background: #c2c2c2;
 }
 .historias__tabla table {
   font-size: 0.9rem;
   border-collapse: collapse;
 }
 .historias__tabla table thead {
-  background-color: #000;
+  background-color: tomato;
   color: #fff;
+}
+.historias__tabla table tbody {
+  font-family: system;
+  font-size: 0.8rem;
+  line-height: 1rem !important;
+}
+.historias__tabla table tbody tr {
+  border-bottom: 1px solid #c2c2c2;
 }
 
 .navigator__commands {
@@ -506,4 +771,39 @@ button:hover {
 .navigator__commands button {
   background: #4b4b4b;
   height: 2rem !important;
+}
+
+.ficha__cabecera {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 3fr 1fr;
+  grid-template-columns: 1fr 3fr 1fr;
+}
+.ficha__cabecera img {
+  width: 100%;
+}
+
+.ficha__cuerpo span {
+  display: block;
+  font-family: serif;
+  line-height: 1.5rem;
+  padding-left: 5px;
+  font-weight: bold;
+}
+.ficha__cuerpo .ficha__cuerpo__data {
+  line-height: 1rem;
+  padding: 4px 5px;
+  font-family: serif;
+}
+.ficha__cuerpo .ficha__cuerpo__data input {
+  border: none;
+  outline: none;
+}
+
+.cierre_form{
+  background:gray;
+  width: 40px;
+  position: fixed;
+  top: 15px;
+  right: 40px;
 }

@@ -3,6 +3,11 @@
     grid-template-columns: repeat(2,1fr);
 }
 
+.columnas_8_1fr{
+    display: grid;
+    grid-template-columns: repeat(8,1fr);
+    column-gap: 4px;
+}
 
 .columnas_4 {
     display: grid;
@@ -14,5 +19,11 @@
     grid-template-columns: repeat(4,.5fr 1fr);
     grid-template-rows: 2rem;
     column-gap: 10px;
+}
 
+.columnas_6-1-1-05_filas_2{
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr .5fr;
+    column-gap: 5px;
 }

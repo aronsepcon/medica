@@ -12,3 +12,29 @@
         box-shadow: 5px 7px 6px #414141
     }
 }
+
+.info__sgi{
+    font-size: .8rem;
+    line-height: 1.5rem;
+}
+
+.bordes {
+    border: 1px solid #c2c2c2;
+}
+
+.bordes_izquierda_derecha{
+    border-left: 1px solid #c2c2c2;
+    border-right: 1px solid #c2c2c2;
+}
+
+.mayusculas{
+    text-transform: uppercase;
+}
+
+.enviado {
+    color:green !important;
+}
+
+.no__enviado{
+    color: red !important;
+}
