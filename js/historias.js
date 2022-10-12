@@ -177,7 +177,7 @@ $documento_trabajador.onkeypress = (e) => {
                 $centro_costos.value = dataJson.ccostos;
                 $sede__trabajador.value = dataJson.sede;
                 $estado__trabajador.value = dataJson.estado;
-                $tabla__examenes_body.innerHTML = "";
+                $tabla__examenes_body.innerHTML = "";//ver aquui??
             }else{
                 mostrarMensaje("Verifique el N°. Documento","msj_error");
             }
@@ -252,11 +252,11 @@ $tabla__examenes_body.addEventListener("click", e=>{
     let adjunto =  e.target.parentElement.dataset.atach;//VER AQUI
     
         if ( accion == "previewFile" ){ //Y AQUI
-           
+                
                 $frame__adjunto.setAttribute("src", '../hc/'+adjunto);
-               // if(adjunto==!null){
+           //     if(dataJson.lista[index].adjunto==!null){
                     fadeIn($ficha__vistaprevia);
-           /*     } else{
+         /*     } else{
                     fadeIn($form_ingreso)
                 }*/
     }else if (accion == "uploadFile"){
@@ -269,7 +269,6 @@ $tabla__examenes_body.addEventListener("click", e=>{
                 adjunto = e.target.parentElement.dataset.adjunto,
                 clinica = e.target.parentElement.dataset.clinica == 1 ? "MEDEX": "";
             
-        //    $documento_trabajador.addEventListener("click", e => {
                 let data = new FormData();//veraqui u:
                 data.append("documento",$documento_trabajador.value);
                 data.append("funcion","datosColaborador");
@@ -295,44 +294,6 @@ $tabla__examenes_body.addEventListener("click", e=>{
                         mostrarMensaje("Verifique el N°. Documento","msj_error");
                     }
                 })
-        //    });
-
-            
-
-            
-/*
-            let data2 = new FormData();
-                data2.append("documento",$nombres_trabajador.value);
-                data2.append("funcion","nombreColaborador")*/
-            
-       //     if($documento_trabajador.onkeypress==true || $nombres_trabajador.onkeypress == true){
-               
-          //  }
-      /*      else if($nombres_trabajador.onclick==true){
-                fetch('../inc/consultasrrhh.inc.php',{
-                    method: "POST",
-                    body:data2,
-                })
-                .then(function(response){
-                    return response.json();
-                })
-                .then(dataJson => {
-                    if (dataJson.respuesta){
-                        document.getElementById("asunto__correo").value = dataJson.codcos + " EMO - "+ examen +" "+dataJson.nombres;
-                        document.getElementById("nombre__correo").value = dataJson.nombres;
-                        document.getElementById("direccion__correo").value = dataJson.correo;
-                        document.getElementById("fecha__examen").value = fecha;
-                        document.getElementById("id__examen").value = registro;
-                        document.getElementById("adjunto_examen").value = adjunto;
-                        document.getElementById('clinica__examen').value = clinica;
-                    
-                        fadeIn($ficha__medica__correo);
-                    }else{
-                        mostrarMensaje("Verifique el N°. Documento","msj_error");
-                    }
-                })
-            }*/
-    
         } catch (error) {
             mostrarMensaje("Verifique el N°. Documento","msj_error");
         } 
@@ -445,13 +406,9 @@ $mail__accept.onclick = (e) => {
 
 function listarExamenes(){
 
-    /*let data2 = new FormData();
-    data2.append("documento",$nombres_trabajador.value);
-    data2.append("funcion","nombreColaborador")*/
-
   //  if($documento_trabajador.onclick==true || $nombres_trabajador.onclick == true){
 
-    $documento_trabajador.addEventListener("click", e =>{
+//    $documento_trabajador.addEventListener("click", e =>{
         let data = new FormData();
         data.append("documento",$documento_trabajador.value);
         data.append("funcion","listarExamenes");
@@ -523,14 +480,13 @@ function listarExamenes(){
                 mostrarMensaje("No se encontraron examenes","msj_error");
             }
         })
-    });
+  //  });
       
-    $nombres_trabajador.addEventListener("click", e=>{
-
-    let data2 = new FormData();
-    data2.append("documento",$nombres_trabajador.value);
-    data2.append("funcion","nombreColaborador")
-    fetch('../inc/consultasmedicas.inc.php',{
+    /*$nombres_trabajador.addEventListener("click", e=>{
+        let data2 = new FormData();
+        data2.append("documento",$nombres_trabajador.value);
+        data2.append("funcion","nombreColaborador")
+        fetch('../inc/consultasmedicas.inc.php',{
         method: "POST",
         body:data2,
     })

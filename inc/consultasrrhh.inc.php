@@ -87,7 +87,7 @@
                 FROM
                     tabla_aquarius 
                 WHERE
-                    CONCAT(tabla_aquarius.nombres,' ',tabla_aquarius.apellidos) = ?";
+                    CONCAT(tabla_aquarius.apellidos,' ',tabla_aquarius.nombres) = ?";
 
 
             $statement = $pdo->prepare($sql);
