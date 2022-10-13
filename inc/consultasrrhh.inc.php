@@ -30,7 +30,7 @@
                     tabla_aquarius.estado,
                     tabla_aquarius.cut 
                 FROM
-                    tabla_aquarius 
+                    tabla_aquarius
                 WHERE
                     tabla_aquarius.dni = ?";
                    
@@ -87,7 +87,7 @@
                 FROM
                     tabla_aquarius 
                 WHERE
-                    CONCAT(tabla_aquarius.apellidos,' ',tabla_aquarius.nombres) = ?";
+                    CONCAT(tabla_aquarius.nombres,' ',tabla_aquarius.apellidos) = ?";
 
 
             $statement = $pdo->prepare($sql);

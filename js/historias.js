@@ -218,11 +218,11 @@ $nombres_trabajador.onkeypress = (e) => {
                 $sede__trabajador.value = dataJson.sede;
                 $estado__trabajador.value = dataJson.estado;
                 $tabla__examenes_body.innerHTML = "";
+                $documento_trabajador.value = dataJson.dni;
             }else{
                 mostrarMensaje("Verifique el N°. Documento","msj_error");
             }
         })
-
     } catch (error) {
         mostrarMensaje(error,"msj_error");
     }
@@ -236,12 +236,7 @@ $btn__atencion__medica.onclick = (e) => {
 
     return false;
 }
-/*document.body.addEventListener("keydown", function(event) {
-    console.log(event.code, event.keyCode);
-    if (event.code === 'Escape' || event.keyCode === 27) {
-      fadeOut($ficha__vistaprevia);
-    }
-});*/
+
 
 $tabla__examenes_body.addEventListener("click", e=>{
     e.preventDefault();
@@ -253,12 +248,13 @@ $tabla__examenes_body.addEventListener("click", e=>{
     
         if ( accion == "previewFile" ){ //Y AQUI
                 
-                $frame__adjunto.setAttribute("src", '../hc/'+adjunto);
-           //     if(dataJson.lista[index].adjunto==!null){
-                    fadeIn($ficha__vistaprevia);
-         /*     } else{
-                    fadeIn($form_ingreso)
-                }*/
+      /*      if(dataJson.lista[index].adjunto==null){
+                fadeIn($form_ingreso)
+                
+              }else{*/
+                $frame__adjunto.setAttribute("src", '../hc/'+adjunto);        
+                fadeIn($ficha__vistaprevia);
+                //}
     }else if (accion == "uploadFile"){
         $uploadPdf.click(); 
     }else if (accion == "sendMail") {
@@ -406,9 +402,6 @@ $mail__accept.onclick = (e) => {
 
 function listarExamenes(){
 
-  //  if($documento_trabajador.onclick==true || $nombres_trabajador.onclick == true){
-
-//    $documento_trabajador.addEventListener("click", e =>{
         let data = new FormData();
         data.append("documento",$documento_trabajador.value);
         data.append("funcion","listarExamenes");
@@ -480,84 +473,6 @@ function listarExamenes(){
                 mostrarMensaje("No se encontraron examenes","msj_error");
             }
         })
-  //  });
-      
-    /*$nombres_trabajador.addEventListener("click", e=>{
-        let data2 = new FormData();
-        data2.append("documento",$nombres_trabajador.value);
-        data2.append("funcion","nombreColaborador")
-        fetch('../inc/consultasmedicas.inc.php',{
-        method: "POST",
-        body:data2,
-    })
-    .then(function(response){
-        return response.json();
-    })
-    .then(dataJson => {
-        if (dataJson.respuesta){
-            $tabla__examenes_body.innerHTML = "";
-
-            for (let index = 0; index < dataJson.lista.length; index++) {
-                let clinicaExt=null;
-                let tr = document.createElement("tr");
-                let $clase_enviado = dataJson.lista[index].enviado == null ? 'no__enviado' : 'enviado';
-                let $titulo_enviado = dataJson.lista[index].enviado == null ? 'Pendiente Envio' : 'Enviado';
-                let $icono_enviado = dataJson.lista[index].enviado == null ? '<i class="fas fa-external-link-alt"></i>' :'<i class="fas fa-check" style="color:green"></i>';
-                let $icono_cargado = dataJson.lista[index].adjunto == null ? '<i class="fas fa-upload"></i>' : '<i class="fas fa-upload" style="color:green"></i>';
-                let $restricciones = dataJson.lista[index].restricciones == null ? " " : dataJson.lista[index].restricciones;
-                let $recomendaciones = dataJson.lista[index].recomendaciones == null ? " " : dataJson.lista[index].recomendaciones;
-                let $clinica =  dataJson.lista[index].clinica;
-
-                switch($clinica){
-                    case 1:
-                        clinicaExt="MEDEX";
-                        break
-                    default:
-                        clinicaExt="Otros";
-                }
-
-
-                tr.innerHTML = `<td>${clinicaExt}</td>
-                                <td class="pl10px">${dataJson.lista[index].tipo}</td>
-                                <td>${dataJson.lista[index].fecha}</td>
-                                <td>${dataJson.lista[index].aptitud}</td>
-                                <td>${$recomendaciones}</td>
-                                <td>${$restricciones}</td>
-                                <td>${dataJson.lista[index].alergias}</td>
-                                <td>${dataJson.lista[index].sangre}</td>
-                                <td class="textoCentro">
-                                    <a href="${dataJson.lista[index].id}" data-accion="sendMail" 
-                                                                          data-examen="${dataJson.lista[index].tipo}" 
-                                                                          data-fecha="${dataJson.lista[index].fecha}"
-                                                                          data-adjunto="${dataJson.lista[index].adjunto}"
-                                                                          data-clinica="${dataJson.lista[index].clinica}"
-                                                                          class="${$clase_enviado}"
-                                                                          title="${$titulo_enviado}">${$icono_enviado}</a>
-                                </td>
-                                <td class="textoCentro">
-                                    <a href="${dataJson.lista[index].id}" data-accion="previewFile" data-atach="${dataJson.lista[index].adjunto}">
-                                        <i class="fas fa-eye"></i>
-                                    </a>
-                                </td>
-                                <td class="textoCentro">
-                                    <a href="${dataJson.lista[index].id}" data-accion="uploadFile">
-                                        ${$icono_cargado}
-                                    </a>
-                                </td>`;
-
-                $tabla__examenes_body.appendChild(tr);
-            }
-            
-        }else{
-            mostrarMensaje("No se encontraron examenes","msj_error");
-        }
-
-     })
-    })
-   // }
-   /* else if($nombres_trabajador.onclick==true){
-   
-    }*/
 
 };
 

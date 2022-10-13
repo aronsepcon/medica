@@ -145,7 +145,7 @@
         try {
             $respuesta = false;
             $lista = [];
-
+            //OR fichas_api.paciente = ?
             $sql ="SELECT
                         fichas_api.tipoExa, 
                         fichas_api.fecha, 
@@ -157,9 +157,10 @@
                         fichas_api.enviado,
                         fichas_api.alergias,
                         fichas_api.grupoSangre,
-                        fichas_api.clinica
+                        fichas_api.clinica,
+                        fichas_api.paciente
                     FROM
-                        fichas_api
+                        fichas_api 
                     WHERE
                         fichas_api.dni = ? 
                     ORDER BY
