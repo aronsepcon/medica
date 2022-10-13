@@ -54,7 +54,7 @@
            
     </div>
     <div class="modal" id="form_ingreso">
-        <div class="inside w25porcen">
+        <div class="inside w75porcen">
             <button type="button" id="cierre_form_vistp">X</button>
             <h1>No hay documentos en la plataforma</h1>
         </div>
@@ -80,6 +80,7 @@
 	</div>
     <div class="modal" id="atencion__medica">
         <div class="inside w55porcen">
+            <button type="button" id="cierre_atencion">X</button>
             <div><h1>Atencion Médica</h1></div>
             <div>
                 <label for="fecha__atencion">Fecha :</label>
@@ -275,25 +276,6 @@
                     <tbody id="tabla__examenes_body">
                     </tbody>
                        
-                    <!--tbody>
-                        <!?php/*
-                            while($row = $statement2 -> fetch()){
-                                echo "<tr>";
-                                echo "<td>".$row['clinica']."</td>";
-                                echo "<td>".$row['tipoExa']."</td>";
-                                echo "<td>".$row['fecha']."</td>";
-                                echo "<td>".$row['aptitud']."</td>";
-                                echo "<td>".$row['observaciones']."</td>";
-                                echo "<td>".$row['reco1']."</td>";
-                                echo "<td>".$row['alergias']."</td>";
-                                echo "<td>".$row['grupoSangre']."</td>";
-                                echo "<td>c</td>";
-                                echo "<td>v</td>";
-                                echo "<td>cr</td>";
-
-                            }*/
-                        ?>
-                    </tbody-->
                 </table>
         </section>
         <section class="historias__cuerpo__pagina oculto" id="pagina3">

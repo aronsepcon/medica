@@ -47,6 +47,9 @@ const $cierre_form = document.getElementById('cierre_form');
 const $cierre_form_ing = document.getElementById('cierre_form_ing');
 const $mail__accept = document.getElementById('mail__accept');
 
+const $cierre_atencion = document.getElementById('cierre_atencion');
+const $cierre_form_vistp = document.getElementById('cierre_form_vistp')
+
 const $btn__atencion__medica = document.getElementById('btn__atencion__medica');
 const $atencion__medica = document.getElementById('atencion__medica');
 
@@ -244,17 +247,16 @@ $tabla__examenes_body.addEventListener("click", e=>{
     let accion =  e.target.parentElement.dataset.accion;
     
     registro = e.target.parentElement.getAttribute("href");
-    let adjunto =  e.target.parentElement.dataset.atach;//VER AQUI
+    let adjunto =  e.target.parentElement.dataset.atach;
     
-        if ( accion == "previewFile" ){ //Y AQUI
+        if ( accion == "previewFile" ){ 
                 
-      /*      if(dataJson.lista[index].adjunto==null){
-                fadeIn($form_ingreso)
-                
-              }else{*/
+            if(adjunto=="null"){
+                fadeIn($form_ingreso)               
+            }else{
                 $frame__adjunto.setAttribute("src", '../hc/'+adjunto);        
                 fadeIn($ficha__vistaprevia);
-                //}
+                }
     }else if (accion == "uploadFile"){
         $uploadPdf.click(); 
     }else if (accion == "sendMail") {
@@ -353,6 +355,19 @@ $cierre_form_ing.onclick = (e) => {
     e.preventDefault();
 
     fadeOut($ficha__vistaprevia);
+}
+
+$cierre_form_vistp.onclick = (e) => {
+    e.preventDefault();
+
+    fadeOut($form_ingreso);
+}
+
+
+$cierre_atencion.onclick = (e) => {
+    e.preventDefault();
+
+    fadeOut($atencion__medica);
 }
 
 $mail__accept.onclick = (e) => {
