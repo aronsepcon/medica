@@ -180,7 +180,8 @@ $documento_trabajador.onkeypress = (e) => {
                 $centro_costos.value = dataJson.ccostos;
                 $sede__trabajador.value = dataJson.sede;
                 $estado__trabajador.value = dataJson.estado;
-                $tabla__examenes_body.innerHTML = "";//ver aquui??
+                $tabla__examenes_body.innerHTML = "";
+                $nombres_trabajador.value = dataJson.nombres;
             }else{
                 mostrarMensaje("Verifique el N°. Documento","msj_error");
             }
