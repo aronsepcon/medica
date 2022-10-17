@@ -2,18 +2,13 @@
     require_once("connectmedica.inc.php");
     include("consultasmedicas.inc.php");
 
-    if(isset($_POST['funcion'])){
-        if ($_POST['funcion'] == "listarExamenes"){
-            echo json_encode(listarExamenes($pdo,$_POST["documento"]));
-        }//por aqui es 
-    }
+    $doc=$_POST['indice'];
 
     $mensaje = "No se completo la operacion";
     $respuesta = false;
 
-   /* $datos = $pdo -> prepare("SELECT * FROM fichas_api where idreg=?");
+    $datos = $pdo -> prepare("SELECT tipoExa FROM fichas_api where idreg=$doc");
     $datos -> execute(array());
-    //$C = $reg['paciente'];
 
     while($dato = $datos -> fetch(PDO::FETCH_ASSOC)){
         if ($dato['tipoExa']=='PERIODICO'){
@@ -26,16 +21,14 @@
             $tipoEMO = 'A';
         }
         else{
-            $tipoEMO = 'O';
-        }
-*/  
-
-        $tipoEMO = listarExamenes($pdo,$doc);
-        var_dump($tipoEMO);
+            $tipoEMO = 'PRE';
+        }}
+    
+        $nombres = $_POST['nombres'];
 
         $archivo    = $_FILES['fileUpload'];
         $temporal	= $_FILES['fileUpload']['tmp_name'];
-        $fileId     = "EMO".$doc['tipo']."-".uniqid().".pdf";
+        $fileId     = "EMO".$tipoEMO."-".$nombres.".pdf";
         $indice     = $_POST['indice'];
 
         if (move_uploaded_file($temporal,"../hc/".$fileId)) {

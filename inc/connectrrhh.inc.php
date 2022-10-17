@@ -1,14 +1,14 @@
 <?php 
-/*
+
     $dsn = "mysql:dbname=rrhh;host=192.168.1.30";
 	$user = "remoto";
 	$password = "s3pc0n2020";
-*/	
 
+/*
 	$dsn = "mysql:dbname=rrhh;host=localhost";
 	$user = "root";
 	$password = "";
-
+*/
 	try {
 		$pdo = new PDO($dsn,$user,$password);
 		$errorDbConexion = false;

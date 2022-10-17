@@ -31,6 +31,8 @@ const $centro_costos = document.getElementById('centro_costos');
 const $sede__trabajador = document.getElementById('sede__trabajador');
 const $estado__trabajador = document.getElementById('estado__trabajador');
 
+const $tipo_examen = document.getElementById('');//enviar dato por php o algo asi mira la funcion U:
+
 const $tabla__examenes = document.getElementById('tabla__examenes');
 const $tabla__examenes_body = document.getElementById('tabla__examenes_body');
 
@@ -343,7 +345,10 @@ $uploadPdf.onchange = (e) => {
         const formData = new FormData();
         formData.append('fileUpload',$uploadPdf.files[0]);
         formData.append('indice',registro);
-
+        formData.append('documento',$documento_trabajador.value);
+        formData.append('funcion','listarExamenes');
+        formData.append('nombres',$nombres__apellidos.value);
+        //pasar indice a una consulta
         fetch ('../inc/cargarHistoriaMedica.inc.php',{
             method: 'POST',
             body: formData
@@ -353,6 +358,7 @@ $uploadPdf.onchange = (e) => {
             if (data.respuesta) {
                 mostrarMensaje("Documento subido","msj_correct");
                 let adjunto = "../hc/"+data.archivo;
+                console.log(adjunto);
                 $frame__adjunto.setAttribute("src", adjunto);
             }else{
                 mostrarMensaje("Hubo un error al subir el archivo","msj_error");

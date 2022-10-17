@@ -184,7 +184,8 @@
                                     "alergias"=>$row['alergias'],
                                     "sangre"=>$row['grupoSangre'],
                                     "id"=>$row['idreg'],
-                                    "clinica"=>$row['clinica']);
+                                    "clinica"=>$row['clinica'],
+                                    "paciente"=>$row['paciente']);
                     array_push($lista,$salida);
                 }
                 $respuesta = true;

@@ -62,13 +62,13 @@
     <div class="modal_mensaje msj_info" id="mensaje__sistema">
         <span id="mensaje_texto">Vamos a ver si lo muestra</span>
     </div>
-    <div class="historias__cuerpo__busqueda">
+    <form class="historias__cuerpo__busqueda" action="../inc/cargarHistoriaMedica.inc.php" method="post">
         <input type="text" id="nombres_trabajador" name="nombres_trabajador" placeholder="Nombres" value="">
         <input type="text" id="documento_trabajador" name="documento_trabajador" placeholder="Documento de Identificación" value="42081842">
         <div>
             <a href="#"><i class="fas fa-search"></i></a>
         </div>
-    </div>
+    </form>
     <div class="modal" id="ficha__vistaprevia">    
         <div class="inside h90p">
             <button type="button" id="cierre_form_ing">X</button>
