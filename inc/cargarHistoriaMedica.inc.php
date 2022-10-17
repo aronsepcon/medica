@@ -11,18 +11,16 @@
     $datos -> execute(array());
 
     while($dato = $datos -> fetch(PDO::FETCH_ASSOC)){
-        if ($dato['tipoExa']=='PERIODICO'){
-            $tipoEMO = 'P';
+        if ($dato['tipoExa']=='PERIODICO' OR $dato['tipoExa']=='EMOA'){
+            $tipoEMO = 'A';
         }
         else if($dato['tipoExa']=='RETIRO'){
             $tipoEMO = 'R';
         }
-        else if($dato['tipoExa']=='EMOA'){
-            $tipoEMO = 'A';
-        }
         else{
-            $tipoEMO = 'PRE';
-        }}
+            $tipoEMO = 'P';//seria para el preocupacional
+        }
+    }
     
         $nombres = $_POST['nombres'];
 
@@ -42,7 +40,7 @@
                         "archivo"   =>$fileId);
 
         echo json_encode($salida);
-    
+
 
     function actualizarAdjunto($pdo,$file,$indice) {
         try {
@@ -57,7 +55,7 @@
             return false;
         }
     }
-  //  }
+
 
     
 

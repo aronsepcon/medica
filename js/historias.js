@@ -31,8 +31,6 @@ const $centro_costos = document.getElementById('centro_costos');
 const $sede__trabajador = document.getElementById('sede__trabajador');
 const $estado__trabajador = document.getElementById('estado__trabajador');
 
-const $tipo_examen = document.getElementById('');//enviar dato por php o algo asi mira la funcion U:
-
 const $tabla__examenes = document.getElementById('tabla__examenes');
 const $tabla__examenes_body = document.getElementById('tabla__examenes_body');
 
@@ -360,6 +358,7 @@ $uploadPdf.onchange = (e) => {
                 let adjunto = "../hc/"+data.archivo;
                 console.log(adjunto);
                 $frame__adjunto.setAttribute("src", adjunto);
+                //Window.location.reload();
             }else{
                 mostrarMensaje("Hubo un error al subir el archivo","msj_error");
             }

@@ -67,7 +67,8 @@
             //$mail->addAddress($destino,$nombre);
             //$mail->addAddress('Exámenes Medicos','examenesmedicos@sepcon.net');
             
-            $mail->addAddress('caarroyo@hotmail.com','CESAR ARROYO');
+            $mail->addAddress($destino,$correo);//aca iba el correo de cesar mas no iba a un destino fijo
+            //$mail->addCC('')
 
             $mail->Subject = utf8_decode($asunto);
 
