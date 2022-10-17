@@ -65,6 +65,7 @@
         }
     }
 
+
     function nombreColaborador($pdo,$doc){
         try {
             $respuesta  = false;

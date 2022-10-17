@@ -297,6 +297,7 @@
                             <td><i class="fas fa-paperclip"></i></td>
                         </th>
                     </thead>
+                    <tbody id="tabla__atenciones_body"></tbody>
                 </table>
             </div>
         </section>

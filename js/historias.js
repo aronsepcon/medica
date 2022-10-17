@@ -34,6 +34,9 @@ const $estado__trabajador = document.getElementById('estado__trabajador');
 const $tabla__examenes = document.getElementById('tabla__examenes');
 const $tabla__examenes_body = document.getElementById('tabla__examenes_body');
 
+const $tabla__atenciones = document.getElementById('tabla__atenciones');
+const $tabla__atenciones_body = document.getElementById('tabla__atenciones_body');
+
 const ficha__medica = document.getElementById('ficha__medica');
 const $ficha__vistaprevia = document.getElementById('ficha__vistaprevia');
 
@@ -93,7 +96,6 @@ $opcion2.onclick = (e) => {
 
         listarExamenes();
 
-        
     } catch (error) {
         mostrarMensaje(error,"msj_error");
     }
@@ -104,17 +106,27 @@ $opcion2.onclick = (e) => {
 $opcion3.onclick = (e) => {
     e.preventDefault();
 
-    document.querySelectorAll(".historias__vertical__menu a").forEach(el => {
-        el.classList.remove('resaltado')
-    });
+    try{
 
-    document.querySelectorAll(".historias__cuerpo__pagina").forEach(el => {
-        el.classList.add('oculto');
-    })
+        if ($documento_trabajador.value == "" && $nombres_trabajador.value=="" ) throw "Ingrese el número de documento";
 
-    $opcion3.classList.add('resaltado');
-    $pagina3.classList.remove('oculto');
-    
+        document.querySelectorAll(".historias__vertical__menu a").forEach(el => {
+            el.classList.remove('resaltado')
+        });
+
+        document.querySelectorAll(".historias__cuerpo__pagina").forEach(el => {
+            el.classList.add('oculto');
+        })
+
+        $opcion3.classList.add('resaltado');
+        $pagina3.classList.remove('oculto');
+        
+        listarConsultas();
+
+    }catch(error){
+        mostrarMensaje(error,"msj_error");
+    }
+
    return false;
 }
 
@@ -181,6 +193,7 @@ $documento_trabajador.onkeypress = (e) => {
                 $sede__trabajador.value = dataJson.sede;
                 $estado__trabajador.value = dataJson.estado;
                 $tabla__examenes_body.innerHTML = "";
+                $tabla__atenciones_body.innerHTML = "";
                 $nombres_trabajador.value = dataJson.nombres;
             }else{
                 mostrarMensaje("Verifique el N°. Documento","msj_error");
@@ -222,6 +235,7 @@ $nombres_trabajador.onkeypress = (e) => {
                 $sede__trabajador.value = dataJson.sede;
                 $estado__trabajador.value = dataJson.estado;
                 $tabla__examenes_body.innerHTML = "";
+                $tabla__atenciones_body.innerHTML = "";
                 $documento_trabajador.value = dataJson.dni;
             }else{
                 mostrarMensaje("Verifique el N°. Documento","msj_error");
@@ -258,10 +272,10 @@ $tabla__examenes_body.addEventListener("click", e=>{
                 $frame__adjunto.setAttribute("src", '../hc/'+adjunto);        
                 fadeIn($ficha__vistaprevia);
                 }
-    }else if (accion == "uploadFile"){
-        $uploadPdf.click(); 
-    }else if (accion == "sendMail") {
-        try {
+        }else if (accion == "uploadFile"){
+            $uploadPdf.click(); 
+        }else if (accion == "sendMail") {
+            try {
             let examen = e.target.parentElement.dataset.examen,
                 fecha  = e.target.parentElement.dataset.fecha,
                 registro = e.target.parentElement.getAttribute("href"),
@@ -299,6 +313,25 @@ $tabla__examenes_body.addEventListener("click", e=>{
     }
 
     return false;
+})
+
+$tabla__atenciones_body.addEventListener("click", e=>{
+    e.preventDefault();
+
+    let accion =  e.target.parentElement.dataset.accion;
+    
+    registro = e.target.parentElement.getAttribute("href");
+    let adjunto =  e.target.parentElement.dataset.atach;
+
+    if ( accion == "previewFile" ){ 
+                
+        if(adjunto=="null"){
+            fadeIn($form_ingreso)               
+        }else{
+            $frame__adjunto.setAttribute("src", '../hc/'+adjunto);        
+            fadeIn($ficha__vistaprevia);
+        }
+    }
 })
 
 $uploadPdf.onchange = (e) => {
@@ -344,8 +377,6 @@ $mail__cancel.onclick = (e) => {
     return false
 }
 
-
-
 $cierre_form.onclick = (e) => {
     e.preventDefault();
 
@@ -363,7 +394,6 @@ $cierre_form_vistp.onclick = (e) => {
 
     fadeOut($form_ingreso);
 }
-
 
 $cierre_atencion.onclick = (e) => {
     e.preventDefault();
@@ -490,6 +520,48 @@ function listarExamenes(){
             }
         })
 
+};
+
+function listarConsultas(){
+    let data = new FormData();
+    data.append("documento",$documento_trabajador.value);
+    data.append("funcion","listarConsultas");
+
+    fetch('../inc/consultasmedicas.inc.php',{
+        method: "POST",
+        body:data,
+    })
+    .then(function(response){
+        return response.json();
+    })
+    .then(
+        dataJson => {
+            if (dataJson.respuesta){
+                $tabla__atenciones_body.innerHTML = "";
+
+                for (let index = 0; index < dataJson.lista.length; index++) {
+                    let tr = document.createElement("tr");
+                    let $restricciones = dataJson.lista[index].restricciones == null ? " " : dataJson.lista[index].restricciones;
+                    let $recomendaciones = dataJson.lista[index].recomendaciones == null ? " " : dataJson.lista[index].recomendaciones;
+                   //cambiar estas columnas y sus variables a consultar
+                    tr.innerHTML = `<td>${dataJson.lista[index].id}</td>
+                                    <td class="pl10px">${dataJson.lista[index].tipo}</td>
+                                    <td>${dataJson.lista[index].fecha}</td>
+                                    <td>${dataJson.lista[index].aptitud}</td>
+                                    <td>${$recomendaciones}</td>
+                                    <td>${$restricciones}</td>
+                                    <td>${dataJson.lista[index].alergias}</td>
+                                    <td class="textoCentro">
+                                        <a href="${dataJson.lista[index].id}" data-accion="previewFile" data-atach="${dataJson.lista[index].adjunto}">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                    </td>`;
+                    $tabla__atenciones_body.appendChild(tr);
+                }
+            }else{
+                mostrarMensaje("No se encontraron examenes","msj_error");
+            }
+        })
 };
 
 

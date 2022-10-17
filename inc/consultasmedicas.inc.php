@@ -14,6 +14,8 @@
                                         $_POST['fecha'],
                                         $_POST['asunto'],
                                         $_POST['adjunto']));
+        }else if ($_POST['funcion'] == "listarConsultas"){
+            echo json_encode(listarConsultas($pdo,$_POST["documento"]));
         }
     }
 
@@ -202,5 +204,61 @@
 
     function datosCorreo($pdo,$documento){
         
+    }
+
+    function listarConsultas($pdo,$doc){
+        try{
+            $respuesta = false;
+            $lista = [];
+            //cambiar la consulta
+            $sql ="SELECT   
+                fichas_api.tipoExa, 
+                fichas_api.fecha, 
+                fichas_api.aptitud,
+                fichas_api.reco1, 
+                fichas_api.observaciones,
+                fichas_api.idreg,
+                fichas_api.adjunto,
+                fichas_api.enviado,
+                fichas_api.alergias,
+                fichas_api.grupoSangre,
+                fichas_api.clinica,
+                fichas_api.paciente
+            FROM
+                fichas_api 
+            WHERE
+                fichas_api.dni = ? 
+            ORDER BY
+                fichas_api.fecha DESC";
+
+            $statement = $pdo->prepare($sql);
+            $statement ->execute(array($doc));
+            $result = $statement ->fetchAll();
+            $rowCount = $statement -> rowcount();
+
+            if ($rowCount>0){
+                foreach($result as $row){       //cambiar las columnas a usar        
+                    $salida = array("id"=>$row['idreg'],
+                                    "tipo"=>$row['tipoExa'], 
+                                    "fecha"=>date("d/m/Y", strtotime($row['fecha'])),
+                                    "recomendaciones"=>$row['reco1'],
+                                    "restricciones"=>$row['observaciones'],
+                                    "alergias"=>$row['alergias'],
+                                    "adjunto"=>$row['adjunto']);
+                    array_push($lista, $salida);
+                }
+                $respuesta = true;
+            }else{
+                $respuesta = false;
+            }
+
+            $salida = array("respuesta"=>$respuesta,
+                            "lista" => $lista);
+
+            return $salida; 
+        }catch(PDOException $th){
+            echo "Error: " . $th->getMessage();
+            return false;
+        }
     }
 ?>
