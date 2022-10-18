@@ -148,7 +148,6 @@
         try {
             $respuesta = false;
             $lista = [];
-            //OR fichas_api.paciente = ?
             $sql ="SELECT
                         fichas_api.tipoExa, 
                         fichas_api.fecha, 
@@ -160,10 +159,14 @@
                         fichas_api.enviado,
                         fichas_api.alergias,
                         fichas_api.grupoSangre,
-                        fichas_api.clinica,
+                        lista_clinicas.nomb_clinica,
                         fichas_api.paciente
                     FROM
                         fichas_api 
+                    LEFT JOIN 
+                        lista_clinicas 
+                    ON
+                        fichas_api.clinica=lista_clinicas.id
                     WHERE
                         fichas_api.dni = ? 
                     ORDER BY
@@ -185,7 +188,7 @@
                                     "alergias"=>$row['alergias'],
                                     "sangre"=>$row['grupoSangre'],
                                     "id"=>$row['idreg'],
-                                    "clinica"=>$row['clinica'],
+                                    "clinica"=>$row['nomb_clinica'],
                                     "paciente"=>$row['paciente']);
                     array_push($lista,$salida);
                 }

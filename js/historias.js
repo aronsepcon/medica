@@ -30,6 +30,9 @@ const $cargo__trabajador = document.getElementById('cargo__trabajador');
 const $centro_costos = document.getElementById('centro_costos');
 const $sede__trabajador = document.getElementById('sede__trabajador');
 const $estado__trabajador = document.getElementById('estado__trabajador');
+const $fecha__nacimiento = document.getElementById('fecha__nacimiento');
+//const $telefono__trabajador = document.getElementById('telefono__trabajador');
+const $direccion__trabajador = document.getElementById('direccion__trabajador');
 
 const $tabla__examenes = document.getElementById('tabla__examenes');
 const $tabla__examenes_body = document.getElementById('tabla__examenes_body');
@@ -192,6 +195,9 @@ $documento_trabajador.onkeypress = (e) => {
                 $centro_costos.value = dataJson.ccostos;
                 $sede__trabajador.value = dataJson.sede;
                 $estado__trabajador.value = dataJson.estado;
+                $fecha__nacimiento.value = dataJson.fecnac;
+           //     $telefono__trabajador.value = dataJson.telefono;
+                $direccion__trabajador.value = dataJson.direccion; 
                 $tabla__examenes_body.innerHTML = "";
                 $tabla__atenciones_body.innerHTML = "";
                 $nombres_trabajador.value = dataJson.nombres;
@@ -234,6 +240,9 @@ $nombres_trabajador.onkeypress = (e) => {
                 $centro_costos.value = dataJson.ccostos;
                 $sede__trabajador.value = dataJson.sede;
                 $estado__trabajador.value = dataJson.estado;
+                $fecha__nacimiento.value = dataJson.fecnac;
+          //      $telefono__trabajador.value = dataJson.telefono;
+                $direccion__trabajador.value = dataJson.direccion; 
                 $tabla__examenes_body.innerHTML = "";
                 $tabla__atenciones_body.innerHTML = "";
                 $documento_trabajador.value = dataJson.dni;
@@ -280,7 +289,7 @@ $tabla__examenes_body.addEventListener("click", e=>{
                 fecha  = e.target.parentElement.dataset.fecha,
                 registro = e.target.parentElement.getAttribute("href"),
                 adjunto = e.target.parentElement.dataset.adjunto,
-                clinica = e.target.parentElement.dataset.clinica == 1 ? "MEDEX": "";
+                clinica = e.target.parentElement.dataset.clinica;
             
                 let data = new FormData();
                 data.append("documento",$documento_trabajador.value);
@@ -342,8 +351,8 @@ $uploadPdf.onchange = (e) => {
 
         const formData = new FormData();
         formData.append('fileUpload',$uploadPdf.files[0]);
-        formData.append('indice',registro);
-        formData.append('documento',$documento_trabajador.value);
+        formData.append('indice',registro);//pasa por post idreg
+        formData.append('documento',$documento_trabajador.value);//pasar por un post el dni
         formData.append('funcion','listarExamenes');
         formData.append('nombres',$nombres__apellidos.value);
         //pasar indice a una consulta
@@ -432,12 +441,12 @@ $mail__accept.onclick = (e) => {
         fetch('../inc/consultasmedicas.inc.php',{
             method: 'POST',
             body:data,
-        })//aqui me quede
+        })
         .then(function(response){
             return response.json();
         })
         .then(dataJson => {
-            if (dataJson.respuesta){///aqui puede faltar???
+            if (dataJson.respuesta){
                 listarExamenes();
                 fadeOut(document.getElementById("modal__esperar"));
                 mostrarMensaje("Examén medico enviado","msj_correct");
@@ -470,27 +479,15 @@ function listarExamenes(){
                 $tabla__examenes_body.innerHTML = "";
     
                 for (let index = 0; index < dataJson.lista.length; index++) {
-                    let clinicaExt=null;
                     let tr = document.createElement("tr");
                     let $clase_enviado = dataJson.lista[index].enviado == null ? 'no__enviado' : 'enviado';
                     let $titulo_enviado = dataJson.lista[index].enviado == null ? 'Pendiente Envio' : 'Enviado';
                     let $icono_enviado = dataJson.lista[index].enviado == null ? '<i class="fas fa-external-link-alt"></i>' :'<i class="fas fa-check" style="color:green"></i>';
                     let $icono_cargado = dataJson.lista[index].adjunto == null ? '<i class="fas fa-upload"></i>' : '<i class="fas fa-upload" style="color:green"></i>';
-                    let $validacion_cuadro = dataJson.lista[index].adjunto == null ? "test.pdf": dataJson.lista[index].adjunto;
                     let $restricciones = dataJson.lista[index].restricciones == null ? " " : dataJson.lista[index].restricciones;
-                    let $recomendaciones = dataJson.lista[index].recomendaciones == null ? " " : dataJson.lista[index].recomendaciones;
-                    let $clinica =  dataJson.lista[index].clinica;
+                    let $recomendaciones = dataJson.lista[index].recomendaciones == null ? " " : dataJson.lista[index].recomendaciones; 
     
-                    switch($clinica){
-                        case 1:
-                            clinicaExt="MEDEX";
-                            break
-                        default:
-                            clinicaExt="Otros";
-                    }
-    
-    
-                    tr.innerHTML = `<td>${clinicaExt}</td>
+                    tr.innerHTML = `<td>${dataJson.lista[index].clinica}</td>
                                     <td class="pl10px">${dataJson.lista[index].tipo}</td>
                                     <td>${dataJson.lista[index].fecha}</td>
                                     <td>${dataJson.lista[index].aptitud}</td>

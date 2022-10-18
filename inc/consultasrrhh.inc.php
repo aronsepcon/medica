@@ -15,7 +15,7 @@
             $respuesta  = false;
             $mensaje    = "No existe el nuemro de documento";
             $clase      = "msj_error";
-
+            //agregar consultas para telefono, direccion, sexo, 
             $sql ="SELECT
                     tabla_aquarius.dni,
                     tabla_aquarius.internal,
