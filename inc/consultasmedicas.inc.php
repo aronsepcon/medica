@@ -68,7 +68,7 @@
             //$mail->addAddress('Exámenes Medicos','examenesmedicos@sepcon.net');
             
             $mail->addAddress($destino,$correo);//aca iba el correo de cesar mas no iba a un destino fijo
-            //$mail->addCC('')
+            //$mail->addCC('','Evaluacion Medica');
 
             $mail->Subject = utf8_decode($asunto);
 
@@ -97,7 +97,7 @@
                 $enviado = true;
                 
                 $mail->ClearAddresses();
-            }; 
+            }
 
             return array("respuesta"=>$respuesta,
                         "enviado"=>$enviado,
@@ -131,7 +131,7 @@
 
     function actualizarExamen($pdo,$id){
         try {
-            $sql = "UPDATE fichas_medicas SET enviado = 1 WHERE idreg = ?";
+            $sql = "UPDATE fichas_api SET enviado = 1 WHERE idreg = ?";
             $statement = $pdo->prepare($sql);
             $statement ->execute(array($id));
             $result = $statement ->fetchAll();

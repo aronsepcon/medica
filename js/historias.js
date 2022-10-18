@@ -431,7 +431,7 @@ $mail__accept.onclick = (e) => {
         fetch('../inc/consultasmedicas.inc.php',{
             method: 'POST',
             body:data,
-        })
+        })//aqui me quede
         .then(function(response){
             return response.json();
         })
