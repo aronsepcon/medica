@@ -282,7 +282,7 @@ $tabla__examenes_body.addEventListener("click", e=>{
                 adjunto = e.target.parentElement.dataset.adjunto,
                 clinica = e.target.parentElement.dataset.clinica == 1 ? "MEDEX": "";
             
-                let data = new FormData();//veraqui u:
+                let data = new FormData();
                 data.append("documento",$documento_trabajador.value);
                 data.append("funcion","datosColaborador");
                 fetch('../inc/consultasrrhh.inc.php',{
@@ -348,6 +348,7 @@ $uploadPdf.onchange = (e) => {
         formData.append('nombres',$nombres__apellidos.value);
         //pasar indice a una consulta
         fetch ('../inc/cargarHistoriaMedica.inc.php',{
+
             method: 'POST',
             body: formData
         })
@@ -436,7 +437,7 @@ $mail__accept.onclick = (e) => {
             return response.json();
         })
         .then(dataJson => {
-            if (dataJson.respuesta){
+            if (dataJson.respuesta){///aqui puede faltar???
                 listarExamenes();
                 fadeOut(document.getElementById("modal__esperar"));
                 mostrarMensaje("Examén medico enviado","msj_correct");
@@ -543,7 +544,7 @@ function listarConsultas(){
         dataJson => {
             if (dataJson.respuesta){
                 $tabla__atenciones_body.innerHTML = "";
-
+                /*
                 for (let index = 0; index < dataJson.lista.length; index++) {
                     let tr = document.createElement("tr");
                     let $restricciones = dataJson.lista[index].restricciones == null ? " " : dataJson.lista[index].restricciones;
@@ -552,9 +553,7 @@ function listarConsultas(){
                     tr.innerHTML = `<td>${dataJson.lista[index].id}</td>
                                     <td class="pl10px">${dataJson.lista[index].tipo}</td>
                                     <td>${dataJson.lista[index].fecha}</td>
-                                    <td>${dataJson.lista[index].aptitud}</td>
                                     <td>${$recomendaciones}</td>
-                                    <td>${$restricciones}</td>
                                     <td>${dataJson.lista[index].alergias}</td>
                                     <td class="textoCentro">
                                         <a href="${dataJson.lista[index].id}" data-accion="previewFile" data-atach="${dataJson.lista[index].adjunto}">
@@ -562,7 +561,7 @@ function listarConsultas(){
                                         </a>
                                     </td>`;
                     $tabla__atenciones_body.appendChild(tr);
-                }
+                }*/
             }else{
                 mostrarMensaje("No se encontraron examenes","msj_error");
             }
