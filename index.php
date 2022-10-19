@@ -35,7 +35,7 @@
         </div>
     </div>
 <div class="formulario-container">
-    <form action="" ><!--id="form_ingreso"-->
+    <form action="" method="POST" id="form_acceso"><!--id="form_ingreso"-->
         <div class="container">
             <div class="group">      
                 <input type="text" id="user_login" name="user_login" required >

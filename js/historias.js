@@ -37,6 +37,8 @@ const $direccion__trabajador = document.getElementById('direccion__trabajador');
 const $tabla__examenes = document.getElementById('tabla__examenes');
 const $tabla__examenes_body = document.getElementById('tabla__examenes_body');
 
+const $tabla__busqueda_body = document.getElementById('tabla__busqueda_body');
+
 const $tabla__atenciones = document.getElementById('tabla__atenciones');
 const $tabla__atenciones_body = document.getElementById('tabla__atenciones_body');
 
@@ -217,7 +219,7 @@ $nombres_trabajador.onkeypress = (e) => {
   if (keycode == 13) {
     try {
         if ($nombres_trabajador.value == "" && $documento_trabajador.value == "") throw "Ingrese un valor";
-
+/*
         let data = new FormData();
             data.append("documento",e.target.value);
             data.append("funcion","nombreColaborador");
@@ -249,7 +251,37 @@ $nombres_trabajador.onkeypress = (e) => {
             }else{
                 mostrarMensaje("Verifique el N°. Documento","msj_error");
             }
+        })*/
+
+        let data = new FormData();
+        data.append("documento",e.target.value);
+        data.append("funcion","buscarEmpleados");
+        
+        fetch('../inc/consultasrrhh.inc.php',{
+            method: "POST",
+            body: data,
         })
+        .then(function(response){
+            return response.json();
+        })
+        .then(dataJson =>{
+            if(dataJson.respuesta){
+                $tabla__busqueda_body.innerHTML = "";
+                
+                for (let index = 0; index < dataJson.lista.length; index++) {
+                    let tr = document.createElement("tr");
+                    tr.innerHTML =`<td>${dataJson.lista[index].dni}</td>
+                                <td>${dataJson.lista[index].nombres}</td>
+                                <td>26</td> 
+                                <td>${dataJson.lista[index].sede}</td>
+                                <td><ahref><></td>`
+                    $tabla__busqueda_body.appendChild(tr);    
+                }
+            }else{
+            mostrarMensaje("No se encontraron empleados","msj_error");}
+        })
+
+
     } catch (error) {
         mostrarMensaje(error,"msj_error");
     }
@@ -263,7 +295,6 @@ $btn__atencion__medica.onclick = (e) => {
 
     return false;
 }
-
 
 $tabla__examenes_body.addEventListener("click", e=>{
     e.preventDefault();
@@ -460,6 +491,36 @@ $mail__accept.onclick = (e) => {
 
     return false
 }
+/*
+function buscarEmpleados(){
+    let data = new FormData();
+    data.append("documento",$documento_trabajador.value);
+    data.append("funcion","buscarEmpleados");
+    
+    fetch('../inc/consultasrrhh.inc.php',{
+        method: "POST",
+        body: data,
+    })
+    .then(function(response){
+        return response.json();
+    })
+    .then(dataJson =>{
+        if(dataJson.respuesta){
+            $tabla__busqueda_body.innerHTML = "";
+            
+            for (let index = 0; index < dataJson.lista.length; index++) {
+                let tr = document.createElement("tr");
+                tr.innerHTML =`<td>${dataJson.lista[index].dni}</td>
+                               <td>${dataJson.lista[index].nombres}</td>
+                               <td>26</td> 
+                               <td>${dataJson.lista[index].sede}</td>
+                               <td><ahref><></td>`
+                $tabla__busqueda_body.appendChild(tr);    
+            }
+        }else{
+        mostrarMensaje("No se encontraron examenes","msj_error");}
+    })
+}   */
 
 function listarExamenes(){
 

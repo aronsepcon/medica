@@ -205,6 +205,20 @@
             </div>
         </div>
     </div>
+    <Section class="busqueda_parcial">
+        <table id="tabla__busqueda">
+            <thead>
+                <tr>
+                    <th>DNI</th>
+                    <th>Nombres y Apellidos</th>
+                    <th>Edad</th>
+                    <th>Sede</th>
+                    <th>Ver</th>
+                </tr>
+            </thead>
+            <tbody id="tabla__busqueda_body"></tbody>
+        </table>
+    </Section>
     <hr>
     <nav class="historias__vertical__menu">
         <a href="#" id="opcion1" class="opcion_vertical resaltado">1.- Datos Generales</a>

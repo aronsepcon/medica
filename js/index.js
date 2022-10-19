@@ -13,6 +13,8 @@ $boton_login.onclick = (e) => {
         if ($user_login.value == "") throw "Ingrese su usuario";
         if ($user_password.value == "") throw "Ingrese su clave";
 
+        let data = new FormData();
+
         window.location.href = "php/dashboard.inc.php";
     } catch (error) {
         mostrarMensajes(error,"msn_error");

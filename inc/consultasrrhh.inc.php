@@ -5,8 +5,74 @@
         if ($_POST['funcion'] == "datosColaborador"){
             echo json_encode(datosColaborador($pdo,$_POST["documento"]));
         }
-      elseif ($_POST['funcion'] == "nombreColaborador") {
+        else if ($_POST['funcion'] == "nombreColaborador") {
             echo json_encode(nombreColaborador($pdo,$_POST["documento"]));
+        }
+        else if ($_POST['funcion'] == "buscarEmpleados"){
+            echo json_encode(buscarEmpleados($pdo,$_POST["documento"]));
+        }
+        else if ($_POST['funcion'] == "validarClave"){
+            echo json_encode(validarClave($pdo,$_POST['login'],$_POST['clave']));
+        }
+    }
+
+    function validarClave($pdo,$login,$clave){//ver el pase de paramentros para el correo
+        try{                                            //ahi esta la respuesta
+
+            $respuesta  = false;
+            $mensaje    = "No existe el nuemro de documento";
+            $clase      = "msj_error";
+
+            $sql ="SELECT  
+                    *
+                FROM
+                    tabla_aquarius
+                WHERE
+                    clave = $clave and usuario = $login";
+             
+
+        }catch(PDOException $th) {
+            echo "Error: " . $th->getMessage();
+            return false;
+        }
+    }
+
+    function buscarEmpleados($pdo,$doc){
+        try{
+            $respuesta  = false;
+            $lista =[];
+            $sql ="SELECT  
+                    CONCAT_WS( ' ', tabla_aquarius.nombres, tabla_aquarius.apellidos ) AS nombres,
+                    tabla_aquarius.dsede,
+                    tabla_aquarius.dni
+                FROM
+                    tabla_aquarius
+                WHERE
+                    CONCAT(tabla_aquarius.apellidos,' ',tabla_aquarius.nombres) LIKE %?%";
+            $statement = $pdo->prepare($sql);
+            $statement ->execute(array($doc));
+            $result = $statement ->fetchAll();
+            $rowCount = $statement -> rowcount();
+
+            if ($rowCount > 0) {
+                foreach($result as $row){
+                    $salida = array("nombres"   => $row['nombres'],
+                                    "sede"      => $row['dsede'],
+                                    "dni"       => $row['dni']
+                                    );
+                    array_push($lista,$salida);
+                }
+                $respuesta = true;
+            }else{
+                $respuesta =false;
+            }
+            $salida = array("respuesta"=>$respuesta,
+                             "lista" => $lista);
+
+            return $salida;
+        }catch (PDOException $th) {
+            echo "Error: " . $th->getMessage();
+            return false;
         }
     }
 
@@ -38,7 +104,7 @@
             $statement ->execute(array($doc));
             $result = $statement ->fetchAll();
             $rowCount = $statement -> rowcount();
-
+            var_dump($result);
             if ($rowCount > 0) {
                 $respuesta = array("respuesta"  => true,
                                    "clase"     =>"msj_correct",
@@ -88,7 +154,7 @@
                 FROM
                     tabla_aquarius 
                 WHERE
-                    CONCAT(tabla_aquarius.nombres,' ',tabla_aquarius.apellidos) = ?";
+                    CONCAT(tabla_aquarius.apellidos,' ',tabla_aquarius.nombres) = ?";
 
 
             $statement = $pdo->prepare($sql);
