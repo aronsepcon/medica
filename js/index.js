@@ -14,6 +14,17 @@ $boton_login.onclick = (e) => {
         if ($user_password.value == "") throw "Ingrese su clave";
 
         let data = new FormData();
+        data.append('login',$user_login.value);
+        data.append('clave',$user_password.value)
+        data.append('funcion','validarClave')
+
+        fetch('../inc/consultasrrhh.inc.php',{
+            method: "POST",
+            body: data,
+        })
+        .then(function(response){
+            return response.json();
+        })
 
         window.location.href = "php/dashboard.inc.php";
     } catch (error) {

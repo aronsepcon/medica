@@ -7,7 +7,7 @@
     $mensaje = "No se completo la operacion";
     $respuesta = false;
 
-    $datos = $pdo -> prepare("SELECT tipoExa FROM fichas_api where idreg=$doc");
+    $datos = $pdo -> prepare("SELECT paciente,tipoExa FROM fichas_api where idreg=$doc");
     $datos -> execute(array());
 
     while($dato = $datos -> fetch(PDO::FETCH_ASSOC)){
@@ -17,7 +17,7 @@
         else if($dato['tipoExa']=='RETIRO'){
             $tipoEMO = 'R';
         }
-        else{
+        elseif($dato['tipoExa']=='PREOCUPACIONAL'){
             $tipoEMO = 'P';//seria para el preocupacional
         }
     }
@@ -26,7 +26,7 @@
 
         $archivo    = $_FILES['fileUpload'];
         $temporal	= $_FILES['fileUpload']['tmp_name'];
-        $fileId     = "EMO".$tipoEMO."-".$nombres.".pdf";
+        $fileId     = "EMO".$tipoEMO."-".$dato['paciente'].".pdf";
         $indice     = $_POST['indice'];
 
         if (move_uploaded_file($temporal,"../hc/".$fileId)) {

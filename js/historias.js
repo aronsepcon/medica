@@ -169,6 +169,16 @@ $opcion5.onclick = (e) => {
    return false;
 }
 
+$tabla__busqueda_body.addEventListener("click", e=>{
+    e.preventDefault();
+
+    let accion =  e.target.parentElement.dataset.accion;
+
+    if(accion == "ingreso"){
+
+    }
+})
+
 $documento_trabajador.onkeypress = (e) => {
   var keycode = e.keyCode || e.which;
   if (keycode == 13) {
@@ -271,10 +281,10 @@ $nombres_trabajador.onkeypress = (e) => {
                 for (let index = 0; index < dataJson.lista.length; index++) {
                     let tr = document.createElement("tr");
                     tr.innerHTML =`<td>${dataJson.lista[index].dni}</td>
-                                <td>${dataJson.lista[index].nombres}</td>
-                                <td>26</td> 
-                                <td>${dataJson.lista[index].sede}</td>
-                                <td><ahref><></td>`
+                                    <td>${dataJson.lista[index].nombres}</td>
+                                    <td>26</td> 
+                                    <td>${dataJson.lista[index].sede}</td>
+                                    <td><a href="${dataJson.lista[index].dni}" data-accion="ingreso"></a></td>`
                     $tabla__busqueda_body.appendChild(tr);    
                 }
             }else{
@@ -322,7 +332,7 @@ $tabla__examenes_body.addEventListener("click", e=>{
                 adjunto = e.target.parentElement.dataset.adjunto,
                 clinica = e.target.parentElement.dataset.clinica;
             
-                let data = new FormData();
+                let data = new FormData();//aqui es la correccion al cambio de query
                 data.append("documento",$documento_trabajador.value);
                 data.append("funcion","datosColaborador");
                 fetch('../inc/consultasrrhh.inc.php',{
@@ -491,36 +501,6 @@ $mail__accept.onclick = (e) => {
 
     return false
 }
-/*
-function buscarEmpleados(){
-    let data = new FormData();
-    data.append("documento",$documento_trabajador.value);
-    data.append("funcion","buscarEmpleados");
-    
-    fetch('../inc/consultasrrhh.inc.php',{
-        method: "POST",
-        body: data,
-    })
-    .then(function(response){
-        return response.json();
-    })
-    .then(dataJson =>{
-        if(dataJson.respuesta){
-            $tabla__busqueda_body.innerHTML = "";
-            
-            for (let index = 0; index < dataJson.lista.length; index++) {
-                let tr = document.createElement("tr");
-                tr.innerHTML =`<td>${dataJson.lista[index].dni}</td>
-                               <td>${dataJson.lista[index].nombres}</td>
-                               <td>26</td> 
-                               <td>${dataJson.lista[index].sede}</td>
-                               <td><ahref><></td>`
-                $tabla__busqueda_body.appendChild(tr);    
-            }
-        }else{
-        mostrarMensaje("No se encontraron examenes","msj_error");}
-    })
-}   */
 
 function listarExamenes(){
 

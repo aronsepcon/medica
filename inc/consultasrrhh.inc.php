@@ -24,12 +24,18 @@
             $clase      = "msj_error";
 
             $sql ="SELECT  
-                    *
+                    tabla_aquarius.nombres,
+                    tabla_aquarius.apellidos 
                 FROM
                     tabla_aquarius
                 WHERE
                     clave = $clave and usuario = $login";
-             
+            
+            $statement = $pdo->prepare($sql);
+            $statement ->execute(array($login));
+            $result = $statement ->fetchAll();
+            
+            return $result;
 
         }catch(PDOException $th) {
             echo "Error: " . $th->getMessage();
@@ -41,6 +47,7 @@
         try{
             $respuesta  = false;
             $lista =[];
+            $consulta='%'.$doc.'%';
             $sql ="SELECT  
                     CONCAT_WS( ' ', tabla_aquarius.nombres, tabla_aquarius.apellidos ) AS nombres,
                     tabla_aquarius.dsede,
@@ -48,12 +55,11 @@
                 FROM
                     tabla_aquarius
                 WHERE
-                    CONCAT(tabla_aquarius.apellidos,' ',tabla_aquarius.nombres) LIKE %?%";
+                    CONCAT(tabla_aquarius.apellidos,' ',tabla_aquarius.nombres) LIKE '$consulta'";
             $statement = $pdo->prepare($sql);
             $statement ->execute(array($doc));
             $result = $statement ->fetchAll();
             $rowCount = $statement -> rowcount();
-
             if ($rowCount > 0) {
                 foreach($result as $row){
                     $salida = array("nombres"   => $row['nombres'],
@@ -104,7 +110,6 @@
             $statement ->execute(array($doc));
             $result = $statement ->fetchAll();
             $rowCount = $statement -> rowcount();
-            var_dump($result);
             if ($rowCount > 0) {
                 $respuesta = array("respuesta"  => true,
                                    "clase"     =>"msj_correct",
