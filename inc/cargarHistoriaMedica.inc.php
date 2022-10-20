@@ -20,13 +20,17 @@
         elseif($dato['tipoExa']=='PREOCUPACIONAL'){
             $tipoEMO = 'P';//seria para el preocupacional
         }
+
+        $nombres =$dato['paciente'];
     }
     
-        $nombres = $_POST['nombres'];
+       // $nombres = $_POST['nombres'];
+
+        
 
         $archivo    = $_FILES['fileUpload'];
         $temporal	= $_FILES['fileUpload']['tmp_name'];
-        $fileId     = "EMO".$tipoEMO."-".$dato['paciente'].".pdf";
+        $fileId     = "EMO".$tipoEMO."-".$nombres.".pdf";
         $indice     = $_POST['indice'];
 
         if (move_uploaded_file($temporal,"../hc/".$fileId)) {

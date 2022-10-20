@@ -44,7 +44,7 @@
                 <label for="fecha__examen">Fecha Examen Medico:</label>
                 <input type="text" name="fecha__examen" id="fecha__examen"  readonly>
                 <label for="clinica__examen">Nombre Clinica:</label>
-                <input type="text" name="clinica__examen" id="clinica__examen" class="mayusculas" readonly>
+                <input type="text" name="clinica__examen" id="clinica__examen" class="mayusculas">
                 <div class="opciones">
                     <button type="button" id="mail__accept">Enviar</button>
                     <button type="button" id="mail__cancel">Cancelar</button>
@@ -205,7 +205,7 @@
             </div>
         </div>
     </div>
-    <Section class="busqueda_parcial">
+    <!--Section id="busqueda_parcial">
         <table id="tabla__busqueda">
             <thead>
                 <tr>
@@ -218,9 +218,9 @@
             </thead>
             <tbody id="tabla__busqueda_body"></tbody>
         </table>
-    </Section>
+    </Section-->
     <hr>
-    <section class="historias__cuerpo_completo">
+    <section class="historias__cuerpo_completo" id="historias__cuerpo_completo"><!--style="display: none;"-->
         <nav class="historias__vertical__menu">
             <a href="#" id="opcion1" class="opcion_vertical resaltado">1.- Datos Generales</a>
             <a href="#" id="opcion2" class="opcion_vertical">2.- Exámenes Médicos</a> 
@@ -260,6 +260,8 @@
                                 <input type="text" name="telefono__trabajador" id="telefono__trabajador" readonly>
                                 <label for="direccion__trabajador">Dirección :</label>
                                 <input type="text" name="direccion__trabajador" id="direccion__trabajador" readonly>
+                                <label for="edad__trabajador">Edad :</label>
+                                <input type="text" name="edad__trabajador" id="edad__trabajador" readonly>
                             </div> 
                         </div>
                     </form>
@@ -465,7 +467,6 @@
         </section>
     </section>
     <script src="../js/funciones.js" type="module"></script>
-    <script src="../js/historias.js?v<?php echo $random;?>" type="module"></script>
-    
+    <script src="../js/historias.js?v<?php echo $random;?>" type="module"></script>    
 </body>
 </html>

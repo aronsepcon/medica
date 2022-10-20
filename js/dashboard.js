@@ -10,6 +10,8 @@ const $configuracion = document.getElementById('configuracion');
 const $modal__esperar = document.getElementById('modal__esperar');
 
 
+
+
 $historias.onclick =(e) => {
     e.preventDefault();
 

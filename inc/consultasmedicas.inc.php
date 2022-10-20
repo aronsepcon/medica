@@ -68,7 +68,7 @@
             //$mail->addAddress('Exámenes Medicos','examenesmedicos@sepcon.net');
             
             $mail->addAddress($destino,$correo);//aca iba el correo de cesar mas no iba a un destino fijo
-            //$mail->addCC('','Evaluacion Medica');
+            $mail->addCC('examenesmedicos@sepcon.net','Exámenes Medicos');
 
             $mail->Subject = utf8_decode($asunto);
 

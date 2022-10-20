@@ -32,12 +32,15 @@ const $sede__trabajador = document.getElementById('sede__trabajador');
 const $estado__trabajador = document.getElementById('estado__trabajador');
 const $fecha__nacimiento = document.getElementById('fecha__nacimiento');
 //const $telefono__trabajador = document.getElementById('telefono__trabajador');
+//const $edad__trabajador = document.getElementById('edad__trabajador');
 const $direccion__trabajador = document.getElementById('direccion__trabajador');
 
 const $tabla__examenes = document.getElementById('tabla__examenes');
 const $tabla__examenes_body = document.getElementById('tabla__examenes_body');
 
 const $tabla__busqueda_body = document.getElementById('tabla__busqueda_body');
+const $historias__cuerpo_completo = document.getElementById('historias__cuerpo_completo');
+const $busqueda_parcial = document.getElementById('busqueda_parcial');
 
 const $tabla__atenciones = document.getElementById('tabla__atenciones');
 const $tabla__atenciones_body = document.getElementById('tabla__atenciones_body');
@@ -168,17 +171,19 @@ $opcion5.onclick = (e) => {
     
    return false;
 }
-
+/*
 $tabla__busqueda_body.addEventListener("click", e=>{
     e.preventDefault();
 
     let accion =  e.target.parentElement.dataset.accion;
+    registro = e.target.parentElement.getAttribute("href");
 
     if(accion == "ingreso"){
-
+        $historias__cuerpo_completo.style.display = "block";
+        fadeOut($busqueda_parcial);
     }
 })
-
+*/
 $documento_trabajador.onkeypress = (e) => {
   var keycode = e.keyCode || e.which;
   if (keycode == 13) {
@@ -209,6 +214,7 @@ $documento_trabajador.onkeypress = (e) => {
                 $estado__trabajador.value = dataJson.estado;
                 $fecha__nacimiento.value = dataJson.fecnac;
            //     $telefono__trabajador.value = dataJson.telefono;
+            //    $edad__trabajador.value = dataJson.edad;
                 $direccion__trabajador.value = dataJson.direccion; 
                 $tabla__examenes_body.innerHTML = "";
                 $tabla__atenciones_body.innerHTML = "";
@@ -229,7 +235,7 @@ $nombres_trabajador.onkeypress = (e) => {
   if (keycode == 13) {
     try {
         if ($nombres_trabajador.value == "" && $documento_trabajador.value == "") throw "Ingrese un valor";
-/*
+
         let data = new FormData();
             data.append("documento",e.target.value);
             data.append("funcion","nombreColaborador");
@@ -254,6 +260,7 @@ $nombres_trabajador.onkeypress = (e) => {
                 $estado__trabajador.value = dataJson.estado;
                 $fecha__nacimiento.value = dataJson.fecnac;
           //      $telefono__trabajador.value = dataJson.telefono;
+          //      $edad__trabajador.value = dataJson.edad;
                 $direccion__trabajador.value = dataJson.direccion; 
                 $tabla__examenes_body.innerHTML = "";
                 $tabla__atenciones_body.innerHTML = "";
@@ -261,12 +268,12 @@ $nombres_trabajador.onkeypress = (e) => {
             }else{
                 mostrarMensaje("Verifique el N°. Documento","msj_error");
             }
-        })*/
-
+        })
+/*
         let data = new FormData();
         data.append("documento",e.target.value);
         data.append("funcion","buscarEmpleados");
-        
+
         fetch('../inc/consultasrrhh.inc.php',{
             method: "POST",
             body: data,
@@ -284,12 +291,14 @@ $nombres_trabajador.onkeypress = (e) => {
                                     <td>${dataJson.lista[index].nombres}</td>
                                     <td>26</td> 
                                     <td>${dataJson.lista[index].sede}</td>
-                                    <td><a href="${dataJson.lista[index].dni}" data-accion="ingreso"></a></td>`
+                                    <td>
+                                        <a href="${dataJson.lista[index].dni}" data-accion="ingreso">Ver</a>
+                                    </td>`;
                     $tabla__busqueda_body.appendChild(tr);    
                 }
             }else{
             mostrarMensaje("No se encontraron empleados","msj_error");}
-        })
+        })*/
 
 
     } catch (error) {
@@ -344,7 +353,7 @@ $tabla__examenes_body.addEventListener("click", e=>{
                 })
                 .then(dataJson => {
                     if (dataJson.respuesta){
-                        document.getElementById("asunto__correo").value = (dataJson.codcos).slice(0,4) + " EMO - "+ examen +" "+dataJson.nombres; //slice(iniciocadena, fincadena)
+                        document.getElementById("asunto__correo").value = (dataJson.ccorreo)/*.slice(0,4)*/ + " EMO - "+ examen +" "+dataJson.nombres; //slice(iniciocadena, fincadena)
                         document.getElementById("nombre__correo").value = dataJson.nombres;
                         document.getElementById("direccion__correo").value = dataJson.correo;
                         document.getElementById("fecha__examen").value = fecha;
@@ -490,6 +499,7 @@ $mail__accept.onclick = (e) => {
             if (dataJson.respuesta){
                 listarExamenes();
                 fadeOut(document.getElementById("modal__esperar"));
+                fadeOut($ficha__medica__correo);
                 mostrarMensaje("Examén medico enviado","msj_correct");
             }
         });

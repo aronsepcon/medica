@@ -807,3 +807,11 @@ button:hover {
   top: 15px;
   right: 40px;
 }
+
+table tr:nth-child(even) {
+  background-color: #c2c2c2;
+}
+
+table tr:nth-child(odd) {
+  background-color: #fff;
+}
