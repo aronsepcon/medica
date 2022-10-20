@@ -159,6 +159,7 @@
                         fichas_api.enviado,
                         fichas_api.alergias,
                         fichas_api.grupoSangre,
+                        fichas_api.dni,
                         lista_clinicas.nomb_clinica,
                         fichas_api.paciente
                     FROM
@@ -189,7 +190,9 @@
                                     "sangre"=>$row['grupoSangre'],
                                     "id"=>$row['idreg'],
                                     "clinica"=>$row['nomb_clinica'],
-                                    "paciente"=>$row['paciente']);
+                                    "paciente"=>$row['paciente'],
+                                    "dni"=>$row['dni']
+                                );
                     array_push($lista,$salida);
                 }
                 $respuesta = true;
