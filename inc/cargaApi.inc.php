@@ -49,7 +49,7 @@
                                             tgp=?,thevenon=?,tipoExa=?,tipoPase=?,tipoPase2=?,
                                             tolueno=?,tratamientoMedico=?,traumatologia=?,trichomonas=?,trigliceridos=?,
                                             trofozoitos=?,ureaSanguinea=?,urobilinogeno=?,vdrl=?,vih=?,
-                                            vldl=?,xileno=?,clinica=?";
+                                            vldl=?,xileno=?,clinica=1";
             $statement = $pdo->prepare($sql);
             $statement ->execute(array($datos[$i]->acidoUrico,$datos[$i]->aglutinaciones,$datos[$i]->alergias,$datos[$i]->anfetaminas,$datos[$i]->antFamiliares,
                                     $datos[$i]->antece1,$datos[$i]->antece2,$datos[$i]->antece3,$datos[$i]->antece4,$datos[$i]->antece5,
@@ -86,7 +86,7 @@
                                     $datos[$i]->tgp,$datos[$i]->thevenon,$datos[$i]->tipoExa,$datos[$i]->tipoPase,$datos[$i]->tipoPase2,
                                     $datos[$i]->tolueno,$datos[$i]->tratamientoMedico,$datos[$i]->traumatologia,$datos[$i]->trichomonas,$datos[$i]->trigliceridos,
                                     $datos[$i]->trofozoitos,$datos[$i]->ureaSanguinea,$datos[$i]->urobilinogeno,$datos[$i]->vdrl,$datos[$i]->vih,
-                                    $datos[$i]->vldl,$datos[$i]->xileno,$datos[$i]->clinica));
+                                    $datos[$i]->vldl,$datos[$i]->xileno));
             
             $contador++;
             $arr = $statement->errorInfo();

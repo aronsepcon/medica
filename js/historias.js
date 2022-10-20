@@ -335,15 +335,27 @@ $tabla__examenes_body.addEventListener("click", e=>{
             $uploadPdf.click(); 
         }else if (accion == "sendMail") {
             try {
-            let examen = e.target.parentElement.dataset.examen,
-                fecha  = e.target.parentElement.dataset.fecha,
-                registro = e.target.parentElement.getAttribute("href"),
-                adjunto = e.target.parentElement.dataset.adjunto,
-                clinica = e.target.parentElement.dataset.clinica;
-            
+                let examen = e.target.parentElement.dataset.examen,
+                    fecha  = e.target.parentElement.dataset.fecha,
+                    registro = e.target.parentElement.getAttribute("href"),
+                    adjunto = e.target.parentElement.dataset.adjunto,
+                    clinica = e.target.parentElement.dataset.clinica;
+
                 let data = new FormData();//aqui es la correccion al cambio de query
                 data.append("documento",$documento_trabajador.value);
                 data.append("funcion","datosColaborador");
+
+/*
+                if (examen =="PERIODICO" || examen=="EMOA"){
+                    tipoEMO = 'A';
+                }
+                else if(examen=="RETIRO"){
+                    tipoEMO = 'R';
+                }
+                else if(examen=="PREOCUPACIONAL"){
+                    tipoEMO = 'P';//seria para el preocupacional
+                }*/
+                
                 fetch('../inc/consultasrrhh.inc.php',{
                     method: "POST",
                     body:data,
@@ -352,8 +364,9 @@ $tabla__examenes_body.addEventListener("click", e=>{
                     return response.json();
                 })
                 .then(dataJson => {
+    
                     if (dataJson.respuesta){
-                        document.getElementById("asunto__correo").value = (dataJson.ccorreo)/*.slice(0,4)*/ + " EMO - "+ examen +" "+dataJson.nombres; //slice(iniciocadena, fincadena)
+                        document.getElementById("asunto__correo").value = (dataJson.ccorreo) + "-EMO-"+ /*tipoEMO */examen+"-"+dataJson.dni+"-"+dataJson.nombres+"-"+clinica+"-"+fecha;
                         document.getElementById("nombre__correo").value = dataJson.nombres;
                         document.getElementById("direccion__correo").value = dataJson.correo;
                         document.getElementById("fecha__examen").value = fecha;

@@ -44,7 +44,7 @@
                 <label for="fecha__examen">Fecha Examen Medico:</label>
                 <input type="text" name="fecha__examen" id="fecha__examen"  readonly>
                 <label for="clinica__examen">Nombre Clinica:</label>
-                <input type="text" name="clinica__examen" id="clinica__examen" class="mayusculas">
+                <input type="text" name="clinica__examen" id="clinica__examen" class="mayusculas" readonly>
                 <div class="opciones">
                     <button type="button" id="mail__accept">Enviar</button>
                     <button type="button" id="mail__cancel">Cancelar</button>

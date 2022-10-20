@@ -1,13 +1,41 @@
 <?php
     require_once("connectmedica.inc.php");
+    //require("connectrrhh.inc.php");
     include("consultasmedicas.inc.php");
 
     $doc=$_POST['indice'];
+    $dni=$_POST['documento'];
 
     $mensaje = "No se completo la operacion";
     $respuesta = false;
+/*
+    $datosrrhh = $pdo -> prepare("SELECT 
+                                    SUBSTRING(tabla_aquarius_copy.ccostos,1,4) as ccorreo,
+                                    FROM
+                                        tabla_aquarius_copy
+                                    WHERE
+                                        tabla_aquarius_copy.dni = $dni");
 
-    $datos = $pdo -> prepare("SELECT paciente,tipoExa FROM fichas_api where idreg=$doc");
+    $datosrrhh -> execute(array());
+
+    while($dato2 = $datosrrhh -> fetch(PDO::FETCH_ASSOC)){
+        $ccostos = $dato2['ccorreo'];
+    }
+*/
+    $datos = $pdo -> prepare("SELECT 
+                                fichas_api.paciente,
+                                fichas_api.tipoExa,
+                                replace(fichas_api.dni,' ','') as dni,
+                                date_format(fichas_api.fecha,'%d%m%y') as fecha,
+                                lista_clinicas.nomb_clinica
+                            FROM 
+                                fichas_api
+                            LEFT JOIN 
+                                lista_clinicas 
+                            ON
+                                fichas_api.clinica=lista_clinicas.id
+                            WHERE
+                                idreg=$doc");
     $datos -> execute(array());
 
     while($dato = $datos -> fetch(PDO::FETCH_ASSOC)){
@@ -22,6 +50,10 @@
         }
 
         $nombres =$dato['paciente'];
+        $dni2 = $dato['dni'];
+        $fecha = $dato['fecha'];
+        $clinica = $dato['nomb_clinica'];
+
     }
     
        // $nombres = $_POST['nombres'];
@@ -30,7 +62,8 @@
 
         $archivo    = $_FILES['fileUpload'];
         $temporal	= $_FILES['fileUpload']['tmp_name'];
-        $fileId     = "EMO".$tipoEMO."-".$nombres.".pdf";
+        $fileId     = /*$ccostos.*/"EMO".$tipoEMO."-".$dni2."-".$nombres."-".$clinica."-".$fecha.".pdf";
+       // $fileId     = "EMO".$tipoEMO."-".$nombres.".pdf"; 
         $indice     = $_POST['indice'];
 
         if (move_uploaded_file($temporal,"../hc/".$fileId)) {
