@@ -1,4 +1,5 @@
 <?php
+    session_start();
     require_once("connectmedica.inc.php");
     //require("connectrrhh.inc.php");
     include("consultasmedicas.inc.php");
@@ -66,7 +67,7 @@
 
         $archivo    = $_FILES['fileUpload'];
         $temporal	= $_FILES['fileUpload']['tmp_name'];
-        $fileId     = $ccostos."EMO".$tipoEMO."-".$dni2."-".$nombres."-".$clinica."-".$fecha.".pdf";
+        $fileId     = $ccostos."-"."EMO".$tipoEMO."-".$dni2."-".$nombres."-".$clinica."-".$fecha.".pdf";
        // $fileId     = "EMO".$tipoEMO."-".$nombres.".pdf"; 
         $indice     = $_POST['indice'];
 

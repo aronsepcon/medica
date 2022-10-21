@@ -30,7 +30,7 @@
                     tabla_aquarius.apellidos,
                     tabla_aquarius.dni,
                     tabla_aquarius.usuario,
-                    tabla_aquarius.clave
+                    tabla_aquarius.clave,
                     SUBSTRING(tabla_aquarius.ccostos,1,4) as ccostos
                 FROM
                     tabla_aquarius
