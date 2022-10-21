@@ -21,7 +21,10 @@
     while($dato2 = $datosrrhh -> fetch(PDO::FETCH_ASSOC)){
         $ccostos = $dato2['ccorreo'];
     }
+
+    
 */
+    $ccostos = $_SESSION['ccostos'];
     $datos = $pdo -> prepare("SELECT 
                                 fichas_api.paciente,
                                 fichas_api.tipoExa,
@@ -53,6 +56,7 @@
         $dni2 = $dato['dni'];
         $fecha = $dato['fecha'];
         $clinica = $dato['nomb_clinica'];
+        
 
     }
     
@@ -62,7 +66,7 @@
 
         $archivo    = $_FILES['fileUpload'];
         $temporal	= $_FILES['fileUpload']['tmp_name'];
-        $fileId     = /*$ccostos.*/"EMO".$tipoEMO."-".$dni2."-".$nombres."-".$clinica."-".$fecha.".pdf";
+        $fileId     = $ccostos."EMO".$tipoEMO."-".$dni2."-".$nombres."-".$clinica."-".$fecha.".pdf";
        // $fileId     = "EMO".$tipoEMO."-".$nombres.".pdf"; 
         $indice     = $_POST['indice'];
 

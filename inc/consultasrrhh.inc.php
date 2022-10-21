@@ -1,4 +1,5 @@
 <?php 
+    session_start();
     require_once("connectrrhh.inc.php");
 
     if(isset($_POST['funcion'])){
@@ -22,20 +23,42 @@
             $respuesta  = false;
             $mensaje    = "No existe el nuemro de documento";
             $clase      = "msj_error";
-
+            $pass = sha1($clave);
+            
             $sql ="SELECT  
                     tabla_aquarius.nombres,
-                    tabla_aquarius.apellidos 
+                    tabla_aquarius.apellidos,
+                    tabla_aquarius.dni,
+                    tabla_aquarius.usuario,
+                    tabla_aquarius.clave
+                    SUBSTRING(tabla_aquarius.ccostos,1,4) as ccostos
                 FROM
                     tabla_aquarius
                 WHERE
-                    clave = $clave and usuario = $login";
+                    tabla_aquarius.usuario = ?";
             
             $statement = $pdo->prepare($sql);
             $statement ->execute(array($login));
             $result = $statement ->fetchAll();
-            
-            return $result;
+            $rowCount = $statement -> rowcount();
+            if($rowCount>0 && $pass==$result[0]['clave']){
+                $_SESSION['logged'] = true;
+                $_SESSION['ccostos'] = $result[0]['ccostos'];
+                $_SESSION['user'] = $result[0]['usuario'];                    
+                $_SESSION['nombres'] = $result[0]['nombres'];                          
+                $_SESSION['apellidos'] = $result[0]['apellidos']; 
+                $_SESSION['dni'] = $result[0]['dni'];      
+                $respuesta = array("respuesta"  => true,
+                                    "clase"     =>"msj_correct",
+                                    "error"     =>"no hay error");
+
+            }else{
+                $respuesta = array("respuesta"=>$respuesta,
+                                    "mensaje"=>$mensaje,
+                                    "clase"=>$clase);
+            }
+
+            return $respuesta;
 
         }catch(PDOException $th) {
             echo "Error: " . $th->getMessage();

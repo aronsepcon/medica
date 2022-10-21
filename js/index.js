@@ -1,3 +1,5 @@
+//import {mostrarMensaje} from "./funciones.js";
+
 const $boton_login = document.getElementById('boton_login');
 const $user_login = document.getElementById('user_login');
 const $user_password = document.getElementById('user_password');
@@ -18,15 +20,22 @@ $boton_login.onclick = (e) => {
         data.append('clave',$user_password.value)
         data.append('funcion','validarClave')
 
-        fetch('../inc/consultasrrhh.inc.php',{
+        fetch('./inc/consultasrrhh.inc.php',{
             method: "POST",
             body: data,
         })
         .then(function(response){
             return response.json();
         })
+        .then(data => {
+            if(data.respuesta){
+                window.location.href = "php/dashboard.inc.php";
+            }else{
+                mostrarMensajes("contraseña erronea","msj_error");
+            }
+        });
 
-        window.location.href = "php/dashboard.inc.php";
+        //window.location.href = "php/dashboard.inc.php";
     } catch (error) {
         mostrarMensajes(error,"msn_error");
     }

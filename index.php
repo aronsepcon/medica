@@ -1,5 +1,7 @@
 <?php
+    //session_start();
     $random = rand(0,1000);
+    
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -8,7 +10,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css?v<?php echo $random; ?>" type="text/css">
-    <script src="js/historias.js"></script>
     <title>Sepcon Area - Médica</title>
 </head>
 <body>

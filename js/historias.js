@@ -3,6 +3,7 @@ import {fadeIn} from "./funciones.js";
 import {fadeOut} from "./funciones.js";
 import { validar } from "./funciones.js";
 
+//import {mostrarMensaje,fadeIn,fadeOut,validar } from "./funciones.js";
 
 const $menu_vertical = document.getElementsByClassName('menu-historias__vertical__menu');
 const $opcion1 = document.getElementById('opcion1');
@@ -68,6 +69,8 @@ const $atencion__medica = document.getElementById('atencion__medica');
 let registro = 0;
 
 /** opciones */
+
+//window.onload = function(){
 $opcion1.onclick = (e) => {
     e.preventDefault();
 
@@ -314,6 +317,7 @@ $btn__atencion__medica.onclick = (e) => {
 
     return false;
 }
+
 
 $tabla__examenes_body.addEventListener("click", e=>{
     e.preventDefault();

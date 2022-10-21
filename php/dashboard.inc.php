@@ -1,5 +1,12 @@
 <?php
+    session_start();
     $random = rand(0,1000);
+    
+    if($_SESSION['logged'] == false){
+        session_unset();
+        session_destroy();
+        header('location: ../index.php');
+    }
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -13,6 +20,7 @@
     
 </head>
 <body>
+
     <div class="modal_mensaje msj_info" id="mensaje__sistema">
         <span id="mensaje_texto">Vamos a ver si lo muestra</span>
     </div>
@@ -28,9 +36,10 @@
             <div class="main_title_user_data">
                 <div class="main__title__img"></div>
                 <div class="main__title__description">
-                    <p>Jhon Curi</p>
-                    <p>Practicante TI</p>
+                    <p>Bienvenido</p>
+                    <p><?php echo $_SESSION['nombres']?></p>
                 </div>
+                <a href="../inc/logout.inc.php" class="href">Cerrar</a>
             </div>
         </div>
         <div class="main__menu">

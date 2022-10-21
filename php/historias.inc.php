@@ -1,5 +1,11 @@
 <?php
+    //session_start();
     $random = rand(0,1000);
+    if($_SESSION['logged'] == false){
+        session_unset();
+        session_destroy();
+        header('location: ../index.php');
+    }
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -290,7 +296,7 @@
                                 <th width="6%">Cargar</th>
                             </tr>
                         </thead>
-                        <tbody id="tabla__examenes_body">
+                        <tbody class="tabla__examenes_body" id="tabla__examenes_body">
                         </tbody>
                         
                     </table>
