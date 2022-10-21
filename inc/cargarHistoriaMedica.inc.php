@@ -1,7 +1,6 @@
 <?php
     session_start();
     require_once("connectmedica.inc.php");
-    //require("connectrrhh.inc.php");
     include("consultasmedicas.inc.php");
 
     $doc=$_POST['indice'];
@@ -9,22 +8,7 @@
 
     $mensaje = "No se completo la operacion";
     $respuesta = false;
-/*
-    $datosrrhh = $pdo -> prepare("SELECT 
-                                    SUBSTRING(tabla_aquarius_copy.ccostos,1,4) as ccorreo,
-                                    FROM
-                                        tabla_aquarius_copy
-                                    WHERE
-                                        tabla_aquarius_copy.dni = $dni");
 
-    $datosrrhh -> execute(array());
-
-    while($dato2 = $datosrrhh -> fetch(PDO::FETCH_ASSOC)){
-        $ccostos = $dato2['ccorreo'];
-    }
-
-    
-*/
     $ccostos = $_SESSION['ccostos'];
     $datos = $pdo -> prepare("SELECT 
                                 fichas_api.paciente,
@@ -60,15 +44,9 @@
         
 
     }
-    
-       // $nombres = $_POST['nombres'];
-
-        
-
         $archivo    = $_FILES['fileUpload'];
         $temporal	= $_FILES['fileUpload']['tmp_name'];
         $fileId     = $ccostos."-"."EMO".$tipoEMO."-".$dni2."-".$nombres."-".$clinica."-".$fecha.".pdf";
-       // $fileId     = "EMO".$tipoEMO."-".$nombres.".pdf"; 
         $indice     = $_POST['indice'];
 
         if (move_uploaded_file($temporal,"../hc/".$fileId)) {

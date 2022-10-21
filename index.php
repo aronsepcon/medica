@@ -1,7 +1,5 @@
 <?php
-    //session_start();
-    $random = rand(0,1000);
-    
+    $random = rand(0,1000);    
 ?>
 <!DOCTYPE html>
 <html lang="es">

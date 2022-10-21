@@ -431,10 +431,10 @@ $uploadPdf.onchange = (e) => {
         .then(response => response.json())
         .then(data => {
             if (data.respuesta) {
-                mostrarMensaje("Documento subido","msj_correct");
                 let adjunto = "../hc/"+data.archivo;
                 console.log(adjunto);
                 $frame__adjunto.setAttribute("src", adjunto);
+                mostrarMensaje("Documento subido","msj_correct");
                 //Window.location.reload();
             }else{
                 mostrarMensaje("Hubo un error al subir el archivo","msj_error");
