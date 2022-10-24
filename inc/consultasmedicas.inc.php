@@ -218,7 +218,7 @@
         try{
             $respuesta = false;
             $lista = [];
-            //cambiar la consulta
+            //cambiar la consulta de aqui
             $sql ="SELECT   
                 fichas_api.tipoExa, 
                 fichas_api.fecha, 
@@ -236,13 +236,11 @@
                 fichas_api 
             WHERE
                 fichas_api.dni = ? 
-            ORDER BY
-                fichas_api.fecha DESC";
-
+            ORDER BY fichas_api.fecha DESC, CASE WHEN fichas_api.tipoExa = 'RETIRO' THEN 3 ELSE 1 END ASC";
             $statement = $pdo->prepare($sql);
             $statement ->execute(array($doc));
             $result = $statement ->fetchAll();
-            $rowCount = $statement -> rowcount();
+            $rowCount = $statement -> rowcount(); //hassta maso por aqi
 
             if ($rowCount>0){
                 foreach($result as $row){       //cambiar las columnas a usar        

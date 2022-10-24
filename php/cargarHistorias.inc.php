@@ -50,10 +50,21 @@
             </form>
         </div>
         <br>
-        <h2>Serpharmed</h2>
-        <div></div>
+        <h2>Serfarmed</h2>
+        <div>
+            <h3>Excel</h3>
+                <form action="" id="formUpload">
+                    <input type="file" name="fileUpload" id="fileUpload" accept=".xls,.xlsx" class="oculto" >
+                    <div id="formUpload__data">
+                        <div id="formUpload__data__process">
+                            <a href="#" id="btn__uploadAmericas"><i class="fas fa-cloud-upload-alt"></i></a>
+                        </div>
+                    </div>
+                    <label>Subir documentos</label>
+                </form> 
+        </div>
         <br>
-        <h2>Las Americas</h2>
+        <!--h2>Las Americas</h2>
         <div>
             <h3>Excel</h3>
             <form action="" id="formUpload">
@@ -63,8 +74,9 @@
                         <a href="#" id="btn__uploadAmericas"><i class="fas fa-cloud-upload-alt"></i></a>
                     </div>
                 </div>
+                <label>Subir documentos</label>
             </form> 
-        </div>
+        </div-->
         
     </section>
     <script src="../js/carga.js?v<?php echo $random;?>" type="module"></script>

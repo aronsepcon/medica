@@ -262,8 +262,8 @@
                                 <input type="text" name="sede__trabajador" id="sede__trabajador" readonly>
                                 <label for="estado__trabajador">Estado :</label>
                                 <input type="text" name="estado__trabajador" id="estado__trabajador" readonly>
-                                <label for="telefono__trabajador">Telefono :</label>
-                                <input type="text" name="telefono__trabajador" id="telefono__trabajador" readonly>
+                                <!--label for="telefono__trabajador">Telefono :</label>
+                                <input type="text" name="telefono__trabajador" id="telefono__trabajador" readonly-->
                                 <label for="direccion__trabajador">Dirección :</label>
                                 <input type="text" name="direccion__trabajador" id="direccion__trabajador" readonly>
                                 <label for="edad__trabajador">Edad :</label>

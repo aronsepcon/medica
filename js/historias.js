@@ -193,6 +193,7 @@ $documento_trabajador.onkeypress = (e) => {
     try {
         if ($documento_trabajador.value == "" && $nombres_trabajador.value == "" ) throw "Ingrese el numero de documento";
 
+        //let url = 'http://sicalsepcon.net/api/workersapi.php?documento='+$documento_trabajador.value;
         let data = new FormData();
             data.append("documento",e.target.value);
             data.append("funcion","datosColaborador");
@@ -226,12 +227,49 @@ $documento_trabajador.onkeypress = (e) => {
                 mostrarMensaje("Verifique el N°. Documento","msj_error");
             }
         })
-
+/*
+        $numero__registro.value = cut
+        $nombres__apellidos.value = nombres;
+        $correo__electronico.value = correo;
+        $documento__identidad.value = dni;
+        $cargo__trabajador.value = cargo;
+        $sexo__trabajador.value = codSexo;
+        $centro_costos.value = ccostos;
+        $sede__trabajador.value = sede;
+       $estado__trabajador.value = estado;
+        $fecha__nacimiento.value = fecnac;
+      // $telefono__trabajador.value = dataJson.telefono;
+       $edad__trabajador.value = dataJson.edad;
+        $direccion__trabajador.value = direccion; 
+/*
+        fetch(url,{
+            method: "POST",
+            mode : "no-cors",
+            headers:{
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                dni:dni,
+                correo:correo,
+                cargo:cargo,
+                sexo:codSexo,
+                sede:sede,
+            })
+        })
+        .then(function(response){
+            return response.json
+        }).then(function(data) {
+            console.log(data)
+        }
+        .catch(error => console.error('Error:', error))
+        );
+*/
     } catch (error) {
         mostrarMensaje(error,"msj_error");
     }
   }
 }
+
 
 $nombres_trabajador.onkeypress = (e) => {
     var keycode = e.keyCode || e.which;
