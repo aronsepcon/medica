@@ -707,15 +707,15 @@ button:hover {
 
 .wrap #formUpload__data #formUpload__data__process {
   background: rgba(234, 189, 196, 0.6);
-  width: 50%;
+  width: 15%;
   display: block;
-  margin: 4rem auto;
-  padding: 5rem;
-  border-radius: 20px;
-  border: 2rem dashed rgba(234, 189, 196, 0.9);
+  
+  padding: 1px;
+  border-radius: 8px;
+  border: 1px dashed rgba(234, 189, 196, 0.9);
 }
 .wrap #formUpload__data #formUpload__data__process i {
-  font-size: 5rem;
+  font-size: 2rem;
 }
 
 .bars::-webkit-scrollbar-track {

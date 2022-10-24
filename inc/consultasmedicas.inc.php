@@ -191,7 +191,7 @@
                                     "id"=>$row['idreg'],
                                     "clinica"=>$row['nomb_clinica'],
                                     "paciente"=>$row['paciente'],
-                                    "dni"=>$row['dni']
+                                    "dni"=>trim($row['dni'])
                                 );
                     array_push($lista,$salida);
                 }

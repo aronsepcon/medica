@@ -3,8 +3,9 @@ import {fadeIn} from "./funciones.js";
 import {fadeOut} from "./funciones.js";
 import {validar} from "./funciones.js";
 
-//const $btn__upload = document.getElementById("btn__upload");
-//const $fileUpload = document.getElementById("fileUpload");
+const $btn__upload = document.getElementById("btn__upload");
+const $btn__uploadAmericas = document.getElementById("btn__uploadAmericas");
+const $fileUpload = document.getElementById("fileUpload");
 const $btnUpdateMedex = document.getElementById("btnUpdateMedex");
 const $fecha__inicio__medex = document.getElementById("fecha__inicio__medex");
 const $fecha__final__medex = document.getElementById("fecha__final__medex");
@@ -12,13 +13,21 @@ const $nro__doc = document.getElementById("nro__doc");
 
 const $modal__esperar = document.getElementById("modal__esperar");
 
-/*$btn__upload.onclick = (e) => {
+$btn__upload.onclick = (e) => {
     e.preventDefault();
 
     $fileUpload.click();
 
     return false;
-}*/
+}
+
+$btn__uploadAmericas.onclick = (e) => {
+    e.preventDefault();
+
+    $fileUpload.click();
+
+    return false;
+}
 
 $btnUpdateMedex.onclick = (e) => {
     e.preventDefault();
@@ -30,7 +39,7 @@ $btnUpdateMedex.onclick = (e) => {
     return false;
 }
 
-/*$fileUpload.onchange = (e) => {
+$fileUpload.onchange = (e) => {
     e.preventDefault;
 
     if($fileUpload.files && $fileUpload.files[0])
@@ -62,7 +71,7 @@ $btnUpdateMedex.onclick = (e) => {
     }
 
     return false;
-}*/
+}
 
 const getToken = () => {
 	let url = 'https://www.medex.com.pe/ApiCitas/api/Usuario/Login';

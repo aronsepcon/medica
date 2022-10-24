@@ -23,14 +23,14 @@
      echo json_encode($salida);
  
  
-     function returnTable($pdo,$archivo){
+    function returnTable($pdo,$archivo){
  
          $objPHPExcel = PHPExcel_IOFactory::load($archivo);
          $objHoja=$objPHPExcel->getActiveSheet()->toArray(null,true,true,true);
          $contador = 0;
  
          foreach ($objHoja as $iIndice=>$objCelda) {
-             if ($objCelda['B'] !== "ATENCION"){
+             if ($objCelda['B'] !== "ATENCION"){//preguntar, ver si va a fichas_api o fichas_medicas
                  $sql = "INSERT INTO fichas_medicas SET  atencion = ?,aseguradora = ?,empresa = ?,hc = ?,dni = ?,
                                                          fec_naci = STR_TO_DATE(?, '%d/%m/%Y'),
                                                          sexo = ?,ocupacion_actual = ?,puesto_postula = ?,tipo_examen = ?,
@@ -105,9 +105,75 @@
                  $rowCount = $statement -> rowcount();
                  //var_dump($statement->errorinfo());
                  $contador++;
-             }
-         }
+            }
+      /*    // else if($objCelda['A']=="Id.Atención"){
+                    $sql = "INSERT INTO fichas_medicas SET atencion=?, fecha = STR_TO_DATE(?,'%Y/%m/%d'), paciente=?,dni=?, ocupacion=?, 
+                                                            codSexo=?, edad =?, empresa=?, aptitud=?, imc=?, diagno1=?, reco1=?, diagno2=?,
+                                                            reco2=?,diagno3=?, reco3=?, diagno4=?, reco4=?,diagno5=?, reco5=?,
+                                                            diagno6=?, reco6=?, diagno7=?, reco7=?, diagno8=?, reco8=?, diagno9=?, 
+                                                            reco9=?, hemoglobina=?, hematocrito=?,grupoSangre=?,glucosa=?, rpr=?, 
+                                                            vdrl=?, clinica=2 ;"//FALTA TIPO DE EXAMEN U:
+                    $statement = $pdo->prepare($sql);
+                    $statement -> execute(array($objCelda['A'],$objCelda['B'],$objCelda['C'],$objCelda['D'],$objCelda['E'],$objCelda['F'],
+                                                $objCelda['G'],$objCelda['H'],$objCelda['J'],$objCelda['K'],$objCelda['L'],$objCelda['M'],
+                                                $objCelda['R'],$objCelda['S'],$objCelda['U'],$objCelda['V'],$objCelda['X'],$objCelda['Y'],
+                                                $objCelda['AD'],$objCelda['AE'],$objCelda['AG'], $objCelda['AH'],$objCelda['AM'],
+                                                $objCelda['AN'], $objCelda['BE'],$objCelda['BF'],$objCelda['BH'],$objCelda['BI'],
+                                                $objCelda['CO'], $objCelda['CP'],$objCelda['CR'],$objCelda['CT'],$objCelda['CU'],
+                                                $objCelda['CV']));//ver como concatenar
+                    $result = $statement ->fetchAll();
+                    $rowCount = $statement -> rowcount();
+                    $contador++;
+          }//serfarmed
+
+         /* else if($objCelda['B'] == "ATENCION") {//las americas
+               $sql ="INSERT INTO fichas_medicas SET paciente = ?,fecNaci = STR_TO_DATE(?,'%Y/%m/%d'),dni = ?,edad = ?, ocupacion=?, 
+                                                    centroCosto=?, empresa=?,grupoSangre=?,alergias = ?, fecha=STR_TO_DATE(?,'%Y/%m/%d'),
+                                                    aptitud=?,peso=?,talla=?,imc=?,estadoNutricional=?,clinica = 3";
+                $statement = $pdo->prepare($sql);
+                $statement -> execute(array( $objCelda['B'],$objCelda['C'],$objCelda['D'],$objCelda['E'],$objCelda['G'],$objCelda['H'],
+                                            $objCelda['I'], $objCelda['L'],$objCelda['M'],$objCelda['N'],$objCelda['P'],$objCelda['Q'],
+                                            $objCelda['R'],$objCelda['S'],$objCelda['T']));
+                $result = $statement ->fetchAll();
+                $rowCount = $statement -> rowcount();
+                $contador++;
+            }
+            else if($objCelda['AG'] !== ""){//Las americas -- retiro
+                $sql ="INSERT INTO fichas_medicas SET paciente = ?,fecNaci = STR_TO_DATE(?,'%Y/%m/%d'),dni = ?,edad = ?, ocupacion=?, 
+                                                    centroCosto=?, empresa=?,grupoSangre=?,alergias = ?, fecha=STR_TO_DATE(?,'%Y/%m/%d'),
+                                                    clinica = 3";
+                $statement = $pdo->prepare($sql);
+                $statement -> execute(array($objCelda['B'],$objCelda['C'],$objCelda['D'],$objCelda['E'],$objCelda['G'],$objCelda['H'],
+                                            $objCelda['I'], $objCelda['L'],$objCelda['M'],$objCelda['AG']));
+                $result = $statement ->fetchAll();
+                $rowCount = $statement -> rowcount();
+                $contador++;
+            }
+           */
+        }
  
-         return $contador;
-     }
+        return $contador;
+    }
+
+    function returnTableAmericas($pdo,$archivo){
+
+        $objPHPExcel = PHPExcel_IOFactory::load($archivo);
+        $objHoja=$objPHPExcel->getActiveSheet()->toArray(null,true,true,true);
+        $contador = 0;
+
+        foreach($objHoja as $iIndice=>$objCelda) {
+            if($objCelda['B'] == "ATENCION") {
+                $sql ="INSERT INTO fichas_medicas SET" ;
+                $statement = $pdo->prepare($sql);
+                $statement -> execute(array());
+                $result = $statement ->fetchAll();
+                $rowCount = $statement -> rowcount();
+                $contador++;
+            }
+        }
+        return $contador;
+    }
+
+
+
 ?>

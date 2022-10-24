@@ -350,7 +350,10 @@ $tabla__examenes_body.addEventListener("click", e=>{
                 data.append("funcion","datosColaborador");
 
 /*
-                if (examen =="PERIODICO" || examen=="EMOA"){
+                if (examen =="PERIODICO"){
+                    tipoEMO = 'A';
+                }
+                else if( examen=="EMOA"){
                     tipoEMO = 'A';
                 }
                 else if(examen=="RETIRO"){

@@ -17,18 +17,18 @@
         <div class="lds-dual-ring"></div>
 	</div>
     <section class="wrap">
-        <h1>Cargar Historias</h1>
-        <!--<form action="" id="formUpload">
+        <!--h1>Cargar Historias</h1>
+        <form action="" id="formUpload">
             <input type="file" name="fileUpload" id="fileUpload" accept=".xls,.xlsx" class="oculto" >
             <div id="formUpload__data">
-                <h1>Seleccione o arrastre el archivo de historias que desea cargar</h1>
                 <div id="formUpload__data__process">
                     <a href="#" id="btn__upload"><i class="fas fa-cloud-upload-alt"></i></a>
                 </div>
             </div>
-        </form>-->
+        </form-->
         <h2>Medex</h2>
         <div>
+            <h3>API</h3>
             <form action="" id="medexForm">
                 <label for="fecha__inicio__medex">Fecha Inicio</label>
                 <input type="date" name="fecha__inicio__medex" id="fecha__inicio__medex" value="<?php echo date('Y-m-d')?>">
@@ -38,6 +38,32 @@
                 <input type="text" name="nro__doc" id="nro__doc">
                 <input type="submit" value="Actualizar" id="btnUpdateMedex">
             </form>
+            <h3>Excel</h3>
+            <form action="" id="formUpload">
+                <input type="file" name="fileUpload" id="fileUpload" accept=".xls,.xlsx" class="oculto" >
+                <div id="formUpload__data">
+                    <div id="formUpload__data__process">
+                        <a href="#" id="btn__upload"><i class="fas fa-cloud-upload-alt"></i></a>
+                    </div>
+                </div>
+                <label>Subir documentos</label>
+            </form>
+        </div>
+        <br>
+        <h2>Serpharmed</h2>
+        <div></div>
+        <br>
+        <h2>Las Americas</h2>
+        <div>
+            <h3>Excel</h3>
+            <form action="" id="formUpload">
+                <input type="file" name="fileUpload" id="fileUpload" accept=".xls,.xlsx" class="oculto" >
+                <div id="formUpload__data">
+                    <div id="formUpload__data__process">
+                        <a href="#" id="btn__uploadAmericas"><i class="fas fa-cloud-upload-alt"></i></a>
+                    </div>
+                </div>
+            </form> 
         </div>
         
     </section>
