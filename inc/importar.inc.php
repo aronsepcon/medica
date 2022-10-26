@@ -35,6 +35,8 @@
          $valAmericasPreocup = $objPHPExcel ->getActiveSheet() -> getCell('C4') -> getValue();
          foreach ($objHoja as $iIndice=>$objCelda) {
           //  if($objCelda['A1']=="Id.Atención"/* && $objCelda['A']!==""*/){//no lo carga bien, carga el primero por algun motivo xc
+            $tipoR = 'RETIRO';
+            $tipoP = 'PREOCUPACIONAL';
             if($valSerfarmed == "Id.Atención"){  
                 $sql = "INSERT INTO fichas_api SET atencion=?, fecha = STR_TO_DATE(?,'%d/%m/%Y'), paciente=?,dni=?, ocupacion=?, 
                                                         codSexo=?, edad =?, empresa=?,tipoExa=?, aptitud=?, imc=?, diagno1=?, reco1=?, diagno2=?,
@@ -173,11 +175,11 @@
 
             else if($valAmericas  == "LAS AMERICAS" || $valAmericasRetiro  == "LAS AMERICAS" ){//Las americas -- retiro
                 $sql ="INSERT INTO fichas_api2 SET paciente = ?,fecNaci = STR_TO_DATE(?,'%d/%m/%Y'),dni = ?,edad = ?, ocupacion=?, 
-                                                    centroCosto=?, empresa=?,grupoSangre=?,alergias = ?, fecha=STR_TO_DATE(?,'%d/%m/%Y'), tipoExa=RETIRO
-                                                    clinica = 3";
+                                                    centroCosto=?, empresa=?,grupoSangre=?,alergias = ?, fecha=STR_TO_DATE(?,'%d/%m/%Y'), 
+                                                    tipoExa=?,clinica = 3";//tipoExa='RETIRO'
                 $statement = $pdo->prepare($sql);
                 $statement -> execute(array($objCelda['B'],$objCelda['C'],$objCelda['D'],$objCelda['E'],$objCelda['G'],$objCelda['H'],
-                                            $objCelda['I'], $objCelda['L'],$objCelda['M'],$objCelda['AG']));
+                                            $objCelda['I'], $objCelda['L'],$objCelda['M'],$objCelda['AG'],$tipoR));
                 $result = $statement ->fetchAll();
                 $rowCount = $statement -> rowcount();
                 var_dump($valAmericas);
@@ -186,11 +188,11 @@
             else if( $valAmericasRetiro  !== "LAS AMERICAS" and $valAmericasPreocup == "FECHA DE NACIMIENTO" ) {//las americas
                $sql ="INSERT INTO fichas_api2 SET paciente = ?,fecNaci = STR_TO_DATE(?,'%d/%m/%Y'),dni = ?,edad = ?, ocupacion=?, 
                                                     centroCosto=?, empresa=?,grupoSangre=?,alergias = ?, fecha=STR_TO_DATE(?,'%d/%m/%Y'),
-                                                    aptitud=?,peso=?,talla=?,imc=?,estadoNutricional=?,tipoExa=PREOCUPACIONAL,clinica = 3";
+                                                    aptitud=?,peso=?,talla=?,imc=?,estadoNutricional=?,tipoExa=?, clinica = 3"; //tipoExa='PREOCUPACIONAL' 
                 $statement = $pdo->prepare($sql);
                 $statement -> execute(array( $objCelda['B'],$objCelda['C'],$objCelda['D'],$objCelda['E'],$objCelda['G'],$objCelda['H'],
                                             $objCelda['I'], $objCelda['L'],$objCelda['M'],$objCelda['N'],$objCelda['P'],$objCelda['Q'],
-                                            $objCelda['R'],$objCelda['S'],$objCelda['T']));
+                                            $objCelda['R'],$objCelda['S'],$objCelda['T'],$tipoP));
                 $result = $statement ->fetchAll();
                 $rowCount = $statement -> rowcount();
                 $contador++;
