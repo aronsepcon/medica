@@ -73,7 +73,7 @@
         <div>
             <input type="radio" name="filtrado" id="radio__nombre">
             <label for="nombre">Por Nombre</label>
-            <input type="radio"  name="filtrado" id="radio__dni">
+            <input type="radio"  name="filtrado" id="radio__dni" checked>
             <label for="dni">Por DNI</label>
         </div>    
         <input type="text" id="nombres_trabajador" name="nombres_trabajador" placeholder="Nombres" value="" style="display: none;">
@@ -236,7 +236,7 @@
             </table>
         </div>
     </section>
-    <section class="historias__cuerpo_completo" id="historias__cuerpo_completo" style="display: none;"><!--style="display: none;"-->
+    <section class="historias__cuerpo_completo" id="historias__cuerpo_completo" style="display: block;"><!--style="display: none;"-->
         <nav class="historias__vertical__menu">
             <a href="#" id="opcion1" class="opcion_vertical resaltado">1.- Datos Generales</a>
             <a href="#" id="opcion2" class="opcion_vertical">2.- Exámenes Médicos</a> 

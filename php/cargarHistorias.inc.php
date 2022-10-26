@@ -57,14 +57,14 @@
                     <input type="file" name="fileUpload" id="fileUpload" accept=".xls,.xlsx" class="oculto" >
                     <div id="formUpload__data">
                         <div id="formUpload__data__process">
-                            <a href="#" id="btn__uploadAmericas"><i class="fas fa-cloud-upload-alt"></i></a>
+                            <a href="#" id="btn__uploadSerfarmed"><i class="fas fa-cloud-upload-alt"></i></a>
                         </div>
                     </div>
                     <label>Subir documentos</label>
                 </form> 
         </div>
         <br>
-        <!--h2>Las Americas</h2>
+        <h2>Las Americas</h2>
         <div>
             <h3>Excel</h3>
             <form action="" id="formUpload">
@@ -76,7 +76,7 @@
                 </div>
                 <label>Subir documentos</label>
             </form> 
-        </div-->
+        </div>
         
     </section>
     <script src="../js/carga.js?v<?php echo $random;?>" type="module"></script>

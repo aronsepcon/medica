@@ -13,6 +13,8 @@ const $opcion4 = document.getElementById('opcion4');
 const $opcion5 = document.getElementById('opcion5');
 const $opciones = document.querySelector(".historias__vertical__menu a");
 
+const $btn = document.createElement('button');
+
 const $pagina1 = document.getElementById('pagina1');
 const $pagina2 = document.getElementById('pagina2');
 const $pagina3 = document.getElementById('pagina3');
@@ -71,6 +73,8 @@ const $atencion__medica = document.getElementById('atencion__medica');
 
 let registro = 0;
 
+$btn.innerHTML ="ver";
+$btn.type = 'button';
 
 $opcion1.onclick = (e) => {
     e.preventDefault();
@@ -177,6 +181,7 @@ $opcion5.onclick = (e) => {
 }
 
 $radio__nombre.onclick = (e) =>{
+
     $documento_trabajador.style.display = 'none';
     $nombres_trabajador.style.display = 'block ';
     $historias__cuerpo_completo.style.display = 'none'
@@ -194,11 +199,12 @@ $tabla__busqueda_body.addEventListener("click", e=>{
     e.preventDefault();
 
     let accion =  e.target.parentElement.dataset.accion;
-    registro = e.target.parentElement.getAttribute("href");
+   // registro = e.target.parentElement.getAttribute("href");
 
     if(accion == "ingreso"){
-        $historias__cuerpo_completo.style.display = "block";
-        fadeOut($busqueda_parcial);
+            $historias__cuerpo_completo.style.display = "block";
+            $busqueda_parcial.style.display = "none";
+        //fadeOut($busqueda_parcial);
     }
 })
 
@@ -318,15 +324,18 @@ $nombres_trabajador.onkeypress = (e) => {
                 $tabla__busqueda_body.innerHTML = "";
                 
                 for (let index = 0; index < dataJson.lista.length; index++) {
+                    //const btn = "<button id='press'  class='Ver'>Ver</button>";
                     let tr = document.createElement("tr");
                     tr.innerHTML =`<td>${dataJson.lista[index].dni}</td>
                                     <td>${dataJson.lista[index].nombres}</td>
                                     <td>26</td> 
                                     <td>${dataJson.lista[index].sede}</td>
                                     <td>
-                                        <a href="${dataJson.lista[index].dni}" data-accion="ingreso">Ver</a>
+                                        <a href="">ver</a>
                                     </td>`;
-                    $tabla__busqueda_body.appendChild(tr);    
+                    $tabla__busqueda_body.appendChild(tr);   
+                    
+                    
                 }
             }else{
             mostrarMensaje("No se encontraron empleados","msj_error");}

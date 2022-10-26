@@ -4,6 +4,7 @@ import {fadeOut} from "./funciones.js";
 import {validar} from "./funciones.js";
 
 const $btn__upload = document.getElementById("btn__upload");
+const $btn__uploadSerfarmed = document.getElementById("btn__uploadSerfarmed");
 const $btn__uploadAmericas = document.getElementById("btn__uploadAmericas");
 const $fileUpload = document.getElementById("fileUpload");
 const $btnUpdateMedex = document.getElementById("btnUpdateMedex");
@@ -14,6 +15,14 @@ const $nro__doc = document.getElementById("nro__doc");
 const $modal__esperar = document.getElementById("modal__esperar");
 
 $btn__upload.onclick = (e) => {
+    e.preventDefault();
+
+    $fileUpload.click();
+
+    return false;
+}
+
+$btn__uploadSerfarmed.onclick = (e) => {
     e.preventDefault();
 
     $fileUpload.click();
