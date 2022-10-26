@@ -36,17 +36,21 @@
         elseif($dato['tipoExa']=='PREOCUPACIONAL'){
             $tipoEMO = 'P';//seria para el preocupacional
         }
+        elseif($dato['tipoExa']=='OTROS'){
+            $tipoEMO = 'O';//seria para el preocupacional
+        }
+
 
         $nombres =$dato['paciente'];
         $dni2 = $dato['dni'];
         $fecha = $dato['fecha'];
-        $clinica = $dato['nomb_clinica'];
-        
+        $clinica = $dato['nomb_clinica'];   
 
     }
         $archivo    = $_FILES['fileUpload'];
         $temporal	= $_FILES['fileUpload']['tmp_name'];
         $fileId     = $ccostos."-"."EMO".$tipoEMO."-".$dni2."-".$nombres."-".$clinica."-".$fecha.".pdf";
+        //$fileId = "test.pdf";
         $indice     = $_POST['indice'];
 
         if (move_uploaded_file($temporal,"../hc/".$fileId)) {

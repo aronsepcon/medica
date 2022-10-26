@@ -47,8 +47,8 @@
                 <li><a href="#" title="Ir Inicio"><i class="fas fa-home"></i></a></li>
                 <li><a href="#" id="historias" title="Historias Clínicas"><i class="far fa-file-alt"></i></a></li>
                 <li><a href="#"><i class="fas fa-chart-bar"></i></a></li>
-                <li><a href="#" id="atenciones" target="frame__loader" title="Atenciones Médicas"><i class="fas fa-user-md"></i></a></li>
                 <li><a href="#" title="Control de medicamentos"><i class="fas fa-box"></i></a></li>
+                <li><a href="#" id="atenciones" title="Atenciones Médicas"><i class="fas fa-user-md"></i></a></li><!-- target="frame__loader"-->
                 <li><a href="#" title="Configuración" id="configuracion"><i class="fas fa-cog"></i></a></li>
             </ul>
         </div>

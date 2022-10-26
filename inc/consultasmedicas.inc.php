@@ -109,7 +109,7 @@
         }
     }
 
-    function buscarAdjunto($pdo,$id){
+    function buscarAdjunto($pdo,$id){//para mostrar el adjunto cuando no esta de forma local
         try {
             $sql = "SELECT fichas_medicas.adjunto 
                     FROM
@@ -218,6 +218,7 @@
         try{
             $respuesta = false;
             $lista = [];
+            $retiroo =  'RET%';
             //cambiar la consulta de aqui
             $sql ="SELECT   
                 fichas_api.tipoExa, 
@@ -236,7 +237,7 @@
                 fichas_api 
             WHERE
                 fichas_api.dni = ? 
-            ORDER BY fichas_api.fecha DESC, CASE WHEN fichas_api.tipoExa = 'RETIRO' THEN 3 ELSE 1 END ASC";
+            ORDER BY fichas_api.fecha DESC, CASE WHEN fichas_api.tipoExa='$retiroo' THEN 3 ELSE 1 END ASC";
             $statement = $pdo->prepare($sql);
             $statement ->execute(array($doc));
             $result = $statement ->fetchAll();

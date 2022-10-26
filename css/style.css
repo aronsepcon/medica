@@ -815,3 +815,24 @@ button:hover {
 .tabla__examenes_body tr:nth-child(odd) {
   background-color: #fff;
 }
+
+input[name = "filtrado"]{
+  height: 15px;
+}
+
+.tabla__busqueda{
+  margin-top: 10px;
+  width: 100%;
+  max-height: 62vh;
+  overflow: auto;
+}
+
+.tabla__busqueda table{
+  font-size: 0.9rem;
+  border-collapse: collapse;
+}
+
+.tabla__busqueda table thead{
+  background-color: tomato;
+  color: #fff;
+ }

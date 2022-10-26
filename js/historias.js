@@ -22,6 +22,9 @@ const $pagina5 = document.getElementById('pagina5');
 const $documento_trabajador = document.getElementById('documento_trabajador');
 const $nombres_trabajador = document.getElementById('nombres_trabajador')
 
+const $radio__nombre = document.getElementById('radio__nombre');
+const $radio__dni = document.getElementById('radio__dni');
+
 const $numero__registro = document.getElementById('numero__registro');
 const $correo__electronico = document.getElementById('correo__electronico'); 
 const $nombres__apellidos = document.getElementById('nombres__apellidos');
@@ -33,7 +36,7 @@ const $sede__trabajador = document.getElementById('sede__trabajador');
 const $estado__trabajador = document.getElementById('estado__trabajador');
 const $fecha__nacimiento = document.getElementById('fecha__nacimiento');
 //const $telefono__trabajador = document.getElementById('telefono__trabajador');
-//const $edad__trabajador = document.getElementById('edad__trabajador');
+const $edad__trabajador = document.getElementById('edad__trabajador');
 const $direccion__trabajador = document.getElementById('direccion__trabajador');
 
 const $tabla__examenes = document.getElementById('tabla__examenes');
@@ -68,9 +71,7 @@ const $atencion__medica = document.getElementById('atencion__medica');
 
 let registro = 0;
 
-/** opciones */
 
-//window.onload = function(){
 $opcion1.onclick = (e) => {
     e.preventDefault();
 
@@ -174,7 +175,21 @@ $opcion5.onclick = (e) => {
     
    return false;
 }
-/*
+
+$radio__nombre.onclick = (e) =>{
+    $documento_trabajador.style.display = 'none';
+    $nombres_trabajador.style.display = 'block ';
+    $historias__cuerpo_completo.style.display = 'none'
+    $busqueda_parcial.style.display = 'block'
+}
+
+$radio__dni.onclick = (e) =>{
+    $documento_trabajador.style.display = 'block';
+    $nombres_trabajador.style.display = 'none';
+    $historias__cuerpo_completo.style.display = 'block'
+    $busqueda_parcial.style.display = 'none'
+}
+
 $tabla__busqueda_body.addEventListener("click", e=>{
     e.preventDefault();
 
@@ -186,14 +201,14 @@ $tabla__busqueda_body.addEventListener("click", e=>{
         fadeOut($busqueda_parcial);
     }
 })
-*/
+
+
 $documento_trabajador.onkeypress = (e) => {
   var keycode = e.keyCode || e.which;
   if (keycode == 13) {
     try {
         if ($documento_trabajador.value == "" && $nombres_trabajador.value == "" ) throw "Ingrese el numero de documento";
 
-        //let url = 'http://sicalsepcon.net/api/workersapi.php?documento='+$documento_trabajador.value;
         let data = new FormData();
             data.append("documento",e.target.value);
             data.append("funcion","datosColaborador");
@@ -208,62 +223,38 @@ $documento_trabajador.onkeypress = (e) => {
         .then(dataJson => {
             if (dataJson.respuesta){
                 $numero__registro.value = dataJson.cut
-                $nombres__apellidos.value = dataJson.nombres;
-                $correo__electronico.value = dataJson.correo;
-                $documento__identidad.value = dataJson.dni;
-                $cargo__trabajador.value = dataJson.cargo;
-                $sexo__trabajador.value = dataJson.codSexo;
-                $centro_costos.value = dataJson.ccostos;
-                $sede__trabajador.value = dataJson.sede;
                 $estado__trabajador.value = dataJson.estado;
-                $fecha__nacimiento.value = dataJson.fecnac;
-           //     $telefono__trabajador.value = dataJson.telefono;
-            //    $edad__trabajador.value = dataJson.edad;
-                $direccion__trabajador.value = dataJson.direccion; 
-                $tabla__examenes_body.innerHTML = "";
-                $tabla__atenciones_body.innerHTML = "";
-                $nombres_trabajador.value = dataJson.nombres;
             }else{
                 mostrarMensaje("Verifique el N°. Documento","msj_error");
             }
         })
-/*
-        $numero__registro.value = cut
-        $nombres__apellidos.value = nombres;
-        $correo__electronico.value = correo;
-        $documento__identidad.value = dni;
-        $cargo__trabajador.value = cargo;
-        $sexo__trabajador.value = codSexo;
-        $centro_costos.value = ccostos;
-        $sede__trabajador.value = sede;
-       $estado__trabajador.value = estado;
-        $fecha__nacimiento.value = fecnac;
-      // $telefono__trabajador.value = dataJson.telefono;
-       $edad__trabajador.value = dataJson.edad;
-        $direccion__trabajador.value = direccion; 
-/*
-        fetch(url,{
+    
+        let data2 = new FormData();
+            data2.append("doc",e.target.value);
+            data2.append("funcion", "datosApi");
+
+        fetch('../inc/consultasrrhh.inc.php',{
             method: "POST",
-            mode : "no-cors",
-            headers:{
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                dni:dni,
-                correo:correo,
-                cargo:cargo,
-                sexo:codSexo,
-                sede:sede,
-            })
+            body:data2,
         })
         .then(function(response){
-            return response.json
-        }).then(function(data) {
-            console.log(data)
-        }
-        .catch(error => console.error('Error:', error))
-        );
-*/
+            return response.json();
+        })
+        .then(dataJson=>{
+            if(dataJson.existe){
+                $nombres__apellidos.value = dataJson.datos[0].nombres+" "+dataJson.datos[0].paterno+" "+dataJson.datos[0].materno;
+                $correo__electronico.value = dataJson.datos[0].correo;
+                $documento__identidad.value = dataJson.datos[0].dni;
+                $cargo__trabajador.value = dataJson.datos[0].cargo;
+                $centro_costos.value =dataJson.datos[0].ccostos.slice(0,4) +" "+dataJson.datos[0].sede;
+                $edad__trabajador.value = dataJson.datos[0].edad;
+                $sede__trabajador.value = dataJson.datos[0].sucursal;
+                $sexo__trabajador.value = dataJson.datos[0].sexo;
+                $nombres_trabajador.value =  dataJson.datos[0].nombres+" "+dataJson.datos[0].paterno+" "+dataJson.datos[0].materno;
+
+            }
+        })
+
     } catch (error) {
         mostrarMensaje(error,"msj_error");
     }
@@ -277,7 +268,7 @@ $nombres_trabajador.onkeypress = (e) => {
     try {
         if ($nombres_trabajador.value == "" && $documento_trabajador.value == "") throw "Ingrese un valor";
 
-        let data = new FormData();
+       /* let data = new FormData();
             data.append("documento",e.target.value);
             data.append("funcion","nombreColaborador");
 
@@ -295,29 +286,29 @@ $nombres_trabajador.onkeypress = (e) => {
                 $correo__electronico.value = dataJson.correo;
                 $documento__identidad.value = dataJson.dni;
                 $cargo__trabajador.value = dataJson.cargo;
-                $sexo__trabajador.value = dataJson.codSexo;
+          //      $sexo__trabajador.value = dataJson.codSexo;
                 $centro_costos.value = dataJson.ccostos;
                 $sede__trabajador.value = dataJson.sede;
                 $estado__trabajador.value = dataJson.estado;
                 $fecha__nacimiento.value = dataJson.fecnac;
           //      $telefono__trabajador.value = dataJson.telefono;
           //      $edad__trabajador.value = dataJson.edad;
-                $direccion__trabajador.value = dataJson.direccion; 
+            //    $direccion__trabajador.value = dataJson.direccion; 
                 $tabla__examenes_body.innerHTML = "";
-                $tabla__atenciones_body.innerHTML = "";
+            //    $tabla__atenciones_body.innerHTML = "";
                 $documento_trabajador.value = dataJson.dni;
             }else{
                 mostrarMensaje("Verifique el N°. Documento","msj_error");
             }
-        })
-/*
-        let data = new FormData();
-        data.append("documento",e.target.value);
-        data.append("funcion","buscarEmpleados");
+        })*/
+
+        let data2 = new FormData();
+        data2.append("documento",e.target.value);
+        data2.append("funcion","buscarEmpleados");
 
         fetch('../inc/consultasrrhh.inc.php',{
             method: "POST",
-            body: data,
+            body: data2,
         })
         .then(function(response){
             return response.json();
@@ -339,7 +330,7 @@ $nombres_trabajador.onkeypress = (e) => {
                 }
             }else{
             mostrarMensaje("No se encontraron empleados","msj_error");}
-        })*/
+        })
 
 
     } catch (error) {
@@ -431,7 +422,7 @@ $tabla__examenes_body.addEventListener("click", e=>{
 
     return false;
 })
-
+/*
 $tabla__atenciones_body.addEventListener("click", e=>{
     e.preventDefault();
 
@@ -449,7 +440,7 @@ $tabla__atenciones_body.addEventListener("click", e=>{
             fadeIn($ficha__vistaprevia);
         }
     }
-})
+})*/
 
 $uploadPdf.onchange = (e) => {
     e.preventDefault();
@@ -459,23 +450,19 @@ $uploadPdf.onchange = (e) => {
 
         const formData = new FormData();
         formData.append('fileUpload',$uploadPdf.files[0]);
-        formData.append('indice',registro);//pasa por post idreg
-        formData.append('documento',$documento_trabajador.value);//pasar por un post el dni
-        formData.append('funcion','listarExamenes');
-        formData.append('nombres',$nombres__apellidos.value);
-        //pasar indice a una consulta
+        formData.append('indice',registro);
         fetch ('../inc/cargarHistoriaMedica.inc.php',{
-
             method: 'POST',
             body: formData
         })
         .then(response => response.json())
         .then(data => {
             if (data.respuesta) {
-                let adjunto = "../hc/"+data.archivo;
-                console.log(adjunto);
-                $frame__adjunto.setAttribute("src", adjunto);
                 mostrarMensaje("Documento subido","msj_correct");
+                let adjunto = "../hc/"+data.archivo;
+               // console.log(adjunto);
+                $frame__adjunto.setAttribute("src", adjunto);
+                //$opcion2.click();
                 //Window.location.reload();
             }else{
                 mostrarMensaje("Hubo un error al subir el archivo","msj_error");
@@ -632,7 +619,7 @@ function listarExamenes(){
             }
         })
 
-};
+}
 
 function listarConsultas(){
     let data = new FormData();
@@ -672,6 +659,6 @@ function listarConsultas(){
                 mostrarMensaje("No se encontraron examenes","msj_error");
             }
         })
-};
+}
 
 

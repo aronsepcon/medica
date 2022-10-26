@@ -15,6 +15,9 @@
         else if ($_POST['funcion'] == "validarClave"){
             echo json_encode(validarClave($pdo,$_POST['login'],$_POST['clave']));
         }
+        else if ($_POST['funcion'] == "datosApi"){
+            echo json_encode(datosApi($pdo,$_POST["doc"]));
+        }
     }
 
     function validarClave($pdo,$login,$clave){//ver el pase de paramentros para el correo
@@ -72,13 +75,13 @@
             $lista =[];
             $consulta='%'.$doc.'%';
             $sql ="SELECT  
-                    CONCAT_WS( ' ', tabla_aquarius.nombres, tabla_aquarius.apellidos ) AS nombres,
-                    tabla_aquarius.dsede,
-                    tabla_aquarius.dni
+                    CONCAT_WS( ' ', tabla_aquarius_copy.nombres, tabla_aquarius_copy.apellidos ) AS nombres,
+                    tabla_aquarius_copy.dsede,
+                    tabla_aquarius_copy.dni
                 FROM
-                    tabla_aquarius
+                    tabla_aquarius_copy
                 WHERE
-                    CONCAT(tabla_aquarius.apellidos,' ',tabla_aquarius.nombres) LIKE '$consulta'";
+                    CONCAT(tabla_aquarius_copy.apellidos,' ',tabla_aquarius_copy.nombres) LIKE '$consulta'";
             $statement = $pdo->prepare($sql);
             $statement ->execute(array($doc));
             $result = $statement ->fetchAll();
@@ -159,6 +162,31 @@
         }
     }*/
 
+    function datosApi($pdo,$doc){
+        try{
+        
+            $url = "http://sicalsepcon.net/api/workersapi.php?documento=".$doc;
+            $json_data = file_get_contents($url);
+            $datos = json_decode($json_data);
+
+            $nreg = count($datos);
+
+            $existe = $nreg == 1 ? true : false;
+
+            if($existe){
+
+                return array(
+                    "datos"=>$datos,
+                    "existe"=>$existe
+                );
+            }else {
+                return array("existe" => $existe);
+              }
+        }catch (PDOException $th) {
+            echo "Error: " . $th->getMessage();
+        }
+    }
+    
     function datosColaborador($pdo,$doc){
         try {
             $respuesta  = false;
@@ -204,9 +232,9 @@
                                    "sede"      => $result[0]['dsede'],
                                    "cargo"     => $result[0]['cargo'],
                                    "estado"    => $result[0]['estado'],
-                                   "fecnac"    => date("d/m/Y", strtotime($result[0]['fecha_nacimiento'])),
-                                    "codSexo"     => $result[0]['sexo'],
-                                    "direccion" => $result[0]['ubigeo_domicilio'] 
+                                  // "fecnac"    => date("d/m/Y", strtotime($result[0]['fecha_nacimiento'])),
+                                  //  "codSexo"     => $result[0]['sexo'],
+                                  //  "direccion" => $result[0]['ubigeo_domicilio'] 
                                 );
             }else{
                 $respuesta = array("respuesta"=>$respuesta,

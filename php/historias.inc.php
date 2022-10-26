@@ -68,11 +68,18 @@
     <div class="modal_mensaje msj_info" id="mensaje__sistema">
         <span id="mensaje_texto">Vamos a ver si lo muestra</span>
     </div>
+   
     <form class="historias__cuerpo__busqueda" action="../inc/cargarHistoriaMedica.inc.php" method="post">
-        <input type="text" id="nombres_trabajador" name="nombres_trabajador" placeholder="Nombres" value="">
+        <div>
+            <input type="radio" name="filtrado" id="radio__nombre">
+            <label for="nombre">Por Nombre</label>
+            <input type="radio"  name="filtrado" id="radio__dni">
+            <label for="dni">Por DNI</label>
+        </div>    
+        <input type="text" id="nombres_trabajador" name="nombres_trabajador" placeholder="Nombres" value="" style="display: none;">
         <input type="text" id="documento_trabajador" name="documento_trabajador" placeholder="Documento de Identificación" value="42081842">
         <div>
-            <a href="#"><i class="fas fa-search"></i></a>
+            <a href="#"><i class="fas fa-search" ></i></a>
         </div>
     </form>
     <div class="modal" id="ficha__vistaprevia">    
@@ -211,22 +218,25 @@
             </div>
         </div>
     </div>
-    <!--Section id="busqueda_parcial">
-        <table id="tabla__busqueda">
-            <thead>
-                <tr>
-                    <th>DNI</th>
-                    <th>Nombres y Apellidos</th>
-                    <th>Edad</th>
-                    <th>Sede</th>
-                    <th>Ver</th>
-                </tr>
-            </thead>
-            <tbody id="tabla__busqueda_body"></tbody>
-        </table>
-    </Section-->
+    
     <hr>
-    <section class="historias__cuerpo_completo" id="historias__cuerpo_completo"><!--style="display: none;"-->
+    <section id="busqueda_parcial" style="display: none;" > 
+        <div class="tabla__busqueda bars">
+            <table id="tabla__busqueda" class="w100porcen1">
+                <thead>
+                    <tr>
+                        <th width=8%>DNI</th>
+                        <th>Nombres y Apellidos</th>
+                        <th>Edad</th>
+                        <th>Sede</th>
+                        <th>Ver</th>
+                    </tr>
+                </thead>
+                <tbody id="tabla__busqueda_body"></tbody>
+            </table>
+        </div>
+    </section>
+    <section class="historias__cuerpo_completo" id="historias__cuerpo_completo" style="display: none;"><!--style="display: none;"-->
         <nav class="historias__vertical__menu">
             <a href="#" id="opcion1" class="opcion_vertical resaltado">1.- Datos Generales</a>
             <a href="#" id="opcion2" class="opcion_vertical">2.- Exámenes Médicos</a> 
