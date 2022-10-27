@@ -182,15 +182,15 @@ $opcion5.onclick = (e) => {
 
 $radio__nombre.onclick = (e) =>{
 
-    $documento_trabajador.style.display = 'none';
-    $nombres_trabajador.style.display = 'block ';
+    $documento_trabajador.readOnly = true;
+    $nombres_trabajador.readOnly =false;
     $historias__cuerpo_completo.style.display = 'none'
     $busqueda_parcial.style.display = 'block'
 }
 
 $radio__dni.onclick = (e) =>{
-    $documento_trabajador.style.display = 'block';
-    $nombres_trabajador.style.display = 'none';
+    $documento_trabajador.readOnly = false;
+    $nombres_trabajador.readOnly = true;
     $historias__cuerpo_completo.style.display = 'block'
     $busqueda_parcial.style.display = 'none'
 }
@@ -256,7 +256,7 @@ $documento_trabajador.onkeypress = (e) => {
                 $edad__trabajador.value = dataJson.datos[0].edad;
                 $sede__trabajador.value = dataJson.datos[0].sucursal;
                 $sexo__trabajador.value = dataJson.datos[0].sexo;
-                $nombres_trabajador.value =  dataJson.datos[0].nombres+" "+dataJson.datos[0].paterno+" "+dataJson.datos[0].materno;
+                $nombres_trabajador.value =  dataJson.datos[0].paterno+" "+dataJson.datos[0].materno+" "+dataJson.datos[0].nombres;
 
             }
         })

@@ -76,7 +76,7 @@
             <input type="radio"  name="filtrado" id="radio__dni" checked>
             <label for="dni">Por DNI</label>
         </div>    
-        <input type="text" id="nombres_trabajador" name="nombres_trabajador" placeholder="Nombres" value="" style="display: none;">
+        <input type="text" id="nombres_trabajador" name="nombres_trabajador" placeholder="Nombres" value="" readonly>
         <input type="text" id="documento_trabajador" name="documento_trabajador" placeholder="Documento de Identificación" value="42081842">
         <div>
             <a href="#"><i class="fas fa-search" ></i></a>
