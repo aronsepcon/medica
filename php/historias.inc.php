@@ -42,8 +42,10 @@
                 <input type="hidden" name="id__examen" id="id__examen">
                 <input type="hidden" name="nombre__correo" id="nombre__correo">
                 <input type="hidden" name="adjunto_examen" id="adjunto_examen">
-
-                <button type="button" id="editar_form" class="editar_form">Editar</button>
+                <div>
+                    <button type="button" id="editar_form" class="editar_form">Editar</button>                
+                    <button type="button" id="cambiar_env" class="editar_form">Validar</button>
+                </div>
                 <label for="asunto__correo">Asunto :</label>
                 <input type="text" name="asunto__correo" id="asunto__correo" readonly>
                 <label for="direccion__correo">Correo electrónico</label>
@@ -294,6 +296,7 @@
                     <table id="tabla__examenes" class="w100porcen1">
                         <thead>
                             <tr>
+                                <th width="4%">CC</th>
                                 <th width="8%">Clinica</th>
                                 <th width="10%">Tipo</th>
                                 <th width="7%">Fecha</th>

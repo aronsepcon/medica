@@ -57,7 +57,7 @@
         if (move_uploaded_file($temporal,"../hc/".$fileId)) {
             $mensaje = "Archivo copiado";
             $respuesta = true;
-            actualizarAdjunto($pdo,$fileId,$indice);
+            actualizarAdjunto($pdo,$fileId,$nombresss,$indice);
         }
 
         $salida = array("mensaje"   =>$mensaje,
@@ -67,11 +67,11 @@
         echo json_encode($salida);
 
 
-    function actualizarAdjunto($pdo,$file,$indice) {
+    function actualizarAdjunto($pdo,$file,$nombresss,$indice) {
         try {
-            $sql = "UPDATE fichas_api SET adjunto=? WHERE idreg=?";
+            $sql = "UPDATE fichas_api SET adjunto=?, centroCosto =?  WHERE idreg=?";
             $statement = $pdo->prepare($sql);
-            $statement ->execute(array($file,$indice));
+            $statement ->execute(array($file,substr($nombresss,0,4),$indice));
             $rowCount = $statement -> rowcount();
 
             return $rowCount;

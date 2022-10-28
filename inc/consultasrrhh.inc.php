@@ -77,7 +77,7 @@
             $lista =[];
             $consulta='%'.$doc.'%';
             $sql ="SELECT  
-                    CONCAT_WS( ' ', tabla_aquarius.nombres, tabla_aquarius.apellidos ) AS nombres,
+                    CONCAT_WS( ' ', tabla_aquarius.apellidos, tabla_aquarius.nombres ) AS nombres,
                     tabla_aquarius.dsede,
                     tabla_aquarius.dni
                 FROM
@@ -198,7 +198,7 @@
             $sql ="SELECT
                     	tabla_aquarius.dni,
                         tabla_aquarius.internal,
-                        CONCAT_WS( ' ', tabla_aquarius.nombres, tabla_aquarius.apellidos ) AS nombres,
+                        CONCAT_WS( ' ', tabla_aquarius.apellidos, tabla_aquarius.nombres ) AS nombres,
                         CONCAT_WS(' ', SUBSTRING(tabla_aquarius.ccostos,1,4),tabla_aquarius.dcostos) as ccostos ,
                         SUBSTRING(tabla_aquarius.ccostos,1,4) as ccorreo,
                         tabla_aquarius.csede,

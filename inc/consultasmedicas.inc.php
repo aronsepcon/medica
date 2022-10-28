@@ -92,7 +92,7 @@
 
             //Enviamos el Mensaje 
             if($mail->send()){
-                $actualizados = actualizarExamen($pdo,$id);
+                $actualizados = actualizarExamen($pdo,$id,$asunto);
                 $respuesta = true;
                 $enviado = true;
                 
@@ -131,7 +131,7 @@
 
     function actualizarExamen($pdo,$id){
         try {
-            $sql = "UPDATE fichas_api SET enviado = 1 WHERE idreg = ?";
+            $sql = "UPDATE fichas_api SET enviado = 1  WHERE idreg = ?";
             $statement = $pdo->prepare($sql);
             $statement ->execute(array($id));
             $result = $statement ->fetchAll();
@@ -161,7 +161,8 @@
                         fichas_api.grupoSangre,
                         fichas_api.dni,
                         lista_clinicas.nomb_clinica,
-                        fichas_api.paciente
+                        fichas_api.paciente,
+                        fichas_api.centroCosto
                     FROM
                         fichas_api 
                     LEFT JOIN 
@@ -179,7 +180,8 @@
 
             if ($rowCount > 0) {
                 foreach($result as $row) {
-                    $salida = array("tipo"=>$row['tipoExa'], 
+                    $salida = array("ccostos"=>$row['centroCosto'], 
+                                    "tipo"=>$row['tipoExa'], 
                                     "fecha"=>date("d/m/Y", strtotime($row['fecha'])),
                                     "aptitud"=>$row['aptitud'],
                                     "recomendaciones"=>$row['reco1'],

@@ -64,6 +64,7 @@ const $cierre_form = document.getElementById('cierre_form');
 const $cierre_form_ing = document.getElementById('cierre_form_ing');
 const $mail__accept = document.getElementById('mail__accept');
 const $editar_form = document.getElementById('editar_form');
+const $cambiar_env = document.getElementById('cambiar_env');
 
 const $cierre_atencion = document.getElementById('cierre_atencion');
 const $cierre_form_vistp = document.getElementById('cierre_form_vistp')
@@ -228,7 +229,7 @@ $documento_trabajador.onkeypress = (e) => {
         let data = new FormData();
             data.append("documento",e.target.value);
             data.append("funcion","datosColaborador");
-
+        listarExamenes();
         fetch('../inc/consultasrrhh.inc.php',{
             method: "POST",
             body:data,
@@ -258,7 +259,7 @@ $documento_trabajador.onkeypress = (e) => {
         })
         .then(dataJson=>{
             if(dataJson.existe){
-                $nombres__apellidos.value = dataJson.datos[0].nombres+" "+dataJson.datos[0].paterno+" "+dataJson.datos[0].materno;
+                $nombres__apellidos.value = dataJson.datos[0].paterno+" "+dataJson.datos[0].materno+" "+dataJson.datos[0].nombres;
                 $correo__electronico.value = dataJson.datos[0].correo;
                 $documento__identidad.value = dataJson.datos[0].dni;
                 $cargo__trabajador.value = dataJson.datos[0].cargo;
@@ -514,18 +515,12 @@ $editar_form.onclick = (e) => {
     e.preventDefault();
         if ($editar_form.innerHTML == "Editar"){
             $editar_form.innerHTML = "Editando"
-            document.getElementById("asunto__correo").readOnly =false;
             document.getElementById("direccion__correo").readOnly =false;
-            document.getElementById("fecha__examen").readOnly =false;
-            document.getElementById("clinica__examen").readOnly =false;
             $editar_form.style.backgroundColor = "red";
             $editar_form.style.color = "black";
         }else{
             $editar_form.innerHTML = "Editar";
-            document.getElementById("asunto__correo").readOnly =true;
             document.getElementById("direccion__correo").readOnly =true;
-            document.getElementById("fecha__examen").readOnly =true;
-            document.getElementById("clinica__examen").readOnly =true;
             $editar_form.style.backgroundColor = "green";//ver esto u:
             $editar_form.style.color = "white";
         } 
@@ -538,10 +533,7 @@ $cierre_form.onclick = (e) => {//cierra el formulario para enviar correos
     fadeOut($ficha__medica__correo);
   
     $editar_form.innerHTML = "Editar"
-    document.getElementById("asunto__correo").readOnly =true;
     document.getElementById("direccion__correo").readOnly =true;
-    document.getElementById("fecha__examen").readOnly =true;
-    document.getElementById("clinica__examen").readOnly =true;
     $editar_form.style.backgroundColor = "green";//ver esto u:
     $editar_form.style.color = "white";
 }
@@ -563,6 +555,25 @@ $cierre_atencion.onclick = (e) => {
 
     fadeOut($atencion__medica);
 }
+/*
+$cambiar_env.onclick = (e) => {
+    e.preventDefault();
+
+    try{
+        data.append("funcion","");
+
+        fetch('../inc/consultasmedicas.inc.php',{
+            method: 'POST',
+            body:data,
+        })
+        .then(function(response){
+            return response.json();
+        })
+        .then(dataJson => {
+    }}catch(error){
+
+    }
+}*/
 
 $mail__accept.onclick = (e) => {
     e.preventDefault();
@@ -629,6 +640,7 @@ function listarExamenes(){
     
                 for (let index = 0; index < dataJson.lista.length; index++) {
                     let tr = document.createElement("tr");
+                    let $cnt_costos = dataJson.lista[index].ccostos == null || "null" ? " " : dataJson.lista[index].ccostos ;
                     let $clase_enviado = dataJson.lista[index].enviado == null ? 'no__enviado' : 'enviado';
                     let $titulo_enviado = dataJson.lista[index].enviado == null ? 'Pendiente Envio' : 'Enviado';
                     let $icono_enviado = dataJson.lista[index].enviado == null ? '<i class="fas fa-external-link-alt"></i>' :'<i class="fas fa-check" style="color:green"></i>';
@@ -636,7 +648,8 @@ function listarExamenes(){
                     let $restricciones = dataJson.lista[index].restricciones == null ? " " : dataJson.lista[index].restricciones;
                     let $recomendaciones = dataJson.lista[index].recomendaciones == null ? " " : dataJson.lista[index].recomendaciones; 
     
-                    tr.innerHTML = `<td>${dataJson.lista[index].clinica}</td>
+                    tr.innerHTML = `<td>${dataJson.lista[index].ccostos}</td>
+                                    <td>${dataJson.lista[index].clinica}</td>
                                     <td class="pl10px">${dataJson.lista[index].tipo}</td>
                                     <td>${dataJson.lista[index].fecha}</td>
                                     <td>${dataJson.lista[index].aptitud}</td>
