@@ -63,6 +63,7 @@ const $mail__cancel = document.getElementById('mail__cancel');
 const $cierre_form = document.getElementById('cierre_form');
 const $cierre_form_ing = document.getElementById('cierre_form_ing');
 const $mail__accept = document.getElementById('mail__accept');
+const $editar_form = document.getElementById('editar_form');
 
 const $cierre_atencion = document.getElementById('cierre_atencion');
 const $cierre_form_vistp = document.getElementById('cierre_form_vistp')
@@ -182,16 +183,20 @@ $opcion5.onclick = (e) => {
 
 $radio__nombre.onclick = (e) =>{
 
-    $documento_trabajador.readOnly = true;
+  //  $documento_trabajador.readOnly = true;
+ //   $documento_trabajador.style.color = 'gray';
     $nombres_trabajador.readOnly =false;
-    $historias__cuerpo_completo.style.display = 'none'
+    $nombres_trabajador.style.color = 'black';
+    $historias__cuerpo_completo.style.display = 'none';
     $busqueda_parcial.style.display = 'block'
 }
 
 $radio__dni.onclick = (e) =>{
-    $documento_trabajador.readOnly = false;
-    $nombres_trabajador.readOnly = true;
-    $historias__cuerpo_completo.style.display = 'block'
+   // $documento_trabajador.readOnly = false;
+    $nombres_trabajador.readOnly = true;    
+    $documento_trabajador.style.color = 'black';
+    $nombres_trabajador.style.color = 'gray';
+    $historias__cuerpo_completo.style.display = 'block';
     $busqueda_parcial.style.display = 'none'
 }
 
@@ -215,6 +220,11 @@ $documento_trabajador.onkeypress = (e) => {
     try {
         if ($documento_trabajador.value == "" && $nombres_trabajador.value == "" ) throw "Ingrese el numero de documento";
 
+        $historias__cuerpo_completo.style.display = 'block';
+        $busqueda_parcial.style.display = 'none'
+        $nombres_trabajador.readOnly = true;    
+        $nombres_trabajador.style.color = 'gray';
+        //ver el cambio sino asi mas directo 
         let data = new FormData();
             data.append("documento",e.target.value);
             data.append("funcion","datosColaborador");
@@ -368,7 +378,7 @@ $tabla__examenes_body.addEventListener("click", e=>{
         if ( accion == "previewFile" ){ 
                 
             if(adjunto=="null"){
-                fadeIn($form_ingreso)               
+                fadeIn($form_ingreso)  //por aqui se debe buscar              
             }else{
                 $frame__adjunto.setAttribute("src", '../hc/'+adjunto);        
                 fadeIn($ficha__vistaprevia);
@@ -411,7 +421,8 @@ $tabla__examenes_body.addEventListener("click", e=>{
                 .then(dataJson => {
     
                     if (dataJson.respuesta){
-                        document.getElementById("asunto__correo").value = (dataJson.ccorreo) + "-EMO-"+ /*tipoEMO */examen+"-"+dataJson.dni+"-"+dataJson.nombres+"-"+clinica+"-"+fecha;
+                        document.getElementById("asunto__correo").value = adjunto;//confirmar nomas uu
+                        //(dataJson.ccorreo) + "-EMO-"+ /*tipoEMO */examen+"-"+dataJson.dni+"-"+dataJson.nombres+"-"+clinica+"-"+fecha;
                         document.getElementById("nombre__correo").value = dataJson.nombres;
                         document.getElementById("direccion__correo").value = dataJson.correo;
                         document.getElementById("fecha__examen").value = fecha;
@@ -468,6 +479,7 @@ $uploadPdf.onchange = (e) => {
         .then(data => {
             if (data.respuesta) {
                 mostrarMensaje("Documento subido","msj_correct");
+                listarExamenes();
                 let adjunto = "../hc/"+data.archivo;
                // console.log(adjunto);
                 $frame__adjunto.setAttribute("src", adjunto);
@@ -494,6 +506,30 @@ $mail__cancel.onclick = (e) => {
     fadeOut($ficha__medica__correo);
 
     return false
+}
+//var editable = true 
+
+
+$editar_form.onclick = (e) => {
+    e.preventDefault();
+        if ($editar_form.innerHTML == "Editar"){
+            $editar_form.innerHTML = "Editando"
+            document.getElementById("asunto__correo").readOnly =false;
+            document.getElementById("direccion__correo").readOnly =false;
+            document.getElementById("fecha__examen").readOnly =false;
+            document.getElementById("clinica__examen").readOnly =false;
+            $editar_form.style.backgroundColor = "red";
+            $editar_form.style.color = "black";
+        }else{
+            $editar_form.innerHTML = "Editar";
+            document.getElementById("asunto__correo").readOnly =true;
+            document.getElementById("direccion__correo").readOnly =true;
+            document.getElementById("fecha__examen").readOnly =true;
+            document.getElementById("clinica__examen").readOnly =true;
+            $editar_form.style.backgroundColor = "green";//ver esto u:
+            $editar_form.style.color = "white";
+        } 
+
 }
 
 $cierre_form.onclick = (e) => {

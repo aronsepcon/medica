@@ -111,18 +111,18 @@
 
     function buscarAdjunto($pdo,$id){//para mostrar el adjunto cuando no esta de forma local
         try {
-            $sql = "SELECT fichas_medicas.adjunto 
+            $sql = "SELECT fichas_api.adjunto 
                     FROM
-                        fichas_medicas 
+                        fichas_api 
                     WHERE
-                        fichas_medicas.idreg = ? ";
+                        fichas_api.idreg = ? ";
             $statement = $pdo->prepare($sql);
             $statement ->execute(array($id));
             $result = $statement ->fetchAll();
             $rowCount = $statement -> rowcount();
-
-            return $result[0]['adjunto'];
-            
+            if($rowCount>0){
+                return $result[0]['adjunto'];
+            }
         } catch (PDOException $th) {
             echo $th->getMessage();
             return false;
@@ -218,7 +218,7 @@
         try{
             $respuesta = false;
             $lista = [];
-            $retiroo =  'RET%';
+            $retiroo =  'RETIRO';
             //cambiar la consulta de aqui
             $sql ="SELECT   
                 fichas_api.tipoExa, 
@@ -237,9 +237,9 @@
                 fichas_api 
             WHERE
                 fichas_api.dni = ? 
-            ORDER BY fichas_api.fecha DESC, CASE WHEN fichas_api.tipoExa='$retiroo' THEN 3 ELSE 1 END ASC";
+            ORDER BY fichas_api.fecha DESC, CASE WHEN fichas_api.tipoExa=? THEN 3 ELSE 1 END ASC";//PROBAR CON LIKE
             $statement = $pdo->prepare($sql);
-            $statement ->execute(array($doc));
+            $statement ->execute(array($doc,$retiroo));
             $result = $statement ->fetchAll();
             $rowCount = $statement -> rowcount(); //hassta maso por aqi
 

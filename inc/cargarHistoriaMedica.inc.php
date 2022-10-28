@@ -8,7 +8,7 @@
 
     $mensaje = "No se completo la operacion";
     $respuesta = false;
-
+//de aqui
     $ccostos = $_SESSION['ccostos'];
     $datos = $pdo -> prepare("SELECT 
                                 fichas_api.paciente,
@@ -46,11 +46,12 @@
         $fecha = $dato['fecha'];
         $clinica = $dato['nomb_clinica'];   
 
-    }
+    }//hasta aqui sobra
         $archivo    = $_FILES['fileUpload'];
         $temporal	= $_FILES['fileUpload']['tmp_name'];
-        $fileId     = $ccostos."-"."EMO".$tipoEMO."-".$dni2."-".$nombres."-".$clinica."-".$fecha.".pdf";
-        //$fileId = "test.pdf";
+        $nombresss = $_FILES['fileUpload']['name'];//como mandar a mail??
+        //$fileId     = $ccostos."-"."EMO".$tipoEMO."-".$dni2."-".$nombres."-".$clinica."-".$fecha.".pdf";
+        $fileId = $nombresss;
         $indice     = $_POST['indice'];
 
         if (move_uploaded_file($temporal,"../hc/".$fileId)) {

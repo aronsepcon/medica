@@ -172,7 +172,7 @@
                 var_dump($statement->errorinfo());
                 $contador++;
             }
-
+            //$objCelda['AG']
             else if($valAmericas  == "LAS AMERICAS" || $valAmericasRetiro  == "LAS AMERICAS" ){//Las americas -- retiro
                 $sql ="INSERT INTO fichas_api2 SET paciente = ?,fecNaci = STR_TO_DATE(?,'%d/%m/%Y'),dni = ?,edad = ?, ocupacion=?, 
                                                     centroCosto=?, empresa=?,grupoSangre=?,alergias = ?, fecha=STR_TO_DATE(?,'%d/%m/%Y'), 
@@ -184,7 +184,7 @@
                 $rowCount = $statement -> rowcount();
                 var_dump($valAmericas);
                 $contador++;
-            }
+            }//$objCelda['O']
             else if( $valAmericasRetiro  !== "LAS AMERICAS" and $valAmericasPreocup == "FECHA DE NACIMIENTO" ) {//las americas
                $sql ="INSERT INTO fichas_api2 SET paciente = ?,fecNaci = STR_TO_DATE(?,'%d/%m/%Y'),dni = ?,edad = ?, ocupacion=?, 
                                                     centroCosto=?, empresa=?,grupoSangre=?,alergias = ?, fecha=STR_TO_DATE(?,'%d/%m/%Y'),

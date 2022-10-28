@@ -34,7 +34,8 @@
                     tabla_aquarius.dni,
                     tabla_aquarius.usuario,
                     tabla_aquarius.clave,
-                    SUBSTRING(tabla_aquarius.ccostos,1,4) as ccostos
+                    SUBSTRING(tabla_aquarius.ccostos,1,4) as ccostos,
+                    tabla_aquarius.acc_medica
                 FROM
                     tabla_aquarius
                 WHERE
@@ -50,7 +51,8 @@
                 $_SESSION['user'] = $result[0]['usuario'];                    
                 $_SESSION['nombres'] = $result[0]['nombres'];                          
                 $_SESSION['apellidos'] = $result[0]['apellidos']; 
-                $_SESSION['dni'] = $result[0]['dni'];      
+                $_SESSION['dni'] = $result[0]['dni'];    
+                $_SESSION['acceso'] = $result[0]['acc_medica'];  
                 $respuesta = array("respuesta"  => true,
                                     "clase"     =>"msj_correct",
                                     "error"     =>"no hay error");

@@ -43,10 +43,11 @@
                 <input type="hidden" name="nombre__correo" id="nombre__correo">
                 <input type="hidden" name="adjunto_examen" id="adjunto_examen">
 
+                <button type="button" id="editar_form" class="editar_form">Editar</button>
                 <label for="asunto__correo">Asunto :</label>
-                <input type="text" name="asunto__correo" id="asunto__correo">
+                <input type="text" name="asunto__correo" id="asunto__correo" readonly>
                 <label for="direccion__correo">Correo electrónico</label>
-                <input type="mail" name="direccion__correo" id="direccion__correo">
+                <input type="mail" name="direccion__correo" id="direccion__correo" readonly>
                 <label for="fecha__examen">Fecha Examen Medico:</label>
                 <input type="text" name="fecha__examen" id="fecha__examen"  readonly>
                 <label for="clinica__examen">Nombre Clinica:</label>
@@ -76,7 +77,7 @@
             <input type="radio"  name="filtrado" id="radio__dni" checked>
             <label for="dni">Por DNI</label>
         </div>    
-        <input type="text" id="nombres_trabajador" name="nombres_trabajador" placeholder="Nombres" value="" readonly>
+        <input type="text" id="nombres_trabajador" name="nombres_trabajador" style="color:gray" placeholder="Nombres" value="" readonly>
         <input type="text" id="documento_trabajador" name="documento_trabajador" placeholder="Documento de Identificación" value="42081842">
         <div>
             <a href="#"><i class="fas fa-search" ></i></a>

@@ -7,6 +7,7 @@
         session_destroy();
         header('location: ../index.php');
     }
+    //echo $_SESSION['acceso'];
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -49,7 +50,12 @@
                 <li><a href="#"><i class="fas fa-chart-bar"></i></a></li>
                 <li><a href="#" title="Control de medicamentos"><i class="fas fa-box"></i></a></li>
                 <li><a href="#" id="atenciones" title="Atenciones Médicas"><i class="fas fa-user-md"></i></a></li><!-- target="frame__loader"-->
-                <li><a href="#" title="Configuración" id="configuracion"><i class="fas fa-cog"></i></a></li>
+                <li><a href="#" title="Configuración" id="configuracion"><i class="fas fa-file-upload"></i></a></li>
+            <?php if($_SESSION['acceso']==1){?>
+                <li><a href="#" title="Permisos" id="permisos"><i class="fas fa-cog" style="display: block;"></i></a></li>
+            <?php }else{?>
+                <li><a href="#" title="Permisos" id="permisos"><i class="fas fa-cog" style="display: none;"></i></a></li>
+            <?php }?>
             </ul>
         </div>
         <div class="main__loader" id="main__loader">
