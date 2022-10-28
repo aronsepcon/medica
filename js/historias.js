@@ -532,10 +532,18 @@ $editar_form.onclick = (e) => {
 
 }
 
-$cierre_form.onclick = (e) => {
+$cierre_form.onclick = (e) => {//cierra el formulario para enviar correos
     e.preventDefault();
 
     fadeOut($ficha__medica__correo);
+  
+    $editar_form.innerHTML = "Editar"
+    document.getElementById("asunto__correo").readOnly =true;
+    document.getElementById("direccion__correo").readOnly =true;
+    document.getElementById("fecha__examen").readOnly =true;
+    document.getElementById("clinica__examen").readOnly =true;
+    $editar_form.style.backgroundColor = "green";//ver esto u:
+    $editar_form.style.color = "white";
 }
 
 $cierre_form_ing.onclick = (e) => {

@@ -4,7 +4,7 @@
     include("consultasmedicas.inc.php");
 
     $doc=$_POST['indice'];
-    $dni=$_POST['documento'];
+  //  $dni=$_POST['documento'];
 
     $mensaje = "No se completo la operacion";
     $respuesta = false;
@@ -49,7 +49,7 @@
     }//hasta aqui sobra
         $archivo    = $_FILES['fileUpload'];
         $temporal	= $_FILES['fileUpload']['tmp_name'];
-        $nombresss = $_FILES['fileUpload']['name'];//como mandar a mail??
+        $nombresss = $_FILES['fileUpload']['name'];
         //$fileId     = $ccostos."-"."EMO".$tipoEMO."-".$dni2."-".$nombres."-".$clinica."-".$fecha.".pdf";
         $fileId = $nombresss;
         $indice     = $_POST['indice'];

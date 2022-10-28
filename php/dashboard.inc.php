@@ -50,9 +50,9 @@
                 <li><a href="#"><i class="fas fa-chart-bar"></i></a></li>
                 <li><a href="#" title="Control de medicamentos"><i class="fas fa-box"></i></a></li>
                 <li><a href="#" id="atenciones" title="Atenciones Médicas"><i class="fas fa-user-md"></i></a></li><!-- target="frame__loader"-->
-                <li><a href="#" title="Configuración" id="configuracion"><i class="fas fa-file-upload"></i></a></li>
+                <li><a href="#" title="Subida" id="configuracion"><i class="fas fa-file-upload"></i></a></li>
             <?php if($_SESSION['acceso']==1){?>
-                <li><a href="#" title="Permisos" id="permisos"><i class="fas fa-cog" style="display: block;"></i></a></li>
+                <li><a href="#" title="Permisos" id="permisos"><i class="fas fa-cog" style="display: block;margin-top: 21.5px;"></i></a></li>
             <?php }else{?>
                 <li><a href="#" title="Permisos" id="permisos"><i class="fas fa-cog" style="display: none;"></i></a></li>
             <?php }?>
@@ -65,6 +65,10 @@
 
             <div id="ficha__cargar" class="fichas oculto">
                 <?php include_once( '../php/cargarHistorias.inc.php' ); ?>
+            </div>
+
+            <div id="permisos_panel" class="permisos_panel" style="display: none;">
+                <?php include_once('../php/accesos.inc.php');?>
             </div>
         </div>
     </div>

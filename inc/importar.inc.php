@@ -18,8 +18,7 @@
      $salida = array("mensaje"   =>$mensaje,
                      "respuesta" =>$respuesta,
                      "contador"  =>returnTable($pdo,"../xls/".$fileId));
- 
- 
+
      echo json_encode($salida);
  
  
@@ -31,14 +30,13 @@
          $valMedex = $objPHPExcel ->getActiveSheet() -> getCell('B2') -> getValue();
          $valSerfarmed = $objPHPExcel ->getActiveSheet() -> getCell('A1') -> getValue();
          $valAmericas = $objPHPExcel ->getActiveSheet() -> getCell('AH9') -> getValue();
-         $valAmericasRetiro = $objPHPExcel ->getActiveSheet() -> getCell('AH8') -> getValue();
          $valAmericasPreocup = $objPHPExcel ->getActiveSheet() -> getCell('C4') -> getValue();
          foreach ($objHoja as $iIndice=>$objCelda) {
           //  if($objCelda['A1']=="Id.Atención"/* && $objCelda['A']!==""*/){//no lo carga bien, carga el primero por algun motivo xc
             $tipoR = 'RETIRO';
             $tipoP = 'PREOCUPACIONAL';
-            if($valSerfarmed == "Id.Atención"){  
-                $sql = "INSERT INTO fichas_api SET atencion=?, fecha = STR_TO_DATE(?,'%d/%m/%Y'), paciente=?,dni=?, ocupacion=?, 
+            if($valSerfarmed == "Id.Atención" && is_numeric($objCelda['D'])){  
+                $sql = "INSERT INTO fichas_api2 SET atencion=?, fecha = STR_TO_DATE(?,'%d/%m/%Y'), paciente=?,dni=?, ocupacion=?, 
                                                         codSexo=?, edad =?, empresa=?,tipoExa=?, aptitud=?, imc=?, diagno1=?, reco1=?, diagno2=?,
                                                         reco2=?,diagno3=?, reco3=?, diagno4=?, reco4=?,diagno5=?, reco5=?,
                                                         diagno6=?, reco6=?, diagno7=?, reco7=?, diagno8=?, reco8=?, diagno9=?, 
@@ -57,7 +55,7 @@
                 $contador++;
             }//serfarmed
            // else if ($objCelda['B'] !== "ATENCION"){
-            else if ($valMedex == "ATENCION"){
+            else if ($valMedex == "ATENCION" && is_numeric($objCelda['E'])){
                      /*   $sql = "INSERT INTO fichas_medicas SET  atencion = ?,aseguradora = ?,empresa = ?,hc = ?,dni = ?,
                                                     fec_naci = STR_TO_DATE(?, '%d/%m/%Y'),
                                                     sexo = ?,ocupacion_actual = ?,puesto_postula = ?,tipo_examen = ?,
@@ -169,11 +167,11 @@
                                     ));
                 $result = $statement ->fetchAll();
                 $rowCount = $statement -> rowcount();
-                var_dump($statement->errorinfo());
+               // var_dump($statement->errorinfo());
                 $contador++;
             }
-            //$objCelda['AG']
-            else if($valAmericas  == "LAS AMERICAS" || $valAmericasRetiro  == "LAS AMERICAS" ){//Las americas -- retiro
+   
+            else if($objCelda['AH']  == "LAS AMERICAS" && is_numeric($objCelda['D'])){//Las americas -- retiro
                 $sql ="INSERT INTO fichas_api2 SET paciente = ?,fecNaci = STR_TO_DATE(?,'%d/%m/%Y'),dni = ?,edad = ?, ocupacion=?, 
                                                     centroCosto=?, empresa=?,grupoSangre=?,alergias = ?, fecha=STR_TO_DATE(?,'%d/%m/%Y'), 
                                                     tipoExa=?,clinica = 3";//tipoExa='RETIRO'
@@ -182,10 +180,9 @@
                                             $objCelda['I'], $objCelda['L'],$objCelda['M'],$objCelda['AG'],$tipoR));
                 $result = $statement ->fetchAll();
                 $rowCount = $statement -> rowcount();
-                var_dump($valAmericas);
                 $contador++;
             }//$objCelda['O']
-            else if( $valAmericasRetiro  !== "LAS AMERICAS" and $valAmericasPreocup == "FECHA DE NACIMIENTO" ) {//las americas
+            else if( ($objCelda['O']== "LAS AMERICAS" and $valAmericasPreocup == "FECHA DE NACIMIENTO") && is_numeric($objCelda['D']) ) {//las americas
                $sql ="INSERT INTO fichas_api2 SET paciente = ?,fecNaci = STR_TO_DATE(?,'%d/%m/%Y'),dni = ?,edad = ?, ocupacion=?, 
                                                     centroCosto=?, empresa=?,grupoSangre=?,alergias = ?, fecha=STR_TO_DATE(?,'%d/%m/%Y'),
                                                     aptitud=?,peso=?,talla=?,imc=?,estadoNutricional=?,tipoExa=?, clinica = 3"; //tipoExa='PREOCUPACIONAL' 
@@ -200,28 +197,8 @@
             
            
         }
-        var_dump($valAmericas);
         return $contador;
     }
-/*
-    function returnTableAmericas($pdo,$archivo){
-
-        $objPHPExcel = PHPExcel_IOFactory::load($archivo);
-        $objHoja=$objPHPExcel->getActiveSheet()->toArray(null,true,true,true);
-        $contador = 0;
-
-        foreach($objHoja as $iIndice=>$objCelda) {
-            if($objCelda['B'] == "ATENCION") {
-                $sql ="INSERT INTO fichas_medicas SET" ;
-                $statement = $pdo->prepare($sql);
-                $statement -> execute(array());
-                $result = $statement ->fetchAll();
-                $rowCount = $statement -> rowcount();
-                $contador++;
-            }
-        }
-        return $contador;
-    }*/
 
 
 

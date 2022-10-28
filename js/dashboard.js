@@ -8,8 +8,8 @@ const $ficha__historias = document.getElementById('ficha__historias');
 const $ficha__cargar = document.getElementById('ficha__cargar');
 const $configuracion = document.getElementById('configuracion');
 const $modal__esperar = document.getElementById('modal__esperar');
-
-
+const $permisos = document.getElementById('permisos');
+const $permisos_panel = document.getElementById('permisos_panel');
 
 
 $historias.onclick =(e) => {
@@ -28,4 +28,12 @@ $configuracion.onclick =(e) => {
     fadeIn($ficha__cargar);
 
     return false;
+}
+
+$permisos.onclick = (e) => {
+    e.preventDefault();
+
+    $permisos_panel.display = "block";
+
+    return false;   
 }

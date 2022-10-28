@@ -77,13 +77,13 @@
             $lista =[];
             $consulta='%'.$doc.'%';
             $sql ="SELECT  
-                    CONCAT_WS( ' ', tabla_aquarius_copy.nombres, tabla_aquarius_copy.apellidos ) AS nombres,
-                    tabla_aquarius_copy.dsede,
-                    tabla_aquarius_copy.dni
+                    CONCAT_WS( ' ', tabla_aquarius.nombres, tabla_aquarius.apellidos ) AS nombres,
+                    tabla_aquarius.dsede,
+                    tabla_aquarius.dni
                 FROM
-                    tabla_aquarius_copy
+                    tabla_aquarius
                 WHERE
-                    CONCAT(tabla_aquarius_copy.apellidos,' ',tabla_aquarius_copy.nombres) LIKE '$consulta'";
+                    CONCAT(tabla_aquarius.apellidos,' ',tabla_aquarius.nombres) LIKE '$consulta'";
             $statement = $pdo->prepare($sql);
             $statement ->execute(array($doc));
             $result = $statement ->fetchAll();
@@ -165,8 +165,8 @@
     }*/
 
     function datosApi($pdo,$doc){
+    
         try{
-        
             $url = "http://sicalsepcon.net/api/workersapi.php?documento=".$doc;
             $json_data = file_get_contents($url);
             $datos = json_decode($json_data);
@@ -196,25 +196,22 @@
             $clase      = "msj_error";
             //agregar consultas para telefono, direccion, sexo, etc
             $sql ="SELECT
-                    	tabla_aquarius_copy.dni,
-                        tabla_aquarius_copy.internal,
-                        CONCAT_WS( ' ', tabla_aquarius_copy.nombres, tabla_aquarius_copy.apellidos ) AS nombres,
-                        CONCAT_WS(' ', SUBSTRING(tabla_aquarius_copy.ccostos,1,4),tabla_aquarius_copy.dcostos) as ccostos ,
-                        SUBSTRING(tabla_aquarius_copy.ccostos,1,4) as ccorreo,
-                        tabla_aquarius_copy.csede,
-                        tabla_aquarius_copy.dsede,
-                        tabla_aquarius_copy.correo,
-                        tabla_aquarius_copy.ccargo AS codigo_cargo,
-                        UPPER( tabla_aquarius_copy.dcargo ) AS cargo,
-                        tabla_aquarius_copy.estado,
-                        tabla_aquarius_copy.cut, 
-                        tabla_aquarius_copy.fecha_nacimiento,
-                        tabla_aquarius_copy.sexo,
-                        tabla_aquarius_copy.ubigeo_domicilio
+                    	tabla_aquarius.dni,
+                        tabla_aquarius.internal,
+                        CONCAT_WS( ' ', tabla_aquarius.nombres, tabla_aquarius.apellidos ) AS nombres,
+                        CONCAT_WS(' ', SUBSTRING(tabla_aquarius.ccostos,1,4),tabla_aquarius.dcostos) as ccostos ,
+                        SUBSTRING(tabla_aquarius.ccostos,1,4) as ccorreo,
+                        tabla_aquarius.csede,
+                        tabla_aquarius.dsede,
+                        tabla_aquarius.correo,
+                        tabla_aquarius.ccargo AS codigo_cargo,
+                        UPPER( tabla_aquarius.dcargo ) AS cargo,
+                        tabla_aquarius.estado,
+                        tabla_aquarius.cut
                 FROM
-                    tabla_aquarius_copy
+                    tabla_aquarius
                 WHERE
-                    tabla_aquarius_copy.dni = ?";
+                    tabla_aquarius.dni = ?";
                    
             $statement = $pdo->prepare($sql);
             $statement ->execute(array($doc));
@@ -315,24 +312,24 @@
             $clase      = "msj_error";
 
             $sql ="SELECT
-                    tabla_aquarius_copy.dni,
-                        tabla_aquarius_copy.internal,
-                        CONCAT_WS( ' ', tabla_aquarius_copy.nombres, tabla_aquarius_copy.apellidos ) AS nombres,
-                        CONCAT_WS(' ', SUBSTRING(tabla_aquarius_copy.ccostos,1,4),tabla_aquarius_copy.dcostos) as ccostos ,
-                        SUBSTRING(tabla_aquarius_copy.ccostos,1,4) as ccorreo,
-                        tabla_aquarius_copy.dsede,
-                        tabla_aquarius_copy.correo,
-                        tabla_aquarius_copy.ccargo AS codigo_cargo,
-                        UPPER( tabla_aquarius_copy.dcargo ) AS cargo,
-                        tabla_aquarius_copy.estado,
-                        tabla_aquarius_copy.cut, 
-                        tabla_aquarius_copy.fecha_nacimiento,
-                        tabla_aquarius_copy.sexo,
-                        tabla_aquarius_copy.ubigeo_domicilio
+                    tabla_aquarius.dni,
+                        tabla_aquarius.internal,
+                        CONCAT_WS( ' ', tabla_aquarius.nombres, tabla_aquarius.apellidos ) AS nombres,
+                        CONCAT_WS(' ', SUBSTRING(tabla_aquarius.ccostos,1,4),tabla_aquarius.dcostos) as ccostos ,
+                        SUBSTRING(tabla_aquarius.ccostos,1,4) as ccorreo,
+                        tabla_aquarius.dsede,
+                        tabla_aquarius.correo,
+                        tabla_aquarius.ccargo AS codigo_cargo,
+                        UPPER( tabla_aquarius.dcargo ) AS cargo,
+                        tabla_aquarius.estado,
+                        tabla_aquarius.cut, 
+                        tabla_aquarius.fecha_nacimiento,
+                        tabla_aquarius.sexo,
+                        tabla_aquarius.ubigeo_domicilio
                 FROM
-                    tabla_aquarius_copy
+                    tabla_aquarius
                 WHERE
-                    CONCAT(tabla_aquarius_copy.apellidos,' ',tabla_aquarius_copy.nombres) = ?";
+                    CONCAT(tabla_aquarius.apellidos,' ',tabla_aquarius.nombres) = ?";
 
 
             $statement = $pdo->prepare($sql);
