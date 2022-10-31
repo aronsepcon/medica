@@ -173,7 +173,7 @@
 
             $nreg = count($datos);
 
-            $existe = $nreg == 1 ? true : false;
+            $existe = $nreg >= 1 ? true : false;
 
             if($existe){
 

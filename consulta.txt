@@ -1,0 +1,5 @@
+#SELECT count(*) FROM `fichas_api` where fecha > '2015-02-15' and adjunto is not null and enviado<>1
+#and adjunto is not null and enviado=NULL
+#and colesterol >120 and edad > 56
+
+SELECT count(*) FROM `fichas_api` where fecha > DATE_SUB(NOW(),INTERVAL 3 MONTH) and adjunto is not null and enviado=1

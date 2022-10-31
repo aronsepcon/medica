@@ -172,18 +172,19 @@
             }
    
             else if($objCelda['AH']  == "LAS AMERICAS" && is_numeric($objCelda['D'])){//Las americas -- retiro
-                $sql ="INSERT INTO fichas_api SET paciente = ?,fecNaci = STR_TO_DATE(?,'%d/%m/%Y'),dni = ?,edad = ?, ocupacion=?, 
-                                                    centroCosto=?, empresa=?,grupoSangre=?,alergias = ?, fecha=STR_TO_DATE(?,'%d/%m/%Y'), 
+                $sql ="INSERT INTO fichas_api2 SET paciente = ?,fecNaci = STR_TO_DATE(?,'%d/%m/%Y'),dni = ?,edad = ?, ocupacion=?, 
+                                                    centroCosto=?, empresa=?,grupoSangre=?,alergias = ?,peso=?,talla=?,imc=?,estadoNutricional=?, fecha=STR_TO_DATE(?,'%d/%m/%Y'), 
                                                     tipoExa=?,aptitud=?, clinica = 3 ";//tipoExa='RETIRO'
                 $statement = $pdo->prepare($sql);
                 $statement -> execute(array($objCelda['B'],$objCelda['C'],$objCelda['D'],$objCelda['E'],$objCelda['G'],$objCelda['H'],
-                                            $objCelda['I'], $objCelda['L'],$objCelda['M'],$objCelda['AG'],$tipoR,$tipoR));
+                                            $objCelda['I'], $objCelda['L'],$objCelda['M'],$objCelda['Q'],
+                                            $objCelda['R'],$objCelda['S'],$objCelda['T'],$objCelda['AG'],$tipoR,$tipoR));
                 $result = $statement ->fetchAll();
                 $rowCount = $statement -> rowcount();
                 $contador++;
             }//$objCelda['O']
             else if( ($objCelda['O']== "LAS AMERICAS" and $valAmericasPreocup == "FECHA DE NACIMIENTO") && is_numeric($objCelda['D']) ) {//las americas
-               $sql ="INSERT INTO fichas_api SET paciente = ?,fecNaci = STR_TO_DATE(?,'%d/%m/%Y'),dni = ?,edad = ?, ocupacion=?, 
+               $sql ="INSERT INTO fichas_api2 SET paciente = ?,fecNaci = STR_TO_DATE(?,'%d/%m/%Y'),dni = ?,edad = ?, ocupacion=?, 
                                                     centroCosto=?, empresa=?,grupoSangre=?,alergias = ?, fecha=STR_TO_DATE(?,'%d/%m/%Y'),
                                                     aptitud=?,peso=?,talla=?,imc=?,estadoNutricional=?,tipoExa=?, clinica = 3"; //tipoExa='PREOCUPACIONAL' 
                 $statement = $pdo->prepare($sql);

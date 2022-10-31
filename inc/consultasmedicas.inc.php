@@ -16,6 +16,8 @@
                                         $_POST['adjunto']));
         }else if ($_POST['funcion'] == "listarConsultas"){
             echo json_encode(listarConsultas($pdo,$_POST["documento"]));
+        }else if($_POST['funcion'] == "validarEnvio"){
+            echo json_encode(validarEnvio($pdo, $_POST['examen']));
         }
     }
 
@@ -26,7 +28,7 @@
             $enviado = false;
 
             $nombre_remitente = utf8_decode("Examenes Médicos");
-            $correo_remitente = "examenesmedicos@sepcon.net";
+            $correo_remitente = "examenesmedicos@sepcon.net";//$_session['correo']
             $destino = $correo;
             $title = utf8_decode($asunto);
             $entrada = "z3Io8Vp7Kd3Tz2R";
@@ -68,7 +70,7 @@
             //$mail->addAddress('Exámenes Medicos','examenesmedicos@sepcon.net');
             
             $mail->addAddress($destino,$correo);//aca iba el correo de cesar mas no iba a un destino fijo
-            $mail->addCC('examenesmedicos@sepcon.net','Exámenes Medicos');
+           $mail->addCC('examenesmedicos@sepcon.net','Exámenes Medicos');
 
             $mail->Subject = utf8_decode($asunto);
 
@@ -92,17 +94,19 @@
 
             //Enviamos el Mensaje 
             if($mail->send()){
-                $actualizados = actualizarExamen($pdo,$id,$asunto);
+                $actualizados = actualizarExamen($pdo,$id);
                 $respuesta = true;
                 $enviado = true;
-                
                 $mail->ClearAddresses();
-            }
+            }/*else{
+                $mail -> addCC('arondlacruz@hotmail.com','rebote');
+            }*/
 
             return array("respuesta"=>$respuesta,
                         "enviado"=>$enviado,
                         "adjunto"=>$adjunto,
-                        "actualizado"=> $actualizados);
+                        "actualizado"=> $actualizados
+                        );//crear nueva pestaña para correos, ver como validar y enviar
         } catch (PDOException $th) {
             echo $th->getMessage();
             return false;
@@ -129,16 +133,35 @@
         }
     }
 
-    function actualizarExamen($pdo,$id){
+    function actualizarExamen($pdo,$id){///pasar el nuevo correo a la hora de editar u:
         try {
-            $sql = "UPDATE fichas_api SET enviado = 1  WHERE idreg = ?";
+            $sql = "UPDATE fichas_api SET enviado = 1   WHERE idreg = ?";
             $statement = $pdo->prepare($sql);
             $statement ->execute(array($id));
             $result = $statement ->fetchAll();
             $rowCount = $statement -> rowcount();
-
             return $rowCount;
         } catch (PDOException $th) {
+            echo $th->getMessage();
+            return false;
+        }
+    }
+
+    function validarEnvio($pdo,$id){//preguntar pase a json
+        try{
+            $sql = "UPDATE fichas_api SET enviado = 0   WHERE idreg = ?";
+            $statement = $pdo->prepare($sql);
+            $statement ->execute(array($id));
+            $result = $statement ->fetchAll();
+            $rowCount = $statement -> rowcount();
+            $respuesta=true;
+
+            $salida = array(
+                "conteo"=>$rowCount,
+                "respuesta"=>$respuesta
+            );
+            return $salida;
+        }catch(PDOException $th) {
             echo $th->getMessage();
             return false;
         }

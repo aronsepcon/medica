@@ -82,7 +82,7 @@
         <input type="text" id="nombres_trabajador" name="nombres_trabajador" style="color:gray" placeholder="Nombres" value="" readonly>
         <input type="text" id="documento_trabajador" name="documento_trabajador" placeholder="Documento de Identificación" value="42081842">
         <div>
-            <a href="#"><i class="fas fa-search" ></i></a>
+            <a href="#" id="busqueda_boton"><i class="fas fa-search" ></i></a>
         </div>
     </form>
     <div class="modal" id="ficha__vistaprevia">    
@@ -275,12 +275,12 @@
                                 <input type="text" name="sede__trabajador" id="sede__trabajador" readonly>
                                 <label for="estado__trabajador">Estado :</label>
                                 <input type="text" name="estado__trabajador" id="estado__trabajador" readonly>
-                                <!--label for="telefono__trabajador">Telefono :</label>
-                                <input type="text" name="telefono__trabajador" id="telefono__trabajador" readonly-->
                                 <label for="direccion__trabajador">Dirección :</label>
                                 <input type="text" name="direccion__trabajador" id="direccion__trabajador" readonly>
                                 <label for="edad__trabajador">Edad :</label>
                                 <input type="text" name="edad__trabajador" id="edad__trabajador" readonly>
+                                <label for="telefono__trabajador">Telefono :</label>
+                                <input type="text" name="telefono__trabajador" id="telefono__trabajador" readonly>
                             </div> 
                         </div>
                     </form>
