@@ -230,7 +230,7 @@
                     <tr>
                         <th width=8%>DNI</th>
                         <th>Nombres y Apellidos</th>
-                        <th>Edad</th>
+                        <th>Estado</th>
                         <th>Sede</th>
                         <th>Ver</th>
                     </tr>
@@ -289,7 +289,15 @@
             <section class="historias__cuerpo__pagina oculto" id="pagina2">
                 <div class="historias__cuerpo__agregar">
                     <div>
-                        <button type="button">+ Agregar Examen</button>
+                        <button type="button" class="oculto">+ Subir Examenes</button >
+                        <form method='post' action='' enctype='multipart/form-data'>
+                            <input type="file" name="file" id="uploadFile" accept=".pdf" multiple>
+                            <div id="formUpload__data">
+                                <div id="formUpload__data__process">
+                                    <a href="#" id="btn__uploadPDF"><i class="fas fa-cloud-upload-alt"></i></a>
+                                </div>
+                            </div>    
+                        </form>
                     </div>
                 </div>
                 <div class="historias__tabla bars">
@@ -486,6 +494,7 @@
             </section>
         </section>
     </section>
+    <script src="../js/cargaMasiva.js" type="module"></script>
     <script src="../js/funciones.js" type="module"></script>
     <script src="../js/historias.js?v<?php echo $random;?>" type="module"></script>    
 </body>

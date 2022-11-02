@@ -664,7 +664,7 @@ function listarExamenes(){
     
                 for (let index = 0; index < dataJson.lista.length; index++) {
                     let tr = document.createElement("tr");
-                    let $cnt_costos = dataJson.lista[index].ccostos == null || "null" ? " " : dataJson.lista[index].ccostos ;
+                    let $cnt_costos = dataJson.lista[index].ccostos == null ? " " : dataJson.lista[index].ccostos ;
                     let $clase_enviado = dataJson.lista[index].enviado == null ? 'no__enviado' : 'enviado';
                     let $titulo_enviado = dataJson.lista[index].enviado == null ? 'Pendiente Envio' : 'Enviado';
                     let $icono_enviado = dataJson.lista[index].enviado == null ? '<i class="fas fa-external-link-alt"></i>' :'<i class="fas fa-check" style="color:green"></i>';

@@ -7,7 +7,7 @@
         session_destroy();
         header('location: ../index.php');
     }
-    //echo $_SESSION['acceso'];
+   // echo $_SESSION['sede'];
 ?>
 <!DOCTYPE html>
 <html lang="es">

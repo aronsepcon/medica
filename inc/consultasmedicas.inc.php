@@ -28,7 +28,7 @@
             $enviado = false;
 
             $nombre_remitente = utf8_decode("Examenes Médicos");
-            $correo_remitente = "examenesmedicos@sepcon.net";//$_session['correo']
+            $correo_remitente = "examenesmedicos@sepcon.net";//$_session['sede'] y $_session['acceso']   1 --- enfermeria/2 --- medicos/3 --- admin (zarai y saul)
             $destino = $correo;
             $title = utf8_decode($asunto);
             $entrada = "z3Io8Vp7Kd3Tz2R";
