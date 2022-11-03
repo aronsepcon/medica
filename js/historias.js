@@ -302,7 +302,7 @@ function listadoDni($e){
                 $edad__trabajador.value = dataJson.datos[0].edad;
                 $sede__trabajador.value = dataJson.datos[0].sucursal;
                 $sexo__trabajador.value = dataJson.datos[0].sexo;
-                $fecha__nacimiento.value = dataJson.datos[0].nacimiento;
+                $fecha__nacimiento.value = dataJson.datos[0].nacimiento.slice(0,10);
                 $estado__trabajador.value = dataJson.datos[0].estado;
                 $nombres_trabajador.value =  dataJson.datos[0].paterno+" "+dataJson.datos[0].materno+" "+dataJson.datos[0].nombres;
                 $direccion__trabajador.value = dataJson.datos[0].direccion;
@@ -346,7 +346,7 @@ function listarNombres($e){
                 let tr = document.createElement("tr");
                 tr.innerHTML =`<td>${dataJson.lista[index].dni}</td>
                                 <td>${dataJson.lista[index].nombres}</td>
-                                <td>  </td> 
+                                <td>${dataJson.lista[index].estado}</td> 
                                 <td>${dataJson.lista[index].sede}</td>
                                 <td>
                                     <a href="" data-accion2="ingreso"

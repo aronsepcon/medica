@@ -1,4 +1,5 @@
 <?php
+    session_start();//sin esto no jala el $_Session, recuerda eso
     require_once("connectmedica.inc.php");
 
     if(isset($_POST['funcion'])){
@@ -28,7 +29,32 @@
             $enviado = false;
 
             $nombre_remitente = utf8_decode("Examenes Médicos");
-            $correo_remitente = "examenesmedicos@sepcon.net";//$_session['sede'] y $_session['acceso']   1 --- enfermeria/2 --- medicos/3 --- admin (zarai y saul)
+
+            switch($_SESSION['acceso']){
+                case 1:
+                    if($_SESSION['sede']=='LIMA'){
+                        $correo_remitente = "enfermerialima@sepcon.net";
+                    }
+                    else if($_SESSION['sede']=='MALVINAS'){
+                        $correo_remitente = "enfermeriamalvinas@sepcon.net";
+                    }
+                    else if(($_SESSION['sede'])=='PISCO'){
+                        $correo_remitente = "enfermeriapisco@sepcon.net";
+                    }
+                    break;
+                case 2: 
+                    if($_SESSION['sede']=='LIMA'){//confiar en el doc
+                        $correo_remitente = "svela@sepcon.net" ;
+                    }
+                    else if($_SESSION['sede']=='MALVINAS'){
+                        $correo_remitente = "saludmalvinas@sepcon.net";
+                    }
+                    break;
+                //default:    
+                  //$correo_remitente = "examenesmedicos@sepcon.net";
+            }
+            
+            //$correo_remitente = "examenesmedicos@sepcon.net";//$_session['sede'] y $_session['acceso']   1 --- enfermeria/2 --- medicos/ //3 --- admin (zarai y saul)
             $destino = $correo;
             $title = utf8_decode($asunto);
             $entrada = "z3Io8Vp7Kd3Tz2R";
@@ -70,7 +96,7 @@
             //$mail->addAddress('Exámenes Medicos','examenesmedicos@sepcon.net');
             
             $mail->addAddress($destino,$correo);//aca iba el correo de cesar mas no iba a un destino fijo
-           $mail->addCC('examenesmedicos@sepcon.net','Exámenes Medicos');
+            $mail->addCC('examenesmedicos@sepcon.net','Exámenes Medicos');
 
             $mail->Subject = utf8_decode($asunto);
 

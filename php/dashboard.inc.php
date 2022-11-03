@@ -7,7 +7,8 @@
         session_destroy();
         header('location: ../index.php');
     }
-   // echo $_SESSION['sede'];
+    //echo $_SESSION['sede'];    
+    //echo $_SESSION['acceso'];
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -51,7 +52,7 @@
                 <li><a href="#" title="Control de medicamentos"><i class="fas fa-box"></i></a></li>
                 <li><a href="#" id="atenciones" title="Atenciones Médicas"><i class="fas fa-user-md"></i></a></li><!-- target="frame__loader"-->
                 <li><a href="#" title="Subida" id="configuracion"><i class="fas fa-file-upload"></i></a></li>
-            <?php if($_SESSION['acceso']==1){?>
+            <?php if(($_SESSION['acceso']==1 || $_SESSION['acceso']==2) && $_SESSION['sede']=='LIMA'){?>
                 <li><a href="#" title="Permisos" id="permisos"><i class="fas fa-cog" style="display: block;margin-top: 21.5px;"></i></a></li>
             <?php }else{?>
                 <li><a href="#" title="Permisos" id="permisos"><i class="fas fa-cog" style="display: none;"></i></a></li>

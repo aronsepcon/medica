@@ -294,7 +294,7 @@
                             <input type="file" name="file" id="uploadFile" accept=".pdf" multiple>
                             <div id="formUpload__data">
                                 <div id="formUpload__data__process">
-                                    <a href="#" id="btn__uploadPDF"><i class="fas fa-cloud-upload-alt"></i></a>
+                                    <a href="#" id="btn__uploadPDF"></i></a>
                                 </div>
                             </div>    
                         </form>

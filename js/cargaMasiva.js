@@ -2,7 +2,7 @@ import {mostrarMensaje} from "./funciones.js";
 import {fadeIn} from "./funciones.js";
 import {fadeOut} from "./funciones.js";
 import {validar} from "./funciones.js";
-import {listarexamenes} from "./historias";
+//import {listarexamenes} from "./historias";
 
 const $btn__uploadPDF = document.getElementById("btn__uploadPDF");
 const $uploadFile = document.getElementById("uploadFile");
@@ -14,7 +14,6 @@ $btn__uploadPDF.onclick = (e) => {
 
     return false;
 }*/
-//let files = 0;
 
 $uploadFile.onchange = (e) =>{
     e.preventDefault();

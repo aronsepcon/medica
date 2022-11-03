@@ -35,7 +35,7 @@
                     tabla_aquarius.usuario,
                     tabla_aquarius.clave,
                     SUBSTRING(tabla_aquarius.ccostos,1,4) as ccostos,
-                    tabla_aquarius.corporativo,
+                    tabla_aquarius.dsede,
                     tabla_aquarius.acc_medica
                 FROM
                     tabla_aquarius
@@ -53,7 +53,7 @@
                 $_SESSION['nombres'] = $result[0]['nombres'];                          
                 $_SESSION['apellidos'] = $result[0]['apellidos']; 
                 $_SESSION['dni'] = $result[0]['dni'];    
-                $_SESSION['sede'] = $result[0]['corporativo']; 
+                $_SESSION['sede'] = $result[0]['dsede']; 
                 $_SESSION['acceso'] = $result[0]['acc_medica'];  
                 $respuesta = array("respuesta"  => true,
                                     "clase"     =>"msj_correct",
@@ -81,7 +81,8 @@
             $sql ="SELECT  
                     CONCAT_WS( ' ', tabla_aquarius.apellidos, tabla_aquarius.nombres ) AS nombres,
                     tabla_aquarius.dsede,
-                    tabla_aquarius.dni
+                    tabla_aquarius.dni,
+                    tabla_aquarius.estado
                 FROM
                     tabla_aquarius
                 WHERE
@@ -94,7 +95,8 @@
                 foreach($result as $row){
                     $salida = array("nombres"   => $row['nombres'],
                                     "sede"      => $row['dsede'],
-                                    "dni"       => $row['dni']
+                                    "dni"       => $row['dni'],
+                                    "estado"       => $row['estado']
                                     );
                     array_push($lista,$salida);
                 }
