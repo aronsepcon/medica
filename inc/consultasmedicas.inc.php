@@ -43,15 +43,15 @@
                     }
                     break;
                 case 2: 
-                    if($_SESSION['sede']=='LIMA'){//confiar en el doc
+                    if($_SESSION['sede']=='LIMA'){
                         $correo_remitente = "svela@sepcon.net" ;
                     }
                     else if($_SESSION['sede']=='MALVINAS'){
                         $correo_remitente = "saludmalvinas@sepcon.net";
                     }
                     break;
-                //default:    
-                  //$correo_remitente = "examenesmedicos@sepcon.net";
+                default:    
+                    $correo_remitente = "examenesmedicos@sepcon.net";
             }
             
             //$correo_remitente = "examenesmedicos@sepcon.net";//$_session['sede'] y $_session['acceso']   1 --- enfermeria/2 --- medicos/ //3 --- admin (zarai y saul)
