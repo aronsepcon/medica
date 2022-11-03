@@ -28,6 +28,8 @@ const $radio__nombre = document.getElementById('radio__nombre');
 const $radio__dni = document.getElementById('radio__dni');
 const $busqueda_boton = document.getElementById('busqueda_boton');
 
+const $uploadFile = document.getElementById("uploadFile");
+
 const $numero__registro = document.getElementById('numero__registro');
 const $correo__electronico = document.getElementById('correo__electronico'); 
 const $nombres__apellidos = document.getElementById('nombres__apellidos');
@@ -309,6 +311,44 @@ function listadoDni($e){
                 $telefono__trabajador.value = dataJson.datos[0].telefono;
             }
         })
+}
+
+$uploadFile.onchange = (e) =>{
+    e.preventDefault();
+
+    var totalFiles = $uploadFile.files.length;
+
+    if(totalFiles>0){
+        try {
+            if(validar($uploadFile)) throw 'Archivo no valido';
+            const formData = new FormData();
+
+            for(var index=0; index<totalFiles;index++){
+                formData.append('files', $uploadFile.files[index]);
+
+                fetch('../inc/importarMasivaPdf.inc.php',{
+                    method: 'POST',
+                    body : formData 
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.respuesta) {
+                        mostrarMensaje("Documento subido","msj_correct");
+                    }else{
+                        mostrarMensaje("Hubo un error al subir el archivo","msj_error");
+                    }
+                })
+                .catch(error => {
+                    console.error(error);
+                })
+            }
+            listarExamenes();
+        } catch (error) {
+            mostrarMensaje(error,"msj_error");
+        }
+}else{
+    mostrarMensaje("elija un documento","msj_error");
+}
 }
 
 $nombres_trabajador.onkeypress = (e) => {
