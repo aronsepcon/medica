@@ -51,35 +51,65 @@ $btnUpdateMedex.onclick = (e) => {
 $fileUpload.onchange = (e) => {
     e.preventDefault;
 
-    if($fileUpload.files && $fileUpload.files[0])
-        console.log("File Seleccionado : ", $fileUpload.files[0]);
+    var totalFiles = $fileUpload.files.length;
 
-    try {
-        if (validar($fileUpload)) throw 'Archivo inválido. No se permite la extensión ';
+   /* if($fileUpload.files && $fileUpload.files[0])
+    console.log("File Seleccionado : ", $fileUpload.files[0]);
+*/  if(totalFiles>0){
 
-        const formData = new FormData();
-        formData.append('fileUpload',$fileUpload.files[0]);
+        try {
+            if (validar($fileUpload)) throw 'Archivo inválido. No se permite la extensión ';
 
-        fetch ('../inc/importar.inc.php',{
-            method: 'POST',
-            body: formData
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.respuesta) {
-                mostrarMensaje("Historias Actualizadas","msj_correct");
-            }else{
-                mostrarMensaje("Hubo un error al actualizar","msj_error");
-            }
-        })
-        .catch(error => {
-            console.error(error);
-        })
-    } catch (error) {
-        mostrarMensaje(error,"msj_error");
+            const formData = new FormData();
+
+                for(var index=0;index<totalFiles;index++){
+                    console.log("File Seleccionado : ", $fileUpload.files[index]);
+                    formData.append('fileUpload',$fileUpload.files[index]);
+
+                    fetch ('../inc/importar.inc.php',{
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.respuesta) {
+                            mostrarMensaje("Historias Actualizadas","msj_correct");
+                        }else{
+                            mostrarMensaje("Hubo un error al actualizar","msj_error");
+                        }
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    })
+                }
+            
+
+            /*
+            formData.append('fileUpload',$fileUpload.files[0]);
+
+            fetch ('../inc/importar.inc.php',{
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.respuesta) {
+                    mostrarMensaje("Historias Actualizadas","msj_correct");
+                }else{
+                    mostrarMensaje("Hubo un error al actualizar","msj_error");
+                }
+            })
+            .catch(error => {
+                console.error(error);
+            })*/
+        } catch (error) {
+            mostrarMensaje(error,"msj_error");
+        }
+
+        //return false;
+    }else{
+        mostrarMensaje("elija un documento","msj_error");
     }
-
-    return false;
 }
 
 const getToken = () => {

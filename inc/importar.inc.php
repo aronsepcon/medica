@@ -6,7 +6,6 @@
      $respuesta = false;
  
      $archivo = $_FILES['fileUpload'];
- 
      $temporal	 = $_FILES['fileUpload']['tmp_name'];
      $fileId      = uniqid().".xlsx";
  

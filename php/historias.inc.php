@@ -494,7 +494,7 @@
             </section>
         </section>
     </section>
-    <script src="../js/cargaMasiva.js" type="module"></script>
+    <!--script src="../js/cargaMasiva.js" type="module"></script-->
     <script src="../js/funciones.js" type="module"></script>
     <script src="../js/historias.js?v<?php echo $random;?>" type="module"></script>    
 </body>

@@ -32,21 +32,21 @@
 
             switch($_SESSION['acceso']){
                 case 1:
-                    if($_SESSION['sede']=='LIMA'){
+                    if(trim($_SESSION['sede'])=='LIMA'){
                         $correo_remitente = "enfermerialima@sepcon.net";
                     }
-                    else if($_SESSION['sede']=='MALVINAS'){
+                    else if(trim($_SESSION['sede'])=='MALVINAS'){
                         $correo_remitente = "enfermeriamalvinas@sepcon.net";
                     }
-                    else if(($_SESSION['sede'])=='PISCO'){
+                    else if(trim(($_SESSION['sede']))=='PISCO'){
                         $correo_remitente = "enfermeriapisco@sepcon.net";
                     }
                     break;
                 case 2: 
-                    if($_SESSION['sede']=='LIMA'){
+                    if(trim($_SESSION['sede'])=='LIMA'){
                         $correo_remitente = "svela@sepcon.net" ;
                     }
-                    else if($_SESSION['sede']=='MALVINAS'){
+                    else if(trim($_SESSION['sede'])=='MALVINAS'){
                         $correo_remitente = "saludmalvinas@sepcon.net";
                     }
                     break;
@@ -103,7 +103,7 @@
             $clinica = strtoupper($clinica);
 
             $message  = "<html><body>";
-            $message .= "<p>Estimado $nombre</p>";
+            $message .= "<p>Estimad@ $nombre</p>";
             $message .= "<p>Por la presente y en cumplimiento de lo <strong>Establecido en la Ley 29783 Art. 49 y 71, además de la DS-011-2019-TR en su Art. 13</strong>, se adjunta el Legajo de su Examen Médico Ocupacional realizado:</p>"; 
             $message .= "<p>Fecha : $fecha</p>";
             $message .= "<p>Clínica :  $clinica</p>";
