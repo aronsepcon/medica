@@ -11,6 +11,7 @@ const $btnUpdateMedex = document.getElementById("btnUpdateMedex");
 const $fecha__inicio__medex = document.getElementById("fecha__inicio__medex");
 const $fecha__final__medex = document.getElementById("fecha__final__medex");
 const $nro__doc = document.getElementById("nro__doc");
+const $subida_masiva_excel=document.getElementById("subidaMasiva");
 
 const $modal__esperar = document.getElementById("modal__esperar");
 
@@ -49,24 +50,54 @@ $btnUpdateMedex.onclick = (e) => {
 }
 
 $fileUpload.onchange = (e) => {
-    e.preventDefault;
+    e.preventDefault();//probar si funciona o no despues del parentesis
+    if($fileUpload.files && $fileUpload.files[0])
+        console.log("File Seleccionado : ", $fileUpload.files[0]);
+    try {
+        if (validar($fileUpload)) throw 'Archivo inválido. No se permite la extensión ';
+        const formData = new FormData();
+        formData.append('fileUpload',$fileUpload.files[0]);
+        fetch ('../inc/importar.inc.php',{
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.respuesta) {
+                mostrarMensaje("Historias Actualizadas","msj_correct");
+            }else{
+                mostrarMensaje("Hubo un error al actualizar","msj_error");
+            }
+        })
+        .catch(error => {
+            console.error(error);
+        })
+    } catch (error) {
+        mostrarMensaje(error,"msj_error");
+    }
+    return false;
+}
 
-    var totalFiles = $fileUpload.files.length;
+$subida_masiva_excel.onchange = (e) => {
+    e.preventDefault();
 
-   /* if($fileUpload.files && $fileUpload.files[0])
-    console.log("File Seleccionado : ", $fileUpload.files[0]);
-*/  if(totalFiles>0){
+    var totalFiles = $subida_masiva_excel.files.length;
 
-        try {
-            if (validar($fileUpload)) throw 'Archivo inválido. No se permite la extensión ';
+    if(totalFiles>0){
+        if(totalFiles>20){
+            mostrarMensaje("Limite 20 archivos","msj_error");//mostrar exceso
+        }
+        else{
+            try {
+                if(validar($subida_masiva_excel)) throw 'Archivo no valido';
+                
+                const formData = new FormData();
 
-            const formData = new FormData();
-
-                for(var index=0;index<totalFiles;index++){
-                    console.log("File Seleccionado : ", $fileUpload.files[index]);
-                    formData.append('fileUpload',$fileUpload.files[index]);
-
-                    fetch ('../inc/importar.inc.php',{
+                for(var index=0; index<totalFiles; index++){
+                formData.append('fileUpload',$subida_masiva_excel.files[index]);
+                fetch ('../inc/importar.inc.php',{
+                    //formData.append('subida_masiva_excel',$subida_masiva_excel.files);
+                    //fetch ('../inc/importarMasivaExcel.inc.php',{
                         method: 'POST',
                         body: formData
                     })
@@ -74,6 +105,7 @@ $fileUpload.onchange = (e) => {
                     .then(data => {
                         if (data.respuesta) {
                             mostrarMensaje("Historias Actualizadas","msj_correct");
+                            console.log(index);
                         }else{
                             mostrarMensaje("Hubo un error al actualizar","msj_error");
                         }
@@ -82,31 +114,11 @@ $fileUpload.onchange = (e) => {
                         console.error(error);
                     })
                 }
-            
 
-            /*
-            formData.append('fileUpload',$fileUpload.files[0]);
-
-            fetch ('../inc/importar.inc.php',{
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.respuesta) {
-                    mostrarMensaje("Historias Actualizadas","msj_correct");
-                }else{
-                    mostrarMensaje("Hubo un error al actualizar","msj_error");
-                }
-            })
-            .catch(error => {
-                console.error(error);
-            })*/
-        } catch (error) {
-            mostrarMensaje(error,"msj_error");
+            } catch (error) {
+                mostrarMensaje(error,"msj_error");
+            }
         }
-
-        //return false;
     }else{
         mostrarMensaje("elija un documento","msj_error");
     }

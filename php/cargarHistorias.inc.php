@@ -53,8 +53,8 @@
         <h2>Serfarmed</h2>
         <div>
             <h3>Excel</h3>
-                <form method='post' action="" id="formUpload" enctype='multipart/form-data'>
-                    <input type="file" name="fileUpload" id="fileUpload" accept=".xls,.xlsx">
+                <form action="" id="formUpload">
+                    <input type="file" name="fileUpload" id="fileUpload" accept=".xls,.xlsx" class="oculto">
                     <div id="formUpload__data"  >
                         <div id="formUpload__data__process">
                             <a href="#" id="btn__uploadSerfarmed"><i class="fas fa-cloud-upload-alt"></i></a>
@@ -82,7 +82,12 @@
         <h2>Carga Masiva</h2>
         <div>
             <form method='post' action='' enctype='multipart/form-data'>
-                <input type="file" name="file" id="fileUpload" accept=".xls,.xlsx" multiple>
+                <input type="file" name="file" id="subidaMasiva" accept=".xls,.xlsx" multiple>
+                <div id="formUpload__data">
+                    <div id="formUpload__data__process">
+                        <a href="#" id="btn__uploadPDF"></i></a>
+                    </div>
+                </div>    
             </form>
         </div>
 

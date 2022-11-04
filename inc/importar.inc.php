@@ -34,7 +34,20 @@
           //  if($objCelda['A1']=="Id.Atención"/* && $objCelda['A']!==""*/){//no lo carga bien, carga el primero por algun motivo xc
             $tipoR = 'RETIRO';
             $tipoP = 'PREOCUPACIONAL';
-            if($valSerfarmed == "Id.Atención" && is_numeric($objCelda['D'])){  
+            if($valSerfarmed == "Id.Atención" && is_numeric($objCelda['D'])){
+                $seisdig =preg_match('/1[0-1][0-9][0-9][0-9][0-9]/',$objCelda['D']);
+                $seisdigven = preg_match('/[0-9][0-9][0-9][0-9][0-9][0-9]/',$objCelda['D']);
+
+                if($seisdig){    
+                    $dni= str_pad($objCelda['D'],8,0,STR_PAD_LEFT);
+                    //[0-9][0-9][0-9][0-9]
+                }
+                else if($seisdigven){    
+                    $dni= str_pad($objCelda['D'],9,0,STR_PAD_LEFT);
+                    //[0-9][0-9][0-9][0-9]
+                }else{
+                    $dni= str_pad($objCelda['D'],8,0,STR_PAD_LEFT);
+                }  
                 $sql = "INSERT INTO fichas_api2 SET atencion=?, fecha = STR_TO_DATE(?,'%d/%m/%Y'), paciente=?,dni=?, ocupacion=?, 
                                                         codSexo=?, edad =?, empresa=?,tipoExa=?, aptitud=?, imc=?, diagno1=?, reco1=?, diagno2=?,
                                                         reco2=?,diagno3=?, reco3=?, diagno4=?, reco4=?,diagno5=?, reco5=?,
@@ -42,7 +55,7 @@
                                                         reco9=?, hemoglobina=?, hematocrito=?,grupoSangre=?,glucosa=?, rpr=?, 
                                                         vdrl=?, clinica=2 ";
                 $statement = $pdo->prepare($sql);
-                $statement -> execute(array(substr($objCelda['A'],4,11),$objCelda['B'],$objCelda['C'],$objCelda['D'],$objCelda['E'],$objCelda['F'],
+                $statement -> execute(array(substr($objCelda['A'],4,11),$objCelda['B'],$objCelda['C'],$dni/*$objCelda['D']*/,$objCelda['E'],$objCelda['F'],
                                             $objCelda['G'],$objCelda['H'],$objCelda['I'],$objCelda['J'],$objCelda['K'],$objCelda['L'],$objCelda['M'],
                                             $objCelda['R'],$objCelda['S'],$objCelda['U'],$objCelda['V'],$objCelda['X'],$objCelda['Y'],
                                             $objCelda['AD'],$objCelda['AE'],$objCelda['AG'], $objCelda['AH'],$objCelda['AM'],
@@ -90,7 +103,7 @@
                                                     pase1 = ?,tipo2 = ?,pase2 = ?,reco1 = ?,reco2 = ?,
                                                     reco3 = ?,reco4 = ?,reco5 = ?,reco6 = ?,reco7 = ?,
                                                     reco8 = ?,reco9 = ?,reco10 = ?,estado = ?";*/
-                $sql = "INSERT INTO fichas_api SET  atencion = ?,desAseg = ?,empresa = ?,codPaci = ?,paciente=?,dni = ?,
+                $sql = "INSERT INTO fichas_api2 SET  atencion = ?,desAseg = ?,empresa = ?,codPaci = ?,paciente=?,dni = ?,
                                                     fecNaci = STR_TO_DATE(?, '%d/%m/%Y'),
                                                     codSexo = ?,ocupacion = ?,puestoPostula = ?,tipoExa = ?,
                                                     fecha = STR_TO_DATE(?, '%d/%m/%Y'),
