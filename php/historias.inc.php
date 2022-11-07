@@ -94,6 +94,7 @@
     <div class="modal" id="ficha_vacunas">
         <div class="inside w25porcen">
             <div>
+                <input type="text" name="nombre_vacuna" id="nombre_vacuna">
                 <button type="button" id="cierre_form_vac" class="cierre_form">X</button>
                 <input type="date" id="fecha_vacuna">
                 <div>
@@ -375,7 +376,7 @@
                                     <span>D1</span>
                                     <input type="date" name="fiebre_amarilla__d1" id="fiebre_amarilla__d1" readonly>
                                     <a href=""><i class="fas fa-eye"></i></a>
-                                    <a href="" id="subida_vacunas"><i class="fas fa-upload"></i></a>
+                                    <a href="" class="subida_vacunas" value="fiebre amarilla"><i class="fas fa-upload"></i></a><!--cambiar id a class-->
                                     <input type="text" name="fiebre_amarilla__cnf" id="fiebre_amarilla__cnf" readonly>
                                 </div>
                             </div>
@@ -388,23 +389,23 @@
                                     <span>D1</span>
                                     <input type="date" name="fiebre__d1" id="fiebre__d1" readonly>
                                     <a href=""><i class="fas fa-eye"></i></a>
-                                    <a href=""><i class="fas fa-upload"></i></a>
+                                    <a href="" class="subida_vacunas" value="difteTet_D1"><i class="fas fa-upload"></i></a>
                                     <span>D2</span>
                                     <input type="date" name="fiebre__d2" id="fiebre__d2" readonly>
                                     <a href=""><i class="fas fa-eye"></i></a>
-                                    <a href=""><i class="fas fa-upload"></i></a>
+                                    <a href="" class="subida_vacunas" value="difteTet_D2"><i class="fas fa-upload"></i></a>
                                     <span>D3</span>
                                     <input type="date" name="fiebre__d2" id="fiebre__d2" readonly>
                                     <a href=""><i class="fas fa-eye"></i></a>
-                                    <a href=""><i class="fas fa-upload"></i></a>
+                                    <a href="" class="subida_vacunas" value="difteTet_D3"><i class="fas fa-upload"></i></a>
                                     <span>R1</span>
                                     <input type="date" name="fiebre__r1" id="fiebre__r1" readonly>
                                     <a href=""><i class="fas fa-eye"></i></a>
-                                    <a href=""><i class="fas fa-upload"></i></a>
+                                    <a href="" class="subida_vacunas" value="difteTet_R1"><i class="fas fa-upload"></i></a>
                                     <span>R2</span>
                                     <input type="date" name="fiebre__d2" id="fiebre__d2" readonly>
                                     <a href=""><i class="fas fa-eye"></i></a>
-                                    <a href=""><i class="fas fa-upload"></i></a>
+                                    <a href="" class="subida_vacunas" value="difteTet_R2"><i class="fas fa-upload"></i></a>
                                 </div>
                             </div>
                             <br>    
@@ -416,19 +417,19 @@
                                     <span>D1</span>
                                     <input type="date" name="fiebre__d1" id="fiebre__d1" readonly>
                                     <a href=""><i class="fas fa-eye"></i></a>
-                                    <a href=""><i class="fas fa-upload"></i></a>
+                                    <a href="" class="subida_vacunas"><i class="fas fa-upload"></i></a>
                                     <span>D2</span>
                                     <input type="date" name="fiebre__d2" id="fiebre__d2" readonly>
                                     <a href=""><i class="fas fa-eye"></i></a>
-                                    <a href=""><i class="fas fa-upload"></i></a>
+                                    <a href="" class="subida_vacunas"><i class="fas fa-upload"></i></a>
                                     <span>R1</span>
                                     <input type="date" name="fiebre__r1" id="fiebre__r1" readonly>
                                     <a href=""><i class="fas fa-eye"></i></a>
-                                    <a href=""><i class="fas fa-upload"></i></a>
+                                    <a href="" class="subida_vacunas"><i class="fas fa-upload"></i></a>
                                     <span>R2</span>
                                     <input type="date" name="fiebre__d2" id="fiebre__d2" readonly>
                                     <a href=""><i class="fas fa-eye"></i></a>
-                                    <a href=""><i class="fas fa-upload"></i></a>
+                                    <a href="" class="subida_vacunas"><i class="fas fa-upload"></i></a>
                                 </div>
                             </div>
                             <div class="item__vacuna">
@@ -439,11 +440,11 @@
                                     <span>D1</span>
                                     <input type="date" name="fiebre__d1" id="fiebre__d1" readonly>
                                     <a href=""><i class="fas fa-eye"></i></a>
-                                    <a href=""><i class="fas fa-upload"></i></a>
+                                    <a href="" class="subida_vacunas"><i class="fas fa-upload"></i></a>
                                     <span>D2</span>
                                     <input type="date" name="fiebre__d2" id="fiebre__d2" readonly>
                                     <a href=""><i class="fas fa-eye"></i></a>
-                                    <a href=""><i class="fas fa-upload"></i></a>
+                                    <a href="" class="subida_vacunas"><i class="fas fa-upload"></i></a>
                                     <input type="text" name="fiebre__r1" id="fiebre__r1" readonly>
                                 </div>
                             </div>
@@ -456,11 +457,11 @@
                                     <span>R1</span>
                                     <input type="date" name="influenza__d1" id="influenza__d1" readonly>
                                     <a href=""><i class="fas fa-eye"></i></a>
-                                    <a href=""><i class="fas fa-upload"></i></a>
+                                    <a href="" class="subida_vacunas"><i class="fas fa-upload"></i></a>
                                     <span>R2</span>
                                     <input type="date" name="influenza__r1" id="influenza__r1" readonly>
                                     <a href=""><i class="fas fa-eye"></i></a>
-                                    <a href=""><i class="fas fa-upload"></i></a>
+                                    <a href="" class="subida_vacunas"><i class="fas fa-upload"></i></a>
                                 </div>
                             </div>
                             <div class="item__vacuna">
@@ -471,7 +472,7 @@
                                     <span>D1</span>
                                     <input type="date" name="trivirica__d1" id="trivirica__d1" readonly>
                                     <a href=""><i class="fas fa-eye"></i></a>
-                                    <a href=""><i class="fas fa-upload"></i></a>
+                                    <a href="" class="subida_vacunas"><i class="fas fa-upload"></i></a>
                                     <input type="text" name="trivirica__r1" id="trivirica__r1" readonly>
                                 </div>
                             </div>
@@ -483,7 +484,7 @@
                                     <span>D1</span>
                                     <input type="date" name="trivirica__d1" id="trivirica__d1" readonly>
                                     <a href=""><i class="fas fa-eye"></i></a>
-                                    <a href=""><i class="fas fa-upload"></i></a>
+                                    <a href="" class="subida_vacunas"><i class="fas fa-upload"></i></a>
                                     <input type="text" name="trivirica__r1" id="trivirica__r1" readonly>
                                 </div>
                             </div>
@@ -495,23 +496,23 @@
                                     <span>D1</span>
                                     <input type="date" name="fiebre__d1" id="fiebre__d1" readonly>
                                     <a href=""><i class="fas fa-eye"></i></a>
-                                    <a href=""><i class="fas fa-upload"></i></a>
+                                    <a href="" class="subida_vacunas"><i class="fas fa-upload"></i></a>
                                     <span>D2</span>
                                     <input type="date" name="fiebre__d2" id="fiebre__d2" readonly>
                                     <a href=""><i class="fas fa-eye"></i></a>
-                                    <a href=""><i class="fas fa-upload"></i></a>
+                                    <a href="" class="subida_vacunas"><i class="fas fa-upload"></i></a>
                                     <span>D3</span>
                                     <input type="date" name="fiebre__d2" id="fiebre__d2" readonly>
                                     <a href=""><i class="fas fa-eye"></i></a>
-                                    <a href=""><i class="fas fa-upload"></i></a>
+                                    <a href="" class="subida_vacunas"><i class="fas fa-upload"></i></a>
                                     <span>R1</span>
                                     <input type="date" name="fiebre__r1" id="fiebre__r1" readonly>
                                     <a href=""><i class="fas fa-eye"></i></a>
-                                    <a href=""><i class="fas fa-upload"></i></a><!--subidaR1-->
+                                    <a href="" class="subida_vacunas"><i class="fas fa-upload"></i></a><!--subidaR1-->
                                     <span>R2</span>
                                     <input type="date" name="fiebre__d2" id="fiebre__d2" readonly>
                                     <a href=""><i class="fas fa-eye"></i></a>
-                                    <a href=""><i class="fas fa-upload"></i></a>
+                                    <a href="" class="subida_vacunas"><i class="fas fa-upload"></i></a>
                                 </div>
                             </div>
                             <div class="item__vacuna">
@@ -522,11 +523,11 @@
                                     <span>R1</span>
                                     <input type="date" name="tifoidea__d1" id="tifoidea__d1" readonly>
                                     <a href=""><i class="fas fa-eye"></i></a>
-                                    <a href=""><i class="fas fa-upload"></i></a>
+                                    <a href="" class="subida_vacunas"><i class="fas fa-upload"></i></a>
                                     <span>R2</span>
                                     <input type="date" name="tifoidea__r1" id="tifoidea__r1" readonly>
                                     <a href=""><i class="fas fa-eye"></i></a>
-                                    <a href=""><i class="fas fa-upload"></i></a>
+                                    <a href="" class="subida_vacunas"><i class="fas fa-upload"></i></a>
                                 </div>
                             </div>
                             <div class="item__vacuna">
@@ -537,11 +538,11 @@
                                     <span>R1</span>
                                     <input type="date" name="tifoidea__d1" id="tifoidea__d1" readonly>
                                     <a href=""><i class="fas fa-eye"></i></a>
-                                    <a href=""><i class="fas fa-upload"></i></a>
+                                    <a href="" class="subida_vacunas"><i class="fas fa-upload"></i></a>
                                     <span>R2</span>
                                     <input type="date" name="tifoidea__r1" id="tifoidea__r1" readonly>
                                     <a href=""><i class="fas fa-eye"></i></a>
-                                    <a href=""><i class="fas fa-upload"></i></a>
+                                    <a href="" class="subida_vacunas"><i class="fas fa-upload"></i></a>
                                 </div>
                             </div>
                             <div class="item__vacuna">
@@ -552,19 +553,19 @@
                                     <span>D1</span>
                                     <input type="date" name="tifoidea__d1" id="tifoidea__d1" readonly>
                                     <a href=""><i class="fas fa-eye"></i></a>
-                                    <a href=""><i class="fas fa-upload"></i></a>
+                                    <a href="" class="subida_vacunas"><i class="fas fa-upload"></i></a>
                                     <span>D2</span>
                                     <input type="date" name="tifoidea__r1" id="tifoidea__r1" readonly>
                                     <a href=""><i class="fas fa-eye"></i></a>
-                                    <a href=""><i class="fas fa-upload"></i></a>
+                                    <a href="" class="subida_vacunas"><i class="fas fa-upload"></i></a>
                                     <span>D3</span>
                                     <input type="date" name="tifoidea__d1" id="tifoidea__d1" readonly>
                                     <a href=""><i class="fas fa-eye"></i></a>
-                                    <a href=""><i class="fas fa-upload"></i></a>
+                                    <a href="" class="subida_vacunas"><i class="fas fa-upload"></i></a>
                                     <span>D4</span>
                                     <input type="date" name="tifoidea__r1" id="tifoidea__r1" readonly>
                                     <a href=""><i class="fas fa-eye"></i></a>
-                                    <a href=""><i class="fas fa-upload"></i></a>
+                                    <a href="" class="subida_vacunas"><i class="fas fa-upload"></i></a>
                                 </div>
                             </div>              
                     </div>
@@ -596,7 +597,7 @@
             </section>
         </section>
     </section>
-    <script src="../js/cargaMasiva.js" type="module"></script>
+    <!--script src="../js/cargaMasiva.js" type="module"></script-->
     <script src="../js/funciones.js" type="module"></script>
     <script src="../js/historias.js?v<?php echo $random;?>" type="module"></script>    
 </body>
