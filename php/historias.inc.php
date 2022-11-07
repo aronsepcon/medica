@@ -91,6 +91,20 @@
             <iframe src="" id="frame__adjunto"></iframe>
         </div>    
     </div>
+    <div class="modal" id="ficha_vacunas">
+        <div class="inside w25porcen">
+            <div>
+                <button type="button" id="cierre_form_vac" class="cierre_form">X</button>
+                <input type="date" id="fecha_vacuna">
+                <div>
+                <input type="file" name="subida_imagen" id="subidaImagen" accept=".jpg,.jpeg,.png">Subir Imagen</input>
+                </div>
+                <div class="opciones">
+                    <button type="button" id="envio_vacuna">Enviar</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="modal" id="modal__esperar">
         <div class="lds-dual-ring"></div>
 	</div>
@@ -353,29 +367,68 @@
                         <button type="button">Grabar</button>
                     </div>
                     <div class="vacunas columnas_2">
-                        <div class="vacunas">
                             <div class="item__vacuna">
                                 <div>
                                     <h5>Fiebre Amarilla</h5>
                                 </div>
                                 <div class="columnas_8">
                                     <span>D1</span>
-                                    <input type="date" name="influenza__d1" id="influenza__d1">
-                                    <span>R1</span>
-                                    <input type="date" name="influenza__r1" id="influenza__r1">
+                                    <input type="date" name="fiebre_amarilla__d1" id="fiebre_amarilla__d1" readonly>
+                                    <a href=""><i class="fas fa-eye"></i></a>
+                                    <a href="" id="subida_vacunas"><i class="fas fa-upload"></i></a>
+                                    <input type="text" name="fiebre_amarilla__cnf" id="fiebre_amarilla__cnf" readonly>
                                 </div>
                             </div>
+                            <br>
                             <div class="item__vacuna">
                                 <div>
-                                    <h5>Fiebre Amarilla</h5>
+                                    <h5>Difteria Tetano</h5>
                                 </div>
                                 <div class="columnas_8">
                                     <span>D1</span>
-                                    <input type="date" name="fiebre__d1" id="fiebre__d1">
+                                    <input type="date" name="fiebre__d1" id="fiebre__d1" readonly>
+                                    <a href=""><i class="fas fa-eye"></i></a>
+                                    <a href=""><i class="fas fa-upload"></i></a>
                                     <span>D2</span>
-                                    <input type="date" name="fiebre__d2" id="fiebre__d2">
+                                    <input type="date" name="fiebre__d2" id="fiebre__d2" readonly>
+                                    <a href=""><i class="fas fa-eye"></i></a>
+                                    <a href=""><i class="fas fa-upload"></i></a>
+                                    <span>D3</span>
+                                    <input type="date" name="fiebre__d2" id="fiebre__d2" readonly>
+                                    <a href=""><i class="fas fa-eye"></i></a>
+                                    <a href=""><i class="fas fa-upload"></i></a>
                                     <span>R1</span>
-                                    <input type="date" name="fiebre__r1" id="fiebre__r1">
+                                    <input type="date" name="fiebre__r1" id="fiebre__r1" readonly>
+                                    <a href=""><i class="fas fa-eye"></i></a>
+                                    <a href=""><i class="fas fa-upload"></i></a>
+                                    <span>R2</span>
+                                    <input type="date" name="fiebre__d2" id="fiebre__d2" readonly>
+                                    <a href=""><i class="fas fa-eye"></i></a>
+                                    <a href=""><i class="fas fa-upload"></i></a>
+                                </div>
+                            </div>
+                            <br>    
+                            <div class="item__vacuna">
+                                <div>
+                                    <h5>Hepatitis A</h5>
+                                </div>
+                                <div class="columnas_8">
+                                    <span>D1</span>
+                                    <input type="date" name="fiebre__d1" id="fiebre__d1" readonly>
+                                    <a href=""><i class="fas fa-eye"></i></a>
+                                    <a href=""><i class="fas fa-upload"></i></a>
+                                    <span>D2</span>
+                                    <input type="date" name="fiebre__d2" id="fiebre__d2" readonly>
+                                    <a href=""><i class="fas fa-eye"></i></a>
+                                    <a href=""><i class="fas fa-upload"></i></a>
+                                    <span>R1</span>
+                                    <input type="date" name="fiebre__r1" id="fiebre__r1" readonly>
+                                    <a href=""><i class="fas fa-eye"></i></a>
+                                    <a href=""><i class="fas fa-upload"></i></a>
+                                    <span>R2</span>
+                                    <input type="date" name="fiebre__d2" id="fiebre__d2" readonly>
+                                    <a href=""><i class="fas fa-eye"></i></a>
+                                    <a href=""><i class="fas fa-upload"></i></a>
                                 </div>
                             </div>
                             <div class="item__vacuna">
@@ -384,70 +437,30 @@
                                 </div>
                                 <div class="columnas_8">
                                     <span>D1</span>
-                                    <input type="date" name="fiebre__d1" id="fiebre__d1">
+                                    <input type="date" name="fiebre__d1" id="fiebre__d1" readonly>
+                                    <a href=""><i class="fas fa-eye"></i></a>
+                                    <a href=""><i class="fas fa-upload"></i></a>
                                     <span>D2</span>
-                                    <input type="date" name="fiebre__d2" id="fiebre__d2">
-                                    <span>R1</span>
-                                    <input type="date" name="fiebre__r1" id="fiebre__r1">
+                                    <input type="date" name="fiebre__d2" id="fiebre__d2" readonly>
+                                    <a href=""><i class="fas fa-eye"></i></a>
+                                    <a href=""><i class="fas fa-upload"></i></a>
+                                    <input type="text" name="fiebre__r1" id="fiebre__r1" readonly>
                                 </div>
                             </div>
-                            <div class="item__vacuna">
-                                <div>
-                                    <h5>Tetanos</h5>
-                                </div>
-                                <div class="columnas_8">
-                                    <span>D1</span>
-                                    <input type="date" name="influenza__d1" id="influenza__d1">
-                                    <span>R1</span>
-                                    <input type="date" name="influenza__r1" id="influenza__r1">
-                                </div>
-                            </div>
-                            <div class="item__vacuna">
-                                <div>
-                                    <h5>Rabia</h5>
-                                </div>
-                                <div class="columnas_8">
-                                    <span>D1</span>
-                                    <input type="date" name="influenza__d1" id="influenza__d1">
-                                    <span>D2</span>
-                                    <input type="date" name="influenza__d1" id="influenza__d1">
-                                    <span>D3</span>
-                                    <input type="date" name="influenza__d1" id="influenza__d1">
-                                    <span>R1</span>
-                                    <input type="date" name="influenza__r1" id="influenza__r1">
-                                </div>
-                            </div>    
+                            
                             <div class="item__vacuna">
                                 <div>
                                     <h5>Influenza</h5>
                                 </div>
                                 <div class="columnas_8">
-                                    <span>D1</span>
-                                    <input type="date" name="influenza__d1" id="influenza__d1">
                                     <span>R1</span>
-                                    <input type="date" name="influenza__r1" id="influenza__r1">
-                                </div>
-                            </div>
-                            <div class="item__vacuna">
-                                <div>
-                                    <h5>Tifoidea</h5>
-                                </div>
-                                <div class="columnas_8">
-                                    <span>D1</span>
-                                    <input type="date" name="tifoidea__d1" id="tifoidea__d1">
-                                    <span>R1</span>
-                                    <input type="date" name="tifoidea__r1" id="tifoidea__r1">
-                                </div>
-                            </div>
-                            <div class="item__vacuna">
-                                <div>
-                                    <h5>Trivirica</h5>
-                                </div>
-                                <div class="columnas_8">
-                                    <span>D1</span>
-                                    <input type="date" name="trivirica__d1" id="trivirica__d1">
-                                    <span>R1</span>
-                                    <input type="date" name="trivirica__r1" id="trivirica__r1">
+                                    <input type="date" name="influenza__d1" id="influenza__d1" readonly>
+                                    <a href=""><i class="fas fa-eye"></i></a>
+                                    <a href=""><i class="fas fa-upload"></i></a>
+                                    <span>R2</span>
+                                    <input type="date" name="influenza__r1" id="influenza__r1" readonly>
+                                    <a href=""><i class="fas fa-eye"></i></a>
+                                    <a href=""><i class="fas fa-upload"></i></a>
                                 </div>
                             </div>
                             <div class="item__vacuna">
@@ -456,15 +469,104 @@
                                 </div>
                                 <div class="columnas_8">
                                     <span>D1</span>
-                                    <input type="date" name="trivirica__d1" id="trivirica__d1">
-                                    <span>R1</span>
-                                    <input type="date" name="trivirica__r1" id="trivirica__r1">
+                                    <input type="date" name="trivirica__d1" id="trivirica__d1" readonly>
+                                    <a href=""><i class="fas fa-eye"></i></a>
+                                    <a href=""><i class="fas fa-upload"></i></a>
+                                    <input type="text" name="trivirica__r1" id="trivirica__r1" readonly>
                                 </div>
                             </div>
-                        </div>
-                        <div>
-                            <img src="../img/userImg.jpg">
-                        </div>
+                            <div class="item__vacuna">
+                                <div>
+                                    <h5>Trivirica</h5>
+                                </div>
+                                <div class="columnas_8">
+                                    <span>D1</span>
+                                    <input type="date" name="trivirica__d1" id="trivirica__d1" readonly>
+                                    <a href=""><i class="fas fa-eye"></i></a>
+                                    <a href=""><i class="fas fa-upload"></i></a>
+                                    <input type="text" name="trivirica__r1" id="trivirica__r1" readonly>
+                                </div>
+                            </div>
+                            <div class="item__vacuna">
+                                <div>
+                                    <h5>Rabia</h5>
+                                </div>
+                                <div class="columnas_8">
+                                    <span>D1</span>
+                                    <input type="date" name="fiebre__d1" id="fiebre__d1" readonly>
+                                    <a href=""><i class="fas fa-eye"></i></a>
+                                    <a href=""><i class="fas fa-upload"></i></a>
+                                    <span>D2</span>
+                                    <input type="date" name="fiebre__d2" id="fiebre__d2" readonly>
+                                    <a href=""><i class="fas fa-eye"></i></a>
+                                    <a href=""><i class="fas fa-upload"></i></a>
+                                    <span>D3</span>
+                                    <input type="date" name="fiebre__d2" id="fiebre__d2" readonly>
+                                    <a href=""><i class="fas fa-eye"></i></a>
+                                    <a href=""><i class="fas fa-upload"></i></a>
+                                    <span>R1</span>
+                                    <input type="date" name="fiebre__r1" id="fiebre__r1" readonly>
+                                    <a href=""><i class="fas fa-eye"></i></a>
+                                    <a href=""><i class="fas fa-upload"></i></a><!--subidaR1-->
+                                    <span>R2</span>
+                                    <input type="date" name="fiebre__d2" id="fiebre__d2" readonly>
+                                    <a href=""><i class="fas fa-eye"></i></a>
+                                    <a href=""><i class="fas fa-upload"></i></a>
+                                </div>
+                            </div>
+                            <div class="item__vacuna">
+                                <div>
+                                    <h5>Tifoidea</h5>
+                                </div>
+                                <div class="columnas_8">
+                                    <span>R1</span>
+                                    <input type="date" name="tifoidea__d1" id="tifoidea__d1" readonly>
+                                    <a href=""><i class="fas fa-eye"></i></a>
+                                    <a href=""><i class="fas fa-upload"></i></a>
+                                    <span>R2</span>
+                                    <input type="date" name="tifoidea__r1" id="tifoidea__r1" readonly>
+                                    <a href=""><i class="fas fa-eye"></i></a>
+                                    <a href=""><i class="fas fa-upload"></i></a>
+                                </div>
+                            </div>
+                            <div class="item__vacuna">
+                                <div>
+                                    <h5>Neumococo</h5>
+                                </div>
+                                <div class="columnas_8">
+                                    <span>R1</span>
+                                    <input type="date" name="tifoidea__d1" id="tifoidea__d1" readonly>
+                                    <a href=""><i class="fas fa-eye"></i></a>
+                                    <a href=""><i class="fas fa-upload"></i></a>
+                                    <span>R2</span>
+                                    <input type="date" name="tifoidea__r1" id="tifoidea__r1" readonly>
+                                    <a href=""><i class="fas fa-eye"></i></a>
+                                    <a href=""><i class="fas fa-upload"></i></a>
+                                </div>
+                            </div>
+                            <div class="item__vacuna">
+                                <div>
+                                    <h5>COVID</h5>
+                                </div>
+                                <div class="columnas_8">
+                                    <span>D1</span>
+                                    <input type="date" name="tifoidea__d1" id="tifoidea__d1" readonly>
+                                    <a href=""><i class="fas fa-eye"></i></a>
+                                    <a href=""><i class="fas fa-upload"></i></a>
+                                    <span>D2</span>
+                                    <input type="date" name="tifoidea__r1" id="tifoidea__r1" readonly>
+                                    <a href=""><i class="fas fa-eye"></i></a>
+                                    <a href=""><i class="fas fa-upload"></i></a>
+                                    <span>D3</span>
+                                    <input type="date" name="tifoidea__d1" id="tifoidea__d1" readonly>
+                                    <a href=""><i class="fas fa-eye"></i></a>
+                                    <a href=""><i class="fas fa-upload"></i></a>
+                                    <span>D4</span>
+                                    <input type="date" name="tifoidea__r1" id="tifoidea__r1" readonly>
+                                    <a href=""><i class="fas fa-eye"></i></a>
+                                    <a href=""><i class="fas fa-upload"></i></a>
+                                </div>
+                            </div>              
                     </div>
                 </div>
             </section>
@@ -494,7 +596,7 @@
             </section>
         </section>
     </section>
-    <!--script src="../js/cargaMasiva.js" type="module"></script-->
+    <script src="../js/cargaMasiva.js" type="module"></script>
     <script src="../js/funciones.js" type="module"></script>
     <script src="../js/historias.js?v<?php echo $random;?>" type="module"></script>    
 </body>

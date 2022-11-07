@@ -57,7 +57,7 @@
             //$correo_remitente = "examenesmedicos@sepcon.net";//$_session['sede'] y $_session['acceso']   1 --- enfermeria/2 --- medicos/ //3 --- admin (zarai y saul)
             $destino = $correo;
             $title = utf8_decode($asunto);
-            $entrada = "z3Io8Vp7Kd3Tz2R";
+            $entrada = "b9Vz0Ho7Uu7Kj9Z";//cambiar la clave
 
             //Create a new PHPMailer instance
             $mail = new PHPMailer;
@@ -89,7 +89,7 @@
             $mail->SMTPAuth = true;
             //Username to use for SMTP authentication - use full email address for gmail
             $mail->Username = "documentos_sistema@sepcon.net";
-            $mail->Password = $entrada;
+            $mail->Password = $entrada;                         
             //Set who the message is to be sent from
             $mail->setFrom($correo_remitente,$nombre_remitente);
             //$mail->addAddress($destino,$nombre);

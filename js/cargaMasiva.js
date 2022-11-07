@@ -4,109 +4,53 @@ import {fadeOut} from "./funciones.js";
 import {validar} from "./funciones.js";
 //import {listarexamenes} from "./historias";
 
-const $btn__uploadPDF = document.getElementById("btn__uploadPDF");
-const $uploadFile = document.getElementById("uploadFile");
-/*
-$btn__uploadPDF.onclick = (e) => {
+const $subida_vacunas = document.getElementById("subida_vacunas");
+const $ficha_vacunas = document.getElementById("ficha_vacunas");
+const $cierre_form_vac = document.getElementById("cierre_form_vac");
+const $fecha_vacuna = document.getElementById("fecha_vacuna");
+const $subida_imagen = document.getElementById("subida_imagen");
+const $envio_vacuna = document.getElementById("envio_vacuna");
+
+$subida_vacunas.onclick = (e) => {
     e.preventDefault();
 
-    $file.click();
+    fadeIn($ficha_vacunas);
 
     return false;
-}*/
-
-$uploadFile.onchange = (e) =>{
-    e.preventDefault();
-
-    var totalFiles = $uploadFile.files.length;
-
-    if(totalFiles>0){
-        try {
-            if(validar($uploadFile)) throw 'Archivo no valido';
-
-        /*   const fileReader = new FileReader();
-
-            fileReader.addEventListener('load', (e)=>{
-                const fileUrl = fileReader.result;
-            });
-
-            fileReader.readAsDataURL(files);*/
-
-            const formData = new FormData();
-
-            for(var index=0; index<totalFiles;index++){
-                formData.append('files', $uploadFile.files[index]);
-
-                fetch('../inc/importarMasivaPdf.inc.php',{
-                    method: 'POST',
-                    body : formData 
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.respuesta) {
-                        mostrarMensaje("Documento subido","msj_correct");
-                        //listarexamenes();
-                    }else{
-                        mostrarMensaje("Hubo un error al subir el archivo","msj_error");
-                    }
-                })
-                .catch(error => {
-                    console.error(error);
-                })
-            }
-           // listarexamenes();
-//como resetear el input
-            } catch (error) {
-                mostrarMensaje(error,"msj_error");
-            }
-    // return false;
-    }else{
-        mostrarMensaje("elija un documento","msj_error");
-    }
-}/*
-let files = 0;
-
-$file.addEventListener("change",(e) => {
-    e.preventDefault();
-
-    files = e.target.files;
-    processFile(files);
 }
 
-)   
+$cierre_form_vac.onclick = (e) => {//cierra el formulario para enviar correos
+    e.preventDefault();
 
-function processFile(file){
-    const docType = file.type;
-    const validExtensions = [".pdf"];
+    fadeOut($ficha_vacunas);
 
-    if(validExtensions.includes(docType)){
-        const fileReader = new FileReader();
-
-        fileReader.addEventListener('load', (e)=>{
-            const fileUrl = fileReader.result;
-        });
-
-        fileReader.readAsDataURL(file);
-        uploadFile(file);
-    }else{
-        mostrarMensaje("el formato del archivo no es válido","msn_error");
-    }
 }
 
-async function uploadFile(file){
-
-    const formData = new FormData();
-    formData.append("file",file);
+$envio_vacuna.onchange = (e) => {
+    e.preventDefault();
 
     try {
-        const response = await fetch("../inc/importarMasivaPdf.inc.php",{
-            method: 'POST',
-            body: formData,
-        });
-        const responseText = await response.text();
+        if(validar($subida_imagen)) throw "Error";
 
+        const formData = new FormData();
+        formData.append('fechaVacunacion',$fecha_vacuna.value);
+        formData.append('subidaImagen',$subida_imagen.value);
+        fetch("../inc/.inc.php",{
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.respuesta) {
+                mostrarMensaje("Documento subido","msj_correct");
+            }else{
+                mostrarMensaje("Hubo un error al subir el archivo","msj_error");
+            }
+        })
+        .catch(error => {
+            console.error(error);
+        })
     } catch (error) {
         
     }
-
-}*/
+}
