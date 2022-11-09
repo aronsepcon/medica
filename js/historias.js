@@ -2,6 +2,7 @@ import {mostrarMensaje} from "./funciones.js";
 import {fadeIn} from "./funciones.js";
 import {fadeOut} from "./funciones.js";
 import { validar } from "./funciones.js";
+import {listarVacunas} from "./cargaMasiva.js";
 
 //import {mostrarMensaje,fadeIn,fadeOut,validar } from "./funciones.js";
 
@@ -74,14 +75,6 @@ const $cierre_form_vistp = document.getElementById('cierre_form_vistp')
 
 const $btn__atencion__medica = document.getElementById('btn__atencion__medica');
 const $atencion__medica = document.getElementById('atencion__medica');
-
-const $subida_vacunas = document.querySelectorAll(".subida_vacunas");
-const $ficha_vacunas = document.getElementById("ficha_vacunas");
-const $cierre_form_vac = document.getElementById("cierre_form_vac");
-const $fecha_vacuna = document.getElementById("fecha_vacuna");
-const $subida_imagen = document.getElementById("subida_imagen");
-const $envio_vacuna = document.getElementById("envio_vacuna");
-const $nombre_vacuna = document.getElementById("nombre_vacuna");
 
 let registro = 0;
 
@@ -161,16 +154,26 @@ $opcion3.onclick = (e) => {
 $opcion4.onclick = (e) => {
     e.preventDefault();
 
-    document.querySelectorAll(".historias__vertical__menu a").forEach(el => {
-        el.classList.remove('resaltado')
-    });
+    try{
 
-    document.querySelectorAll(".historias__cuerpo__pagina").forEach(el => {
-        el.classList.add('oculto');
-    })
+        if ($documento_trabajador.value == "" && $nombres_trabajador.value=="" ) throw "Ingrese el número de documento";
 
-    $opcion4.classList.add('resaltado');
-    $pagina4.classList.remove('oculto');
+        document.querySelectorAll(".historias__vertical__menu a").forEach(el => {
+            el.classList.remove('resaltado')
+        });
+
+        document.querySelectorAll(".historias__cuerpo__pagina").forEach(el => {
+            el.classList.add('oculto');
+        })
+
+        $opcion4.classList.add('resaltado');
+        $pagina4.classList.remove('oculto');
+
+        listarVacunas();
+
+    }catch(error){
+        mostrarMensaje(error,"msj_error");
+    }
     
    return false;
 }
@@ -244,6 +247,7 @@ $tabla__busqueda_body.addEventListener("click", e=>{
         estiloDni();
         $tabla__examenes_body.innerHTML = "";//para otros
         listarExamenes();
+        listarVacunas();//ver si funciona esto
         //fadeOut($busqueda_parcial);
     }
 })
@@ -261,6 +265,7 @@ $documento_trabajador.onkeypress = (e) => {
         //ver el cambio sino asi mas directo 
         
         listadoDni(e.target.value);
+        listarVacunas();
 
     } catch (error) {
         mostrarMensaje(error,"msj_error");
@@ -320,7 +325,7 @@ function listadoDni($e){
         })
 }
 
-$uploadFile.onchange = (e) =>{
+$uploadFile.onchange = (e) =>{//para la carga masiva de PDFs
     e.preventDefault();
 
     var totalFiles = $uploadFile.files.length;
@@ -456,8 +461,7 @@ $tabla__examenes_body.addEventListener("click", e=>{
     registro = e.target.parentElement.getAttribute("href");
     let adjunto =  e.target.parentElement.dataset.atach;
     
-        if ( accion == "previewFile" ){ 
-                
+        if ( accion == "previewFile" ){        
             if(adjunto=="null"){
                 fadeIn($form_ingreso)  //por aqui se debe buscar              
             }else{
@@ -761,64 +765,6 @@ function listarExamenes(){
             }
         })
 
-}
-
-$subida_vacunas.forEach(function($subida_vacunas){
-    $subida_vacunas.onclick = (e) => {
-        e.preventDefault();
-
-        $nombre_vacuna.value = $subida_vacunas.getAttribute("value");
-
-        fadeIn($ficha_vacunas);
-
-    }
-});
-
-
-$cierre_form_vac.onclick = (e) => {//cierra el formulario para enviar correos
-    e.preventDefault();
-
-    fadeOut($ficha_vacunas);
-}
-
-$envio_vacuna.onclick = (e) => {
-    e.preventDefault();
-
-   // mostrarMensaje($nombre_vacuna.value,"msj_correct");
-   // mostrarMensaje($documento_trabajador.value,"msj_correct");
-    fadeOut($ficha_vacunas);
-
-    try {
-            //ver la validacion(1 o 0) para la subida de documentos
-        //if(validar($subida_imagen)) throw "Error";
-        fadeOut($ficha_vacunas);
-
-        let formData = new FormData();
-        formData.append('fechaVacunacion',$fecha_vacuna.value);
-        formData.append('subidaImagen',$subida_imagen.files[0]);//es el envio del documento
-        formData.append('documento',$documento_trabajador.value)
-        formData.append('validacion',$nombre_vacuna.value);
-        //TypeError: Cannot read properties of null (reading 'files')
-
-        fetch("../inc/subirImagen.inc.php",{
-            method: 'POST',
-            body: formData
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.respuesta) {
-                mostrarMensaje("Documento subido","msj_correct");
-            }else{
-                mostrarMensaje("Hubo un error al subir el archivo","msj_error");
-            }
-        })
-        .catch(error => {
-            console.error(error);
-        })
-        
-    } catch (error) {
-        mostrarMensaje(error,"msj_error");
-    }
 }
 
 function listarConsultas(){

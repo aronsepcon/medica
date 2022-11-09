@@ -19,6 +19,8 @@
             echo json_encode(listarConsultas($pdo,$_POST["documento"]));
         }else if($_POST['funcion'] == "validarEnvio"){
             echo json_encode(validarEnvio($pdo, $_POST['examen']));
+        }else if($_POST['funcion'] == "datosVacunacion"){
+            echo json_encode(datosVacunacion($pdo,$_POST["documento"]));
         }
     }
 
@@ -318,5 +320,32 @@
             echo "Error: " . $th->getMessage();
             return false;
         }
+    }
+
+    function datosVacunacion($pdo,$doc){
+        $respuesta  = false;
+        $mensaje    = "No existe el nuemro de documento";
+        $clase      = "msj_error";
+        $sql        = "SELECT fechaFbrAmarilla,fechaDifTD1,fechaDifTD2,fechaDifTD3 FROM fichas_vacunacion WHERE dni=?";
+        $statement = $pdo->prepare($sql);
+            $statement ->execute(array($doc));
+            $result = $statement ->fetchAll();
+            $rowCount = $statement -> rowcount();
+            if ($rowCount > 0) {
+                $respuesta = array(
+                    "respuesta" => true,
+                    "clase"     =>"msj_correct",
+                    "error"     =>"no hay error",
+                    "fecha"     =>$result[0]['fechaFbrAmarilla'],
+                    "fechaDTD1" =>$result[0]['fechaDifTD1'],
+                    "fechaDTD2" =>$result[0]['fechaDifTD2'],
+                    "fechaDTD3" =>$result[0]['fechaDifTD3']);
+
+            }else{
+                $respuesta = array("respuesta"=>$respuesta,
+                                    "mensaje"=>$mensaje,
+                                    "clase"=>$clase);
+            }
+            return $respuesta;
     }
 ?>
