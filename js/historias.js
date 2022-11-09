@@ -626,31 +626,25 @@ $cierre_atencion.onclick = (e) => {
 
     fadeOut($atencion__medica);
 }
-/*
+
 $cambiar_env.onclick = (e) => {
     e.preventDefault();
 
     try{
-        let data = new FormData();
-        data.append("examen",document.getElementById("id__examen").value);
-        data.append("funcion","actualizarExamen");
+        let formData = new FormData();
+        formData.append("examen",document.getElementById("id__examen").value);
+        formData.append("funcion","validarEnvio");
 
         fetch('../inc/consultasmedicas.inc.php',{
             method: 'POST',
-            body:data,
-        })
-        .then(function(response){
-            return response.json();
-        })
-        .then(dataJson => {
-            if (dataJson.respuesta){
-                listarExamenes();
-           }
-    })
+            body:formData,
+        });
+        fadeOut($ficha__medica__correo);
+        listarExamenes();
     }catch(error){
         mostrarMensaje(error,"msj_error");
     }
-}*/
+}
 
 $mail__accept.onclick = (e) => {
     e.preventDefault();

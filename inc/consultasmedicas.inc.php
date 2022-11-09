@@ -22,6 +22,9 @@
         }else if($_POST['funcion'] == "datosVacunacion"){
             echo json_encode(datosVacunacion($pdo,$_POST["documento"]));
         }
+        else if($_POST['funcion'] == "buscarImagen"){
+            echo json_encode(buscarImagen($pdo,$_POST["documento"],$_POST["validacion"]));
+        }
     }
 
     function enviarCorreo($pdo,$id,$nombre,$correo,$clinica,$fecha,$asunto,$adjunto){
@@ -175,20 +178,13 @@
         }
     }
 
-    function validarEnvio($pdo,$id){//preguntar pase a json
+    function validarEnvio($pdo,$id){
         try{
-            $sql = "UPDATE fichas_api SET enviado = 0   WHERE idreg = ?";
+            $respuesta = false;
+            $lista = [];
+            $sql = "UPDATE fichas_api SET enviado = NULL  WHERE idreg = ?";
             $statement = $pdo->prepare($sql);
             $statement ->execute(array($id));
-            $result = $statement ->fetchAll();
-            $rowCount = $statement -> rowcount();
-            $respuesta=true;
-
-            $salida = array(
-                "conteo"=>$rowCount,
-                "respuesta"=>$respuesta
-            );
-            return $salida;
         }catch(PDOException $th) {
             echo $th->getMessage();
             return false;
@@ -326,26 +322,64 @@
         $respuesta  = false;
         $mensaje    = "No existe el nuemro de documento";
         $clase      = "msj_error";
-        $sql        = "SELECT fechaFbrAmarilla,fechaDifTD1,fechaDifTD2,fechaDifTD3 FROM fichas_vacunacion WHERE dni=?";
+        $sql        = "SELECT 
+                            fechaFbrAmarilla,fechaDifTD1,fechaDifTD2,fechaDifTD3
+                        FROM 
+                            fichas_vacunacion 
+                        WHERE 
+                            dni=?";//si falta uno de estos datos en la tabla dara error
         $statement = $pdo->prepare($sql);
-            $statement ->execute(array($doc));
-            $result = $statement ->fetchAll();
-            $rowCount = $statement -> rowcount();
-            if ($rowCount > 0) {
-                $respuesta = array(
-                    "respuesta" => true,
-                    "clase"     =>"msj_correct",
-                    "error"     =>"no hay error",
-                    "fecha"     =>$result[0]['fechaFbrAmarilla'],
-                    "fechaDTD1" =>$result[0]['fechaDifTD1'],
-                    "fechaDTD2" =>$result[0]['fechaDifTD2'],
-                    "fechaDTD3" =>$result[0]['fechaDifTD3']);
-
-            }else{
-                $respuesta = array("respuesta"=>$respuesta,
-                                    "mensaje"=>$mensaje,
-                                    "clase"=>$clase);
-            }
-            return $respuesta;
+        $statement ->execute(array($doc));
+        $result = $statement ->fetchAll();
+        $rowCount = $statement -> rowcount();
+        if ($rowCount > 0) {
+            $respuesta = array(
+                "respuesta" => true,
+                "clase"     =>"msj_correct",
+                "error"     =>"no hay error",
+                "fecha"     =>$result[0]['fechaFbrAmarilla'],
+                "fechaDTD1" =>$result[0]['fechaDifTD1'],
+                "fechaDTD2" =>$result[0]['fechaDifTD2'],
+                "fechaDTD3" =>$result[0]['fechaDifTD3']);
+        }else{
+            $respuesta = array("respuesta"=>$respuesta,
+                                "mensaje"=>$mensaje,
+                                "clase"=>$clase,
+                                "sql" =>$statement);
+        }
+        return $respuesta;
     }
+
+    function buscarImagen($pdo,$doc,$validacion){
+        $respuesta  = false;
+        $mensaje    = "No existe el nuemro de documento";
+        $clase      = "msj_error";
+        switch($validacion){
+            case "fiebre amarilla":
+                $sql = "SELECT adjuntoFbrAmarilla as adjunto FROM fichas_vacunacion WHERE dni=?";
+                break;
+            case "difteTet_D1":
+                $sql ="SELECT adjuntoDifTD1 as adjunto FROM fichas_vacunacion WHERE dni=?";
+                break;
+            }
+        $statement = $pdo->prepare($sql);
+        $statement ->execute(array($doc));
+        $result = $statement ->fetchAll();
+        $rowCount = $statement -> rowcount();
+        if ($rowCount > 0) {
+            $respuesta = array(
+                "respuesta" => true,
+                "clase"     =>"msj_correct",
+                "error"     =>"no hay error",
+                "imagen"    => $result[0]['adjunto']
+            );
+        }else{
+            $respuesta = array("respuesta"=>$respuesta,
+                                "mensaje"=>$mensaje,
+                                "clase"=>$clase);
+        }
+        return $respuesta;
+
+    }
+    
 ?>

@@ -18,12 +18,14 @@ const $difteria__d1 = document.getElementById("fiebre__d1");
 const $difteria__d2 = document.getElementById("fiebre__d2");
 const $difteria__d3 = document.getElementById("fiebre__d3");
 
+const $validacion_Fiebre_Amar=document.getElementById("fiebre_amarilla__cnf")
 
 const $cierre_form_vp_vac = document.getElementById("cierre_form_vp_vac");
 const $ficha__vistaprevia_vac = document.getElementById("ficha__vistaprevia_vac");
-//const $vista_previa_vac = document.querySelectorAll(".vista_previa_vac");
-const $vista_previa_vac = document.getElementById(".vista_previa_vac");
+const $vista_previa_vac = document.querySelectorAll(".vista_previa_vac");
+//const $vista_previa_vac = document.getElementById("vista_previa_vac");
 const $frame__adjunto_vac = document.getElementById("frame__adjunto_vac");
+const $display_image = document.getElementById("imagen");
 
 
 $subida_vacunas.forEach(function($subida_vacunas){
@@ -36,20 +38,6 @@ $subida_vacunas.forEach(function($subida_vacunas){
         return false;
     }
 });
-/*
-$vista_previa_vac.forEach(function($vista_previa_vac){
-    $vista_previa_vac.onclick = (e) => {
-        e.preventDefault();
-
-        fadeIn($ficha__vistaprevia_vac);
-    }
-});
-*//*
-$vista_previa_vac.onclick = (e) => {
-    e.preventDefault();
-
-    fadeIn($ficha__vistaprevia_vac);
-}*/ 
 
 $cierre_form_vp_vac.onclick = (e) => {
     e.preventDefault();
@@ -57,6 +45,47 @@ $cierre_form_vp_vac.onclick = (e) => {
     fadeOut($ficha__vistaprevia_vac);
 }
 
+$vista_previa_vac.forEach(function($vista_previa_vac){
+    $vista_previa_vac.onclick = (e) => {
+        e.preventDefault();
+
+        mostrarImagen($vista_previa_vac.getAttribute("value"));
+        
+        return false;
+    }
+});
+
+function mostrarImagen($value){
+
+    try {
+        
+        const data = new FormData();
+        data.append('documento', $documento_trabajador.value);
+        data.append('validacion',$value);//sino se define se pasa como un null y da error
+        data.append('funcion','buscarImagen');
+        fetch('../inc/consultasmedicas.inc.php',{
+            method: "POST",
+            body:data,
+        })
+        .then(response => response.json())
+        .then(dataJson => {
+            if (dataJson.respuesta){
+                $display_image.src = "../vacunas/"+dataJson.imagen;
+                console.log(dataJson.imagen);    
+                fadeIn($ficha__vistaprevia_vac);
+                //q valide un switch case con $value y luego en la funcion ver si el siguiente adjunto existe
+                //sino darle estilo, cursiva para la fecha--- ver si aplica algo mas
+            }else{
+                mostrarMensaje("No hay imagen","msj_error");
+            }
+        })
+
+    } catch (error) {
+        mostrarMensaje(error,"msj_error");  
+    }
+       
+}
+ 
 
 $cierre_form_vac.onclick = (e) => {//cierra el formulario para enviar correos
     e.preventDefault();
@@ -103,8 +132,8 @@ $envio_vacuna.onclick = (e) => {
         .then(response => response.json())
         .then(data => {
             if (data.respuesta) {
-                mostrarMensaje("Documento subido","msj_correct");
                 listarVacunas();
+                mostrarMensaje("Documento subido","msj_correct");
                 validacion();//ver aqui luego
             }else{
                 mostrarMensaje("Hubo un error al subir el archivo","msj_error");
@@ -122,6 +151,8 @@ $envio_vacuna.onclick = (e) => {
 
 export function listarVacunas(){
     let data = new FormData();
+    console.log($fiebre_amarilla__d1.value);
+    validacion();
     data.append("documento",$documento_trabajador.value);
     data.append("funcion","datosVacunacion");
     fetch('../inc/consultasmedicas.inc.php',{
@@ -137,6 +168,7 @@ export function listarVacunas(){
           $difteria__d1.value = dataJson.fechaDTD1;
           $difteria__d2.value = dataJson.fechaDTD2;
           $difteria__d3.value = dataJson.fechaDTD3;
+          
         }else{
             mostrarMensaje("Verifique el N°. Documento","msj_error");
         }
@@ -144,7 +176,10 @@ export function listarVacunas(){
 }
 
 function validacion(){
-    if($fiebre_amarilla__d1.value!==null){
-        document.getElementById("fiebre_amarilla__cnf").innerHTML = "INMUNIZADO"
+    if($fiebre_amarilla__d1.value!==""){
+        $validacion_Fiebre_Amar.value = "INMUNIZADO"
+    }else{
+        $validacion_Fiebre_Amar.value = "SIN INMUNIZAR";
     }
+    
 }

@@ -34,7 +34,7 @@
                     $sql ="UPDATE fichas_vacunacion SET fechaDifTD1=?,adjuntoDifTD1=?,fechaDifTD2=DATE_ADD(?, INTERVAL 1 MONTH) WHERE dni=?";
                     break;
                 case "difteTet_D2":
-                    $sql ="UPDATE fichas_vacunacion SET fechaDifTD2=?,adjuntoDifTD2=?,fechaDifTD3=DATE_ADD(?, INTERVAL 3 MONTH) WHERE dni=?";
+                    $sql ="UPDATE fichas_vacunacion SET fechaDifTD2=?,adjuntoDifTD2=?,fechaDifTD3=DATE_ADD(?, INTERVAL 5 MONTH) WHERE dni=?";
                     break;//validar los meses
             }       
             $statement = $pdo->prepare($sql);
