@@ -178,11 +178,11 @@
         }
     }
 
-    function validarEnvio($pdo,$id){
+    function validarEnvio($pdo,$id){//ver porq no actualiza xc, doble opcion
         try{
             $respuesta = false;
             $lista = [];
-            $sql = "UPDATE fichas_api SET enviado = NULL  WHERE idreg = ?";
+            $sql = "UPDATE fichas_api SET enviado = 1  WHERE idreg = ?";
             $statement = $pdo->prepare($sql);
             $statement ->execute(array($id));
         }catch(PDOException $th) {

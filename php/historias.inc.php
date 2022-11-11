@@ -471,8 +471,6 @@
                                     <a href="" class="subida_vacunas"><i class="fas fa-upload"></i></a>
                                     <span>R2</span>
                                     <input type="date" name="influenza__r1" id="influenza__r1" readonly>
-                                    <a href="#"><i class="fas fa-eye"></i></a>
-                                    <a href="" class="subida_vacunas"><i class="fas fa-upload"></i></a>
                                 </div>
                             </div>
                             <div class="item__vacuna">
