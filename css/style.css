@@ -156,6 +156,15 @@ iframe {
   grid-template-columns: repeat(4, fr);
 }
 
+.R2 {
+  font-style: italic;
+  font-weight: bold;
+}
+
+.validarInmunidad {
+  color: green;
+}
+/*
 .columnas_8 {
   display: -ms-grid;
   display: grid;
@@ -167,7 +176,7 @@ iframe {
      -moz-column-gap: 10px;
           column-gap: 10px;
 }
-
+*/
 .columnas_8 > *:nth-child(1) {
   -ms-grid-row: 1;
   -ms-grid-column: 1;
@@ -836,3 +845,11 @@ input[name = "filtrado"]{
   background-color: tomato;
   color: #fff;
  }
+
+ #display-image{
+  width: 400px;
+  height: 225px;
+  border: 1px solid black;
+  background-position: center;
+  background-size: cover;
+}

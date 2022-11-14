@@ -17,6 +17,40 @@ const $fiebre_amarilla__d1 = document.getElementById("fiebre_amarilla__d1");
 const $difteria__d1 = document.getElementById("fiebre__d1");
 const $difteria__d2 = document.getElementById("fiebre__d2");
 const $difteria__d3 = document.getElementById("fiebre__d3");
+const $difteria__r1 = document.getElementById("fiebre__r1");
+const $difteria__r2 = document.getElementById("fiebre__r2");
+
+const $hepatitis_A__d1 = document.getElementById("hepatitis_A__d1");
+const $hepatitis_A__d2 = document.getElementById("hepatitis_A__d2");
+const $hepatitis_A__r1 = document.getElementById("hepatitis_A__r1");
+const $hepatitis_A__r2 = document.getElementById("hepatitis_A__r2");
+
+const $hepatitis_B__d1 = document.getElementById("hepatitis_B__d1");
+const $hepatitis_B__d2 = document.getElementById("hepatitis_B__d2");
+const $hepatitis_B__d3 = document.getElementById("hepatitis_B__d3");
+
+const $influenza__r1 = document.getElementById("influenza__r1");
+const $influenza__r2 = document.getElementById("influenza__r2");
+
+const $poliomelitis__d1 = document.getElementById("poliomelitis__d1");
+const $trivirica__d1 = document.getElementById("trivirica__d1");
+
+const $rabia__d1 = document.getElementById("rabia__d1");
+const $rabia__d2 = document.getElementById("rabia__d2");
+const $rabia__d3 = document.getElementById("rabia__d3");
+const $rabia__r1 = document.getElementById("rabia__r1");
+const $rabia__r2 = document.getElementById("rabia__r2");
+
+const $tifoidea__r1 = document.getElementById("tifoidea__r1");
+const $tifoidea__r2 = document.getElementById("tifoidea__r2");
+
+const $neumococo__r1 = document.getElementById("neumococo__r1");
+const $neumococo__r2 = document.getElementById("neumococo__r2");
+
+const $covid__d1 = document.getElementById("covid__d1");
+const $covid__d2 = document.getElementById("covid__d2");
+const $covid__d3 = document.getElementById("covid__d3");
+const $covid__d4 = document.getElementById("covid__d4");
 
 const $validacion_Fiebre_Amar=document.getElementById("fiebre_amarilla__cnf")
 
@@ -56,9 +90,7 @@ $vista_previa_vac.forEach(function($vista_previa_vac){
 });
 
 function mostrarImagen($value){
-
-    try {
-        
+    try {     
         const data = new FormData();
         data.append('documento', $documento_trabajador.value);
         data.append('validacion',$value);//sino se define se pasa como un null y da error
@@ -86,12 +118,10 @@ function mostrarImagen($value){
        
 }
  
-
 $cierre_form_vac.onclick = (e) => {//cierra el formulario para enviar correos
     e.preventDefault();
 
     fadeOut($ficha_vacunas);
-
 }
 
 /** 
@@ -164,11 +194,46 @@ export function listarVacunas(){
     })
     .then(dataJson => {
         if (dataJson.respuesta){
+      
           $fiebre_amarilla__d1.value = dataJson.fecha;
           $difteria__d1.value = dataJson.fechaDTD1;
           $difteria__d2.value = dataJson.fechaDTD2;
           $difteria__d3.value = dataJson.fechaDTD3;
-          
+          $difteria__r1.value =  dataJson.fechaDTR1;
+          $difteria__r2.value =  dataJson.fechaDTR2;
+
+          $hepatitis_A__d1.value =  dataJson.fechaHAD1;
+          $hepatitis_A__d2.value =  dataJson.fechaHAD2;
+          $hepatitis_A__r1.value =  dataJson.fechaHAR1;
+          $hepatitis_A__r2.value =  dataJson.fechaHAR2;
+
+          $hepatitis_B__d1.value =  dataJson.fechaHBD1;
+          $hepatitis_B__d2.value =  dataJson.fechaHBD2;
+          $hepatitis_B__d3.value = dataJson.fechaHBD3;
+
+          $influenza__r1.value =  dataJson.fechaIFR1;
+          $influenza__r2.value =  dataJson.fechaIFR2;
+
+          $poliomelitis__d1.value =  dataJson.fechaPLD1;
+          $trivirica__d1.value =  dataJson.fechaTVD1;
+
+          $rabia__d1.value =  dataJson.fechaRBD1;
+          $rabia__d2.value =  dataJson.fechaRBD2;
+          $rabia__d3.value =  dataJson.fechaRBD3;
+          $rabia__r1.value =  dataJson.fechaRBR1;
+          $rabia__r2.value =  dataJson.fechaRBR2;
+
+          $tifoidea__r1.value =  dataJson.fechaTFR1;
+          $tifoidea__r2.value =  dataJson.fechaTFR2;
+
+          $neumococo__r1.value =  dataJson.fechaNMR1;
+          $neumococo__r2.value =  dataJson.fechaNMR2;
+
+          $covid__d1.value =  dataJson.fechaCVD1;
+          $covid__d2.value =  dataJson.fechaCVD2;
+          $covid__d3.value =  dataJson.fechaCVD3;
+          $covid__d4.value =  dataJson.fechaCVD4;
+
         }else{
             mostrarMensaje("Verifique el N°. Documento","msj_error");
         }

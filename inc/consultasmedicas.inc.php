@@ -323,7 +323,9 @@
         $mensaje    = "No existe el nuemro de documento";
         $clase      = "msj_error";
         $sql        = "SELECT 
-                            fechaFbrAmarilla,fechaDifTD1,fechaDifTD2,fechaDifTD3
+                            fechaFbrAmarilla,fechaDifTD1,fechaDifTD2,fechaDifTD3,fechaDifTR1,fechaDifTR2,fechaHepAD1,fechaHepAD2,fechaHepAR1,fechaHepAR2,fechaHepBD1,
+                            fechaHepBD2,fechaHepBD3,fechaInflR1,fechaInflR2,fechaPolioD1,fechaTrivD1,fechaRabD1,fechaRabD2,fechaRabD3,fechaRabR1,fechaRabR2,fechaTifoR1,
+                            fechaTifoR2,fechaNeumR1,fechaNeumR2,fechaCovidD1,fechaCovidD2,fechaCovidD3,fechaCovidD4	
                         FROM 
                             fichas_vacunacion 
                         WHERE 
@@ -340,7 +342,34 @@
                 "fecha"     =>$result[0]['fechaFbrAmarilla'],
                 "fechaDTD1" =>$result[0]['fechaDifTD1'],
                 "fechaDTD2" =>$result[0]['fechaDifTD2'],
-                "fechaDTD3" =>$result[0]['fechaDifTD3']);
+                "fechaDTD3" =>$result[0]['fechaDifTD3'],
+                "fechaDTR1" =>$result[0]['fechaDifTR1'],
+                "fechaDTR2" =>$result[0]['fechaDifTR2'],
+                "fechaHAD1" =>$result[0]['fechaHepAD1'],
+                "fechaHAD2" =>$result[0]['fechaHepAD2'],
+                "fechaHAR1" =>$result[0]['fechaHepAR1'],
+                "fechaHAR2" =>$result[0]['fechaHepAR2'],
+                "fechaHBD1" =>$result[0]['fechaHepBD1'],
+                "fechaHBD2" =>$result[0]['fechaHepBD2'],
+                "fechaHBD3" =>$result[0]['fechaHepBD3'],
+                "fechaIFR1" =>$result[0]['fechaInflR1'],
+                "fechaIFR2" =>$result[0]['fechaInflR2'],
+                "fechaPLD1" =>$result[0]['fechaPolioD1'],
+                "fechaTVD1" =>$result[0]['fechaTrivD1'],
+                "fechaRBD1" =>$result[0]['fechaRabD1'],
+                "fechaRBD2" =>$result[0]['fechaRabD2'],
+                "fechaRBD3" =>$result[0]['fechaRabD3'],
+                "fechaRBR1" =>$result[0]['fechaRabR1'],
+                "fechaRBR2" =>$result[0]['fechaRabR2'],
+                "fechaTFR1" =>$result[0]['fechaTifoR1'],
+                "fechaTFR2" =>$result[0]['fechaTifoR2'],
+                "fechaNMR1" =>$result[0]['fechaNeumR1'],
+                "fechaNMR2" =>$result[0]['fechaNeumR2'],
+                "fechaCVD1" =>$result[0]['fechaCovidD1'],
+                "fechaCVD2" =>$result[0]['fechaCovidD2'],
+                "fechaCVD3" =>$result[0]['fechaCovidD3'],
+                "fechaCVD4" =>$result[0]['fechaCovidD4'],
+            );
         }else{
             $respuesta = array("respuesta"=>$respuesta,
                                 "mensaje"=>$mensaje,
@@ -359,7 +388,73 @@
                 $sql = "SELECT adjuntoFbrAmarilla as adjunto FROM fichas_vacunacion WHERE dni=?";
                 break;
             case "difteTet_D1":
-                $sql ="SELECT adjuntoDifTD1 as adjunto FROM fichas_vacunacion WHERE dni=?";
+                $sql = "SELECT adjuntoDifTD1 as adjunto FROM fichas_vacunacion WHERE dni=?";
+                break;
+            case "difteTet_D2":
+                $sql = "SELECT adjuntoDifTD2 as adjunto FROM fichas_vacunacion WHERE dni=?";
+                break;
+            case "difteTet_D3":
+                $sql = "SELECT adjuntoDifTD3 as adjunto FROM fichas_vacunacion WHERE dni=?";
+                break;    
+            case "difteTet_R1":
+                $sql = "SELECT adjuntoDifTR1 as adjunto FROM fichas_vacunacion WHERE dni=?";
+                break;
+            case "HepatitisA_D1":
+                $sql = "SELECT adjuntoHepAD1 as adjunto FROM fichas_vacunacion WHERE dni=?";
+                break;
+            case "HepatitisA_D2":
+                $sql = "SELECT adjuntoHepAD2 as adjunto FROM fichas_vacunacion WHERE dni=?";
+                break;
+            case "HepatitisA_R1":
+                $sql = "SELECT adjuntoHepAR1 as adjunto FROM fichas_vacunacion WHERE dni=?";
+                break;
+            case "HepatitisB_D1":
+                $sql = "SELECT adjuntoHepBD1 as adjunto FROM fichas_vacunacion WHERE dni=?";
+                break;
+            case "HepatitisB_D2":
+                $sql = "SELECT adjuntoHepBD2 as adjunto FROM fichas_vacunacion WHERE dni=?";
+                break;
+            case "HepatitisB_D3":
+                $sql = "SELECT adjuntoHepBD3 as adjunto FROM fichas_vacunacion WHERE dni=?";
+                break;
+            case "Influenza_R1":
+                $sql = "SELECT adjuntoInflR1 as adjunto FROM fichas_vacunacion WHERE dni=?";
+                break;
+            case "Polio_D1":
+                $sql = "SELECT adjuntoPolioD1 as adjunto FROM fichas_vacunacion WHERE dni=?";
+                break;
+            case "Trivirica_D1":
+                $sql = "SELECT adjuntoTrivD1 as adjunto FROM fichas_vacunacion WHERE dni=?";
+                break;
+            case "Rabia_D1":
+                $sql = "SELECT adjuntoRabD1 as adjunto FROM fichas_vacunacion WHERE dni=?";
+                break;
+            case "Rabia_D2":
+                $sql = "SELECT adjuntoRabD2 as adjunto FROM fichas_vacunacion WHERE dni=?";
+                break;
+            case "Rabia_D3":
+                $sql = "SELECT adjuntoRabD3 as adjunto FROM fichas_vacunacion WHERE dni=?";
+                break;
+            case "Rabia_R1":
+                $sql = "SELECT adjuntoRabR1 as adjunto FROM fichas_vacunacion WHERE dni=?";
+                break;
+            case "Tifoidea_R1":
+                $sql = "SELECT adjuntoTifoR1 as adjunto FROM fichas_vacunacion WHERE dni=?";
+                break;
+            case "Neumococo_R1":
+                $sql = "SELECT adjuntoNeumR1 as adjunto FROM fichas_vacunacion WHERE dni=?";
+                break;
+            case "COVID_D1":
+                $sql = "SELECT adjuntoCovidD1 as adjunto FROM fichas_vacunacion WHERE dni=?";
+                break;
+            case "COVID_D2":
+                $sql = "SELECT adjuntoCovidD2 as adjunto FROM fichas_vacunacion WHERE dni=?";
+                break;
+            case "COVID_D3":
+                $sql = "SELECT adjuntoCovidD3 as adjunto FROM fichas_vacunacion WHERE dni=?";
+                break;
+            case "COVID_D4":
+                $sql = "SELECT adjuntoCovidD4 as adjunto FROM fichas_vacunacion WHERE dni=?";
                 break;
             }
         $statement = $pdo->prepare($sql);
