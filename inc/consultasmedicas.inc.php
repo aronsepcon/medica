@@ -25,6 +25,9 @@
         else if($_POST['funcion'] == "buscarImagen"){
             echo json_encode(buscarImagen($pdo,$_POST["documento"],$_POST["validacion"]));
         }
+        else if($_POST['funcion'] =="crearDatosVac"){
+            echo json_encode(crearDatosVac($pdo,$_POST["documento"]));
+        }
     }
 
     function enviarCorreo($pdo,$id,$nombre,$correo,$clinica,$fecha,$asunto,$adjunto){
@@ -182,7 +185,7 @@
         try{
             $respuesta = false;
             $lista = [];
-            $sql = "UPDATE fichas_api SET enviado = 1  WHERE idreg = ?";
+            $sql = "UPDATE fichas_api SET enviado = 1  WHERE idreg = ?";//probar con 0
             $statement = $pdo->prepare($sql);
             $statement ->execute(array($id));
         }catch(PDOException $th) {
@@ -314,6 +317,17 @@
             return $salida; 
         }catch(PDOException $th){
             echo "Error: " . $th->getMessage();
+            return false;
+        }
+    }
+
+    function crearDatosVac($pdo,$doc){
+        try {
+            $sql="INSERT INTO fichas_vacunacion SET dni=?";
+            $statement = $pdo->prepare($sql);
+            $statement ->execute(array($doc));
+        } catch (PDOException $th) {
+            echo $th->getMessage();
             return false;
         }
     }

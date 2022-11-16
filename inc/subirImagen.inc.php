@@ -39,6 +39,7 @@
                 case "difteTet_D3":
                     $sql = "UPDATE fichas_vacunacion SET fechaDifTD3=?,adjuntoDifTD3=?,fechaDifTR1=DATE_ADD(?, INTERVAL 10 YEAR) WHERE dni=?";
                     break;
+                case "difteTet_R2":
                 case "difteTet_R1":
                     $sql = "UPDATE fichas_vacunacion SET fechaDifTR1=?,adjuntoDifTR1=?,fechaDifTR2=DATE_ADD(?, INTERVAL 10 YEAR) WHERE dni=?";
                     break; 
@@ -49,6 +50,7 @@
                     $sql = "UPDATE fichas_vacunacion SET fechaHepAD2=?,adjuntoHepAD2=?,fechaHepAR1=DATE_ADD(?, INTERVAL 10 YEAR) WHERE dni=?";
                     break;
                 case "HepatitisA_R1":
+                case "HepatitisA_R2":
                     $sql = "UPDATE fichas_vacunacion SET fechaHepAR1=?,adjuntoHepAR1=?,fechaHepAR2=DATE_ADD(?, INTERVAL 10 YEAR) WHERE dni=?";
                     break;
                 case "HepatitisB_D1":
@@ -61,6 +63,7 @@
                     $sql = "UPDATE fichas_vacunacion SET fechaHepBD3=?,adjuntoHepBD3=? WHERE dni=?";
                     break;
                 case "Influenza_R1":
+                case "Influenza_R2":
                     $sql = "UPDATE fichas_vacunacion SET fechaInflR1=?,adjuntoInflR1=?,fechaInflR2=DATE_DIFF(?, INTERVAL 5 MONTH) WHERE dni=?";
                     break;//VER LUEGO
                 case "Polio_D1":
@@ -79,12 +82,15 @@
                     $sql = "UPDATE fichas_vacunacion SET fechaRabD3=?,adjuntoRabD3=?,fechaRabR1=DATE_ADD(?, INTERVAL 3 YEAR) WHERE dni=?";
                     break;
                 case "Rabia_R1":
+                case "Rabia_R2":
                     $sql = "UPDATE fichas_vacunacion SET fechaRabR1=?,adjuntoRabR1=?,fechaRabR2=DATE_ADD(?, INTERVAL 3 YEAR) WHERE dni=?";
                     break;
                 case "Tifoidea_R1":
+                case "Tifoidea_R2":
                     $sql = "UPDATE fichas_vacunacion SET fechaTifoR1=?,adjuntoTifoR1=?,fechaTifoR2=DATE_ADD(?, INTERVAL 3 YEAR) WHERE dni=?";
                     break;
                 case "Neumococo_R1":
+                case "Neumococo_R2":
                     $sql = "UPDATE fichas_vacunacion SET fechaNeumR1=?,adjuntoNeumR1=?,fechaNeumR2=DATE_ADD(?, INTERVAL 5 YEAR) WHERE dni=?";
                     break;
                 case "COVID_D1":

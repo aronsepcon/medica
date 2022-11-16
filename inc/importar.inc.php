@@ -16,7 +16,7 @@
  
      $salida = array("mensaje"   =>$mensaje,
                      "respuesta" =>$respuesta,
-                     "contador"  =>returnTable($pdo,"../xls/".$fileId));
+                     "contador"  =>returnTable($pdo,"../xls/".$fileId));//cambiar a la funcion deseada o algo asi
 
      echo json_encode($salida);
  

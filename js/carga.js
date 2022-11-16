@@ -10,8 +10,10 @@ const $fileUpload = document.getElementById("fileUpload");
 const $btnUpdateMedex = document.getElementById("btnUpdateMedex");
 const $fecha__inicio__medex = document.getElementById("fecha__inicio__medex");
 const $fecha__final__medex = document.getElementById("fecha__final__medex");
+
 const $nro__doc = document.getElementById("nro__doc");
 const $subida_masiva_excel=document.getElementById("subidaMasiva");
+const $elegirClinicaExcel = document.getElementById("elegirClinicaExcel");
 
 const $modal__esperar = document.getElementById("modal__esperar");
 
@@ -77,6 +79,53 @@ $fileUpload.onchange = (e) => {
     }
     return false;
 }
+/*
+$elegirClinicaExcel.onchange = (e) => {
+    e.preventDefault();
+    $fileUpload.onchange = (e) => {
+        e.preventDefault();
+
+        if($fileUpload.files && $fileUpload.files[0])
+        console.log("File Seleccionado : ", $fileUpload.files[0]);
+
+        try {
+            if (validar($fileUpload)) throw 'Archivo inválido. No se permite la extensión ';
+            const formData = new FormData();
+            formData.append('fileUpload',$fileUpload.files[0]);
+            switch($elegirClinicaExcel.value){
+                case "1":
+                    formData.append("funcion","subidaMedex");
+                    break;
+                case "2":
+                    formData.append("funcion","subidaSerfarmed");
+                    break;
+                case "3":
+                    formData.append("funcion","subidaAmericas");
+                    break;
+            }
+            fetch ('../inc/importar.inc.php',{
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.respuesta) {
+                    mostrarMensaje("Historias Actualizadas","msj_correct");
+                }else{
+                    mostrarMensaje("Hubo un error al actualizar","msj_error");
+                }
+            })
+            .catch(error => {
+                console.error(error);
+            })
+        } catch (error) {
+            mostrarMensaje(error,"msj_error");
+        }
+    //mostrarMensaje($elegirClinicaExcel.value,"msj_error")
+    //console.log($elegirClinicaExcel.value)
+        
+    }
+}*/
 
 $subida_masiva_excel.onchange = (e) => {
     e.preventDefault();

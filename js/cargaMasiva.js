@@ -52,7 +52,15 @@ const $covid__d2 = document.getElementById("covid__d2");
 const $covid__d3 = document.getElementById("covid__d3");
 const $covid__d4 = document.getElementById("covid__d4");
 
-const $validacion_Fiebre_Amar=document.getElementById("fiebre_amarilla__cnf")
+const $validacion_Fiebre_Amar=document.getElementById("fiebre_amarilla__cnf");
+const $hepatitis_B__r1 = document.getElementById("hepatitis_B__r1");
+const $poliomelitis__r1 = document.getElementById("poliomelitis__r1");
+const $trivirica__r1 = document.getElementById("trivirica__r1");
+const $validarInmunidad = document.querySelectorAll(".validarInmunidad");
+const $fecha_vac = document.querySelectorAll(".fecha_vac");
+const $icono_subida = document.querySelectorAll(".fas fa-upload");
+
+//fas fa-eye
 
 const $cierre_form_vp_vac = document.getElementById("cierre_form_vp_vac");
 const $ficha__vistaprevia_vac = document.getElementById("ficha__vistaprevia_vac");
@@ -122,8 +130,13 @@ $cierre_form_vac.onclick = (e) => {//cierra el formulario para enviar correos
     e.preventDefault();
 
     fadeOut($ficha_vacunas);
+    limpiar()
 }
 
+function limpiar(){
+    $fecha_vacuna.value = "";
+    $subida_imagen.value = "";
+}
 /** 
  * Mediante el getAttribute se obtiene un valor diferenciador para el boton que planeamos usar en el envio, 
  * esto nos permite poder usar la funcion generica que abre el modal para todos pero a la vez los hace unicos,
@@ -165,6 +178,7 @@ $envio_vacuna.onclick = (e) => {
                 listarVacunas();
                 mostrarMensaje("Documento subido","msj_correct");
                 validacion();//ver aqui luego
+                limpiar();
             }else{
                 mostrarMensaje("Hubo un error al subir el archivo","msj_error");
             }
@@ -180,9 +194,17 @@ $envio_vacuna.onclick = (e) => {
 }
 
 export function listarVacunas(){
+
+    let formData = new FormData();
+    formData.append("documento",$documento_trabajador.value);
+    formData.append("funcion","crearDatosVac");
+    //console.log($documento_trabajador.value);
+    fetch('../inc/consultasmedicas.inc.php',{
+        method: "POST",
+        body:formData,
+    });
     let data = new FormData();
-    console.log($fiebre_amarilla__d1.value);
-    validacion();
+    //console.log($fiebre_amarilla__d1.value);
     data.append("documento",$documento_trabajador.value);
     data.append("funcion","datosVacunacion");
     fetch('../inc/consultasmedicas.inc.php',{
@@ -194,8 +216,15 @@ export function listarVacunas(){
     })
     .then(dataJson => {
         if (dataJson.respuesta){
-      
+
           $fiebre_amarilla__d1.value = dataJson.fecha;
+
+          if($fiebre_amarilla__d1.value!==""){
+            $validacion_Fiebre_Amar.value = "INMUNIZADO"
+          }else{
+            $validacion_Fiebre_Amar.value = "SIN INMUNIZAR";
+          }
+
           $difteria__d1.value = dataJson.fechaDTD1;
           $difteria__d2.value = dataJson.fechaDTD2;
           $difteria__d3.value = dataJson.fechaDTD3;
@@ -211,11 +240,52 @@ export function listarVacunas(){
           $hepatitis_B__d2.value =  dataJson.fechaHBD2;
           $hepatitis_B__d3.value = dataJson.fechaHBD3;
 
+          if($hepatitis_B__d3.value!==""){
+            $hepatitis_B__r1.value = "INMUNIZADO"
+          }else{
+            $hepatitis_B__r1.value = "SIN INMUNIZAR";
+          }
+
           $influenza__r1.value =  dataJson.fechaIFR1;
           $influenza__r2.value =  dataJson.fechaIFR2;
 
           $poliomelitis__d1.value =  dataJson.fechaPLD1;
           $trivirica__d1.value =  dataJson.fechaTVD1;
+          
+          if($poliomelitis__d1.value!==""){
+            $poliomelitis__r1.value = "INMUNIZADO"
+          }else{
+            $poliomelitis__r1.value = "SIN INMUNIZAR";
+          }
+
+          if($trivirica__d1.value!==""){
+            $trivirica__r1.value = "INMUNIZADO"
+          }else{
+            $trivirica__r1.value = "SIN INMUNIZAR";
+          }
+
+          $validarInmunidad.forEach(function($validarInmunidad){
+            if($validarInmunidad.value=="INMUNIZADO"){
+                $validarInmunidad.style.color = "green";
+            }
+            else{
+                $validarInmunidad.style.color = "red";
+            }
+          })
+
+          $fecha_vac.forEach(function($fecha_vac){
+            if($fecha_vac.value!=""){
+              //  $fecha_vac.value.style.fontStyle = "italic";
+            }
+          });
+
+         // $vista_previa_vac.forEach(function($vista_previa_vac){
+            $icono_subida.forEach(function($icono_subida){
+                if($display_image.src != "null"){
+                    $icono_subida.style.color = "green";
+                }
+            })
+          //});
 
           $rabia__d1.value =  dataJson.fechaRBD1;
           $rabia__d2.value =  dataJson.fechaRBD2;
@@ -240,11 +310,9 @@ export function listarVacunas(){
     })
 }
 
+
+
 function validacion(){
-    if($fiebre_amarilla__d1.value!==""){
-        $validacion_Fiebre_Amar.value = "INMUNIZADO"
-    }else{
-        $validacion_Fiebre_Amar.value = "SIN INMUNIZAR";
-    }
+   
     
 }

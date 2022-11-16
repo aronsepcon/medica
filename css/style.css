@@ -116,8 +116,16 @@ iframe {
   width: 30% !important;
 }
 
+.w40porcen {
+  width: 40% !important;
+}
+
 .w55porcen {
   width: 55% !important;
+}
+
+.h60p {
+  height: 60%;
 }
 
 .w150porcen {
@@ -126,6 +134,10 @@ iframe {
 
 .w100porcen {
   width: 100%;
+}
+
+.h40p {
+  height: 40%;
 }
 
 .h90p {
@@ -628,15 +640,18 @@ button:hover {
   padding: 0.5rem 0.7rem;
   border-radius: 8px;
 }
-
+.busqueda_parcial{
+  margin-bottom: 10000px;
+}
 .historias__cuerpo {
   margin: 0 2rem;
 }
 .historias__cuerpo .historias__cuerpo__pagina {
   height: 65vh;
-  padding: 0 3rem;
+  padding: 0 3rem 5rem;
   overflow: auto;
   line-height: 2rem;
+  margin-bottom: 10000px;/*esto ayuda a corregir el error de subida(aparecia debajo)*/
 }
 .historias__cuerpo .formulario_datos_trabajador_4columnas {
   display: -ms-grid;

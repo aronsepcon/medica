@@ -10,6 +10,9 @@
     <title>Document</title>
 </head>
 <body>
+<section class="wrap">
+
     <h1>hola</h1>
+</section> 
 </body>
 </html>

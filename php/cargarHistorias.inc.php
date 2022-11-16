@@ -38,7 +38,7 @@
                 <input type="text" name="nro__doc" id="nro__doc">
                 <input type="submit" value="Actualizar" id="btnUpdateMedex">
             </form>
-            <h3>Excel</h3>
+            <h2>Excel</h2>
             <form action="" id="formUpload">
                 <input type="file" name="fileUpload" id="fileUpload" accept=".xls,.xlsx" class="oculto" >
                 <div id="formUpload__data">
@@ -48,6 +48,12 @@
                 </div>
                 <label>Subir documentos</label>
             </form>
+            <select name="elegirClinicaExcel" id="elegirClinicaExcel" readonly>
+                <option value="0"></option>
+                <option value="1">MEDEX</option>
+                <option value="2">SERFARMED</option>
+                <option value="3">LAS AMERICAS</option>
+            </select>
         </div>
         <br>
         <h2>Serfarmed</h2>
