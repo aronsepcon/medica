@@ -47,16 +47,16 @@
                     </div>
                 </div>
                 <label>Subir documentos</label>
+                <select name="elegirClinicaExcel" id="elegirClinicaExcel" readonly>
+                    <option value="0"></option>
+                    <option value="1">MEDEX</option>
+                    <option value="2">SERFARMED</option>
+                    <option value="3">LAS AMERICAS</option>
+                </select>
             </form>
-            <select name="elegirClinicaExcel" id="elegirClinicaExcel" readonly>
-                <option value="0"></option>
-                <option value="1">MEDEX</option>
-                <option value="2">SERFARMED</option>
-                <option value="3">LAS AMERICAS</option>
-            </select>
         </div>
         <br>
-        <h2>Serfarmed</h2>
+        <!--h2>Serfarmed</h2>
         <div>
             <h3>Excel</h3>
                 <form action="" id="formUpload">
@@ -83,8 +83,8 @@
                 </div>
                 <label>Subir documentos</label>
             </form> 
-        </div>
-        
+        </div-->
+
         <h2>Carga Masiva</h2>
         <div>
             <form method='post' action='' enctype='multipart/form-data'>

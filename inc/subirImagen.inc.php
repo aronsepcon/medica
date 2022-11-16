@@ -20,12 +20,15 @@
 
     $salida =  array("mensaje"=>$mensaje,
                     "respuesta"=>$respuesta,
-                    "archivo"=>$nombre);
+                    "archivo"=>$nombre,
+                    "fecha"=>$fecha);
 
     echo json_encode($salida);
 
     function enviarImagen($pdo,$fecha,$validacion,$archivo,$documento){
         try {
+            $tiempo = date("n",strtotime($fecha));
+
             switch($validacion){
                 case "fiebre amarilla":
                     $sql = "UPDATE fichas_vacunacion SET fechaFbrAmarilla=?,adjuntoFbrAmarilla=? WHERE dni=?";
@@ -64,8 +67,13 @@
                     break;
                 case "Influenza_R1":
                 case "Influenza_R2":
-                    $sql = "UPDATE fichas_vacunacion SET fechaInflR1=?,adjuntoInflR1=?,fechaInflR2=DATE_DIFF(?, INTERVAL 5 MONTH) WHERE dni=?";
-                    break;//VER LUEGO
+                    if($tiempo>=1 && $tiempo<5){
+                        $sql = "UPDATE fichas_vacunacion SET fechaInflR1=?,adjuntoInflR1=?,fechaInflR2=CONCAT_WS('-',DATE_FORMAT(?,'%Y'),04,30) WHERE dni=?";
+                    }
+                    else{
+                        $sql = "UPDATE fichas_vacunacion SET fechaInflR1=?,adjuntoInflR1=?,fechaInflR2=CONCAT_WS('-',DATE_FORMAT(DATE_ADD(?,INTERVAL 1 YEAR),'%Y'),04,30) WHERE dni=?";
+                    }
+                    break;
                 case "Polio_D1":
                     $sql = "UPDATE fichas_vacunacion SET fechaPolioD1=?,adjuntoPolioD1=? WHERE dni=?";
                     break;
@@ -125,6 +133,7 @@
                 case "HepatitisB_D1":
                 case "HepatitisB_D2":
                 case "Influenza_R1":
+                case "Influenza_R2":
                 case "Rabia_D1":
                 case "Rabia_D2":
                 case "Rabia_D3":

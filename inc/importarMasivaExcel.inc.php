@@ -17,12 +17,12 @@
  
      $salida = array("mensaje"   =>$mensaje,
                      "respuesta" =>$respuesta,
-                     "contador"  =>/*returnTable($pdo,"../xls/".$fileId));//*/returnTable($pdo,"../xls/".$fileId,$validacion));//cambiar a la funcion deseada o algo asi
+                     "contador"  =>returnTable($pdo,"../xls/".$fileId));//*/returnTable($pdo,"../xls/".$fileId,$validacion));//cambiar a la funcion deseada o algo asi
 
      echo json_encode($salida);
  
  
-   /* function returnTable($pdo,$archivo){  */  function returnTable($pdo,$archivo,$validacion){
+    function returnTable($pdo,$archivo){ 
 
          //$objPHPExcel = \PHPExcel_IOFactory::load($archivo);//llamado para phpexcel--desactualizado y cambiado al de abajo
          $objPHPExcel = PhpOffice\PhpSpreadsheet\IOFactory::load($archivo);
@@ -36,8 +36,7 @@
           //  if($objCelda['A1']=="Id.Atención"/* && $objCelda['A']!==""*/){//no lo carga bien, carga el primero por algun motivo xc
             $tipoR = 'RETIRO';
             $tipoP = 'PREOCUPACIONAL';
-            switch($validacion){
-                case "subidaSerfarmed": 
+         
                 if($valSerfarmed == "Id.Atención" && is_numeric($objCelda['D'])){
                     $seisdig =preg_match('/1[0-1][0-9][0-9][0-9][0-9]/',$objCelda['D']);
                     $seisdigven = preg_match('/[0-9][0-9][0-9][0-9][0-9][0-9]/',$objCelda['D']);
@@ -78,11 +77,10 @@
                     $rowCount = $statement -> rowcount();
                     $contador++;
                 }
-                break;
             //serfarmed
            // else if ($objCelda['B'] !== "ATENCION"){
-            case "subidaMedex":
-            /*else*/ if ($valMedex == "ATENCION" && is_numeric($objCelda['E'])){
+       
+            else if ($valMedex == "ATENCION" && is_numeric($objCelda['E'])){
                      /*   $sql = "INSERT INTO fichas_medicas SET  atencion = ?,aseguradora = ?,empresa = ?,hc = ?,dni = ?,
                                                     fec_naci = STR_TO_DATE(?, '%d/%m/%Y'),
                                                     sexo = ?,ocupacion_actual = ?,puesto_postula = ?,tipo_examen = ?,
@@ -197,9 +195,8 @@
                // var_dump($statement->errorinfo());
                 $contador++;
             }
-        break;
-    case "subidaAmericas":
-           /* else*/ if($objCelda['AH']  == "LAS AMERICAS" && is_numeric($objCelda['D'])){//Las americas -- retiro
+      
+           else if($objCelda['AH']  == "LAS AMERICAS" && is_numeric($objCelda['D'])){//Las americas -- retiro
                 $sql ="INSERT INTO fichas_api2 SET paciente = ?,fecNaci = STR_TO_DATE(?,'%d/%m/%Y'),dni = ?,edad = ?, ocupacion=?, 
                                                     centroCosto=?, empresa=?,grupoSangre=?,alergias = ?,peso=?,talla=?,imc=?,estadoNutricional=?, fecha=STR_TO_DATE(?,'%d/%m/%Y'), 
                                                     tipoExa=?,aptitud=?, clinica = 3 ";//tipoExa='RETIRO'
@@ -224,8 +221,7 @@
                 $contador++;
             }
             
-            break;
-            }
+            
            
         }
         return $contador;

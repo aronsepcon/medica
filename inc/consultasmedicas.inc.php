@@ -27,6 +27,11 @@
         }
         else if($_POST['funcion'] =="crearDatosVac"){
             echo json_encode(crearDatosVac($pdo,$_POST["documento"]));
+        }else if($_POST['funcion'] == "buscarEnvio"){
+            echo json_encode(buscarEnvio($pdo, $_POST['examen']));
+        }
+        else if($_POST['funcion'] == "actualizarExamen"){
+            echo json_encode(actualizarExamen($pdo, $_POST['examen']));
         }
     }
 
@@ -169,7 +174,7 @@
 
     function actualizarExamen($pdo,$id){///pasar el nuevo correo a la hora de editar u:
         try {
-            $sql = "UPDATE fichas_api SET enviado = 1   WHERE idreg = ?";
+            $sql = "UPDATE fichas_api SET enviado = 1 WHERE idreg = ?";
             $statement = $pdo->prepare($sql);
             $statement ->execute(array($id));
             $result = $statement ->fetchAll();
@@ -181,11 +186,44 @@
         }
     }
 
+    function buscarEnvio($pdo,$id){
+      //  try {
+            $respuesta  = false;
+            $mensaje    = "No existe el nuemro de documento";
+            $clase      = "msj_error";
+            $sql = "SELECT fichas_api.enviado FROM fichas_api WHERE idreg = ?";
+            $statement = $pdo->prepare($sql);
+            $statement ->execute(array($id));
+            $result = $statement ->fetchAll();
+            $rowCount = $statement -> rowcount();
+            if($rowCount>0){
+                $respuesta = array(
+                    "respuesta"  => true,
+                    "clase"      =>"msj_correct",
+                    "error"      =>"no hay error",
+                    "enviado"    => $result[0]['enviado'],
+                );
+            }else{
+                $respuesta = array(
+                    "respuesta" => $respuesta,
+                    "clase"   => $clase,
+                    "error"     => $mensaje
+                );
+            }
+
+            return $respuesta;
+
+      /*  } catch (PDOException $th) {
+            echo $th->getMessage();
+            return false;
+        }*/
+    }
+
     function validarEnvio($pdo,$id){//ver porq no actualiza xc, doble opcion
         try{
             $respuesta = false;
             $lista = [];
-            $sql = "UPDATE fichas_api SET enviado = 1  WHERE idreg = ?";//probar con 0
+            $sql = "UPDATE fichas_api SET enviado = NULL  WHERE idreg = ?";//probar con 0
             $statement = $pdo->prepare($sql);
             $statement ->execute(array($id));
         }catch(PDOException $th) {

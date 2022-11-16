@@ -631,16 +631,37 @@ $cambiar_env.onclick = (e) => {
     e.preventDefault();
 
     try{
-        let formData = new FormData();
-        formData.append("examen",document.getElementById("id__examen").value);
-        formData.append("funcion","validarEnvio");
 
+        let data = new FormData();
+        data.append("examen",document.getElementById("id__examen").value);
+        data.append("funcion","buscarEnvio");
         fetch('../inc/consultasmedicas.inc.php',{
-            method: 'POST',
-            body:formData,
-        });
+            method: "POST",
+            body:data,
+        })
+        .then(function(response){
+            return response.json();
+        })
+        .then(dataJson => {
+            if (dataJson.respuesta){
+                let formData = new FormData();
+                formData.append("examen",document.getElementById("id__examen").value);
+                if(dataJson.enviado==1){
+                    formData.append("funcion","validarEnvio");
+                }
+                else{
+                    formData.append("funcion","actualizarExamen");
+                }
+                fetch('../inc/consultasmedicas.inc.php',{
+                    method: 'POST',
+                    body:formData,
+                });
+                listarExamenes();
+            }
+        })
+
+        
         fadeOut($ficha__medica__correo);
-        listarExamenes();
     }catch(error){
         mostrarMensaje(error,"msj_error");
     }

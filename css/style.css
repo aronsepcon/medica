@@ -727,6 +727,8 @@ button:hover {
 
 .wrap #formUpload__data {
   text-align: center;
+  /*margin-bottom: 100000px;*/
+
 }
 
 .wrap #formUpload__data #formUpload__data__process {

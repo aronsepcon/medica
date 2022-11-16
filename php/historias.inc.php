@@ -90,66 +90,82 @@
             <button type="button" id="cierre_pase_medico">X</button>
             <div class="columnas_8">
                 <span>Fiebre Amarilla</span>
-                <input type="date">
+                <input type="date" id="fiebre_A" readonly>
             </div>
             <div class="columnas_8">
                 <span>Difteria Tetano</span>
-                <input type="date">
-                <input type="date">
-                <input type="date">
-                <input type="date">
+                <input type="date" id="dt_D1" readonly>
+                <input type="date" id="dt_D2" readonly>
+                <input type="date" id="dt_D3" readonly>
+                <input type="date" id="dt_R1" readonly>
             </div>
             <div class="columnas_8">
                 <span>Hepatitis A</span>
-                <input type="date">
-                <input type="date">
-                <input type="date">
+                <input type="date" readonly>
+                <input type="date" readonly>
+                <input type="date" readonly>
             </div>
             <div class="columnas_8">
                 <span>Hepatitis B</span>
-                <input type="date">
-                <input type="date">
-                <input type="date">
+                <input type="date" readonly>
+                <input type="date" readonly>
+                <input type="date" readonly>
             </div>
             <div class="columnas_8">
                 <span>Influenza</span>
-                <input type="date">
-                <input type="date">
-                <input type="date">
+                <input type="date" readonly>
+                <input type="date" readonly>
+                <input type="date" readonly>
             </div>
             <div class="columnas_8">
                 <span>Poliomelitis</span>
-                <input type="date">
+                <input type="date" readonly>
             </div>
             <div class="columnas_8">
                 <span>Trivirica</span>
-                <input type="date">
+                <input type="date" readonly>
             </div>
             <div class="columnas_8">
                 <span>Rabia</span>
-                <input type="date">
-                <input type="date">
-                <input type="date">
-                <input type="date">
+                <input type="date" readonly>
+                <input type="date" readonly>
+                <input type="date" readonly>
+                <input type="date" readonly>
             </div>
             <div class="columnas_8">
                 <span>Tifoidea</span>
-                <input type="date">
-                <input type="date">
-                <input type="date">
+                <input type="date" readonly>
+                <input type="date" readonly>
+                <input type="date" readonly>
             </div>
             <div class="columnas_8">
                 <span>Neumococo</span>
-                <input type="date">
-                <input type="date">
-                <input type="date">
+                <input type="date" readonly>
+                <input type="date" readonly>
+                <input type="date" readonly>
             </div>
             <div class="columnas_8">
                 <span>COVID</span>
-                <input type="date">
-                <input type="date">
-                <input type="date">
-                <input type="date">
+                <input type="date" readonly>
+                <input type="date" readonly>
+                <input type="date" readonly>
+                <input type="date" readonly>
+            </div>
+            <div>
+                <span>Nombre</span>
+                <input type="text" id="nombre_pase">
+            </div>
+            <div>
+                <span>DNI</span>
+                <input type="text" id="dni_pase">
+            </div>
+            <div>
+                <span>Grupo Sanguineo</span>
+                <input type="text" id="sangre_pase">
+            </div>
+            <div>
+                <span>Alergias</span>
+                <input type="text" id="alergias_pase">
             </div>
         </div>
     </div>

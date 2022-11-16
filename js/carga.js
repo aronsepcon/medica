@@ -24,7 +24,7 @@ $btn__upload.onclick = (e) => {
 
     return false;
 }
-
+/*
 $btn__uploadSerfarmed.onclick = (e) => {
     e.preventDefault();
 
@@ -50,7 +50,7 @@ $btnUpdateMedex.onclick = (e) => {
 
     return false;
 }
-
+/*
 $fileUpload.onchange = (e) => {
     e.preventDefault();//probar si funciona o no despues del parentesis
     if($fileUpload.files && $fileUpload.files[0])
@@ -78,8 +78,8 @@ $fileUpload.onchange = (e) => {
         mostrarMensaje(error,"msj_error");
     }
     return false;
-}
-/*
+}*/
+
 $elegirClinicaExcel.onchange = (e) => {
     e.preventDefault();
     $fileUpload.onchange = (e) => {
@@ -94,13 +94,13 @@ $elegirClinicaExcel.onchange = (e) => {
             formData.append('fileUpload',$fileUpload.files[0]);
             switch($elegirClinicaExcel.value){
                 case "1":
-                    formData.append("funcion","subidaMedex");
+                    formData.append("validacion","subidaMedex");
                     break;
                 case "2":
-                    formData.append("funcion","subidaSerfarmed");
+                    formData.append("validacion","subidaSerfarmed");
                     break;
                 case "3":
-                    formData.append("funcion","subidaAmericas");
+                    formData.append("validacion","subidaAmericas");
                     break;
             }
             fetch ('../inc/importar.inc.php',{
@@ -125,7 +125,7 @@ $elegirClinicaExcel.onchange = (e) => {
     //console.log($elegirClinicaExcel.value)
         
     }
-}*/
+}
 
 $subida_masiva_excel.onchange = (e) => {
     e.preventDefault();
@@ -144,7 +144,7 @@ $subida_masiva_excel.onchange = (e) => {
 
                 for(var index=0; index<totalFiles; index++){
                 formData.append('fileUpload',$subida_masiva_excel.files[index]);
-                fetch ('../inc/importar.inc.php',{
+                fetch ('../inc/importarMasivaExcel.inc.php',{
                     //formData.append('subida_masiva_excel',$subida_masiva_excel.files);
                     //fetch ('../inc/importarMasivaExcel.inc.php',{
                         method: 'POST',
