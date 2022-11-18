@@ -3,10 +3,10 @@
 
     $mensaje = "No se completo la operacion";
     $respuesta = false;
-
+    //$nombrePac = $_POST['nombre'];
     $archivo = $_FILES['subidaImagen'];
     $temporal = $_FILES['subidaImagen']['tmp_name'];
-    $nombre = uniqid().".jpeg";//probar luego
+    $nombre = uniqid().".jpeg";//probar luego $validacion."-".$nombrePac."-".$fecha
     
     $fecha = $_POST['fechaVacunacion'];
     $validacion = $_POST['validacion'];
@@ -38,7 +38,7 @@
                     break;
                 case "difteTet_D2":
                     $sql = "UPDATE fichas_vacunacion SET fechaDifTD2=?,adjuntoDifTD2=?,fechaDifTD3=DATE_ADD(?, INTERVAL 5 MONTH) WHERE dni=?";
-                    break;//validar los meses
+                    break;
                 case "difteTet_D3":
                     $sql = "UPDATE fichas_vacunacion SET fechaDifTD3=?,adjuntoDifTD3=?,fechaDifTR1=DATE_ADD(?, INTERVAL 10 YEAR) WHERE dni=?";
                     break;
@@ -67,7 +67,7 @@
                     break;
                 case "Influenza_R1":
                 case "Influenza_R2":
-                    if($tiempo>=1 && $tiempo<5){
+                    if($tiempo>=1 && $tiempo<4){
                         $sql = "UPDATE fichas_vacunacion SET fechaInflR1=?,adjuntoInflR1=?,fechaInflR2=CONCAT_WS('-',DATE_FORMAT(?,'%Y'),04,30) WHERE dni=?";
                     }
                     else{
@@ -127,9 +127,11 @@
                 case "difteTet_D2":
                 case "difteTet_D3":
                 case "difteTet_R1":
+                case "difteTet_R2":
                 case "HepatitisA_D1":
                 case "HepatitisA_D2":
                 case "HepatitisA_R1":
+                case "HepatitisA_R2":
                 case "HepatitisB_D1":
                 case "HepatitisB_D2":
                 case "Influenza_R1":
@@ -138,8 +140,11 @@
                 case "Rabia_D2":
                 case "Rabia_D3":
                 case "Rabia_R1":
+                case "Rabia_R2":
                 case "Tifoidea_R1":
+                case "Tifoidea_R2":
                 case "Neumococo_R1":
+                case "Neumococo_R2":
                 case "COVID_D1":
                 case "COVID_D2":
                 case "COVID_D3":

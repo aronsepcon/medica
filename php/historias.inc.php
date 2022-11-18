@@ -543,7 +543,6 @@
                                 </div>
                             </div>
                             <br>    
-
                             <div class="item__vacuna">
                                 <div>
                                     <h5>Influenza</h5>
@@ -558,6 +557,7 @@
                                     <a href="" class="subida_vacunas" value="Influenza_R2"><i class="fas fa-upload"></i></a>
                                 </div>
                             </div>
+                            <br>    
                             <div class="item__vacuna">
                                 <div>
                                     <h5>Poliomelitis</h5>
@@ -570,6 +570,7 @@
                                     <input type="text" name="poliomelitis__r1" id="poliomelitis__r1" class="validarInmunidad" readonly>
                                 </div>
                             </div>
+                            <br>    
                             <div class="item__vacuna">
                                 <div>
                                     <h5>Trivirica</h5>
@@ -582,6 +583,7 @@
                                     <input type="text" name="trivirica__r1" id="trivirica__r1" class="validarInmunidad" readonly>
                                 </div>
                             </div>
+                            <br>        
                             <div class="item__vacuna">
                                 <div>
                                     <h5>Rabia</h5>
@@ -608,10 +610,11 @@
                                     <a href="" class="subida_vacunas" value="Rabia_R2"><i class="fas fa-upload"></i></a><!--subidaR2-->                                    
                                 </div>
                             </div>
+                            <br>    
                             <div class="item__vacuna">
                                 <div>
                                     <h5>Tifoidea</h5>
-                        
+                                </div>
                                 <div class="columnas_8">
                                     <span>R1</span>
                                     <input type="date" name="tifoidea__d1" id="tifoidea__r1" class="fecha_vac" readonly>
@@ -622,6 +625,7 @@
                                     <a href="" class="subida_vacunas"  value="Tifoidea_R2"><i class="fas fa-upload"></i></a>
                                 </div>
                             </div>
+                            <br>    
                             <div class="item__vacuna">
                                 <div>
                                     <h5>Neumococo</h5>
@@ -636,6 +640,7 @@
                                     <a href="" class="subida_vacunas" value="Neumococo_R2"><i class="fas fa-upload"></i></a>
                                 </div>
                             </div>
+                            <br>    
                             <div class="item__vacuna">
                                 <div>
                                     <h5>COVID</h5>
@@ -688,7 +693,7 @@
             </section>
         </section>
     </section>
-    <script src="../js/cargaMasiva.js" type="module"></script>
+    <script src="../js/cargaMasiva.js?v<?php echo $random;?>" type="module"></script>
     <script src="../js/paseMedico.js" type="module"></script>
     <script src="../js/funciones.js" type="module"></script>
     <script src="../js/historias.js?v<?php echo $random;?>" type="module"></script>    

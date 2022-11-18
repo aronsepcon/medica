@@ -18,6 +18,9 @@
         else if ($_POST['funcion'] == "datosApi"){
             echo json_encode(datosApi($pdo,$_POST["doc"]));
         }
+        else if ($_POST['funcion'] == "modificarAcceso"){
+            echo json_encode(modificarAcceso($pdo,$_POST["documento"],$_POST["acceso"]));
+        }
     }
 
     function validarClave($pdo,$login,$clave){//ver el pase de paramentros para el correo
@@ -370,4 +373,21 @@
 
         }
     }
+
+    function modificarAcceso($pdo,$doc,$acceso){
+        try {
+            $sql = "UPDATE tabla_aquarius SET acc_medica=? WHERE dni=?";
+            $statement = $pdo->prepare($sql);
+            $statement ->execute(array($acceso,$doc));
+            $respuesta = array("respuesta"  => true,
+                                "clase"     =>"msj_correct",
+                                "error"     =>"no hay error",
+                                "sql"       =>$sql);
+            
+            return $respuesta;
+        } catch(PDOException $th) {
+            echo $th->getMessage();
+            return false;
+        }   
+     }
 ?>

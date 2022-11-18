@@ -160,7 +160,7 @@ $envio_vacuna.onclick = (e) => {
             //ver la validacion(1 o 0) para la subida de documentos
         fadeOut($ficha_vacunas);
         
-        if(validar($subida_imagen)) throw "Error";
+        if(validar($subida_imagen) || fecha1=="") throw "Error de subida";
 
         const formData = new FormData();
         formData.append('fechaVacunacion',fecha1);

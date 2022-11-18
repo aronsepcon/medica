@@ -274,9 +274,9 @@ $documento_trabajador.onkeypress = (e) => {
 }
 
 function listadoDni($e){
-    let data = new FormData();
-            data.append("documento",$e);
-            data.append("funcion","datosColaborador");
+        let data = new FormData();
+        data.append("documento",$e);
+        data.append("funcion","datosColaborador");
         listarExamenes();
         fetch('../inc/consultasrrhh.inc.php',{
             method: "POST",

@@ -176,7 +176,7 @@ iframe {
 .validarInmunidad {
   color: green;
 }
-/*
+
 .columnas_8 {
   display: -ms-grid;
   display: grid;
@@ -188,7 +188,7 @@ iframe {
      -moz-column-gap: 10px;
           column-gap: 10px;
 }
-*/
+
 .columnas_8 > *:nth-child(1) {
   -ms-grid-row: 1;
   -ms-grid-column: 1;
@@ -634,6 +634,16 @@ button:hover {
   padding: 0 20px;
   width: 23%;
 }
+
+.accesos input {
+  height: 2rem;
+  border-radius: 8px;
+  border: 1px solid #c2c2c2;
+  margin-right: 5px;
+  padding: 0 20px;
+  width: 28%;
+}
+
 .historias__cuerpo__busqueda i {
   color: #fff;
   background: #4b4b4b;
@@ -690,6 +700,10 @@ button:hover {
   border-radius: 8px;
   height: 35px;
   padding-left: 20px;
+}
+
+.subida_paginas{
+  margin-bottom: 10000px;/*esto ayuda a corregir el error de subida(aparecia debajo)*/
 }
 
 #atencion__medica #funciones__vitales {
