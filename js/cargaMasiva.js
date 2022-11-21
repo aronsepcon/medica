@@ -271,21 +271,279 @@ export function listarVacunas(){
             else{
                 $validarInmunidad.style.color = "red";
             }
-          })
-
-          $fecha_vac.forEach(function($fecha_vac){
-            if($fecha_vac.value!=""){
-              //  $fecha_vac.value.style.fontStyle = "italic";
-            }
           });
+          /*$vista_previa_vac.forEach(function($vista_previa_vac){
+            
 
-         // $vista_previa_vac.forEach(function($vista_previa_vac){
-            $icono_subida.forEach(function($icono_subida){
-                if($display_image.src != "null"){
-                    $icono_subida.style.color = "green";
-                }
-            })
-          //});
+          });*/
+
+            if(dataJson.adjuntoFbrAmarilla!=null){
+                document.getElementById("icono_fbra").style.color="green";
+            }else{
+                document.getElementById("icono_fbra").style.color="";
+            }
+            if(dataJson.adjuntoDifTD1!=null){
+                document.getElementById("icono_dt_d1").style.color="green";
+            }else{
+                document.getElementById("icono_dt_d1").style.color="";
+            }
+
+            if(dataJson.adjuntoDifTD2!=null){
+                document.getElementById("icono_dt_d2").style.color="green";
+                $difteria__d2.style.fontStyle="";
+                $difteria__d2.style.fontWeight = "";
+            }
+            else if(dataJson.adjuntoDifTD2==null && $difteria__d2.value!=""){
+                document.getElementById("icono_dt_d3").style.color="";
+                $difteria__d2.style.fontStyle="italic";
+                $difteria__d2.style.fontWeight = "bold";
+            }
+            else{
+                document.getElementById("icono_dt_d2").style.color="";
+                $difteria__d2.style.fontStyle="";
+                $difteria__d2.style.fontWeight = "";
+            }
+            
+            if(dataJson.adjuntoDifTD3!=null){
+                document.getElementById("icono_dt_d3").style.color="green";
+                $difteria__d3.style.fontStyle="";
+                $difteria__d3.style.fontWeight = "";
+            } 
+            else if(dataJson.adjuntoDifTD3==null && $difteria__d3.value!=""){
+                document.getElementById("icono_dt_d3").style.color="";
+                $difteria__d3.style.fontStyle="italic";
+                $difteria__d3.style.fontWeight = "bold";
+            }
+            else{
+                document.getElementById("icono_dt_d3").style.color="";
+                $difteria__d3.style.fontStyle="";
+                $difteria__d3.style.fontWeight = "";
+            }
+
+            if(dataJson.adjuntoDifTR1!=null){
+                document.getElementById("icono_dt_r1").style.color="green";
+                $difteria__r1.style.fontStyle="";
+                $difteria__r1.style.fontWeight = "";
+            }
+            else if(dataJson.adjuntoDifTR1==null && $difteria__r1.value!=""){
+                document.getElementById("icono_dt_r1").style.color="";
+                $difteria__r1.style.fontStyle="italic";
+                $difteria__r1.style.fontWeight = "bold";
+            }
+            else{
+                document.getElementById("icono_dt_r1").style.color="";
+                $difteria__r1.style.fontStyle="";
+                $difteria__r1.style.fontWeight = "";
+            }
+            
+            if(dataJson.adjuntoHepAD1!=null){
+                document.getElementById("icono_ha_d1").style.color="green";
+            }else{
+                document.getElementById("icono_ha_d1").style.color="";
+
+            }
+
+            if(dataJson.adjuntoHepAD2!=null && $hepatitis_A__d2.value!=""){
+                document.getElementById("icono_ha_d2").style.color="green";
+                $hepatitis_A__d2.style.fontStyle="";
+                $hepatitis_A__d2.style.fontWeight = "";
+            }
+            else if(dataJson.adjuntoHepAD2==null && $hepatitis_A__d2.value!=""){
+                document.getElementById("icono_ha_d2").style.color="";
+                $hepatitis_A__d2.style.fontStyle="italic";
+                $hepatitis_A__d2.style.fontWeight = "bold";
+            }
+            else{
+                document.getElementById("icono_ha_d2").style.color="";
+                $hepatitis_A__d2.style.fontStyle="";
+                $hepatitis_A__d2.style.fontWeight = "";
+            }
+
+            if(dataJson.adjuntoHepAR1!=null && $hepatitis_A__r1.value!=""){
+                document.getElementById("icono_ha_r1").style.color="green";
+                $hepatitis_A__r1.style.fontStyle="";
+                $hepatitis_A__r1.style.fontWeight = "";
+            }
+            else if(dataJson.adjuntoHepAR1==null && $hepatitis_A__r1.value!=""){
+                document.getElementById("icono_ha_r1").style.color="";
+                $hepatitis_A__r1.style.fontStyle="italic";
+                $hepatitis_A__r1.style.fontWeight = "bold";
+            }else{
+                document.getElementById("icono_ha_r1").style.color="";
+                $hepatitis_A__r1.style.fontStyle="";
+                $hepatitis_A__r1.style.fontWeight = "";
+            }
+
+            if(dataJson.adjuntoHepBD1!=null){
+                document.getElementById("icono_hb_d1").style.color="green";
+            }else{
+                document.getElementById("icono_hb_d1").style.color="";
+            }
+
+            if(dataJson.adjuntoHepBD2!=null && $hepatitis_B__d2.value!=""){
+                document.getElementById("icono_hb_d2").style.color="green";
+                $hepatitis_B__d2.style.fontStyle="";
+                $hepatitis_B__d2.style.fontWeight = "";
+            }
+            else if(dataJson.adjuntoHepBD2==null && $hepatitis_B__d2.value!=""){
+                document.getElementById("icono_hb_d2").style.color="";
+                $hepatitis_B__d2.style.fontStyle="italic";
+                $hepatitis_B__d2.style.fontWeight = "bold";
+            }
+            else{
+                document.getElementById("icono_hb_d2").style.color="";
+                $hepatitis_B__d2.style.fontStyle="";
+                $hepatitis_B__d2.style.fontWeight = "";
+            }
+            
+            if(dataJson.adjuntoHepBD3!=null && $hepatitis_B__d3.value!=""){
+                document.getElementById("icono_hb_d3").style.color="green";
+                $hepatitis_B__d3.style.fontStyle="";
+                $hepatitis_B__d3.style.fontWeight = "";
+            } 
+            else if(dataJson.adjuntoHepBD3==null && $hepatitis_B__d3.value!=""){
+                document.getElementById("icono_hb_d3").style.color="";
+                $hepatitis_B__d3.style.fontStyle="italic";
+                $hepatitis_B__d3.style.fontWeight = "bold";
+            }
+            else{
+                document.getElementById("icono_hb_d3").style.color="";
+                $hepatitis_B__d3.style.fontStyle="";
+                $hepatitis_B__d3.style.fontWeight = "";
+            }
+
+            if(dataJson.adjuntoInflR1!=null){
+                document.getElementById("icono_if_r1").style.color="green";
+            }else{
+                document.getElementById("icono_if_r1").style.color="";
+            }
+
+            if(dataJson.adjuntoPolioD1!=null){
+                document.getElementById("icono_pl_r1").style.color="green";
+            }else{
+                document.getElementById("icono_pl_r1").style.color="";
+            }
+
+            if(dataJson.adjuntoTrivD1!=null){
+                document.getElementById("icono_tv_r1").style.color="green";
+            }else{
+                document.getElementById("icono_tv_r1").style.color="";
+            }
+            if(dataJson.adjuntoRabD1!=null){
+                document.getElementById("icono_rb_d1").style.color="green";
+            }else{
+                document.getElementById("icono_rb_d1").style.color="";
+            }
+            
+            if(dataJson.adjuntoRabD2!=null && $rabia__d2.value!=""){
+                document.getElementById("icono_rb_d2").style.color="green";
+                $rabia__d2.style.fontStyle="";
+                $rabia__d2.style.fontWeight = "";
+            }
+            else if(dataJson.adjuntoRabD2==null && $rabia__d2.value!=""){
+                document.getElementById("icono_rb_d2").style.color="";
+                $rabia__d2.style.fontStyle="italic";
+                $rabia__d2.style.fontWeight = "bold";
+            }
+            else{
+                document.getElementById("icono_rb_d2").style.color="";
+                $rabia__d2.style.fontStyle="";
+                $rabia__d2.style.fontWeight = "";
+            }
+
+            if(dataJson.adjuntoRabD3!=null  && $rabia__d3.value!=""){
+                document.getElementById("icono_rb_d3").style.color="green";
+                $rabia__d3.style.fontStyle="";
+                $rabia__d3.style.fontWeight = "";
+            }
+            else if(dataJson.adjuntoRabD3==null && $rabia__d3.value!=""){
+                document.getElementById("icono_rb_d3").style.color="";
+                $rabia__d3.style.fontStyle="italic";
+                $rabia__d3.style.fontWeight = "bold";
+            }
+            else{
+                document.getElementById("icono_rb_d3").style.color="";
+                $rabia__d3.style.fontStyle="";
+                $rabia__d3.style.fontWeight = "";
+            }
+            
+            if(dataJson.adjuntoRabR1!=null  && $rabia__r1.value!=""){
+                document.getElementById("icono_rb_r1").style.color="green"; 
+                $rabia__r1.style.fontStyle="";
+                $rabia__r1.style.fontWeight = "";
+            }
+            else if(dataJson.adjuntoRabR1==null && $rabia__r1.value!=""){
+                document.getElementById("icono_rb_r1").style.color="";
+                $rabia__r1.style.fontStyle="italic";
+                $rabia__r1.style.fontWeight = "bold";
+            }
+            else{
+                document.getElementById("icono_rb_r1").style.color="";
+                $rabia__r1.style.fontStyle="";
+                $rabia__r1.style.fontWeight = "";
+            }
+
+            if(dataJson.adjuntoTifoR1!=null){
+                document.getElementById("icono_tf_r1").style.color="green";
+            }else{
+                document.getElementById("icono_tf_r1").style.color="";
+            }
+            if(dataJson.adjuntoNeumR1!=null){
+                document.getElementById("icono_nm_r1").style.color="green";
+            }else{
+                document.getElementById("icono_nm_r1").style.color="";
+            }
+            
+            if(dataJson.adjuntoCovidD1!=null){
+                document.getElementById("icono_cv_d1").style.color="green";
+            }else{
+                document.getElementById("icono_cv_d1").style.color="";
+            }
+
+            if(dataJson.adjuntoCovidD2!=null && $covid__d2.value!=""){
+                document.getElementById("icono_cv_d2").style.color="green"; 
+                $covid__d2.style.fontStyle="";
+                $covid__d2.style.fontWeight = "";
+            }
+            else if(dataJson.adjuntoCovidD2==null && $covid__d2.value!=""){
+                document.getElementById("icono_cv_d2").style.color="";
+                $covid__d2.style.fontStyle="italic";
+                $covid__d2.style.fontWeight = "bold";
+            }
+            else{
+                document.getElementById("icono_cv_d2").style.color="";
+                $covid__d2.style.fontStyle="";
+                $covid__d2.style.fontWeight = "";
+            }
+            if(dataJson.adjuntoCovidD3!=null && $covid__d3.value!=""){
+                document.getElementById("icono_cv_d3").style.color="green";
+                $covid__d3.style.fontStyle="";
+                $covid__d3.style.fontWeight = "";
+            }
+            else if(dataJson.adjuntoCovidD3==null && $covid__d3.value!=""){
+                document.getElementById("icono_cv_d3").style.color="";
+                $covid__d3.style.fontStyle="italic";
+                $covid__d3.style.fontWeight = "bold";
+            }
+            else{
+                document.getElementById("icono_cv_d3").style.color="";
+                $covid__d3.style.fontStyle="";
+                $covid__d3.style.fontWeight = "";
+            } 
+            if(dataJson.adjuntoCovidD4!=null && $covid__d4.value!=""){
+                document.getElementById("icono_cv_d4").style.color="green";
+                $covid__d4.style.fontStyle="";
+                $covid__d4.style.fontWeight = "";
+            }else if(dataJson.adjuntoCovidD4==null && $covid__d4.value!=""){
+                document.getElementById("icono_cv_d4").style.color="";
+                $covid__d4.style.fontStyle="italic";
+                $covid__d4.style.fontWeight = "bold";
+            }else{
+                document.getElementById("icono_cv_d4").style.color="";
+                $covid__d4.style.fontStyle="";
+                $covid__d4.style.fontWeight = "";
+            }
+
 
           $rabia__d1.value =  dataJson.fechaRBD1;
           $rabia__d2.value =  dataJson.fechaRBD2;

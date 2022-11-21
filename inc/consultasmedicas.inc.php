@@ -377,7 +377,10 @@
         $sql        = "SELECT 
                             fechaFbrAmarilla,fechaDifTD1,fechaDifTD2,fechaDifTD3,fechaDifTR1,fechaDifTR2,fechaHepAD1,fechaHepAD2,fechaHepAR1,fechaHepAR2,fechaHepBD1,
                             fechaHepBD2,fechaHepBD3,fechaInflR1,fechaInflR2,fechaPolioD1,fechaTrivD1,fechaRabD1,fechaRabD2,fechaRabD3,fechaRabR1,fechaRabR2,fechaTifoR1,
-                            fechaTifoR2,fechaNeumR1,fechaNeumR2,fechaCovidD1,fechaCovidD2,fechaCovidD3,fechaCovidD4	
+                            fechaTifoR2,fechaNeumR1,fechaNeumR2,fechaCovidD1,fechaCovidD2,fechaCovidD3,fechaCovidD4,
+                            adjuntoFbrAmarilla,adjuntoDifTD1,adjuntoDifTD2,adjuntoDifTD3,adjuntoDifTR1,adjuntoHepAD1,adjuntoHepAD2,adjuntoHepAR1,adjuntoHepBD1,
+                            adjuntoHepBD2,adjuntoHepBD3,adjuntoInflR1,adjuntoPolioD1,adjuntoTrivD1,adjuntoRabD1,adjuntoRabD2,adjuntoRabD3,adjuntoRabR1,adjuntoTifoR1,
+                            adjuntoNeumR1,adjuntoCovidD1,adjuntoCovidD2,adjuntoCovidD3,adjuntoCovidD4
                         FROM 
                             fichas_vacunacion 
                         WHERE 
@@ -421,6 +424,30 @@
                 "fechaCVD2" =>$result[0]['fechaCovidD2'],
                 "fechaCVD3" =>$result[0]['fechaCovidD3'],
                 "fechaCVD4" =>$result[0]['fechaCovidD4'],
+                "adjuntoFbrAmarilla" =>$result[0]['adjuntoFbrAmarilla'],
+                "adjuntoDifTD1" =>$result[0]['adjuntoDifTD1'],
+                "adjuntoDifTD2" =>$result[0]['adjuntoDifTD2'],
+                "adjuntoDifTD3" =>$result[0]['adjuntoDifTD3'],
+                "adjuntoDifTR1" =>$result[0]['adjuntoDifTR1'],
+                "adjuntoHepAD1" =>$result[0]['adjuntoHepAD1'],
+                "adjuntoHepAD2" =>$result[0]['adjuntoHepAD2'],
+                "adjuntoHepAR1" =>$result[0]['adjuntoHepAR1'],
+                "adjuntoHepBD1" =>$result[0]['adjuntoHepBD1'],
+                "adjuntoHepBD2" =>$result[0]['adjuntoHepBD2'],
+                "adjuntoHepBD3" =>$result[0]['adjuntoHepBD3'],
+                "adjuntoInflR1" =>$result[0]['adjuntoInflR1'],
+                "adjuntoPolioD1" =>$result[0]['adjuntoPolioD1'],
+                "adjuntoTrivD1" =>$result[0]['adjuntoTrivD1'],
+                "adjuntoRabD1" =>$result[0]['adjuntoRabD1'],
+                "adjuntoRabD2" =>$result[0]['adjuntoRabD2'],
+                "adjuntoRabD3" =>$result[0]['adjuntoRabD3'],
+                "adjuntoRabR1" =>$result[0]['adjuntoRabR1'],
+                "adjuntoTifoR1" =>$result[0]['adjuntoTifoR1'],
+                "adjuntoNeumR1" =>$result[0]['adjuntoNeumR1'],
+                "adjuntoCovidD1" =>$result[0]['adjuntoCovidD1'],
+                "adjuntoCovidD2" =>$result[0]['adjuntoCovidD2'],
+                "adjuntoCovidD3" =>$result[0]['adjuntoCovidD3'],
+                "adjuntoCovidD4" =>$result[0]['adjuntoCovidD4'],
             );
         }else{
             $respuesta = array("respuesta"=>$respuesta,
@@ -529,4 +556,6 @@
 
     }
     
+    function enviarPase($pdo){}
+
 ?>
