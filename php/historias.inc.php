@@ -652,30 +652,31 @@
                             </div>
                         </div>
                         <div >
-                            <div class="pase_medico">
+                            <input type="hidden" id="id_pase">
+                            <div>
                                 <span>N° Pase</span>
                                 <input type="text" id="numero_pase">
                             </div>
                             <div>
                                 <span>Nombre</span>
-                                <input type="text" id="nombre_pase">
+                                <input type="text" id="nombre_pase" readonly>
                             </div>
                             <div>
                                 <span>DNI</span>
-                                <input type="text" id="dni_pase">
+                                <input type="text" id="dni_pase" readonly>
                             </div>
                             <div>
                                 <span>Grupo Sanguineo</span>
-                                <input type="text" id="sangre_pase">
+                                <input type="text" id="sangre_pase" readonly>
                             </div>
                             <div>
                                 <span>Alergias</span>
-                                <input type="text" id="alergias_pase">
+                                <input type="text" id="alergias_pase" readonly>
                             </div>
                             
                             <div>
                                 <span>Fecha EMO</span>
-                                <input type="date" id="fecha_emo">
+                                <input type="date" id="fecha_emo" readonly>
                             </div>
                             <div>
                                 <span>Fecha Vigencia</span>
@@ -683,8 +684,9 @@
                             </div>
                             <div>
                                 <span>Cargar Pase</span>
-                                <a href="#" class="subida_pase" value="subida_pase"><i class="fas fa-eye"></i></a>
-                                <a href="#" class="subida_pase" value="subida_pase"><i class="fas fa-upload"></i></a><!--cambiar id a class-->
+                                <input type="file" name="subirPdf" id="subirPdf" accept=".pdf" class="oculto">
+                                <a href="#" class="vista_pase" id="vista_pase"><i class="fas fa-eye"></i></a>
+                                <a href="#" class="subida_pase" id="subida_pase" value="subida_pase"><i class="fas fa-upload"></i></a><!--cambiar id a class-->
                             </div>
                             <button type="button" id="enviar_pase_medico">Enviar Pase Medico</button>
                         </div>                      

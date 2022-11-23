@@ -6,8 +6,11 @@ import {validar} from "./funciones.js";
 const $pase_medico = document.getElementById("pase_medico");
 const $mostrar_pase_medico = document.getElementById("mostrar_pase_medico");
 const $cierre_pase_medico = document.getElementById("cierre_pase_medico");
+
 const $documento_trabajador = document.getElementById("documento_trabajador");
 const $fiebre_A = document.getElementById("fiebre_A");
+
+const $id_pase = document.getElementById("id_pase");
 const $nombre_pase = document.getElementById("nombre_pase");
 const $dni_pase = document.getElementById("dni_pase");
 const $sangre_pase = document.getElementById("sangre_pase");
@@ -16,6 +19,12 @@ const $enviar_pase = document.getElementById("enviar_pase_medico");
 const $numero_pase = document.getElementById("numero_pase");
 const $fecha_emo = document.getElementById("fecha_emo");
 const $fecha_vigencia = document.getElementById("fecha_vigencia");
+
+const $subida_pase = document.getElementById("subida_pase");
+const $subirPdf = document.getElementById("subirPdf");
+const $vista_pase = document.getElementById("vista_pase");
+
+
 
 $mostrar_pase_medico.onclick = (e) => {
     e.preventDefault();
@@ -39,27 +48,19 @@ $enviar_pase.onclick = (e) => {
         enviarPase();
     }
 }
+/*
+$vista_pase.onclick = (e) =>{
+    e.preventDefault();
+    
+    if(dataJson.lista[0].adjunto_pase){
+        fadeIn()
+    }else{
+        fadeIn($form_ingreso)
+    }
+
+}*/
 
 export function paseMedico(){
-    let data = new FormData();
-    //console.log($fiebre_amarilla__d1.value);
-    data.append("documento",$documento_trabajador.value);
-    data.append("funcion","datosVacunacion");
-    fetch('../inc/consultasmedicas.inc.php',{
-        method: "POST",
-        body:data,
-    })
-    .then(function(response){
-        return response.json();
-    })
-    .then(dataJson => {
-        if (dataJson.respuesta){
-            $fiebre_A.value = dataJson.fecha;
-        }else{
-            mostrarMensaje("Verifique el N°. Documento","msj_error");
-        }
-    
-    });
 
     let data2 = new FormData();
     data2.append("documento",$documento_trabajador.value);
@@ -97,18 +98,42 @@ export function paseMedico(){
     })
     .then(dataJson => {
         if (dataJson.respuesta){
+            $id_pase.value = dataJson.lista[0].id;
             $numero_pase.value=dataJson.lista[0].numero_pase;
             $fecha_vigencia.value=dataJson.lista[0].fecha_vigencia;
+
+            if(dataJson.lista[0].adjunto_pase){
+                $subida_pase.style.color="green";
+            }
+            else{
+                $id_pase.value ="";
+                $subida_pase.style.color="";
+            }
         }
         else{
+            $id_pase.value ="";
             $numero_pase.value="";
             $fecha_vigencia.value="";
+            $subida_pase.style.color="";
         }
     });   
 }
 
+$subida_pase.onclick = (e) => {
+    e.preventDefault();
+    $subirPdf.click();
+    return false;
+}
+
 function enviarPase(){
+
+    try {
+        let data2 = new FormData();
+    } catch (error) {
+        mostrarMensaje(error,"msj_error");
+    }
     let data = new FormData();
+    data.append('subidaPase',$subirPdf.files[0]);
     data.append("num_pase", $numero_pase.value);
     data.append("nombre", $nombre_pase.value);
     data.append("documento", $dni_pase.value);
@@ -116,7 +141,12 @@ function enviarPase(){
     data.append("alergias", $alergias_pase.value);
     data.append("fecha_emo",$fecha_emo.value);
     data.append("fecha_vigencia",$fecha_vigencia.value);
-    data.append("funcion","enviarPase");
+    if($id_pase.value !=""){
+        data.append("funcion","actualizarPase");
+    }
+    else{
+        data.append("funcion","enviarPase");
+    }
     fetch('../inc/consultasmedicas.inc.php',{
         method:"POST",
         body:data,
