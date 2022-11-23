@@ -884,3 +884,8 @@ input[name = "filtrado"]{
   background-position: center;
   background-size: cover;
 }
+
+.pase_medico{
+  position: sticky;
+  bottom: 120px;
+}

@@ -503,7 +503,7 @@
                                     <a href="" class="vista_previa_vac" value="HepatitisA_R1"><i class="fas fa-eye"></i></a>
                                     <a href="" class="subida_vacunas" value="HepatitisA_R1"><i class="fas fa-upload" id="icono_ha_r1"></i></a>
                                     <span>R2</span>
-                                    <input type="date" name="hepatitis_A__r2" id="hepatitis_A__r2" class="fecha_vac" class="R2" readonly>
+                                    <input type="date" name="hepatitis_A__r2" id="hepatitis_A__r2" class="R2" readonly>
                                     <a href="" class="subida_vacunas" value="HepatitisA_R2"><i class="fas fa-upload"></i></a>
                                 </div>
                             </div>
@@ -651,8 +651,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div>
-                            <div>
+                        <div >
+                            <div class="pase_medico">
                                 <span>N° Pase</span>
                                 <input type="text" id="numero_pase">
                             </div>

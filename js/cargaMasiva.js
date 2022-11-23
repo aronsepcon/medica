@@ -2,6 +2,7 @@ import {mostrarMensaje} from "./funciones.js";
 import {fadeIn} from "./funciones.js";
 import {fadeOut} from "./funciones.js";
 import {validar} from "./funciones.js";
+import { paseMedico } from "./paseMedico.js";
 //import {listarexamenes} from "./historias";
 ///esto puede servir para llamar a la funcion de forma mas directa uu
 const $documento_trabajador = document.getElementById('documento_trabajador');

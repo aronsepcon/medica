@@ -3,6 +3,8 @@ import {fadeIn} from "./funciones.js";
 import {fadeOut} from "./funciones.js";
 import { validar } from "./funciones.js";
 import {listarVacunas} from "./cargaMasiva.js";
+import { paseMedico } from "./paseMedico.js";
+
 
 //import {mostrarMensaje,fadeIn,fadeOut,validar } from "./funciones.js";
 
@@ -170,6 +172,7 @@ $opcion4.onclick = (e) => {
         $pagina4.classList.remove('oculto');
 
         listarVacunas();
+        paseMedico();
 
     }catch(error){
         mostrarMensaje(error,"msj_error");
@@ -248,6 +251,7 @@ $tabla__busqueda_body.addEventListener("click", e=>{
         $tabla__examenes_body.innerHTML = "";//para otros
         listarExamenes();
         listarVacunas();//ver si funciona esto
+        paseMedico();
         //fadeOut($busqueda_parcial);
     }
 })
@@ -266,6 +270,7 @@ $documento_trabajador.onkeypress = (e) => {
         
         listadoDni(e.target.value);
         listarVacunas();
+        paseMedico();
 
     } catch (error) {
         mostrarMensaje(error,"msj_error");
