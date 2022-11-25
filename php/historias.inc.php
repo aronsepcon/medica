@@ -166,6 +166,93 @@
             <img src="" id="imagen" alt="">        
         </div>    
     </div>
+
+    <div class="modal" id="pestañas">
+        <div class="inside h90p">
+            <button type="button" id="cierre_pestañas">X</button>
+            <div class="tabs">
+                <div class="tab-container">
+                    <div id="tab4" class="tab"> 
+                        <a href="#tab4">Pestaña 4</a>
+                        <div class="tab-content">
+                            <img src="" id="imagen_pestaña_r4" alt="">        
+                        </div>
+                    </div>
+                    <div id="tab3" class="tab"> 
+                        <a href="#tab3">Pestaña 3</a>
+                        <div class="tab-content">
+                            <img src="" id="imagen_pestaña_r3" alt="">        
+                        </div>
+                    </div>
+                    <div id="tab2" class="tab">
+                        <a href="#tab2">Pestaña 2</a>
+                        <div class="tab-content">
+                            <img src="" id="imagen_pestaña_r2" alt="">        
+                        </div>
+                    </div> 
+                    <div id="tab1" class="tab">
+                        <a href="#tab1">Pestaña 1</a>
+                        <div class="tab-content">
+                            <img src="" id="imagen_pestaña" alt="">
+                        </div> 
+                    </div> 
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="pestañas_rabia">
+        <div class="inside h90p">
+            <button type="button" id="cierre_pestañas_rabia">X</button>
+            <div class="tabs">
+                <div class="tab-container">
+                    <div id="tab7" class="tab"> 
+                        <a href="#tab7">Pestaña 7</a>
+                        <div class="tab-content">
+                            <img src="" id="imagen_pestaña_rabia_r7" alt="">
+                        </div>
+                    </div>
+                    <div id="tab6" class="tab"> 
+                        <a href="#tab6">Pestaña 6</a>
+                        <div class="tab-content">
+                            <img src="" id="imagen_pestaña_rabia_r6" alt="">
+                        </div>
+                    </div>
+                    <div id="tab5" class="tab">
+                        <a href="#tab5">Pestaña 5</a>
+                        <div class="tab-content">
+                            <img src="" id="imagen_pestaña_rabia_r5" alt="">
+                        </div>
+                    </div> 
+                    <div id="tab4_r" class="tab"> 
+                        <a href="#tab4_r">Pestaña 4</a>
+                        <div class="tab-content">
+                            <img src="" id="imagen_pestaña_rabia_r4" alt="">
+                        </div>
+                    </div>
+                    <div id="tab3_r" class="tab"> 
+                        <a href="#tab3_r">Pestaña 3</a>
+                        <div class="tab-content">
+                            <img src="" id="imagen_pestaña_rabia_r3" alt="">
+                        </div>
+                    </div>
+                    <div id="tab2_r" class="tab">
+                        <a href="#tab2_r">Pestaña 2</a>
+                        <div class="tab-content">
+                            <img src="" id="imagen_pestaña_rabia_r2" alt="">
+                        </div>
+                    </div> 
+                    <div id="tab1" class="tab">
+                        <a href="#tab1">Pestaña 1</a>
+                        <div class="tab-content">
+                            <img src="" id="imagen_pestaña_rabia" alt="">
+                        </div> 
+                    </div> 
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="modal" id="ficha_vacunas">
         <div class="inside w40porcen h40p">
             <div>
@@ -380,6 +467,7 @@
             <section class="historias__cuerpo__pagina oculto" id="pagina2">
                 <div class="historias__cuerpo__agregar">
                     <div>
+                        <button type="button" id="abrir_pestañas" class="oculto_r">pestañas</button>
                         <button type="button" class="oculto">+ Subir Examenes</button >
                     </div>
                 </div>
@@ -653,7 +741,11 @@
                             </div>
                             <div>
                                 <span>Lote</span>
-                                <input type="text" id="lote_pase">
+                                <input type="text" id="lote_pase" hidden>
+                                <input type="checkbox" name="lote56" id="lote56">
+                                <label for="lote56">56</label>
+                                <input type="checkbox" name="pisco" id="pisco">
+                                <label for="pisco">Pisco</label>
                             </div>
                             <div>
                                 <span>Nombre</span>
@@ -674,19 +766,20 @@
                             
                             <div>
                                 <span>Fecha EMO</span>
-                                <input type="date" id="fecha_emo" readonly>
+                                <input type="date" id="fecha_emo">
                             </div>
                             <div>
                                 <span>Fecha Vigencia</span>
                                 <input type="date" id="fecha_vigencia">
                             </div>
                             <div>
-                                <span>Observacion</span>
+                                <span>Motivo</span>
                                 <select name="" id="obs_pase">
-                                    <option value="0">Observacion 1</option>
-                                    <option value="1">Observacion 2</option>
-                                    <option value="2">Observacion 3</option>
-                                </select>                            
+                                    <option value="0">EMOA</option>
+                                    <option value="1">Vacuna</option>
+                                    <option value="2">Medica</option>
+                                </select>
+                                <input type="text" id="medicamotivotext" hidden>                            
                             </div>
                             <div>
                                 <span>Cargar Pase</span>

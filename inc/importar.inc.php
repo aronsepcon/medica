@@ -52,7 +52,7 @@
                     }else{
                         $dni= str_pad($objCelda['D'],8,0,STR_PAD_LEFT);
                     }  
-                    $sql = "INSERT INTO fichas_api2 SET atencion=?, fecha = STR_TO_DATE(?,'%d/%m/%Y'), paciente=?,dni=?, ocupacion=?, 
+                    $sql = "INSERT INTO fichas_api SET atencion=?, fecha = STR_TO_DATE(?,'%d/%m/%Y'), paciente=?,dni=?, ocupacion=?, 
                                                             codSexo=?, edad =?, empresa=?,tipoExa=?, aptitud=?, imc=?, diagno1=?, reco1=?, diagno2=?,
                                                             reco2=?,diagno3=?, reco3=?, diagno4=?, reco4=?,diagno5=?, reco5=?,
                                                             diagno6=?, reco6=?, diagno7=?, reco7=?, diagno8=?, reco8=?, diagno9=?, 
@@ -71,7 +71,7 @@
                     $contador++;
                 }
                 else if(($objCelda['O']== "SERFARMED" and $valAmericasPreocup == "FECHA DE NACIMIENTO") && is_numeric($objCelda['D'])){
-                    $sql ="UPDATE fichas_api2 SET alergias=? WHERE dni=? and clinica=2";
+                    $sql ="UPDATE fichas_api SET alergias=? WHERE dni=? and clinica=2";
                     $statement = $pdo->prepare($sql);
                     $statement -> execute(array($objCelda['M'],$objCelda['D']));
                     $result = $statement ->fetchAll();
@@ -118,7 +118,7 @@
                                                     pase1 = ?,tipo2 = ?,pase2 = ?,reco1 = ?,reco2 = ?,
                                                     reco3 = ?,reco4 = ?,reco5 = ?,reco6 = ?,reco7 = ?,
                                                     reco8 = ?,reco9 = ?,reco10 = ?,estado = ?";*/
-                $sql = "INSERT INTO fichas_api2 SET  atencion = ?,desAseg = ?,empresa = ?,codPaci = ?,paciente=?,dni = ?,
+                $sql = "INSERT INTO fichas_api SET  atencion = ?,desAseg = ?,empresa = ?,codPaci = ?,paciente=?,dni = ?,
                                                     fecNaci = STR_TO_DATE(?, '%d/%m/%Y'),
                                                     codSexo = ?,ocupacion = ?,puestoPostula = ?,tipoExa = ?,
                                                     fecha = STR_TO_DATE(?, '%d/%m/%Y'),
@@ -200,7 +200,7 @@
         break;
     case "subidaAmericas":
            /* else*/ if($objCelda['AH']  == "LAS AMERICAS" && is_numeric($objCelda['D'])){//Las americas -- retiro
-                $sql ="INSERT INTO fichas_api2 SET paciente = ?,fecNaci = STR_TO_DATE(?,'%d/%m/%Y'),dni = ?,edad = ?, ocupacion=?, 
+                $sql ="INSERT INTO fichas_api SET paciente = ?,fecNaci = STR_TO_DATE(?,'%d/%m/%Y'),dni = ?,edad = ?, ocupacion=?, 
                                                     centroCosto=?, empresa=?,grupoSangre=?,alergias = ?,peso=?,talla=?,imc=?,estadoNutricional=?, fecha=STR_TO_DATE(?,'%d/%m/%Y'), 
                                                     tipoExa=?,aptitud=?, clinica = 3 ";//tipoExa='RETIRO'
                 $statement = $pdo->prepare($sql);
@@ -212,7 +212,7 @@
                 $contador++;
             }//$objCelda['O']
             else if( ($objCelda['O']== "LAS AMERICAS" and $valAmericasPreocup == "FECHA DE NACIMIENTO") && is_numeric($objCelda['D']) ) {//las americas
-               $sql ="INSERT INTO fichas_api2 SET paciente = ?,fecNaci = STR_TO_DATE(?,'%d/%m/%Y'),dni = ?,edad = ?, ocupacion=?, 
+               $sql ="INSERT INTO fichas_api SET paciente = ?,fecNaci = STR_TO_DATE(?,'%d/%m/%Y'),dni = ?,edad = ?, ocupacion=?, 
                                                     centroCosto=?, empresa=?,grupoSangre=?,alergias = ?, fecha=STR_TO_DATE(?,'%d/%m/%Y'),
                                                     aptitud=?,peso=?,talla=?,imc=?,estadoNutricional=?,tipoExa=?, clinica = 3"; //tipoExa='PREOCUPACIONAL' 
                 $statement = $pdo->prepare($sql);

@@ -36,7 +36,7 @@
         else if($_POST['funcion'] == "actualizarPase"){
             echo json_encode(actualizarPase($pdo,$_POST['num_pase'],
                                         $_POST['lote_pase'],$_POST['obs_pase'],
-                                        $_POST['documento'],
+                                        $_POST['nombre'],$_POST['documento'],
                                         $_POST['fecha_emo'],$_POST['fecha_vigencia'],
                                         $_POST['id']
            ));
@@ -481,7 +481,7 @@
         try {
             $respuesta = false;
             $lista = [];
-            $sql="SELECT id,numPase,fechaVigencia,adjuntoPase,lote,observacion FROM pase_medico WHERE dni=?";
+            $sql="SELECT id,fechaEmo,numPase,fechaVigencia,adjuntoPase,observacion FROM pase_medico WHERE dni=?";
             $statement = $pdo->prepare($sql);
             $statement ->execute(array($doc));
             $result = $statement ->fetchAll();
@@ -489,10 +489,11 @@
             if($rowCount > 0){
                 foreach($result as $row) {
                     $salida = array("id"=>$row['id'],
+                                    "fechaEmo" => $row['fechaEmo'],
                                     "numero_pase"=>$row['numPase'],
                                     "fecha_vigencia"=>$row['fechaVigencia'],
                                     "adjunto_pase" =>$row['adjuntoPase'],
-                                    "lote_pase"=>$row['lote'],
+                                    //"lote_pase"=>$row['lote'],
                                     "obs_pase" =>$row['observacion']);
                     array_push($lista,$salida);
                 }
@@ -608,7 +609,7 @@
 
     }
 
-    function actualizarPase($pdo,$cod,$lote,$obs,$doc,$fechaEmo,$fechaVigencia,$id){//problemas U;
+    function actualizarPase($pdo,$cod,$lote,$obs,$nombre,$doc,$fechaEmo,$fechaVigencia,$id){//problemas U;
         try {
             $formatos = ["jpeg","jpg","png","pdf"];
 
@@ -624,10 +625,10 @@
                 case $formatos[0]:
                 case $formatos[1]:
                 case $formatos[2]:
-                    $nombres = $doc.".jpeg";
+                    $nombres = "PM-".$nombre."-".$doc.".jpeg";
                     break;
                 case $formatos[3]:
-                    $nombres = $doc.".pdf";
+                    $nombres = "PM-".$nombre."-".$doc.".pdf";
                     break;
             }
 
@@ -671,10 +672,10 @@
                 case $formatos[0]:
                 case $formatos[1]:
                 case $formatos[2]:
-                    $nombres = $doc.".jpeg";
+                    $nombres = "PM-".$nombre."-".$doc.".jpeg";
                     break;
                 case $formatos[3]:
-                    $nombres = $doc.".pdf";
+                    $nombres = "PM-".$nombre."-".$doc.".pdf";
                     break;
             }         
             

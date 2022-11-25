@@ -10,12 +10,22 @@ const $configuracion = document.getElementById('configuracion');
 const $modal__esperar = document.getElementById('modal__esperar');
 const $permisos = document.getElementById('permisos1');
 const $permisos_panel = document.getElementById('permisos_panel');
+const $cargar__estadisticas = document.getElementById('cargar__estadisticas');
+const $estadisticas = document.getElementById('estadisticas');
 
 
 $historias.onclick =(e) => {
     e.preventDefault();
 
     fadeIn($ficha__historias);
+
+    return false;
+}
+
+$estadisticas.onclick = (e) => {
+    e.preventDefault();
+
+    fadeIn($cargar__estadisticas);
 
     return false;
 }

@@ -264,7 +264,7 @@ function paseMedico(){
             $sangre_pase.value = dataJson.lista[0].sangre;
             $alergias_pase.value = dataJson.lista[0].alergias;
             //validar tipo de examen ---->  dataJson.lista[0].tipo;
-            $fecha_emo.value = dataJson.lista[0].fecha_emo;
+            /*$fecha_emo.value = dataJson.lista[0].fecha_emo;*/
         }else{
             mostrarMensaje("Verifique el N°. Documento","msj_error");
         }
@@ -285,6 +285,7 @@ function paseMedico(){
         if (dataJson.respuesta){
             $id_pase.value = dataJson.lista[0].id;
             $numero_pase.value=dataJson.lista[0].numero_pase;
+            $fecha_emo.value=dataJson.lista[0].	fechaEmo;
             $fecha_vigencia.value=dataJson.lista[0].fecha_vigencia;
             $lote_pase.value =dataJson.lista[0].lote_pase;
             $obs_pase.value = dataJson.lista[0].obs_pase;

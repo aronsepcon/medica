@@ -22,6 +22,7 @@ const $enviar_pase = document.getElementById("enviar_pase_medico");
 const $numero_pase = document.getElementById("numero_pase");
 const $fecha_emo = document.getElementById("fecha_emo");
 const $fecha_vigencia = document.getElementById("fecha_vigencia");
+const $medicamotivotext = document.getElementById("medicamotivotext");
 
 const $subida_pase = document.getElementById("subida_pase");
 const $subirPdf = document.getElementById("subirPdf");
@@ -45,6 +46,17 @@ $cierre_pase_medico.onclick = (e) => {
     e.preventDefault();
 
     fadeOut($pase_medico);
+}
+
+$obs_pase.onclick = (e) => {
+    e.preventDefault()
+
+    if($obs_pase.value==2){
+        $medicamotivotext.hidden= false;
+    }
+    else{
+        $medicamotivotext.hidden= true;
+    }
 }
 
 $enviar_pase.onclick = (e) => {
