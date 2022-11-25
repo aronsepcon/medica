@@ -17,6 +17,9 @@ const $elegirClinicaExcel = document.getElementById("elegirClinicaExcel");
 
 const $modal__esperar = document.getElementById("modal__esperar");
 
+const $uploadFile = document.getElementById("uploadFile");
+
+
 $btn__upload.onclick = (e) => {
     e.preventDefault();
 
@@ -164,6 +167,49 @@ $subida_masiva_excel.onchange = (e) => {
                     })
                 }
 
+            } catch (error) {
+                mostrarMensaje(error,"msj_error");
+            }
+        }
+    }else{
+        mostrarMensaje("elija un documento","msj_error");
+    }
+}
+
+$uploadFile.onchange = (e) =>{//para la carga masiva de PDFs
+    e.preventDefault();
+
+    var totalFiles = $uploadFile.files.length;
+
+    if(totalFiles>0){
+        if(totalFiles>20){
+            mostrarMensaje("Limite 20 archivos","msj_error");//mostrar exceso
+        }
+        else{
+            try {
+                if(validar($uploadFile)) throw 'Archivo no valido';
+                const formData = new FormData();
+
+                for(var index=0; index<totalFiles;index++){
+                    formData.append('files', $uploadFile.files[index]);
+
+                    fetch('../inc/importarMasivaPdf.inc.php',{
+                        method: 'POST',
+                        body : formData 
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.respuesta) {
+                            mostrarMensaje("Documento subido","msj_correct");
+                        }else{
+                            mostrarMensaje("Hubo un error al subir el archivo","msj_error");
+                        }
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    })
+                }
+                listarExamenes();
             } catch (error) {
                 mostrarMensaje(error,"msj_error");
             }

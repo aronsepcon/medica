@@ -1,10 +1,23 @@
+//import {paseMedico} from "./paseMedico.js";
 import {mostrarMensaje} from "./funciones.js";
 import {fadeIn} from "./funciones.js";
 import {fadeOut} from "./funciones.js";
 import { validar } from "./funciones.js";
 import {listarVacunas} from "./cargaMasiva.js";
-import { paseMedico } from "./paseMedico.js";
+//import {paseMedico} from "./funciones.js";
 
+const $id_pase = document.getElementById("id_pase");
+const $nombre_pase = document.getElementById("nombre_pase");
+const $dni_pase = document.getElementById("dni_pase");
+const $sangre_pase = document.getElementById("sangre_pase");
+const $alergias_pase = document.getElementById("alergias_pase");
+const $nomb_adjunto = document.getElementById("nomb_adjunto");
+const $subida_pase = document.getElementById("subida_pase");
+const $numero_pase = document.getElementById("numero_pase");
+const $fecha_emo = document.getElementById("fecha_emo");
+const $fecha_vigencia = document.getElementById("fecha_vigencia");
+const $lote_pase = document.getElementById("lote_pase");
+const $obs_pase = document.getElementById("obs_pase");
 
 //import {mostrarMensaje,fadeIn,fadeOut,validar } from "./funciones.js";
 
@@ -30,8 +43,6 @@ const $nombres_trabajador = document.getElementById('nombres_trabajador')
 const $radio__nombre = document.getElementById('radio__nombre');
 const $radio__dni = document.getElementById('radio__dni');
 const $busqueda_boton = document.getElementById('busqueda_boton');
-
-const $uploadFile = document.getElementById("uploadFile");
 
 const $numero__registro = document.getElementById('numero__registro');
 const $correo__electronico = document.getElementById('correo__electronico'); 
@@ -234,6 +245,67 @@ $radio__dni.onclick = (e) =>{
     $nombres_trabajador.value = "";
 }
 
+function paseMedico(){
+    
+    let data2 = new FormData();
+    data2.append("documento",$documento_trabajador.value);
+    data2.append("funcion","listarExamenes");
+    fetch('../inc/consultasmedicas.inc.php',{
+        method: "POST",
+        body:data2,
+    })
+    .then(function(response){
+        return response.json();
+    })
+    .then(dataJson => {
+        if (dataJson.respuesta){
+            $nombre_pase.value = dataJson.lista[0].paciente;
+            $dni_pase.value = dataJson.lista[0].dni;
+            $sangre_pase.value = dataJson.lista[0].sangre;
+            $alergias_pase.value = dataJson.lista[0].alergias;
+            //validar tipo de examen ---->  dataJson.lista[0].tipo;
+            $fecha_emo.value = dataJson.lista[0].fecha_emo;
+        }else{
+            mostrarMensaje("Verifique el N°. Documento","msj_error");
+        }
+    
+    });
+
+    let data3 = new FormData();
+    data3.append("documento",$documento_trabajador.value);
+    data3.append("funcion","listarPases");
+    fetch('../inc/consultasmedicas.inc.php',{
+        method: "POST",
+        body:data3,
+    })
+    .then(function(response){
+        return response.json();
+    })
+    .then(dataJson => {
+        if (dataJson.respuesta){
+            $id_pase.value = dataJson.lista[0].id;
+            $numero_pase.value=dataJson.lista[0].numero_pase;
+            $fecha_vigencia.value=dataJson.lista[0].fecha_vigencia;
+            $lote_pase.value =dataJson.lista[0].lote_pase;
+            $obs_pase.value = dataJson.lista[0].obs_pase;
+            $nomb_adjunto.value = dataJson.lista[0].adjunto_pase;
+            if(dataJson.lista[0].adjunto_pase){
+                $subida_pase.style.color="green";
+            }
+            else{
+                $id_pase.value ="";
+                $subida_pase.style.color="";
+            }
+        }
+        else{
+            $id_pase.value ="";
+            $numero_pase.value="";
+            $fecha_vigencia.value="";
+            $subida_pase.style.color="";
+        }
+    });   
+}
+
 $tabla__busqueda_body.addEventListener("click", e=>{
     e.preventDefault();
 
@@ -330,49 +402,6 @@ function listadoDni($e){
         })
 }
 
-$uploadFile.onchange = (e) =>{//para la carga masiva de PDFs
-    e.preventDefault();
-
-    var totalFiles = $uploadFile.files.length;
-
-    if(totalFiles>0){
-        if(totalFiles>20){
-            mostrarMensaje("Limite 20 archivos","msj_error");//mostrar exceso
-        }
-        else{
-            try {
-                if(validar($uploadFile)) throw 'Archivo no valido';
-                const formData = new FormData();
-
-                for(var index=0; index<totalFiles;index++){
-                    formData.append('files', $uploadFile.files[index]);
-
-                    fetch('../inc/importarMasivaPdf.inc.php',{
-                        method: 'POST',
-                        body : formData 
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.respuesta) {
-                            mostrarMensaje("Documento subido","msj_correct");
-                        }else{
-                            mostrarMensaje("Hubo un error al subir el archivo","msj_error");
-                        }
-                    })
-                    .catch(error => {
-                        console.error(error);
-                    })
-                }
-                listarExamenes();
-            } catch (error) {
-                mostrarMensaje(error,"msj_error");
-            }
-        }
-    }else{
-        mostrarMensaje("elija un documento","msj_error");
-    }
-}
-
 $nombres_trabajador.onkeypress = (e) => {
     var keycode = e.keyCode || e.which;
   if (keycode == 13) {
@@ -412,10 +441,10 @@ function listarNombres($e){
                                 <td>${dataJson.lista[index].sede}</td>
                                 <td>
                                     <a href="" data-accion2="ingreso"
-                                               data-dni="${dataJson.lista[index].dni}"
-                                               ><i class="fas fa-address-book"></i></a>
-                                </td>
-                                `;
+                                               data-dni="${dataJson.lista[index].dni}">
+                                        <i class="fas fa-address-book"></i>
+                                    </a>
+                                </td>`;
                 $tabla__busqueda_body.appendChild(tr);   
                 
                 

@@ -11,6 +11,9 @@ const $documento_trabajador = document.getElementById("documento_trabajador");
 const $fiebre_A = document.getElementById("fiebre_A");
 
 const $id_pase = document.getElementById("id_pase");
+const $nomb_adjunto = document.getElementById("nomb_adjunto");
+const $lote_pase = document.getElementById("lote_pase");
+const $obs_pase = document.getElementById("obs_pase");
 const $nombre_pase = document.getElementById("nombre_pase");
 const $dni_pase = document.getElementById("dni_pase");
 const $sangre_pase = document.getElementById("sangre_pase");
@@ -24,6 +27,10 @@ const $subida_pase = document.getElementById("subida_pase");
 const $subirPdf = document.getElementById("subirPdf");
 const $vista_pase = document.getElementById("vista_pase");
 
+const $frame__adjunto = document.getElementById('frame__adjunto');
+const $ficha__vistaprevia = document.getElementById('ficha__vistaprevia');
+const $ficha__vistaprevia_vac = document.getElementById("ficha__vistaprevia_vac");
+const $display_image = document.getElementById("imagen");
 
 
 $mostrar_pase_medico.onclick = (e) => {
@@ -44,22 +51,36 @@ $enviar_pase.onclick = (e) => {
     e.preventDefault();
     if($numero_pase.value=="" && $fecha_vigencia.value==""){
         mostrarMensaje("Ingrese una fecha o codigo de pase","msj_error");
-    }else{
+    }else if($subirPdf.files.length==0){
+        mostrarMensaje("elija un documento","msj_error");
+    }
+    else{
         enviarPase();
     }
 }
-/*
+
 $vista_pase.onclick = (e) =>{
     e.preventDefault();
     
-    if(dataJson.lista[0].adjunto_pase){
-        fadeIn()
-    }else{
-        fadeIn($form_ingreso)
+    if($subida_pase.style.color=="green"){
+        let formato = ($nomb_adjunto.value).split('.')
+        if(formato[1]=="pdf"){
+            $frame__adjunto.setAttribute("src",'../pases/'+$dni_pase.value+'.pdf');
+            fadeIn($ficha__vistaprevia);
+        }else if(formato[1]=="jpeg"){
+            $display_image.src = '../pases/'+$dni_pase.value+'.jpeg';
+            fadeIn($ficha__vistaprevia_vac);
+        }
+        else{
+            mostrarMensaje("Existe un problema","msj_error");
+        }
+    }
+    else{
+        mostrarMensaje("No existe un documento","msj_error");
     }
 
-}*/
-
+}
+/*
 export function paseMedico(){
 
     let data2 = new FormData();
@@ -117,24 +138,23 @@ export function paseMedico(){
             $subida_pase.style.color="";
         }
     });   
-}
+}*/
 
 $subida_pase.onclick = (e) => {
     e.preventDefault();
     $subirPdf.click();
     return false;
-}
+}    
+
+//console.log($subirPdf.files.length);
+
 
 function enviarPase(){
-
-    try {
-        let data2 = new FormData();
-    } catch (error) {
-        mostrarMensaje(error,"msj_error");
-    }
     let data = new FormData();
     data.append('subidaPase',$subirPdf.files[0]);
     data.append("num_pase", $numero_pase.value);
+    data.append("lote_pase", $lote_pase.value);
+    data.append("obs_pase", $obs_pase.value);
     data.append("nombre", $nombre_pase.value);
     data.append("documento", $dni_pase.value);
     data.append("grupo_sangre", $sangre_pase.value );
@@ -143,6 +163,7 @@ function enviarPase(){
     data.append("fecha_vigencia",$fecha_vigencia.value);
     if($id_pase.value !=""){
         data.append("funcion","actualizarPase");
+        data.append("id",$id_pase.value);
     }
     else{
         data.append("funcion","enviarPase");

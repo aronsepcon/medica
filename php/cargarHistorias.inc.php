@@ -87,6 +87,8 @@
             </div-->
 
             <h2>Carga Masiva</h2>
+
+            <h3>Excel</h3>
             <div>
                 <form method='post' action='' enctype='multipart/form-data'>
                     <input type="file" name="file" id="subidaMasiva" accept=".xls,.xlsx" multiple>
@@ -97,6 +99,19 @@
                     </div>    
                 </form>
             </div>
+
+            <h3>PDF</h3>
+            <div>
+                <form method='post' action='' enctype='multipart/form-data'>
+                    <input type="file" name="file" id="uploadFile" accept=".pdf" multiple>
+                    <div id="formUpload__data">
+                        <div id="formUpload__data__process">
+                            <a href="#" id="btn__uploadPDF"></i></a>
+                        </div>
+                    </div>    
+                </form>
+            </div>
+           
 
         </section>
     </section>

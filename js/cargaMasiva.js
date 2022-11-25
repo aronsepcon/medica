@@ -2,7 +2,7 @@ import {mostrarMensaje} from "./funciones.js";
 import {fadeIn} from "./funciones.js";
 import {fadeOut} from "./funciones.js";
 import {validar} from "./funciones.js";
-import { paseMedico } from "./paseMedico.js";
+
 //import {listarexamenes} from "./historias";
 ///esto puede servir para llamar a la funcion de forma mas directa uu
 const $documento_trabajador = document.getElementById('documento_trabajador');
@@ -13,6 +13,7 @@ const $fecha_vacuna = document.getElementById("fecha_vacuna");
 const $subida_imagen = document.getElementById("subida_imagen");
 const $envio_vacuna = document.getElementById("envio_vacuna");
 const $nombre_vacuna = document.getElementById("nombre_vacuna");
+const $nombre_trabajador = document.getElementById('nombre_pase');
 
 const $fiebre_amarilla__d1 = document.getElementById("fiebre_amarilla__d1");
 const $difteria__d1 = document.getElementById("fiebre__d1");
@@ -69,7 +70,8 @@ const $vista_previa_vac = document.querySelectorAll(".vista_previa_vac");
 //const $vista_previa_vac = document.getElementById("vista_previa_vac");
 const $frame__adjunto_vac = document.getElementById("frame__adjunto_vac");
 const $display_image = document.getElementById("imagen");
-
+const $frame__adjunto = document.getElementById('frame__adjunto');
+const $ficha__vistaprevia = document.getElementById('ficha__vistaprevia');
 
 $subida_vacunas.forEach(function($subida_vacunas){
     $subida_vacunas.onclick = (e) => {
@@ -111,9 +113,18 @@ function mostrarImagen($value){
         .then(response => response.json())
         .then(dataJson => {
             if (dataJson.respuesta){
-                $display_image.src = "../vacunas/"+dataJson.imagen;
-                console.log(dataJson.imagen);    
-                fadeIn($ficha__vistaprevia_vac);
+                let formatos = (dataJson.adjunto).split('.');
+                if(formatos[1]=="pdf"){
+                    $frame__adjunto.setAttribute("src",'../vacunas/'+dataJson.adjunto);
+                    fadeIn($ficha__vistaprevia);
+                }else if(formatos[1]=="jpeg"){
+                    $display_image.src = "../vacunas/"+dataJson.adjunto;
+                    console.log(dataJson.adjunto);    
+                    fadeIn($ficha__vistaprevia_vac);
+                }
+                else{
+                    mostrarMensaje("Existe un problema","msj_error");
+                }
                 //q valide un switch case con $value y luego en la funcion ver si el siguiente adjunto existe
                 //sino darle estilo, cursiva para la fecha--- ver si aplica algo mas
             }else{
@@ -168,6 +179,7 @@ $envio_vacuna.onclick = (e) => {
         formData.append('subidaImagen',$subida_imagen.files[0]);//es el envio del documento
         formData.append('documento',documento)
         formData.append('validacion',tipovacuna);
+        formData.append('nombre',$nombre_trabajador.value);
 
         fetch("../inc/subirImagen.inc.php",{
             method: 'POST',
@@ -195,6 +207,8 @@ $envio_vacuna.onclick = (e) => {
 }
 
 export function listarVacunas(){
+
+    //paseMedico();
 
     let formData = new FormData();
     formData.append("documento",$documento_trabajador.value);

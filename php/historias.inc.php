@@ -44,7 +44,7 @@
                 <input type="hidden" name="adjunto_examen" id="adjunto_examen">
                 <div>
                     <button type="button" id="editar_form" class="editar_form">Editar</button>                
-                    <button type="button" id="cambiar_env" class="editar_form">Validar</button>
+                    <button type="button" id="cambiar_env" class="cambiar_env">Validar</button>
                 </div>
                 <label for="asunto__correo">Asunto :</label>
                 <input type="text" name="asunto__correo" id="asunto__correo" readonly>
@@ -173,10 +173,11 @@
                 <button type="button" id="cierre_form_vac" class="cierre_form">X</button>
                 <input type="date" id="fecha_vacuna">
                 <div>
-                    <input type="file" name="file" id="subida_imagen" accept=".jpg,.jpeg,.png">                      
+                    <label for="subida_imagen">Subir Adjunto</label>
+                    <input type="file" name="file" id="subida_imagen" accept=".jpg,.jpeg,.png,.pdf" hidden>                      
                 </div>
                 <div class="opciones">
-                    <button type="button" id="envio_vacuna">Enviar</button>
+                    <center><button type="button" id="envio_vacuna">Enviar</button></center>
                 </div>
             </div>
         </div>
@@ -315,7 +316,7 @@
     <hr>
     <section id="busqueda_parcial" class="busqueda_parcial" style="display: none;" > 
         <div class="tabla__busqueda bars">
-            <table id="tabla__busqueda" class="w100porcen1">
+            <table id="tabla__busqueda" class="w100porcen">
                 <thead>
                     <tr>
                         <th width=8%>DNI</th>
@@ -380,14 +381,6 @@
                 <div class="historias__cuerpo__agregar">
                     <div>
                         <button type="button" class="oculto">+ Subir Examenes</button >
-                        <form method='post' action='' enctype='multipart/form-data'>
-                            <input type="file" name="file" id="uploadFile" accept=".pdf" multiple>
-                            <div id="formUpload__data">
-                                <div id="formUpload__data__process">
-                                    <a href="#" id="btn__uploadPDF"></i></a>
-                                </div>
-                            </div>    
-                        </form>
                     </div>
                 </div>
                 <div class="historias__tabla bars">
@@ -653,9 +646,14 @@
                         </div>
                         <div >
                             <input type="hidden" id="id_pase">
+                            <input type="hidden" id="nomb_adjunto">
                             <div>
                                 <span>N° Pase</span>
                                 <input type="text" id="numero_pase">
+                            </div>
+                            <div>
+                                <span>Lote</span>
+                                <input type="text" id="lote_pase">
                             </div>
                             <div>
                                 <span>Nombre</span>
@@ -683,8 +681,16 @@
                                 <input type="date" id="fecha_vigencia">
                             </div>
                             <div>
+                                <span>Observacion</span>
+                                <select name="" id="obs_pase">
+                                    <option value="0">Observacion 1</option>
+                                    <option value="1">Observacion 2</option>
+                                    <option value="2">Observacion 3</option>
+                                </select>                            
+                            </div>
+                            <div>
                                 <span>Cargar Pase</span>
-                                <input type="file" name="subirPdf" id="subirPdf" accept=".pdf" class="oculto">
+                                <input type="file" name="subirPdf" id="subirPdf" accept=".jpg,.jpeg,.png,.pdf" class="oculto">
                                 <a href="#" class="vista_pase" id="vista_pase"><i class="fas fa-eye"></i></a>
                                 <a href="#" class="subida_pase" id="subida_pase" value="subida_pase"><i class="fas fa-upload"></i></a><!--cambiar id a class-->
                             </div>

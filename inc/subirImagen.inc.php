@@ -1,16 +1,31 @@
 <?php
     require_once("connectmedica.inc.php");
 
-    $mensaje = "No se completo la operacion";
-    $respuesta = false;
-    //$nombrePac = $_POST['nombre'];
-    $archivo = $_FILES['subidaImagen'];
-    $temporal = $_FILES['subidaImagen']['tmp_name'];
-    $nombre = uniqid().".jpeg";//probar luego $validacion."-".$nombrePac."-".$fecha
-    
+    $formatos = ["jpeg","jpg","png","pdf"];
+
     $fecha = $_POST['fechaVacunacion'];
     $validacion = $_POST['validacion'];
     $documento = $_POST['documento'];
+    $nombrePac = $_POST['nombre'];
+    $formato = explode(".",htmlspecialchars( basename($_FILES['subidaImagen']["name"])));
+
+    $mensaje = "No se completo la operacion";
+    $respuesta = false;
+
+
+    $archivo = $_FILES['subidaImagen'];
+    $temporal = $_FILES['subidaImagen']['tmp_name'];
+    
+    switch($formato[1]){
+        case $formatos[0]:
+        case $formatos[1]:
+        case $formatos[2]:
+            $nombre = $validacion."-".$nombrePac."-".$fecha.".jpeg";
+            break;
+        case $formatos[3]:
+            $nombre = $validacion."-".$nombrePac."-".$fecha.".pdf";
+            break;
+    }
 
     if(move_uploaded_file($temporal,"../vacunas/".$nombre)){
         $mensaje = "Archivo copiado";

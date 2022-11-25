@@ -132,6 +132,7 @@ iframe {
   width: 150%;
 }
 
+
 .w100porcen {
   width: 100%;
 }
@@ -636,12 +637,18 @@ button:hover {
 }
 
 .accesos input {
-  height: 2rem;
+  height: 1.9rem;
   border-radius: 8px;
   border: 1px solid #c2c2c2;
   margin-right: 5px;
   padding: 0 20px;
-  width: 28%;
+  width: 26%;
+  margin-bottom: 13px;
+}
+
+.accesos select {
+  height: 1.7rem;
+  border-radius: 3px;
 }
 
 .historias__cuerpo__busqueda i {
@@ -876,6 +883,15 @@ input[name = "filtrado"]{
   background-color: tomato;
   color: #fff;
  }
+.tabla__busqueda table tbody{
+  font-family: system;
+  font-size: 0.8rem;
+  line-height: 1rem !important;
+}
+
+.tabla__busqueda table tbody tr{
+  border-bottom: 1px solid #c2c2c2;
+}
 
  #display-image{
   width: 400px;
@@ -888,4 +904,64 @@ input[name = "filtrado"]{
 .pase_medico{
   position: sticky;
   bottom: 120px;
+}
+
+#tabla__busqueda{
+  text-align: center;
+}
+
+.tabla__busqueda table tbody tr:nth-child(even) {
+  background-color: #c2c2c2;
+}
+
+.tabla__busqueda table tbody tr:nth-child(odd) {
+  background-color: #fff;
+}
+
+.tabla__busqueda table tbody tr:hover{
+  background-color: #D6EEEE;
+}
+
+.editar_form {
+  background-color: green;
+}
+
+#ficha_vacunas input {
+  height: 1.7rem;
+  border-radius: 5px;
+  margin-bottom: 9px;
+}
+
+#ficha_vacunas label{
+  margin-bottom: 9px;
+  border: 1px solid #ccc;
+  background-color: green;
+  display: inline-block;
+  padding: 6px 8px;
+  cursor: pointer;
+  -webkit-box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2);
+}
+
+#ficha_vacunas label:hover{
+  -webkit-transform: translateY(-3px);
+  transform: translateY(-3px);
+  -webkit-box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.2);
+          box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.2);
+}
+
+#ficha__vistaprevia_vac img{
+  max-width: 90%;
+  height: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto
+}
+
+#ficha__vistaprevia_vac img:hover{
+  -webkit-transform: scale(1.5);
+  -moz-transform: scale(1.5);
+  -o-transform: scale(1.5);
+  -ms-transform: scale(1.5);
+  transform: scale(1.5);
 }
