@@ -35,19 +35,20 @@
         }
         else if($_POST['funcion'] == "actualizarPase"){
             echo json_encode(actualizarPase($pdo,$_POST['num_pase'],
-                                        $_POST['lote_pase'],$_POST['obs_pase'],
+                                        $_POST['lote56'],$_POST['obs_pase'],
                                         $_POST['nombre'],$_POST['documento'],
                                         $_POST['fecha_emo'],$_POST['fecha_vigencia'],
-                                        $_POST['id']
-           ));
+                                        $_POST['medica_motivo_txt'],$_POST['lote88'],
+                                        $_POST['pisco'],$_POST['id']));
         }
         else if($_POST['funcion'] == "enviarPase"){
             echo json_encode(enviarPase($pdo,$_POST['num_pase'],
-                                        $_POST['lote_pase'],$_POST['obs_pase'],
+                                        $_POST['lote56'],$_POST['obs_pase'],
                                         $_POST['nombre'],$_POST['documento'],
                                         $_POST['grupo_sangre'],$_POST['alergias'],
-                                        $_POST['fecha_emo'],$_POST['fecha_vigencia']
-                                       ));
+                                        $_POST['fecha_emo'],$_POST['fecha_vigencia'],
+                                        $_POST['medica_motivo_txt'],$_POST['lote88'],
+                                        $_POST['pisco'],));
         }else if($_POST['funcion'] == "listarPases"){
             echo json_encode(listarPases($pdo,$_POST["documento"]));
         }
@@ -481,7 +482,7 @@
         try {
             $respuesta = false;
             $lista = [];
-            $sql="SELECT id,fechaEmo,numPase,fechaVigencia,adjuntoPase,observacion FROM pase_medico WHERE dni=?";
+            $sql="SELECT id,fechaEmo,numPase,fechaVigencia,motivotexto,adjuntoPase,lot56,lot88,lotpisco,observacion FROM pase_medico WHERE dni=?";
             $statement = $pdo->prepare($sql);
             $statement ->execute(array($doc));
             $result = $statement ->fetchAll();
@@ -492,8 +493,11 @@
                                     "fechaEmo" => $row['fechaEmo'],
                                     "numero_pase"=>$row['numPase'],
                                     "fecha_vigencia"=>$row['fechaVigencia'],
+                                    "motivotexto"=>$row['motivotexto'],
                                     "adjunto_pase" =>$row['adjuntoPase'],
-                                    //"lote_pase"=>$row['lote'],
+                                    "lote56"=>$row['lot56'],
+                                    "lote88"=>$row['lot88'],
+                                    "lotepisco"=>$row['lotpisco'],
                                     "obs_pase" =>$row['observacion']);
                     array_push($lista,$salida);
                 }
@@ -609,12 +613,16 @@
 
     }
 
-    function actualizarPase($pdo,$cod,$lote,$obs,$nombre,$doc,$fechaEmo,$fechaVigencia,$id){//problemas U;
+    function actualizarPase($pdo,$cod,$lot56,$obs,$nombre,$doc,$fechaEmo,$fechaVigencia,$medica_motivo_txt,$lot88,$lotpisc,$id){//problemas U;
         try {
             $formatos = ["jpeg","jpg","png","pdf"];
 
             $adjunto = "no ha enviado el documento";
             $respuestaAdJ = true;
+
+            $lote56 = ($lot56==true) ? 1 : 0;
+            $lote88 = ($lot88==true) ? 1 : 0;
+            $pisco = ($lotpisc==true) ? 1 : 0;
 
             $formato = explode(".",htmlspecialchars( basename($_FILES['subidaPase']["name"])));
 
@@ -638,15 +646,15 @@
                 $adjunto = "archivo subido";
                 $respuestaAdJ = true;
             }
-            $sql ="UPDATE pase_medico SET numPase=?,lote=?,observacion=?,fechaEmo=?,fechaVigencia=?,adjuntoPase=? WHERE id=?";        
+            $sql ="UPDATE pase_medico SET numPase=?,lot56=?,observacion=?,fechaEmo=?,fechaVigencia=?,motivotexto=?,lot88=?,lotpisco=?,adjuntoPase=? WHERE id=?";        
             $statement = $pdo->prepare($sql);
-            $statement ->execute(array($cod,$lote,$obs,$fechaEmo,$fechaVigencia,$nombres,$id));
+            $statement ->execute(array($cod,$lote56,$obs,$fechaEmo,$fechaVigencia,$medica_motivo_txt,$lote88,$pisco,$nombres,$id));
             $respuesta = array("respuesta"  => true,
                                 "clase"     =>"msj_correct",
                                 "error"     =>"no hay error", 
                                 "doc"       => $nombres,
                                 "adjunto"   => $adjunto,
-                                "resultado" => $respuestaAdJ);
+                                "resultado" => $lote88);
             return $respuesta;
 
         } catch (PDOException $th) {
@@ -656,9 +664,13 @@
     }
 
 
-    function enviarPase($pdo,$cod,$lote,$obs,$nombre,$doc,$grupoSangre,$alergias,$fechaEmo,$fechaVigencia){
+    function enviarPase($pdo,$cod,$lot56,$obs,$nombre,$doc,$grupoSangre,$alergias,$fechaEmo,$fechaVigencia,$medica_motivo_txt,$lot88,$lotpisc){
         try {
             $formatos = ["jpeg","jpg","png","pdf"];
+
+            $lote56 = ($lot56==true) ? 1 : 0;
+            $lote88 = ($lot88==true) ? 1 : 0;
+            $pisco = ($lotpisc==true) ? 1 : 0;
 
             $adjunto = "no ha enviado el documento";
             $respuestaAdJ = true;
@@ -686,15 +698,15 @@
             }
             $id=uniqid();
             
-            $sql = "INSERT INTO pase_medico SET id=?,numPase=?,lote=?,observacion=?,nombre=?,dni=?,grupoSangre=?,alergias=?,fechaEmo=?,fechaVigencia=?,adjuntoPase=?";
+            $sql = "INSERT INTO pase_medico SET id=?,numPase=?,lot56=?,observacion=?,nombre=?,dni=?,grupoSangre=?,alergias=?,fechaEmo=?,fechaVigencia=?,motivotexto=?,lot88=?,lotpisco=?,adjuntoPase=?";
             $statement = $pdo->prepare($sql);
-            $statement ->execute(array($id,$cod,$lote,$obs,$nombre,$doc,$grupoSangre,$alergias,$fechaEmo,$fechaVigencia,$nombres));
+            $statement ->execute(array($id,$cod,$lote56,$obs,$nombre,$doc,$grupoSangre,$alergias,$fechaEmo,$fechaVigencia,$medica_motivo_txt,$lote88,$pisco,$nombres));
             $respuesta = array("respuesta"  => true,
                                 "clase"     =>"msj_correct",
                                 "error"     =>"no hay error",
                                 "doc"       => $nombres,
                                 "adjunto"   => $adjunto,
-                                "resultado" => $respuestaAdJ);
+                                "resultado" => $lote88);
 
             return $respuesta;
 

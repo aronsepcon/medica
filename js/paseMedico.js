@@ -18,6 +18,9 @@ const $nombre_pase = document.getElementById("nombre_pase");
 const $dni_pase = document.getElementById("dni_pase");
 const $sangre_pase = document.getElementById("sangre_pase");
 const $alergias_pase = document.getElementById("alergias_pase");
+const $lote56 = document.getElementById("lote56");
+const $lote88 = document.getElementById("lote88");
+const $pisco = document.getElementById("pisco");
 const $enviar_pase = document.getElementById("enviar_pase_medico");
 const $numero_pase = document.getElementById("numero_pase");
 const $fecha_emo = document.getElementById("fecha_emo");
@@ -92,65 +95,6 @@ $vista_pase.onclick = (e) =>{
     }
 
 }
-/*
-export function paseMedico(){
-
-    let data2 = new FormData();
-    data2.append("documento",$documento_trabajador.value);
-    data2.append("funcion","listarExamenes");
-    fetch('../inc/consultasmedicas.inc.php',{
-        method: "POST",
-        body:data2,
-    })
-    .then(function(response){
-        return response.json();
-    })
-    .then(dataJson => {
-        if (dataJson.respuesta){
-            $nombre_pase.value = dataJson.lista[0].paciente;
-            $dni_pase.value = dataJson.lista[0].dni;
-            $sangre_pase.value = dataJson.lista[0].sangre;
-            $alergias_pase.value = dataJson.lista[0].alergias;
-            //validar tipo de examen ---->  dataJson.lista[0].tipo;
-            $fecha_emo.value = dataJson.lista[0].fecha_emo;
-        }else{
-            mostrarMensaje("Verifique el N°. Documento","msj_error");
-        }
-    
-    });
-
-    let data3 = new FormData();
-    data3.append("documento",$documento_trabajador.value);
-    data3.append("funcion","listarPases");
-    fetch('../inc/consultasmedicas.inc.php',{
-        method: "POST",
-        body:data3,
-    })
-    .then(function(response){
-        return response.json();
-    })
-    .then(dataJson => {
-        if (dataJson.respuesta){
-            $id_pase.value = dataJson.lista[0].id;
-            $numero_pase.value=dataJson.lista[0].numero_pase;
-            $fecha_vigencia.value=dataJson.lista[0].fecha_vigencia;
-
-            if(dataJson.lista[0].adjunto_pase){
-                $subida_pase.style.color="green";
-            }
-            else{
-                $id_pase.value ="";
-                $subida_pase.style.color="";
-            }
-        }
-        else{
-            $id_pase.value ="";
-            $numero_pase.value="";
-            $fecha_vigencia.value="";
-            $subida_pase.style.color="";
-        }
-    });   
-}*/
 
 $subida_pase.onclick = (e) => {
     e.preventDefault();
@@ -173,6 +117,10 @@ function enviarPase(){
     data.append("alergias", $alergias_pase.value);
     data.append("fecha_emo",$fecha_emo.value);
     data.append("fecha_vigencia",$fecha_vigencia.value);
+    data.append("medica_motivo_txt",$medicamotivotext.value);
+    data.append("lote56",$lote56.checked);
+    data.append("lote88",$lote88.checked);
+    data.append("pisco",$pisco.checked);
     if($id_pase.value !=""){
         data.append("funcion","actualizarPase");
         data.append("id",$id_pase.value);

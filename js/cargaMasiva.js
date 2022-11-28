@@ -235,7 +235,7 @@ $envio_vacuna.onclick = (e) => {
         formData.append('documento',documento)
         formData.append('validacion',tipovacuna);
         formData.append('nombre',$nombre_trabajador.value);
-
+        //if(tipovacuna=="" || tipovacuna==""){}else if{tipovacuna==""}
         fetch("../inc/subirImagen.inc.php",{
             method: 'POST',
             body: formData

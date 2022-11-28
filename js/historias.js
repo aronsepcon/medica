@@ -16,8 +16,11 @@ const $subida_pase = document.getElementById("subida_pase");
 const $numero_pase = document.getElementById("numero_pase");
 const $fecha_emo = document.getElementById("fecha_emo");
 const $fecha_vigencia = document.getElementById("fecha_vigencia");
-const $lote_pase = document.getElementById("lote_pase");
+const $lote56 = document.getElementById("lote56");
+const $lote88 = document.getElementById("lote88");
+const $pisco = document.getElementById("pisco");
 const $obs_pase = document.getElementById("obs_pase");
+const $medicamotivotext = document.getElementById("medicamotivotext");
 
 //import {mostrarMensaje,fadeIn,fadeOut,validar } from "./funciones.js";
 
@@ -263,8 +266,13 @@ function paseMedico(){
             $dni_pase.value = dataJson.lista[0].dni;
             $sangre_pase.value = dataJson.lista[0].sangre;
             $alergias_pase.value = dataJson.lista[0].alergias;
-            //validar tipo de examen ---->  dataJson.lista[0].tipo;
-            /*$fecha_emo.value = dataJson.lista[0].fecha_emo;*/
+            console.log($alergias_pase.value);
+            if( dataJson.lista[0].alergias=="NO REFIERE" || dataJson.lista[0].alergias=="NINGUNA"){
+                $alergias_pase.style.color = "";
+            }
+            else{
+                $alergias_pase.style.color = "red";
+            }
         }else{
             mostrarMensaje("Verifique el N°. Documento","msj_error");
         }
@@ -287,9 +295,12 @@ function paseMedico(){
             $numero_pase.value=dataJson.lista[0].numero_pase;
             $fecha_emo.value=dataJson.lista[0].	fechaEmo;
             $fecha_vigencia.value=dataJson.lista[0].fecha_vigencia;
-            $lote_pase.value =dataJson.lista[0].lote_pase;
+            dataJson.lista[0].lote56==1 ? $lote56.checked=true : $lote56.checked=false;
+            dataJson.lista[0].lote88==1 ? $lote88.checked=true : $lote88.checked=false;
+            dataJson.lista[0].lotepisco==1 ? $pisco.checked=true : $pisco.checked=false;
             $obs_pase.value = dataJson.lista[0].obs_pase;
             $nomb_adjunto.value = dataJson.lista[0].adjunto_pase;
+            $medicamotivotext.value = dataJson.lista[0].motivotexto;
             if(dataJson.lista[0].adjunto_pase){
                 $subida_pase.style.color="green";
             }

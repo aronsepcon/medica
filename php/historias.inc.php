@@ -75,9 +75,9 @@
     <form class="historias__cuerpo__busqueda" action="../inc/cargarHistoriaMedica.inc.php" method="post">
         <div>
             <input type="radio" name="filtrado" id="radio__nombre">
-            <label for="nombre">Por Nombre</label>
+            <label for="radio__nombre">Por Nombre</label>
             <input type="radio"  name="filtrado" id="radio__dni" checked>
-            <label for="dni">Por DNI</label>
+            <label for="radio__dni">Por DNI</label>
         </div>    
         <input type="text" id="nombres_trabajador" name="nombres_trabajador" style="color:gray" placeholder="Nombres" value="" readonly>
         <input type="text" id="documento_trabajador" name="documento_trabajador" placeholder="Documento de Identificación" value="42081842">
@@ -744,6 +744,8 @@
                                 <input type="text" id="lote_pase" hidden>
                                 <input type="checkbox" name="lote56" id="lote56">
                                 <label for="lote56">56</label>
+                                <input type="checkbox" name="lote88" id="lote88">
+                                <label for="lote88">88</label>
                                 <input type="checkbox" name="pisco" id="pisco">
                                 <label for="pisco">Pisco</label>
                             </div>
