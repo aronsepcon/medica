@@ -254,14 +254,13 @@
     </div>
 
     <div class="modal" id="ficha_vacunas">
-        <div class="inside w40porcen h40p">
+        <div class="inside w30porcen h15p">
             <div>
                 <input type="hidden" name="nombre_vacuna" id="nombre_vacuna">
                 <button type="button" id="cierre_form_vac" class="cierre_form">X</button>
-                <input type="date" id="fecha_vacuna">
+                <input type="date" id="fecha_vacuna" class="fecha_vacuna">
                 <div>
-                    <label for="subida_imagen">Subir Adjunto</label>
-                    <input type="file" name="file" id="subida_imagen" accept=".jpg,.jpeg,.png,.pdf" hidden>                      
+                    <input type="file" name="file" id="subida_imagen" accept=".jpg,.jpeg,.png,.pdf" >                      
                 </div>
                 <div class="opciones">
                     <center><button type="button" id="envio_vacuna">Enviar</button></center>

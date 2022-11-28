@@ -15,6 +15,8 @@ const $envio_vacuna = document.getElementById("envio_vacuna");
 const $nombre_vacuna = document.getElementById("nombre_vacuna");
 const $nombre_trabajador = document.getElementById('nombre_pase');
 
+const $adj_val_dt = document.getElementById('adj_val_dt');
+
 const $fiebre_amarilla__d1 = document.getElementById("fiebre_amarilla__d1");
 const $difteria__d1 = document.getElementById("fiebre__d1");
 const $difteria__d2 = document.getElementById("fiebre__d2");
@@ -152,21 +154,27 @@ function mostrarImagen($value){
             if (dataJson.respuesta){
                 if(dataJson.adjunto){
                     if($value=="difteTet_R1" || $value=="Tifoidea_R1" || $value=="HepatitisA_R1" || $value=="Neumococo_R1"){
-                        $display_image_pest.src="../vacunas/"+dataJson.adjunto;//adjunto[0]
-                        $display_image_pest_r2.src="../vacunas/"+dataJson.adjunto;
-                        $display_image_pest_r3.src="../vacunas/"+dataJson.adjunto;
-                        $display_image_pest_r4.src="../vacunas/"+dataJson.adjunto;
+                        $display_image_pest.src="../vacunas/"+dataJson.adjunto[0];//adjunto[0]
+                        $display_image_pest_r2.src="../vacunas/"+dataJson.adjunto[1];
+                        $display_image_pest_r3.src="../vacunas/"+dataJson.adjunto[2];
+                        $display_image_pest_r4.src="../vacunas/"+dataJson.adjunto[3];
                         fadeIn($pestañas);
                     }
                     else if($value=="Rabia_R1"){
-                        $display_image_pest_rabia.src="../vacunas/"+dataJson.adjunto;
+                        $display_image_pest_rabia.src="../vacunas/"+dataJson.adjunto[0];
+                        $display_image_pest_rabia_r2.src="../vacunas/"+dataJson.adjunto[1];
+                        $display_image_pest_rabia_r3.src="../vacunas/"+dataJson.adjunto[2];
+                        $display_image_pest_rabia_r4.src="../vacunas/"+dataJson.adjunto[3];
+                        $display_image_pest_rabia_r5.src="../vacunas/"+dataJson.adjunto[4];
+                        $display_image_pest_rabia_r6.src="../vacunas/"+dataJson.adjunto[5];
+                        $display_image_pest_rabia_r7.src="../vacunas/"+dataJson.adjunto[6];
                         fadeIn($pestañas_rabia);        
                     }else{
                         let formatos = (dataJson.adjunto).split('.');
                         if(formatos[1]=="pdf"){//esto deberia ir arriba de hecho pero por mientras uu
                             $frame__adjunto.setAttribute("src",'../vacunas/'+dataJson.adjunto);
                             fadeIn($ficha__vistaprevia);
-                        }else if(formatos[1]=="jpeg"){
+                        }else if(formatos[1]=="jpeg"){//el de los multiples deberia ir aqui U:
                             $display_image.src = "../vacunas/"+dataJson.adjunto;
                             console.log(dataJson.adjunto);    
                             fadeIn($ficha__vistaprevia_vac);
@@ -227,33 +235,117 @@ $envio_vacuna.onclick = (e) => {
             //ver la validacion(1 o 0) para la subida de documentos
         fadeOut($ficha_vacunas);
         
-        if(validar($subida_imagen) || fecha1=="") throw "Error de subida";
+        if(validar($subida_imagen) || fecha1=="") throw "Error en el formato del documento";//si el formato del archivo esta en mayusculas da error
 
         const formData = new FormData();
-        formData.append('fechaVacunacion',fecha1);
-        formData.append('subidaImagen',$subida_imagen.files[0]);//es el envio del documento
-        formData.append('documento',documento)
-        formData.append('validacion',tipovacuna);
-        formData.append('nombre',$nombre_trabajador.value);
-        //if(tipovacuna=="" || tipovacuna==""){}else if{tipovacuna==""}
-        fetch("../inc/subirImagen.inc.php",{
-            method: 'POST',
-            body: formData
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.respuesta) {
-                listarVacunas();
-                mostrarMensaje("Documento subido","msj_correct");
-                validacion();//ver aqui luego
-                limpiar();
-            }else{
-                mostrarMensaje("Hubo un error al subir el archivo","msj_error");
-            }
-        })
-        .catch(error => {
-            console.error(error);
-        })
+
+       // if(tipovacuna=="difteTet_R2" || tipovacuna=="HepatitisA_R2" || tipovacuna=="Tifoidea_R2" || tipovacuna=="Neumococo_R2"  || tipovacuna=="Rabia_R2"){
+
+            let data = new FormData();
+            //console.log($fiebre_amarilla__d1.value);
+            data.append("documento",$documento_trabajador.value);
+            data.append("funcion","datosVacunacion");
+            fetch('../inc/consultasmedicas.inc.php',{
+                method: "POST",
+                body:data,
+            })
+            .then(function(response){
+                return response.json();
+            })
+            .then(dataJson => {
+                if (dataJson.respuesta){
+
+                    switch(tipovacuna){
+                        case "difteTet_R2":
+                            if(dataJson.adjuntoDifTR2!="null"){
+                               tipovacuna="difteTet_R3";
+                            }else if(dataJson.adjuntoDifTR3!="null"){
+                                tipovacuna="difteTet_R4";
+                            }
+                            else{
+                                tipovacuna="difteTet_R2";
+                            }
+                            break;
+                        case "HepatitisA_R2":
+                            if(dataJson.adjuntoHepAR2!="null"){
+                                tipovacuna="HepatitisA_R3";
+                            }else if(dataJson.adjuntoHepAR3!="null"){
+                                tipovacuna="HepatitisA_R4";
+                            }
+                            else{
+                                tipovacuna="HepatitisA_R2";
+                            }
+                            break;
+                        case "Tifoidea_R2":
+                            if(dataJson.adjuntoTifoR2!="null"){
+                                tipovacuna="Tifoidea_R3";
+                            }else if(dataJson.adjuntoTifoR3!="null"){
+                                tipovacuna="Tifoidea_R4";
+                            }
+                            else{
+                                tipovacuna="Tifoidea_R2";
+                            }                            
+                            break;
+                        case "Neumococo_R2":
+                            if(dataJson.adjuntoNeumR2!="null"){
+                                tipovacuna="Neumococo_R3";
+                            }else if(dataJson.adjuntoNeumR3!="null"){
+                                tipovacuna="Neumococo_R4";
+                            }
+                            else{
+                                tipovacuna="Neumococo_R2";
+                            }                                  
+                            break;
+                        case "Rabia_R2":
+                            if(dataJson.adjuntoRabR2!="null"){
+                                tipovacuna="Rabia_R3";
+                            }else if(dataJson.adjuntoRabR3!="null"){
+                                tipovacuna="Rabia_R4";
+                            }else if(dataJson.adjuntoRabR4!="null"){
+                                tipovacuna="Rabia_R5";
+                            }else if(dataJson.adjuntoRabR5!="null"){
+                                tipovacuna="Rabia_R6";
+                            }else if(dataJson.adjuntoRabR6!="null"){
+                                tipovacuna="Rabia_R7";
+                            }
+                            else{
+                                tipovacuna="Rabia_R2";
+                            }                             
+                            break;
+                        case "fiebre amarilla":
+                                tipovacuna="fiebre amarilla";
+                            break;
+                    }    
+                    formData.append('fechaVacunacion',fecha1);
+                    formData.append('subidaImagen',$subida_imagen.files[0]);//es el envio del documento
+                    formData.append('documento',documento);
+                    formData.append('nombre',$nombre_trabajador.value);
+                    formData.append('validacion',tipovacuna);    
+
+                    fetch("../inc/subirImagen.inc.php",{
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.respuesta) {
+                            listarVacunas();
+                            mostrarMensaje("Documento subido","msj_correct");
+                            validacion();//ver aqui luego
+                            limpiar();
+                        }else{
+                            mostrarMensaje("Hubo un error al subir el archivo","msj_error");
+                        }
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    })
+
+                }
+            })  
+      //  }
+
+        
         
     } catch (error) {
         mostrarMensaje(error,"msj_error");  
@@ -539,7 +631,6 @@ export function listarVacunas(){
                 $rabia__d2.style.fontStyle="italic";
                 $rabia__d2.style.fontWeight = "bold";
                 $rabia__d2.style.color="red";
-
             }
             else{
                 document.getElementById("icono_rb_d2").style.color="";
@@ -548,7 +639,7 @@ export function listarVacunas(){
                 $rabia__d2.style.color="";
             }
 
-            if(dataJson.adjuntoRabD3!=null  && $rabia__d3.value!=""){
+            if(dataJson.adjuntoRabD3!=null && $rabia__d3.value!=""){
                 document.getElementById("icono_rb_d3").style.color="green";
                 $rabia__d3.style.fontStyle="";
                 $rabia__d3.style.fontWeight = "";
@@ -559,7 +650,6 @@ export function listarVacunas(){
                 $rabia__d3.style.fontStyle="italic";
                 $rabia__d3.style.fontWeight = "bold";
                 $rabia__d3.style.color="red";
-
             }
             else{
                 document.getElementById("icono_rb_d3").style.color="";

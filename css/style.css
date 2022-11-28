@@ -137,6 +137,10 @@ iframe {
   width: 100%;
 }
 
+.h15p {
+  height:15%;
+}
+
 .h40p {
   height: 40%;
 }
@@ -181,8 +185,8 @@ iframe {
 .columnas_8 {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 0.5fr 10px 1fr 10px 0.5fr 10px 1fr 10px 0.5fr 10px 1fr 10px 0.5fr 10px 1fr;
-  grid-template-columns: repeat(4, 0.5fr 1fr);
+  /*-ms-grid-columns: 0.5fr 10px 0.5fr 10px 0.5fr 10px 1fr 10px 0.5fr 10px 1fr 10px 0.5fr 10px 1fr;*/
+  grid-template-columns: repeat(4, 0.4fr 0.5fr);
   -ms-grid-rows: 2rem;
   grid-template-rows: 2rem;
   -webkit-column-gap: 10px;
@@ -932,39 +936,42 @@ input[name = "filtrado"]{
   margin-bottom: 9px;
 }
 
-#ficha_vacunas label{
-  margin-bottom: 9px;
-  border: 1px solid #ccc;
-  background-color: green;
-  display: inline-block;
-  padding: 6px 8px;
-  cursor: pointer;
-  -webkit-box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2);
-  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2);
+.fecha_vacuna {
+  margin-top: 10px;
 }
 
-#ficha_vacunas label:hover{
-  -webkit-transform: translateY(-3px);
-  transform: translateY(-3px);
-  -webkit-box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.2);
-          box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.2);
-}
-
-#ficha__vistaprevia_vac img{
+.tab-content img{
+  margin-top: 50px;
   max-width: 90%;
   height: auto;
   display: block;
   margin-left: auto;
-  margin-right: auto;
+  margin-right: auto
+}
+
+.tab-content img:hover{
+  -webkit-transform: scale(1.3);
+  -moz-transform: scale(1.3);
+  -o-transform: scale(1.3);
+  -ms-transform: scale(1.3);
+  transform: scale(1.3);
+}
+
+#ficha__vistaprevia_vac img{
   margin-top: 50px;
+  max-width: 90%;
+  height: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto
 }
 
 #ficha__vistaprevia_vac img:hover{
-  -webkit-transform: scale(1.5);
-  -moz-transform: scale(1.5);
-  -o-transform: scale(1.5);
-  -ms-transform: scale(1.5);
-  transform: scale(1.5);
+  -webkit-transform: scale(1.3);
+  -moz-transform: scale(1.3);
+  -o-transform: scale(1.3);
+  -ms-transform: scale(1.3);
+  transform: scale(1.3);
 }
 
 .tab-content {

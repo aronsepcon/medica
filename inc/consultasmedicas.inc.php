@@ -398,9 +398,12 @@
                             fechaFbrAmarilla,fechaDifTD1,fechaDifTD2,fechaDifTD3,fechaDifTR1,fechaDifTR2,fechaHepAD1,fechaHepAD2,fechaHepAR1,fechaHepAR2,fechaHepBD1,
                             fechaHepBD2,fechaHepBD3,fechaInflR1,fechaInflR2,fechaPolioD1,fechaTrivD1,fechaRabD1,fechaRabD2,fechaRabD3,fechaRabR1,fechaRabR2,fechaTifoR1,
                             fechaTifoR2,fechaNeumR1,fechaNeumR2,fechaCovidD1,fechaCovidD2,fechaCovidD3,fechaCovidD4,
-                            adjuntoFbrAmarilla,adjuntoDifTD1,adjuntoDifTD2,adjuntoDifTD3,adjuntoDifTR1,adjuntoHepAD1,adjuntoHepAD2,adjuntoHepAR1,adjuntoHepBD1,
-                            adjuntoHepBD2,adjuntoHepBD3,adjuntoInflR1,adjuntoPolioD1,adjuntoTrivD1,adjuntoRabD1,adjuntoRabD2,adjuntoRabD3,adjuntoRabR1,adjuntoTifoR1,
-                            adjuntoNeumR1,adjuntoCovidD1,adjuntoCovidD2,adjuntoCovidD3,adjuntoCovidD4
+                            adjuntoFbrAmarilla,adjuntoDifTD1,adjuntoDifTD2,adjuntoDifTD3,adjuntoDifTR1,adjuntoDifTR2,adjuntoDifTR3,adjuntoDifTR4,adjuntoHepAD1,adjuntoHepAD2,
+                            adjuntoHepAR1,adjuntoHepAR2,adjuntoHepAR3,adjuntoHepAR4,adjuntoHepBD1,
+                            adjuntoHepBD2,adjuntoHepBD3,adjuntoInflR1,adjuntoPolioD1,adjuntoTrivD1,adjuntoRabD1,adjuntoRabD2,adjuntoRabD3,adjuntoRabR1,
+                            adjuntoRabR2,adjuntoRabR3,adjuntoRabR4,adjuntoRabR5,adjuntoRabR6,adjuntoRabR7,
+                            adjuntoTifoR1,adjuntoTifoR2,adjuntoTifoR3,adjuntoTifoR4,adjuntoNeumR1,adjuntoNeumR2,adjuntoNeumR3,adjuntoNeumR4,
+                            adjuntoCovidD1,adjuntoCovidD2,adjuntoCovidD3,adjuntoCovidD4
                         FROM 
                             fichas_vacunacion 
                         WHERE 
@@ -449,9 +452,15 @@
                 "adjuntoDifTD2" =>$result[0]['adjuntoDifTD2'],
                 "adjuntoDifTD3" =>$result[0]['adjuntoDifTD3'],
                 "adjuntoDifTR1" =>$result[0]['adjuntoDifTR1'],
+                "adjuntoDifTR2" =>$result[0]['adjuntoDifTR2'],
+                "adjuntoDifTR3" =>$result[0]['adjuntoDifTR3'],
+                "adjuntoDifTR4" =>$result[0]['adjuntoDifTR4'],
                 "adjuntoHepAD1" =>$result[0]['adjuntoHepAD1'],
                 "adjuntoHepAD2" =>$result[0]['adjuntoHepAD2'],
                 "adjuntoHepAR1" =>$result[0]['adjuntoHepAR1'],
+                "adjuntoHepAR2" =>$result[0]['adjuntoHepAR2'],
+                "adjuntoHepAR3" =>$result[0]['adjuntoHepAR3'],
+                "adjuntoHepAR4" =>$result[0]['adjuntoHepAR4'],
                 "adjuntoHepBD1" =>$result[0]['adjuntoHepBD1'],
                 "adjuntoHepBD2" =>$result[0]['adjuntoHepBD2'],
                 "adjuntoHepBD3" =>$result[0]['adjuntoHepBD3'],
@@ -462,8 +471,20 @@
                 "adjuntoRabD2" =>$result[0]['adjuntoRabD2'],
                 "adjuntoRabD3" =>$result[0]['adjuntoRabD3'],
                 "adjuntoRabR1" =>$result[0]['adjuntoRabR1'],
+                "adjuntoRabR2" =>$result[0]['adjuntoRabR2'],
+                "adjuntoRabR3" =>$result[0]['adjuntoRabR3'],
+                "adjuntoRabR4" =>$result[0]['adjuntoRabR4'],
+                "adjuntoRabR5" =>$result[0]['adjuntoRabR5'],
+                "adjuntoRabR6" =>$result[0]['adjuntoRabR6'],
+                "adjuntoRabR7" =>$result[0]['adjuntoRabR7'],
                 "adjuntoTifoR1" =>$result[0]['adjuntoTifoR1'],
+                "adjuntoTifoR2" =>$result[0]['adjuntoTifoR2'],
+                "adjuntoTifoR3" =>$result[0]['adjuntoTifoR3'],
+                "adjuntoTifoR4" =>$result[0]['adjuntoTifoR4'],
                 "adjuntoNeumR1" =>$result[0]['adjuntoNeumR1'],
+                "adjuntoNeumR2" =>$result[0]['adjuntoNeumR2'],
+                "adjuntoNeumR3" =>$result[0]['adjuntoNeumR3'],
+                "adjuntoNeumR4" =>$result[0]['adjuntoNeumR4'],
                 "adjuntoCovidD1" =>$result[0]['adjuntoCovidD1'],
                 "adjuntoCovidD2" =>$result[0]['adjuntoCovidD2'],
                 "adjuntoCovidD3" =>$result[0]['adjuntoCovidD3'],
@@ -533,7 +554,7 @@
                 $sql = "SELECT adjuntoDifTD3 as adjunto FROM fichas_vacunacion WHERE dni=?";
                 break;    
             case "difteTet_R1":
-                $sql = "SELECT adjuntoDifTR1 as adjunto FROM fichas_vacunacion WHERE dni=?";
+                $sql = "SELECT adjuntoDifTR1 as adjunto1,adjuntoDifTR2  as adjunto2,adjuntoDifTR3  as adjunto3,adjuntoDifTR4  as adjunto4 FROM fichas_vacunacion WHERE dni=?";
                 break;
             case "HepatitisA_D1":
                 $sql = "SELECT adjuntoHepAD1 as adjunto FROM fichas_vacunacion WHERE dni=?";
@@ -542,7 +563,7 @@
                 $sql = "SELECT adjuntoHepAD2 as adjunto FROM fichas_vacunacion WHERE dni=?";
                 break;
             case "HepatitisA_R1":
-                $sql = "SELECT adjuntoHepAR1 as adjunto FROM fichas_vacunacion WHERE dni=?";
+                $sql = "SELECT adjuntoHepAR1 as adjunto1,adjuntoHepAR2 as adjunto2,adjuntoHepAR3 as adjunto3,adjuntoHepAR4 as adjunto4 FROM fichas_vacunacion WHERE dni=?";
                 break;
             case "HepatitisB_D1":
                 $sql = "SELECT adjuntoHepBD1 as adjunto FROM fichas_vacunacion WHERE dni=?";
@@ -572,13 +593,14 @@
                 $sql = "SELECT adjuntoRabD3 as adjunto FROM fichas_vacunacion WHERE dni=?";
                 break;
             case "Rabia_R1":
-                $sql = "SELECT adjuntoRabR1 as adjunto FROM fichas_vacunacion WHERE dni=?";
+                $sql = "SELECT adjuntoRabR1 as adjunto1,adjuntoRabR2 as adjunto2,adjuntoRabR3 as adjunto3,adjuntoRabR4 as adjunto4,
+                        adjuntoRabR5 as adjunto5,adjuntoRabR6 as adjunto6,adjuntoRabR7 as adjunto7, FROM fichas_vacunacion WHERE dni=?";
                 break;
             case "Tifoidea_R1":
-                $sql = "SELECT adjuntoTifoR1 as adjunto FROM fichas_vacunacion WHERE dni=?";
+                $sql = "SELECT adjuntoTifoR1 as adjunto1,adjuntoTifoR2 as adjunto2,adjuntoTifoR3 as adjunto3,adjuntoTifoR4 as adjunto4 FROM fichas_vacunacion WHERE dni=?";
                 break;
             case "Neumococo_R1":
-                $sql = "SELECT adjuntoNeumR1 as adjunto FROM fichas_vacunacion WHERE dni=?";
+                $sql = "SELECT adjuntoNeumR1 as adjunto1,adjuntoNeumR2 as adjunto2, adjuntoNeumR3 as adjunto3, adjuntoNeumR4 as adjunto4  FROM fichas_vacunacion WHERE dni=?";
                 break;
             case "COVID_D1":
                 $sql = "SELECT adjuntoCovidD1 as adjunto FROM fichas_vacunacion WHERE dni=?";
@@ -598,12 +620,38 @@
         $result = $statement ->fetchAll();
         $rowCount = $statement -> rowcount();
         if ($rowCount > 0) {
-            $respuesta = array(
-                "respuesta" => true,
-                "clase"     =>"msj_correct",
-                "error"     =>"no hay error",
-                "adjunto"    => $result[0]['adjunto']
-            );
+            switch($validacion){
+                case "Tifoidea_R1":
+                case "difteTet_R1":
+                case "HepatitisA_R1":
+                case "Neumococo_R1":
+                    $respuesta = array(
+                        "respuesta" => true,
+                        "clase"     =>"msj_correct",
+                        "error"     =>"no hay error",
+                        "caso"      =>$validacion,
+                        "adjunto"   => array($result[0]['adjunto1'],$result[0]['adjunto2'],$result[0]['adjunto3'],$result[0]['adjunto4'])
+                    );
+                    break;
+                case "Rabia_R1":
+                    $respuesta = array(
+                        "respuesta" => true,
+                        "clase"     =>"msj_correct",
+                        "error"     =>"no hay error",
+                        "caso"      =>$validacion,
+                        "adjunto"   => array($result[0]['adjunto1'],$result[0]['adjunto2'],$result[0]['adjunto3'],$result[0]['adjunto4']
+                                            ,$result[0]['adjunto5'],$result[0]['adjunto6'],$result[0]['adjunto7'])
+                    );
+                    break;
+                default:
+                    $respuesta = array(
+                        "respuesta" => true,
+                        "clase"     =>"msj_correct",
+                        "error"     =>"no hay error",
+                        "adjunto"    => $result[0]['adjunto']
+                    );
+                    break;
+            }
         }else{
             $respuesta = array("respuesta"=>$respuesta,
                                 "mensaje"=>$mensaje,
