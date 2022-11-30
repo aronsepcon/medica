@@ -176,45 +176,55 @@
                         <a href="#tab4">Pestaña 4</a>
                         <div class="tab-content">
                             <div class="tab_imagen" id="tab_imagen_r1">
-                                <div class="pest_sup" id="pest_sup">
+                                <div class="pest_sup" id="pest_sup_r4">
+                                    <a href="#" onclick="zoomOut('r4')" class="alejar"><i class="fas fa-minus"></i></a>
+                                    <a href="#" onclick="zoomIn('r4')" class="acercar"><i class="fas fa-plus"></i></a>
                                     <a href="#" id="descarga" download><i class="fas fa-download desc"></i></a>
                                 </div>
-                                <img src="" id="imagen_pestaña_r4" alt="">        
-                            </div>
-                            <div class="tab_pdf" id="tab_pdf_r4" >
-                                <iframe src="" id="adjunto_pestaña_r4" ></iframe>
+                                <img src="" class="img_pestaña" id="imagen_pestaña_r4" alt="">  
+                                <iframe src="" id="adjunto_pestaña_r4" ></iframe>      
                             </div>
                         </div>
                     </div>
                     <div id="tab3" class="tab"> 
                         <a href="#tab3">Pestaña 3</a>
                         <div class="tab-content">
-                            <img src="" id="imagen_pestaña_r3" alt="">        
-                        </div>
-                        <div class="tab_pdf" hidden>
-                            <iframe src="" id="adjunto_pestaña_r3" ></iframe>
+                            <div class="tab_imagen">
+                                <div class="pest_sup" id="pest_sup_r3">
+                                    <a href="#" onclick="zoomOut('r3')" class="alejar"><i class="fas fa-minus"></i></a>
+                                    <a href="#" onclick="zoomIn('r3')" class="acercar"><i class="fas fa-plus"></i></a>
+                                    <a href="#" id="descarga_3" download><i class="fas fa-download desc"></i></a>
+                                </div>
+                                <img src="" class="img_pestaña" id="imagen_pestaña_r3" alt=""> 
+                                <iframe src="" id="adjunto_pestaña_r3" ></iframe>   
+                            </div>
                         </div>
                     </div>
                     <div id="tab2" class="tab">
                         <a href="#tab2">Pestaña 2</a>
                         <div class="tab-content">
-                            <div class="pest_sup">
-                                <a href="" id="descarga_2" download><i class="fas fa-download desc"></i></a>
+                            <div class="tab_imagen">
+                                <div class="pest_sup" id="pest_sup_r2">
+                                    <a href="" id="descarga_2" download><i class="fas fa-download desc"></i></a>
+                                </div>
+                                <img src="" class="img_pestaña" id="imagen_pestaña_r2" alt=""> 
+                                <iframe src="" id="adjunto_pestaña_r2" ></iframe>    
                             </div>
-                            <img src="" id="imagen_pestaña_r2" alt="">        
-                        </div>
-                        <div class="tab_pdf" hidden>
-                                <iframe src="" id="adjunto_pestaña_r2" ></iframe>
                         </div>
                     </div> 
                     <div id="tab1" class="tab">
                         <a href="#tab1">Pestaña 1</a>
                         <div class="tab-content">
-                            <img src="" id="imagen_pestaña" alt="">
+                            <div class="tab_imagen">
+                                <div class="pest_sup" id="pest_sup_r1">
+                                    <a href="#" onclick="zoomOut('r1')" class="alejar"><i class="fas fa-minus"></i></a>
+                                    <a href="#" onclick="zoomIn('r1')" class="acercar"><i class="fas fa-plus"></i></a>
+                                    <a href="#" id="descarga_1" download><i class="fas fa-download desc"></i></a>
+                                </div>    
+                                <img src="" class="img_pestaña" id="imagen_pestaña" alt="">
+                                <iframe src="" id="adjunto_pestaña_r1"></iframe>
+                            </div>
                         </div> 
-                        <div class="tab_pdf" hidden>
-                                <iframe src="" id="adjunto_pestaña_r1" ></iframe>
-                        </div>
                     </div> 
                 </div>
             </div>
