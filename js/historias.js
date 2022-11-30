@@ -396,20 +396,30 @@ function listadoDni($e){
         })
         .then(dataJson=>{
             if(dataJson.existe){
+                
+                let fec_nac= new Date(dataJson.datos[0].nacimiento.slice(0,10)).getTime();
+                let diff_mes = Date.now()-fec_nac;
+                let edad1 = new Date(diff_mes);
+                let año = edad1.getUTCFullYear();
+                let edad = Math.abs(año-1970);
+
                 $numero__registro.value = dataJson.datos[0].cut;
                 $nombres__apellidos.value = dataJson.datos[0].paterno+" "+dataJson.datos[0].materno+" "+dataJson.datos[0].nombres;
                 $correo__electronico.value = dataJson.datos[0].correo;
                 $documento__identidad.value = dataJson.datos[0].dni;
                 $cargo__trabajador.value = dataJson.datos[0].cargo;
                 $centro_costos.value =dataJson.datos[0].ccostos.slice(0,4) +" "+dataJson.datos[0].sede;
-                $edad__trabajador.value = dataJson.datos[0].edad;
+                $edad__trabajador.value = edad;//aqui xd
                 $sede__trabajador.value = dataJson.datos[0].sucursal;
                 $sexo__trabajador.value = dataJson.datos[0].sexo;
-                $fecha__nacimiento.value = dataJson.datos[0].nacimiento.slice(0,10);
+                $fecha__nacimiento.value = dataJson.datos[0].nacimiento.slice(0,10);//aqui tmb
                 $estado__trabajador.value = dataJson.datos[0].estado;
                 $nombres_trabajador.value =  dataJson.datos[0].paterno+" "+dataJson.datos[0].materno+" "+dataJson.datos[0].nombres;
                 $direccion__trabajador.value = dataJson.datos[0].direccion;
                 $telefono__trabajador.value = dataJson.datos[0].telefono;
+
+               
+                console.log( edad);
             }
         })
 }

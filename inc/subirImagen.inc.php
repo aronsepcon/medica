@@ -7,7 +7,25 @@
     $validacion = $_POST['validacion'];
     $documento = $_POST['documento'];
     $nombrePac = $_POST['nombre'];
-    $formato = explode(".",htmlspecialchars( basename($_FILES['subidaImagen']["name"])));
+
+    $formato = explode(".",htmlspecialchars( basename(strtolower($_FILES['subidaImagen']["name"]))));
+    $i=0;
+    $s="";
+
+    foreach($formato as $fr){
+        switch($formato[$i]){
+            case $formatos[0]:
+            case $formatos[1]:
+            case $formatos[2]:    
+            case $formatos[2]:    
+                $s = $formato[$i];
+            break;
+        }
+        $i++;
+    }
+
+    $fec=explode("-",$fecha);
+    $r = $fec[2].$fec[1].$fec[0];//el formato es ddmmyyyy
 
     $mensaje = "No se completo la operacion";
     $respuesta = false;
@@ -16,15 +34,15 @@
     $archivo = $_FILES['subidaImagen'];
     $temporal = $_FILES['subidaImagen']['tmp_name'];
     
-    switch($formato[1]){
+    switch($s){
         case $formatos[0]:
         case $formatos[1]:
         case $formatos[2]:
-            $nombre = $validacion."-".$nombrePac."-".$fecha.".jpeg";
+            $nombre = $validacion."-".$nombrePac."-".$documento."-".$r.".jpeg";
             break;
         case $formatos[3]:
-            $nombre = $validacion."-".$nombrePac."-".$fecha.".pdf";
-            break;
+            $nombre = $validacion."-".$nombrePac."-".$documento."-".$r.".pdf";
+            break;//preguntar con espacio o sin espacio
     }
 
     if(move_uploaded_file($temporal,"../vacunas/".$nombre)){
@@ -35,6 +53,7 @@
 
     $salida =  array("mensaje"=>$mensaje,
                     "respuesta"=>$respuesta,
+                    "validacion"=>$validacion,
                     "archivo"=>$nombre,
                     "fecha"=>$fecha);
 

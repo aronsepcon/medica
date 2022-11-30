@@ -554,7 +554,7 @@
                 $sql = "SELECT adjuntoDifTD3 as adjunto FROM fichas_vacunacion WHERE dni=?";
                 break;    
             case "difteTet_R1":
-                $sql = "SELECT adjuntoDifTR1 as adjunto1,adjuntoDifTR2  as adjunto2,adjuntoDifTR3  as adjunto3,adjuntoDifTR4  as adjunto4 FROM fichas_vacunacion WHERE dni=?";
+                $sql = "SELECT adjuntoDifTR1 as adjunto1,adjuntoDifTR2 as adjunto2,adjuntoDifTR3 as adjunto3,adjuntoDifTR4 as adjunto4 FROM fichas_vacunacion WHERE dni=?";
                 break;
             case "HepatitisA_D1":
                 $sql = "SELECT adjuntoHepAD1 as adjunto FROM fichas_vacunacion WHERE dni=?";

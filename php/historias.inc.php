@@ -175,7 +175,15 @@
                     <div id="tab4" class="tab"> 
                         <a href="#tab4">Pestaña 4</a>
                         <div class="tab-content">
-                            <img src="" id="imagen_pestaña_r4" alt="">        
+                            <div class="tab_imagen" id="tab_imagen_r1">
+                                <div class="pest_sup" id="pest_sup">
+                                    <a href="#" id="descarga" download><i class="fas fa-download desc"></i></a>
+                                </div>
+                                <img src="" id="imagen_pestaña_r4" alt="">        
+                            </div>
+                            <div class="tab_pdf" id="tab_pdf_r4" >
+                                <iframe src="" id="adjunto_pestaña_r4" ></iframe>
+                            </div>
                         </div>
                     </div>
                     <div id="tab3" class="tab"> 
@@ -183,11 +191,20 @@
                         <div class="tab-content">
                             <img src="" id="imagen_pestaña_r3" alt="">        
                         </div>
+                        <div class="tab_pdf" hidden>
+                            <iframe src="" id="adjunto_pestaña_r3" ></iframe>
+                        </div>
                     </div>
                     <div id="tab2" class="tab">
                         <a href="#tab2">Pestaña 2</a>
                         <div class="tab-content">
+                            <div class="pest_sup">
+                                <a href="" id="descarga_2" download><i class="fas fa-download desc"></i></a>
+                            </div>
                             <img src="" id="imagen_pestaña_r2" alt="">        
+                        </div>
+                        <div class="tab_pdf" hidden>
+                                <iframe src="" id="adjunto_pestaña_r2" ></iframe>
                         </div>
                     </div> 
                     <div id="tab1" class="tab">
@@ -195,6 +212,9 @@
                         <div class="tab-content">
                             <img src="" id="imagen_pestaña" alt="">
                         </div> 
+                        <div class="tab_pdf" hidden>
+                                <iframe src="" id="adjunto_pestaña_r1" ></iframe>
+                        </div>
                     </div> 
                 </div>
             </div>
@@ -242,8 +262,8 @@
                             <img src="" id="imagen_pestaña_rabia_r2" alt="">
                         </div>
                     </div> 
-                    <div id="tab1" class="tab">
-                        <a href="#tab1">Pestaña 1</a>
+                    <div id="tab1_r" class="tab">
+                        <a href="#tab1_r">Pestaña 1</a>
                         <div class="tab-content">
                             <img src="" id="imagen_pestaña_rabia" alt="">
                         </div> 
