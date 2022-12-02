@@ -594,7 +594,7 @@
                 break;
             case "Rabia_R1":
                 $sql = "SELECT adjuntoRabR1 as adjunto1,adjuntoRabR2 as adjunto2,adjuntoRabR3 as adjunto3,adjuntoRabR4 as adjunto4,
-                        adjuntoRabR5 as adjunto5,adjuntoRabR6 as adjunto6,adjuntoRabR7 as adjunto7, FROM fichas_vacunacion WHERE dni=?";
+                        adjuntoRabR5 as adjunto5,adjuntoRabR6 as adjunto6,adjuntoRabR7 as adjunto7 FROM fichas_vacunacion WHERE dni=?";
                 break;
             case "Tifoidea_R1":
                 $sql = "SELECT adjuntoTifoR1 as adjunto1,adjuntoTifoR2 as adjunto2,adjuntoTifoR3 as adjunto3,adjuntoTifoR4 as adjunto4 FROM fichas_vacunacion WHERE dni=?";

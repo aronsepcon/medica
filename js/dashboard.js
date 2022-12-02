@@ -18,6 +18,7 @@ $historias.onclick =(e) => {
     e.preventDefault();
 
     fadeIn($ficha__historias);
+    fadeOut($cargar__estadisticas);
 
     return false;
 }
@@ -26,6 +27,9 @@ $estadisticas.onclick = (e) => {
     e.preventDefault();
 
     fadeIn($cargar__estadisticas);
+    fadeOut($ficha__cargar);
+    fadeOut($ficha__historias);
+    fadeOut($permisos_panel);
 
     return false;
 }
@@ -45,6 +49,7 @@ $permisos.onclick = (e) => {
 
     //$permisos_panel.display = "block";
     fadeOut($ficha__cargar);
+    fadeOut($cargar__estadisticas);
     fadeOut($ficha__historias);
     fadeIn($permisos_panel);
 

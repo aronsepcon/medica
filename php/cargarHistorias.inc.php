@@ -92,7 +92,7 @@
             <div>
                 <form method='post' action='' enctype='multipart/form-data'>
                     <input type="file" name="file" id="subidaMasiva" accept=".xls,.xlsx" multiple>
-                    <div id="formUpload__data">
+                    <div id="formUpload__data" class="oculto">
                         <div id="formUpload__data__process">
                             <a href="#" id="btn__uploadPDF"></i></a>
                         </div>
@@ -104,7 +104,7 @@
             <div>
                 <form method='post' action='' enctype='multipart/form-data'>
                     <input type="file" name="file" id="uploadFile" accept=".pdf" multiple>
-                    <div id="formUpload__data">
+                    <div id="formUpload__data" class="oculto">
                         <div id="formUpload__data__process">
                             <a href="#" id="btn__uploadPDF"></i></a>
                         </div>

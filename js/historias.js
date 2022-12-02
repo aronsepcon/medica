@@ -265,6 +265,13 @@ function paseMedico(){
             $nombre_pase.value = dataJson.lista[0].paciente;
             $dni_pase.value = dataJson.lista[0].dni;
             $sangre_pase.value = dataJson.lista[0].sangre;
+            let sp = (dataJson.lista[0].sangre).split(" ");
+            if(sp[2]=="NEGATIVO" || sp[2]=="negativo" || sp[2]=="-" || sp[1]=="Rh-"){
+                $sangre_pase.style.color="red";
+            }
+            else{
+                $sangre_pase.style.color="";
+            }
             $alergias_pase.value = dataJson.lista[0].alergias;
             console.log($alergias_pase.value);
             if( dataJson.lista[0].alergias=="NO REFIERE" || dataJson.lista[0].alergias=="NINGUNA"){

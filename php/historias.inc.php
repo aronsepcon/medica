@@ -88,70 +88,6 @@
     <div class="modal" id="pase_medico">
         <div class="inside w55porcen h60p">
             <button type="button" id="cierre_pase_medico">X</button>
-            <div class="columnas_8">
-                <span>Fiebre Amarilla</span>
-                <input type="date" id="fiebre_A" readonly>
-            </div>
-            <div class="columnas_8">
-                <span>Difteria Tetano</span>
-                <input type="date" id="dt_D1" readonly>
-                <input type="date" id="dt_D2" readonly>
-                <input type="date" id="dt_D3" readonly>
-                <input type="date" id="dt_R1" readonly>
-            </div>
-            <div class="columnas_8">
-                <span>Hepatitis A</span>
-                <input type="date" readonly>
-                <input type="date" readonly>
-                <input type="date" readonly>
-            </div>
-            <div class="columnas_8">
-                <span>Hepatitis B</span>
-                <input type="date" readonly>
-                <input type="date" readonly>
-                <input type="date" readonly>
-            </div>
-            <div class="columnas_8">
-                <span>Influenza</span>
-                <input type="date" readonly>
-                <input type="date" readonly>
-                <input type="date" readonly>
-            </div>
-            <div class="columnas_8">
-                <span>Poliomelitis</span>
-                <input type="date" readonly>
-            </div>
-            <div class="columnas_8">
-                <span>Trivirica</span>
-                <input type="date" readonly>
-            </div>
-            <div class="columnas_8">
-                <span>Rabia</span>
-                <input type="date" readonly>
-                <input type="date" readonly>
-                <input type="date" readonly>
-                <input type="date" readonly>
-            </div>
-            <div class="columnas_8">
-                <span>Tifoidea</span>
-                <input type="date" readonly>
-                <input type="date" readonly>
-                <input type="date" readonly>
-            </div>
-            <div class="columnas_8">
-                <span>Neumococo</span>
-                <input type="date" readonly>
-                <input type="date" readonly>
-                <input type="date" readonly>
-            </div>
-            <div class="columnas_8">
-                <span>COVID</span>
-                <input type="date" readonly>
-                <input type="date" readonly>
-                <input type="date" readonly>
-                <input type="date" readonly>
-            </div>
-            
         </div>
     </div>
     <div class="modal" id="ficha__vistaprevia">    
@@ -170,116 +106,141 @@
     <div class="modal" id="pestañas">
         <div class="inside h90p">
             <button type="button" id="cierre_pestañas">X</button>
-            <div class="tabs">
                 <div class="tab-container">
-                    <div id="tab4" class="tab"> 
-                        <a href="#tab4">Pestaña 4</a>
-                        <div class="tab-content">
-                            <div class="tab_imagen" id="tab_imagen_r1">
-                                <div class="pest_sup" id="pest_sup_r4">
-                                    <a href="#" onclick="zoomOut('r4')" class="alejar"><i class="fas fa-minus"></i></a>
-                                    <a href="#" onclick="zoomIn('r4')" class="acercar"><i class="fas fa-plus"></i></a>
-                                    <a href="#" id="descarga" download><i class="fas fa-download desc"></i></a>
-                                </div>
-                                <img src="" class="img_pestaña" id="imagen_pestaña_r4" alt="">  
-                                <iframe src="" id="adjunto_pestaña_r4" ></iframe>      
-                            </div>
-                        </div>
-                    </div>
-                    <div id="tab3" class="tab"> 
-                        <a href="#tab3">Pestaña 3</a>
-                        <div class="tab-content">
-                            <div class="tab_imagen">
-                                <div class="pest_sup" id="pest_sup_r3">
-                                    <a href="#" onclick="zoomOut('r3')" class="alejar"><i class="fas fa-minus"></i></a>
-                                    <a href="#" onclick="zoomIn('r3')" class="acercar"><i class="fas fa-plus"></i></a>
-                                    <a href="#" id="descarga_3" download><i class="fas fa-download desc"></i></a>
-                                </div>
-                                <img src="" class="img_pestaña" id="imagen_pestaña_r3" alt=""> 
-                                <iframe src="" id="adjunto_pestaña_r3" ></iframe>   
-                            </div>
-                        </div>
-                    </div>
-                    <div id="tab2" class="tab">
-                        <a href="#tab2">Pestaña 2</a>
-                        <div class="tab-content">
-                            <div class="tab_imagen">
-                                <div class="pest_sup" id="pest_sup_r2">
-                                    <a href="" id="descarga_2" download><i class="fas fa-download desc"></i></a>
-                                </div>
-                                <img src="" class="img_pestaña" id="imagen_pestaña_r2" alt=""> 
-                                <iframe src="" id="adjunto_pestaña_r2" ></iframe>    
-                            </div>
-                        </div>
-                    </div> 
-                    <div id="tab1" class="tab">
-                        <a href="#tab1">Pestaña 1</a>
-                        <div class="tab-content">
-                            <div class="tab_imagen">
-                                <div class="pest_sup" id="pest_sup_r1">
-                                    <a href="#" onclick="zoomOut('r1')" class="alejar"><i class="fas fa-minus"></i></a>
-                                    <a href="#" onclick="zoomIn('r1')" class="acercar"><i class="fas fa-plus"></i></a>
-                                    <a href="#" id="descarga_1" download><i class="fas fa-download desc"></i></a>
-                                </div>    
-                                <img src="" class="img_pestaña" id="imagen_pestaña" alt="">
-                                <iframe src="" id="adjunto_pestaña_r1"></iframe>
-                            </div>
-                        </div> 
-                    </div> 
+                        <a href="#" id="tab4" class="tab" value="tab4,tab-content-r4">Pestaña 4</a>         
+                        <a href="#" id="tab3" class="tab" value="tab3,tab-content-r3">Pestaña 3</a>
+                        <a href="#" id="tab2" class="tab" value="tab2,tab-content-r2">Pestaña 2</a>
+                        <a href="#" id="tab1" class="tab" value="tab1,tab-content-r1">Pestaña 1</a>
                 </div>
-            </div>
+                <div class="tab-content"  id="tab-content-r4">
+                    <div class="tab_imagen" id="tab_imagen_r4">
+                        <div class="pest_sup" id="pest_sup_r4">
+                            <a href="#" value="r4" class="alejar"><i class="fas fa-minus"></i></a>
+                            <a href="#" value="r4" class="acercar"><i class="fas fa-plus"></i></a>
+                            <a href="#" id="descarga" download><i class="fas fa-download desc"></i></a>
+                        </div>
+                        <img src="" class="img_pestaña" id="imagen_pestaña_r4" alt="">  
+                        <iframe src="" id="adjunto_pestaña_r4" ></iframe>      
+                    </div>
+                </div>
+                <div class="tab-content" id="tab-content-r3">
+                    <div class="tab_imagen">
+                        <div class="pest_sup" id="pest_sup_r3">
+                            <a href="#" value="r3" class="alejar"><i class="fas fa-minus"></i></a>
+                            <a href="#" value="r3" class="acercar"><i class="fas fa-plus"></i></a>
+                            <a href="#" id="descarga_3" download><i class="fas fa-download desc"></i></a>
+                        </div>
+                        <img src="" class="img_pestaña" id="imagen_pestaña_r3" alt=""> 
+                        <iframe src="" id="adjunto_pestaña_r3" ></iframe>   
+                    </div>
+                </div>
+                <div class="tab-content" id="tab-content-r2">
+                    <div class="tab_imagen">
+                        <div class="pest_sup" id="pest_sup_r2">
+                            <a href="#" value="r2" class="alejar"><i class="fas fa-minus"></i></a>
+                            <a href="#" value="r2" class="acercar"><i class="fas fa-plus"></i></a>
+                            <a href="" id="descarga_2" download><i class="fas fa-download desc"></i></a>
+                        </div>
+                        <img src="" class="img_pestaña" id="imagen_pestaña_r2" alt=""> 
+                        <iframe src="" id="adjunto_pestaña_r2" ></iframe>    
+                    </div>
+                </div>
+                <div class="tab-content" id="tab-content-r1">
+                    <div class="tab_imagen">
+                        <div class="pest_sup" id="pest_sup_r1">
+                            <a href="#" value="r1" class="alejar"><i class="fas fa-minus"></i></a>
+                            <a href="#" value="r1" class="acercar"><i class="fas fa-plus"></i></a>
+                            <a href="#" id="descarga_1" download><i class="fas fa-download desc"></i></a>
+                        </div>    
+                        <img src="" class="img_pestaña" id="imagen_pestaña" alt="">
+                        <iframe src="" id="adjunto_pestaña_r1"></iframe>
+                    </div>
+                </div> 
         </div>
     </div>
+        
 
     <div class="modal" id="pestañas_rabia">
         <div class="inside h90p">
             <button type="button" id="cierre_pestañas_rabia">X</button>
-            <div class="tabs">
                 <div class="tab-container">
-                    <div id="tab7" class="tab"> 
-                        <a href="#tab7">Pestaña 7</a>
-                        <div class="tab-content">
-                            <img src="" id="imagen_pestaña_rabia_r7" alt="">
-                        </div>
-                    </div>
-                    <div id="tab6" class="tab"> 
-                        <a href="#tab6">Pestaña 6</a>
-                        <div class="tab-content">
-                            <img src="" id="imagen_pestaña_rabia_r6" alt="">
-                        </div>
-                    </div>
-                    <div id="tab5" class="tab">
-                        <a href="#tab5">Pestaña 5</a>
-                        <div class="tab-content">
-                            <img src="" id="imagen_pestaña_rabia_r5" alt="">
-                        </div>
-                    </div> 
-                    <div id="tab4_r" class="tab"> 
-                        <a href="#tab4_r">Pestaña 4</a>
-                        <div class="tab-content">
-                            <img src="" id="imagen_pestaña_rabia_r4" alt="">
-                        </div>
-                    </div>
-                    <div id="tab3_r" class="tab"> 
-                        <a href="#tab3_r">Pestaña 3</a>
-                        <div class="tab-content">
-                            <img src="" id="imagen_pestaña_rabia_r3" alt="">
-                        </div>
-                    </div>
-                    <div id="tab2_r" class="tab">
-                        <a href="#tab2_r">Pestaña 2</a>
-                        <div class="tab-content">
-                            <img src="" id="imagen_pestaña_rabia_r2" alt="">
-                        </div>
-                    </div> 
-                    <div id="tab1_r" class="tab">
-                        <a href="#tab1_r">Pestaña 1</a>
-                        <div class="tab-content">
-                            <img src="" id="imagen_pestaña_rabia" alt="">
-                        </div> 
-                    </div> 
+                    <a href="#" id="tab7" class="tab" value="tab7,tab-content-r7">Pestaña 7</a>
+                    <a href="#" id="tab6" class="tab" value="tab6,tab-content-r6">Pestaña 6</a>
+                    <a href="#" id="tab5" class="tab" value="tab5,tab-content-r5">Pestaña 5</a>
+                    <a href="#" id="tab4_r" class="tab" value="tab4_r,tab-content-rab-r4">Pestaña 4</a>
+                    <a href="#" id="tab3_r" class="tab" value="tab3_r,tab-content-rab-r3">Pestaña 3</a>
+                    <a href="#" id="tab2_r" class="tab" value="tab2_r,tab-content-rab-r2">Pestaña 2</a>
+                    <a href="#" id="tab1_r" class="tab" value="tab1_r,tab-content-rab-r1">Pestaña 1</a>
                 </div>
-            </div>
+                <div class="tab-content" id="tab-content-r7">
+                    <div class="pest_sup" id="pest_sup_rab_7">
+                        <a href="#" value="r7_rab" class="alejar"><i class="fas fa-minus"></i></a>
+                        <a href="#" value="r7_rab" class="acercar"><i class="fas fa-plus"></i></a>
+                        <a href="" id="descarga_rab_7" download><i class="fas fa-download desc"></i></a>
+                    </div>
+                    <img src="" id="imagen_pestaña_rabia_r7" alt="">
+                    <iframe src="" id="adjunto_pestaña_rabia_r7"></iframe>
+                </div>
+    
+                <div class="tab-content" id="tab-content-r6">
+                    <div class="pest_sup" id="pest_sup_rab_6">
+                        <a href="#" value="r6_rab" class="alejar"><i class="fas fa-minus"></i></a>
+                        <a href="#" value="r6_rab" class="acercar"><i class="fas fa-plus"></i></a>
+                        <a href="" id="descarga_rab_6" download><i class="fas fa-download desc"></i></a>
+                    </div>
+                    <img src="" id="imagen_pestaña_rabia_r6" alt="">
+                    <iframe src="" id="adjunto_pestaña_rabia_r6"></iframe>
+                </div>
+
+                <div class="tab-content" id="tab-content-r5">
+                    <div class="pest_sup" id="pest_sup_rab_5">
+                        <a href="#" value="r5_rab" class="alejar"><i class="fas fa-minus"></i></a>
+                        <a href="#" value="r5_rab" class="acercar"><i class="fas fa-plus"></i></a>
+                        <a href="" id="descarga_rab_5" download><i class="fas fa-download desc"></i></a>
+                    </div>
+                    <img src="" id="imagen_pestaña_rabia_r5" alt="">
+                    <iframe src="" id="adjunto_pestaña_rabia_r5"></iframe>
+                </div>
+               
+                <div class="tab-content" id="tab-content-rab-r4">
+                    <div class="pest_sup" id="pest_sup_rab_4">
+                        <a href="#" value="r4_rab" class="alejar"><i class="fas fa-minus"></i></a>
+                        <a href="#" value="r4_rab" class="acercar"><i class="fas fa-plus"></i></a>
+                        <a href="" id="descarga_rab_4" download><i class="fas fa-download desc"></i></a>
+                    </div>
+                    <img src="" id="imagen_pestaña_rabia_r4" alt="">
+                    <iframe src="" id="adjunto_pestaña_rabia_r4"></iframe>
+                </div>
+                
+                <div class="tab-content" id="tab-content-rab-r3">
+                    <div class="pest_sup" id="pest_sup_rab_3"> 
+                        <a href="#" value="r3_rab" class="alejar"><i class="fas fa-minus"></i></a>
+                        <a href="#" value="r3_rab" class="acercar"><i class="fas fa-plus"></i></a>
+                        <a href="" id="descarga_rab_3" download><i class="fas fa-download desc"></i></a>
+                    </div>
+                    <img src="" id="imagen_pestaña_rabia_r3" alt="">
+                    <iframe src="" id="adjunto_pestaña_rabia_r3"></iframe>
+                </div>
+        
+                <div class="tab-content" id="tab-content-rab-r2">
+                    <div class="pest_sup" id="pest_sup_rab_2">
+                        <a href="#" value="r2_rab" class="alejar"><i class="fas fa-minus"></i></a>
+                        <a href="#" value="r2_rab" class="acercar"><i class="fas fa-plus"></i></a>
+                        <a href="" id="descarga_rab_2" download><i class="fas fa-download desc"></i></a>
+                    </div>
+                    <img src="" id="imagen_pestaña_rabia_r2" alt="">
+                    <iframe src="" id="adjunto_pestaña_rabia_r2"></iframe>
+                </div>
+        
+                <div class="tab-content" id="tab-content-rab-r1">
+                    <div class="pest_sup" id="pest_sup_rab_1">
+                        <a href="#" value="r1_rab" class="alejar"><i class="fas fa-minus"></i></a>
+                        <a href="#" value="r1_rab" class="acercar"><i class="fas fa-plus"></i></a>
+                        <a href="" id="descarga_rab_1" download><i class="fas fa-download desc"></i></a>
+                    </div>
+                    <img src="" id="imagen_pestaña_rabia" alt="">
+                    <iframe src="" id="adjunto_pestaña_rabia_r1"></iframe>
+                </div>
         </div>
     </div>
 
@@ -496,7 +457,7 @@
             <section class="historias__cuerpo__pagina oculto" id="pagina2">
                 <div class="historias__cuerpo__agregar">
                     <div>
-                        <button type="button" id="abrir_pestañas" class="oculto_r">pestañas</button>
+                        <button type="button" id="abrir_pestañas" class="oculto">pestañas</button>
                         <button type="button" class="oculto">+ Subir Examenes</button >
                     </div>
                 </div>
@@ -551,7 +512,7 @@
                     <div>
                         <!--button type="button">Modificar</button>
                         <button type="button">Grabar</button-->
-                        <button type="button" id="mostrar_pase_medico">Pase Medico</button>
+                        <button type="button" id="mostrar_pase_medico" class="oculto">Pase Medico</button>
                     </div>
                     <div class="vacunas columnas_2">
                         <div>

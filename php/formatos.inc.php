@@ -17,22 +17,23 @@
 </head>
 <body>
 <section class="wrap">
-    <div>
-        <span>Centro de Costo</span>
-        <select name="" id="">
-            <option value="0">2600</option>
-            <option value="1">2100</option>
-            <option value="2">2300</option>
-        </select>
-    </div>
-    <div>
-        <span>Formato</span>
-        <select name="" id="">
-            <option value="0">001</option>
-            <option value="1">006</option>
-        </select>
-    </div>
-   
+    <section class="creacion_formatos">
+        <div>
+            <span>Centro de Costo</span>
+            <select name="" id="">
+                <option value="0">2600</option>
+                <option value="1">2100</option>
+                <option value="2">2300</option>
+            </select>
+        </div>
+        <div>
+            <span>Formato</span>
+            <select name="" id="">
+                <option value="0">001</option>
+                <option value="1">006</option>
+            </select>
+        </div>
+    </section>
 </section>
 </body>
 </html>

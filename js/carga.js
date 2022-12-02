@@ -44,15 +44,6 @@ $btn__uploadAmericas.onclick = (e) => {
     return false;
 }
 
-$btnUpdateMedex.onclick = (e) => {
-    e.preventDefault();
-
-    $modal__esperar.style.display = "block";
-
-    getToken();
-
-    return false;
-}
 /*
 $fileUpload.onchange = (e) => {
     e.preventDefault();//probar si funciona o no despues del parentesis
@@ -209,7 +200,6 @@ $uploadFile.onchange = (e) =>{//para la carga masiva de PDFs
                         console.error(error);
                     })
                 }
-                listarExamenes();
             } catch (error) {
                 mostrarMensaje(error,"msj_error");
             }
@@ -219,9 +209,20 @@ $uploadFile.onchange = (e) =>{//para la carga masiva de PDFs
     }
 }
 
+$btnUpdateMedex.onclick = (e) => {
+    e.preventDefault();
+
+    $modal__esperar.style.display = "block";
+
+    getToken();
+
+    return false;
+}
+
 const getToken = () => {
 	let url = 'https://www.medex.com.pe/ApiCitas/api/Usuario/Login';
 	let data = {"usuario":"sistemas.sepcon","password":"sistemas.sepcon"};
+    
 
 	fetch(url, {
 	  	method: 'POST', // or 'PUT'
@@ -234,7 +235,9 @@ const getToken = () => {
 	.catch(error => console.error('Error:', error))
 	.then(response => {
         getDataMedex(response.token);
-	});
+        //console.log(response.token);
+    
+    });
 }
 
 const getDataMedex = (tokenMedex) => {
@@ -256,6 +259,7 @@ const getDataMedex = (tokenMedex) => {
 	.catch(error => console.error('Error:', error))
 	.then(response => {
         passDatatoMaster(response);
+        console.log('hola');
         mostrarMensaje("Registros Actualizados: " + response.length,"msj_info");
         $modal__esperar.style.display = "none";
     });
