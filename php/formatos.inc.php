@@ -13,6 +13,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/style.css?v<?php echo $random; ?>" type="text/css">
+    <link rel="stylesheet" href="../css/all.css" type="text/css">
     <title>Document</title>
 </head>
 <body>
@@ -20,20 +22,43 @@
     <section class="creacion_formatos">
         <div>
             <span>Centro de Costo</span>
-            <select name="" id="">
-                <option value="0">2600</option>
-                <option value="1">2100</option>
-                <option value="2">2300</option>
+            <select name="" id="ccostos">
+                <option value="0">2100</option>
+                <option value="1">2300</option>
+                <option value="2">2600</option>
             </select>
         </div>
         <div>
             <span>Formato</span>
-            <select name="" id="">
+            <select name="" id="formato">
                 <option value="0">001</option>
                 <option value="1">006</option>
             </select>
         </div>
+        <button type="button" id="exportar">Exportar</button>
+        <table id="tabla">
+            <thead>
+                <tr>
+                    <th>N1</th>
+                    <th>N2</th>
+                    <th>N3</th>
+                    <th>N4</th>
+                    <th>N5</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>B1</td>
+                    <td>B2</td>
+                    <td>B3</td>
+                    <td>B4</td>
+                    <td>B5</td>
+                </tr>
+            </tbody>
+        </table>
     </section>
 </section>
+<script src="../js/xlsx.full.min.js"></script>
+<script src="../js/formatos.js?v<?php echo $random;?>" type="module"></script>
 </body>
 </html>

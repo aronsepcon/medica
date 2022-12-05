@@ -2,6 +2,7 @@ import {mostrarMensaje} from "./funciones.js";
 import {fadeIn} from "./funciones.js";
 import {fadeOut} from "./funciones.js";
 import {validar} from "./funciones.js";
+import {paseMedico} from "./historias.js";
 
 const $pase_medico = document.getElementById("pase_medico");
 const $mostrar_pase_medico = document.getElementById("mostrar_pase_medico");
@@ -56,8 +57,7 @@ $obs_pase.onclick = (e) => {
 
     if($obs_pase.value==2){
         $medicamotivotext.hidden= false;
-    }
-    else{
+    }else{
         $medicamotivotext.hidden= true;
     }
 }
@@ -68,8 +68,7 @@ $enviar_pase.onclick = (e) => {
         mostrarMensaje("Ingrese una fecha o codigo de pase","msj_error");
     }else if($subirPdf.files.length==0){
         mostrarMensaje("elija un documento","msj_error");
-    }
-    else{
+    }else{
         enviarPase();
     }
 }
@@ -86,15 +85,12 @@ $vista_pase.onclick = (e) =>{
             $display_image.src = '../pases/'+$nomb_adjunto.value;
             fadeIn($ficha__vistaprevia_vac);
             (document.getElementById("descarga_vac")).setAttribute("href","../vacunas/"+$nomb_adjunto.value);
-        }
-        else{
+        }else{
             mostrarMensaje("Existe un problema","msj_error");
         }
-    }
-    else{
+    }else{
         mostrarMensaje("No existe un documento","msj_error");
     }
-
 }
 
 $subida_pase.onclick = (e) => {
@@ -102,9 +98,6 @@ $subida_pase.onclick = (e) => {
     $subirPdf.click();
     return false;
 }    
-
-//console.log($subirPdf.files.length);
-
 
 function enviarPase(){
     let data = new FormData();
@@ -125,8 +118,7 @@ function enviarPase(){
     if($id_pase.value !=""){
         data.append("funcion","actualizarPase");
         data.append("id",$id_pase.value);
-    }
-    else{
+    }else{
         data.append("funcion","enviarPase");
     }
     fetch('../inc/consultasmedicas.inc.php',{
@@ -139,11 +131,9 @@ function enviarPase(){
     .then(dataJson => {
         if (dataJson.respuesta){
             mostrarMensaje("Se ha agregado el pase medico","msj_correct");
-        }
-        else{
+            paseMedico();
+        }else{
             mostrarMensaje("Verifique el N°. Documento","msj_error");
         }
-    }
-
-    )
+    })
 }

@@ -678,9 +678,9 @@
             $adjunto = "no ha enviado el documento";
             $respuestaAdJ = true;
 
-            $lote56 = ($lot56==true) ? 1 : 0;
-            $lote88 = ($lot88==true) ? 1 : 0;
-            $pisco = ($lotpisc==true) ? 1 : 0;
+            $lote56 = ($lot56=="true") ? 1 : 0;
+            $lote88 = ($lot88=="true") ? 1 : 0;//
+            $pisco = ($lotpisc=="true") ? 1 : 0;
 
             $formato = explode(".",htmlspecialchars( basename($_FILES['subidaPase']["name"])));
             $i=0;
@@ -740,9 +740,9 @@
         try {
             $formatos = ["jpeg","jpg","png","pdf"];
 
-            $lote56 = ($lot56==true) ? 1 : 0;
-            $lote88 = ($lot88==true) ? 1 : 0;
-            $pisco = ($lotpisc==true) ? 1 : 0;
+            $lote56 = ($lot56=="true") ? 1 : 0;
+            $lote88 = ($lot88=="true") ? 1 : 0;
+            $pisco = ($lotpisc=="true") ? 1 : 0;
 
             $adjunto = "no ha enviado el documento";
             $respuestaAdJ = true;

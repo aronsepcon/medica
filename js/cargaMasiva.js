@@ -341,8 +341,10 @@ function mostrarImagen($value){
                     }
                     else if($value=="Rabia_R1"){
                         if(dataJson.adjunto[0]==null){
-                            document.getElementById("tab7").hidden=true;
+                            document.getElementById("tab7").style.display="none";
+                            $pest_sup_rab_r7.style.display = 'none';
                         }else{
+                            document.getElementById("tab7").style.display="inline";
                             let adj7 = dataJson.adjunto[0].split('.');
                             if(adj7[1]=="jpeg"){
                                 $display_image_pest_rabia_r7.style.display = "block";
@@ -361,6 +363,7 @@ function mostrarImagen($value){
                         if(dataJson.adjunto[1]==null){
                             document.getElementById("tab6").style.display="none";
                         }else{
+                            document.getElementById("tab6").style.display="inline";
                             let adj6 = dataJson.adjunto[1].split('.');
                             if(adj6[1]=="jpeg"){
                                 $display_image_pest_rabia_r6.style.display = "block";
@@ -379,9 +382,9 @@ function mostrarImagen($value){
                         if(dataJson.adjunto[2]==null){
                             document.getElementById("tab5").style.display="none";
                         }else{
+                            document.getElementById("tab5").style.display="inline";
                             let adj5 = dataJson.adjunto[2].split('.');
                             if(adj5[1]=="jpeg"){
-                                document.getElementById("tab5").style.display="inline";
                                 $display_image_pest_rabia_r5.style.display = "block";
                                 $adjunto_pestaña_rabia_r5.style.display = "none";
                                 $pest_sup_rab_r5.style.display = 'block';

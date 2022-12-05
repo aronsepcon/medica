@@ -978,19 +978,29 @@ input[name = "filtrado"]{
 
 .pest_sup a {
   margin-left: 20px;
+  padding-top: 15px;
 }
 
 .tab-content iframe {
   border: 1px;
   width: 450px;
   height: 650px;
+  margin-top: 10px;
 }
 
 .tab-container{
   margin-top: 15px;
 }
 
+.pest_sup .fas{
+  margin-top: 20px;
+}
+
 .tab{
+  padding: 10px 13px;
+}
+
+.tab_r{
   padding: 10px 13px;
 }
 

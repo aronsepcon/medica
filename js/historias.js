@@ -249,7 +249,7 @@ $radio__dni.onclick = (e) =>{
     $nombres_trabajador.value = "";
 }
 
-function paseMedico(){
+export function paseMedico(){
     
     let data2 = new FormData();
     data2.append("documento",$documento_trabajador.value);
