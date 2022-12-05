@@ -8,7 +8,7 @@
      $archivo = $_FILES['fileUpload'];
      $temporal	 = $_FILES['fileUpload']['tmp_name'];
      $fileId      = uniqid().".xlsx";
-     $validacion = $_POST['validacion'];
+     //$validacion = $_POST['validacion'];//porq esto estaba aqui ----> investigar
  
      if (move_uploaded_file($temporal,"../xls/".$fileId)) {
          $mensaje = "Archivo copiado";

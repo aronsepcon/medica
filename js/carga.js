@@ -123,14 +123,15 @@ $elegirClinicaExcel.onchange = (e) => {
 
 $subida_masiva_excel.onchange = (e) => {
     e.preventDefault();
-
+   // let i=0;
     var totalFiles = $subida_masiva_excel.files.length;
-
-    if(totalFiles>0){
+    console.log($subida_masiva_excel.files);//devuelve un array listando cada uno
+    if(totalFiles>0){//de aqi
         if(totalFiles>20){
             mostrarMensaje("Limite 20 archivos","msj_error");//mostrar exceso
         }
-        else{
+        else{//hasta aqui se reemplaza por un for y un while ----> validar tamaño tmb U:
+    //
             try {
                 if(validar($subida_masiva_excel)) throw 'Archivo no valido';
                 
@@ -147,7 +148,7 @@ $subida_masiva_excel.onchange = (e) => {
                     .then(response => response.json())
                     .then(data => {
                         if (data.respuesta) {
-                            mostrarMensaje("Historias Actualizadas","msj_correct");
+                            mostrarMensaje("Historias Actualizadas"+(index+1),"msj_correct");
                             console.log(index);
                         }else{
                             mostrarMensaje("Hubo un error al actualizar","msj_error");
@@ -171,10 +172,16 @@ $uploadFile.onchange = (e) =>{//para la carga masiva de PDFs
     e.preventDefault();
 
     var totalFiles = $uploadFile.files.length;
+    let r=0;
+	
+    for(let i=0;i<$uploadFile.files.length;i++){
+  	let t = $uploadFile.files[i].size;
+    r=r+$uploadFile.files[i].size;
+    }
 
-    if(totalFiles>0){
-        if(totalFiles>20){
-            mostrarMensaje("Limite 20 archivos","msj_error");//mostrar exceso
+    if(r>0){
+        if(r>10000000){//DEBE SER 10MB
+            mostrarMensaje("Limite 10MB de archivos","msj_error");//mostrar exceso
         }
         else{
             try {

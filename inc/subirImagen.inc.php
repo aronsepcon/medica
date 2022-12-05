@@ -184,7 +184,7 @@
                     $sql = "UPDATE fichas_vacunacion SET fechaNeumR1=?,adjuntoNeumR4=?,fechaNeumR2=DATE_ADD(?, INTERVAL 5 YEAR) WHERE dni=?";
                     break;
                 case "COVID_D1":
-                    $sql = "UPDATE fichas_vacunacion SET fechaCovidD1=?,adjuntoCovidD1=?,fechaCovidD2=DATE_ADD(?, INTERVAL 28 DAY) WHERE dni=?";
+                    $sql = "UPDATE fichas_vacunacion SET fechaCovidD1=?,adjuntoCovidD1=?,fechaCovidD2=DATE_ADD(?, INTERVAL 21 DAY) WHERE dni=?";
                     break;
                 case "COVID_D2":
                     $sql = "UPDATE fichas_vacunacion SET fechaCovidD2=?,adjuntoCovidD2=?,fechaCovidD3=DATE_ADD(?, INTERVAL 3 MONTH) WHERE dni=?";

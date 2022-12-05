@@ -123,6 +123,10 @@ const $adjunto_pestaña_rabia_r5 = document.getElementById("adjunto_pestaña_rab
 const $adjunto_pestaña_rabia_r6 = document.getElementById("adjunto_pestaña_rabia_r6");
 const $adjunto_pestaña_rabia_r7 = document.getElementById("adjunto_pestaña_rabia_r7");
 
+const $tab1 = document.getElementById("tab1"); 
+const $tab2 = document.getElementById("tab2"); 
+const $tab3 = document.getElementById("tab3"); 
+const $tab4 = document.getElementById("tab4"); 
 
 $subida_vacunas.forEach(function($subida_vacunas){
     $subida_vacunas.onclick = (e) => {
@@ -139,11 +143,27 @@ $abrir_pestañas.onclick = (e) => {
     e.preventDefault();
 
     fadeIn($pestañas);
-
 }
 
 $cierre_pestañas.onclick = (e) => {
     e.preventDefault();
+    
+    $tab4.style.display='none';
+    $tab3.style.display='none';
+    $tab2.style.display='none';
+    $tab1.style.display='none';
+    $pest_sup_r4.style.display = 'none';
+    $pest_sup_r2.style.display = 'none';
+    $pest_sup_r3.style.display = 'none';
+    $pest_sup_r1.style.display = 'none';
+    $adjunto_pestaña_r4.style.display = 'none';
+    $display_image_pest_r4.style.display = 'none';
+    $adjunto_pestaña_r3.style.display = 'none';
+    $display_image_pest_r3.style.display = 'none';
+    $adjunto_pestaña_r2.style.display = 'none';
+    $display_image_pest_r2.style.display = 'none';
+    $adjunto_pestaña_r1.style.display = 'none';
+    $display_image_pest_r1.style.display = 'none';
 
     fadeOut($pestañas);
 }
@@ -153,7 +173,6 @@ $cierre_pestañas_rabia.onclick = (e) => {
 
     fadeOut($pestañas_rabia);
 }
-
 
 $cierre_form_vp_vac.onclick = (e) => {
     e.preventDefault();
@@ -182,19 +201,41 @@ $tab.forEach(function($tab){
     }
 })
 
-var selected="tab1";
-var disp="tab-content-r1";
+var selected="tab4";//crear uno parecido a show para rabia e.e
+var disp="tab-content-r4";
 
 function show(a,b)
 {
     document.getElementById(selected).style.backgroundColor = "rgb(150,150,150)";
     document.getElementById(disp).style.display = "none";
-    
-    document.getElementById(a).style.backgroundColor = "rgb(200,200,200)";      
-    
+    document.getElementById(a).style.backgroundColor = "rgb(48, 37, 123)";       
     document.getElementById(b).style.display = "block";
     selected=a;
     disp=b;
+}
+
+const $tab_r = document.querySelectorAll(".tab_r");
+
+$tab_r.forEach(function($tab_r){
+    $tab_r.onclick = (e) => {
+        e.preventDefault();
+
+        let $r =$tab_r.getAttribute("value").split(",")
+        showR($r[0],$r[1]);
+    }
+})
+
+var selectedR="tab7";//crear uno parecido a show para rabia e.e
+var dispR="tab-content-r7";
+
+function showR(a,b)
+{
+    document.getElementById(selectedR).style.backgroundColor = "rgb(150,150,150)";
+    document.getElementById(dispR).style.display = "none";
+    document.getElementById(a).style.backgroundColor = "rgb(48, 37, 123)";       
+    document.getElementById(b).style.display = "block";
+    selectedR=a;
+    dispR=b;
 }
 
 function mostrarImagen($value){
@@ -214,8 +255,9 @@ function mostrarImagen($value){
                     if($value=="difteTet_R1" || $value=="Tifoidea_R1" || $value=="HepatitisA_R1" || $value=="Neumococo_R1"){
                        
                         if(dataJson.adjunto[0]==null){
-                            document.getElementById("tab4").style.display='none';
+                            $tab4.style.display='none';
                         }else{
+                            $tab4.style.display='inline';
                             let adj1=dataJson.adjunto[0].split('.');
                             console.log(adj1[1]);
                             if(adj1[1]=="jpeg"){
@@ -234,9 +276,10 @@ function mostrarImagen($value){
                         }
 
                         if(dataJson.adjunto[1]==null){
-                            document.getElementById("tab3").style.display='none';
+                            $tab3.style.display='none';
                         }else{
-                           let adj2=dataJson.adjunto[1].split('.');//si es null no lo abre U:
+                            $tab3.style.display="inline";
+                            let adj2=dataJson.adjunto[1].split('.');//si es null no lo abre U:
                             if(adj2[1]=="jpeg"){
                                 $display_image_pest_r3.src="../vacunas/"+dataJson.adjunto[1];//adjunto[0]
                                 $adjunto_pestaña_r3.style.display = 'none';
@@ -253,8 +296,9 @@ function mostrarImagen($value){
                         }
 
                         if(dataJson.adjunto[2]==null){
-                            document.getElementById("tab2").style.display='none';
+                            $tab2.style.display='none';
                         }else{
+                            $tab2.style.display='inline';
                             let adj3=dataJson.adjunto[2].split('.');
                             if(adj3[1]=="jpeg"){
                                 $display_image_pest_r2.src="../vacunas/"+dataJson.adjunto[2];//adjunto[0]
@@ -269,11 +313,13 @@ function mostrarImagen($value){
                                 $adjunto_pestaña_r2.setAttribute("src","../vacunas/"+dataJson.adjunto[2]);
                             }
                             (document.getElementById("descarga_3")).setAttribute("href","../vacunas/"+dataJson.adjunto[2]);
+                            console.log(dataJson.adjunto[2]);
                         }
                         
                         if(dataJson.adjunto[3]==null){
-                            document.getElementById("tab1").style.display='none';
+                            $tab1.style.display='none';
                         }else{
+                            $tab1.style.display='inline';
                             let adj4=dataJson.adjunto[3].split('.');
                             if(adj4[1]=="jpeg"){
                                 $adjunto_pestaña_r1.style.display = 'none';
@@ -313,7 +359,7 @@ function mostrarImagen($value){
                             (document.getElementById("descarga_rab_7")).setAttribute("href","../vacunas/"+dataJson.adjunto[0]);
                         }
                         if(dataJson.adjunto[1]==null){
-                            document.getElementById("tab6").hidden=true;
+                            document.getElementById("tab6").style.display="none";
                         }else{
                             let adj6 = dataJson.adjunto[1].split('.');
                             if(adj6[1]=="jpeg"){
@@ -331,10 +377,11 @@ function mostrarImagen($value){
                             (document.getElementById("descarga_rab_6")).setAttribute("href","../vacunas/"+dataJson.adjunto[1]);
                         }
                         if(dataJson.adjunto[2]==null){
-                            document.getElementById("tab5").hidden=true;
+                            document.getElementById("tab5").style.display="none";
                         }else{
                             let adj5 = dataJson.adjunto[2].split('.');
                             if(adj5[1]=="jpeg"){
+                                document.getElementById("tab5").style.display="inline";
                                 $display_image_pest_rabia_r5.style.display = "block";
                                 $adjunto_pestaña_rabia_r5.style.display = "none";
                                 $pest_sup_rab_r5.style.display = 'block';
@@ -386,8 +433,9 @@ function mostrarImagen($value){
                         }
 
                         if(dataJson.adjunto[5]==null){//aqui es 5
-                            document.getElementById("tab2_r").hidden=true;
+                            document.getElementById("tab2_r").style.display="none";
                         }else{
+                            document.getElementById("tab2_r").style.display="inline";
                             let adj2 = dataJson.adjunto[5].split('.');
                             if(adj2[1]=="jpeg"){
                                 $display_image_pest_rabia_r2.style.display = "block";
@@ -405,8 +453,9 @@ function mostrarImagen($value){
                         }
 
                         if(dataJson.adjunto[6]==null){
-                            document.getElementById("tab1_r").hidden=true;
+                            document.getElementById("tab1_r").style.display="none";
                         }else{
+                            document.getElementById("tab1_r").style.display="inline";
                             let adj1 = dataJson.adjunto[6].split('.');
                             if(adj1[1]=="jpeg"){
                                 $display_image_pest_rabia.style.display = "block";
@@ -427,12 +476,15 @@ function mostrarImagen($value){
                     }else{
                         let formatos = (dataJson.adjunto).split('.');
                         if(formatos[1]=="pdf"){//esto deberia ir arriba de hecho pero por mientras uu
+                            (document.getElementById("pest_sup_vac")).style.display = "none"
                             $frame__adjunto.setAttribute("src",'../vacunas/'+dataJson.adjunto);
                             fadeIn($ficha__vistaprevia);
                         }else if(formatos[1]=="jpeg"){//el de los multiples deberia ir aqui U:
                             $display_image.src = "../vacunas/"+dataJson.adjunto;
+                            (document.getElementById("pest_sup_vac")).style.display = "block"
                             console.log(dataJson.adjunto);    
                             fadeIn($ficha__vistaprevia_vac);
+                            (document.getElementById("descarga_vac")).setAttribute("href","../vacunas/"+dataJson.adjunto);
                         }
                         else{
                             mostrarMensaje("Existe un problema","msj_error");
@@ -1072,13 +1124,13 @@ function zoomIn($val){
             break;
         case "r7_rab":
             imgZ = $display_image_pest_rabia_r7;
-        break;
-        default:
+            break;
+        case "vac":
+            imgZ = $display_image;
             break;
     }
     let width = imgZ.clientWidth;
     imgZ.style.width = width + 100 + "px";
-
     return true;
  }
 
@@ -1096,7 +1148,7 @@ function zoomIn($val){
             break;
         case "r4":
             imgZ = $display_image_pest_r4;
-        break; 
+            break; 
         case "r1_rab":
             imgZ = $display_image_pest_rabia;
             break;
@@ -1118,7 +1170,8 @@ function zoomIn($val){
         case "r7_rab":
             imgZ = $display_image_pest_rabia_r7;
             break;
-        default:
+        case "vac":
+            imgZ = $display_image;
             break;
     }
      let width = imgZ.clientWidth;

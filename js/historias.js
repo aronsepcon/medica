@@ -91,6 +91,7 @@ const $cierre_form_vistp = document.getElementById('cierre_form_vistp')
 
 const $btn__atencion__medica = document.getElementById('btn__atencion__medica');
 const $atencion__medica = document.getElementById('atencion__medica');
+const $actualizarReg = document.getElementById('actualizarReg');
 
 let registro = 0;
 
@@ -300,8 +301,22 @@ function paseMedico(){
         if (dataJson.respuesta){
             $id_pase.value = dataJson.lista[0].id;
             $numero_pase.value=dataJson.lista[0].numero_pase;
-            $fecha_emo.value=dataJson.lista[0].	fechaEmo;
+            $fecha_emo.value=dataJson.lista[0].fechaEmo;
             $fecha_vigencia.value=dataJson.lista[0].fecha_vigencia;
+
+            let vigencia = new Date(dataJson.lista[0].fecha_vigencia);
+            let dias = new Date(vigencia-Date.now())
+            let diffd = Math.ceil(dias/(1000*60*60*24))
+            if(vigencia>Date.now() && diffd>=30){
+                $fecha_vigencia.style.color="green";
+            }else if(diffd>=1 && diffd<30){
+                $fecha_vigencia.style.color="orange";
+            }else if(vigencia<=Date.now()){
+                $fecha_vigencia.style.color="red";
+            }else{
+                console.log(dataJson.lista[0].fecha_vigencia);
+            }
+   
             dataJson.lista[0].lote56==1 ? $lote56.checked=true : $lote56.checked=false;
             dataJson.lista[0].lote88==1 ? $lote88.checked=true : $lote88.checked=false;
             dataJson.lista[0].lotepisco==1 ? $pisco.checked=true : $pisco.checked=false;
@@ -310,11 +325,11 @@ function paseMedico(){
             $medicamotivotext.value = dataJson.lista[0].motivotexto;
             if(dataJson.lista[0].adjunto_pase){
                 $subida_pase.style.color="green";
-            }
-            else{
+            }else{
                 $id_pase.value ="";
                 $subida_pase.style.color="";
             }
+            
         }
         else{
             $id_pase.value ="";
@@ -357,8 +372,7 @@ $documento_trabajador.onkeypress = (e) => {
         $busqueda_parcial.style.display = 'none'
         $nombres_trabajador.readOnly = true;    
         $nombres_trabajador.style.color = 'gray';
-        //ver el cambio sino asi mas directo 
-        
+        //ver el cambio sino asi mas directo         
         listadoDni(e.target.value);
         listarVacunas();
         paseMedico();
@@ -386,7 +400,18 @@ function listadoDni($e){
               //  $numero__registro.value = dataJson.cut
               //  $estado__trabajador.value = dataJson.estado;
             }else{
-                mostrarMensaje("Verifique el N°. Documento","msj_error");
+                mostrarMensaje("Puede editar el registro","msj_error");
+                $nombres_trabajador.value = "";
+                $cargo__trabajador.readOnly=false;  
+                $numero__registro.readOnly=false;
+                $nombres__apellidos.readOnly=false;
+                $documento__identidad.readOnly=false;
+                $centro_costos.readOnly=false;
+                $edad__trabajador.readOnly=false;
+                $sede__trabajador.readOnly=false;
+                $sexo__trabajador.readOnly=false;
+                $fecha__nacimiento.readOnly=false;
+                $estado__trabajador.readOnly=false;
             }
         })
     
@@ -403,32 +428,108 @@ function listadoDni($e){
         })
         .then(dataJson=>{
             if(dataJson.existe){
-                
+
                 let fec_nac= new Date(dataJson.datos[0].nacimiento.slice(0,10)).getTime();
-                let diff_mes = Date.now()-fec_nac;
-                let edad1 = new Date(diff_mes);
-                let año = edad1.getUTCFullYear();
-                let edad = Math.abs(año-1970);
-
-                $numero__registro.value = dataJson.datos[0].cut;
-                $nombres__apellidos.value = dataJson.datos[0].paterno+" "+dataJson.datos[0].materno+" "+dataJson.datos[0].nombres;
-                $correo__electronico.value = dataJson.datos[0].correo;
-                $documento__identidad.value = dataJson.datos[0].dni;
-                $cargo__trabajador.value = dataJson.datos[0].cargo;
-                $centro_costos.value =dataJson.datos[0].ccostos.slice(0,4) +" "+dataJson.datos[0].sede;
-                $edad__trabajador.value = edad;//aqui xd
-                $sede__trabajador.value = dataJson.datos[0].sucursal;
-                $sexo__trabajador.value = dataJson.datos[0].sexo;
-                $fecha__nacimiento.value = dataJson.datos[0].nacimiento.slice(0,10);//aqui tmb
-                $estado__trabajador.value = dataJson.datos[0].estado;
+                    let diff_mes = Date.now()-fec_nac;
+                    let edad1 = new Date(diff_mes);
+                    let año = edad1.getUTCFullYear();
+                    let edad = Math.abs(año-1970);
+                
                 $nombres_trabajador.value =  dataJson.datos[0].paterno+" "+dataJson.datos[0].materno+" "+dataJson.datos[0].nombres;
-                $direccion__trabajador.value = dataJson.datos[0].direccion;
-                $telefono__trabajador.value = dataJson.datos[0].telefono;
 
-               
-                console.log( edad);
+                let data4 = new FormData();
+                    data4.append("doc",$e);
+                    data4.append("funcion", "datosEmpleados");
+                
+                fetch('../inc/consultasmedicas.inc.php',{
+                    method: "POST",
+                    body:data4,
+                })
+                .then(function(response){
+                    return response.json();
+                })
+                .then(dataJson=>{
+                    if(dataJson.respuesta){
+                        
+                        $numero__registro.value = dataJson.lista[0].cut == null ? dataJson.datos[0].cut : dataJson.lista[0].cut;
+                        $nombres__apellidos.value = dataJson.lista[0].nombres == null ? dataJson.datos[0].paterno+" "+dataJson.datos[0].materno+" "+dataJson.datos[0].nombres : dataJson.lista[0].nombres;
+                        $correo__electronico.value = dataJson.lista[0].correo == null ? dataJson.datos[0].correo : dataJson.lista[0].correo;
+                        $documento__identidad.value =dataJson.lista[0].dni == null ? dataJson.datos[0].dni : dataJson.lista[0].dni;
+                        $cargo__trabajador.value = dataJson.lista[0].cargo == null ? dataJson.datos[0].cargo : dataJson.lista[0].cargo;
+                        $centro_costos.value = dataJson.lista[0].ccostos == null ? dataJson.datos[0].ccostos.slice(0,4) +" "+dataJson.datos[0].sede : dataJson.lista[0].ccostos;
+                        $edad__trabajador.value = dataJson.lista[0].edad == null ? edad : dataJson.lista[0].edad;//aqui xd
+                        $sede__trabajador.value = dataJson.lista[0].sede == null ? dataJson.datos[0].sucursal : dataJson.lista[0].sede;
+                        $sexo__trabajador.value = dataJson.lista[0].sexo == null ? dataJson.datos[0].sexo : dataJson.lista[0].sexo;
+                        $fecha__nacimiento.value = dataJson.lista[0].fecnac == null ? dataJson.datos[0].nacimiento.slice(0,10) : dataJson.lista[0].fecnac;//aqui tmb
+                        $estado__trabajador.value = dataJson.lista[0].estado == null ? dataJson.datos[0].estado : dataJson.lista[0].estado;
+                        $direccion__trabajador.value = dataJson.lista[0].direccion == null ? dataJson.datos[0].direccion : dataJson.lista[0].direccion;
+                        $telefono__trabajador.value = dataJson.lista[0].cut==null ? dataJson.datos[0].telefono : dataJson.lista[0].telefono;
+                
+                    } 
+                });
+
+                $numero__registro.value =  dataJson.datos[0].cut;
+                $nombres__apellidos.value =  dataJson.datos[0].paterno+" "+dataJson.datos[0].materno+" "+dataJson.datos[0].nombres;
+                $correo__electronico.value =  dataJson.datos[0].correo;
+                $documento__identidad.value = dataJson.datos[0].dni; 
+                $cargo__trabajador.value =  dataJson.datos[0].cargo;
+                $centro_costos.value =  dataJson.datos[0].ccostos.slice(0,4) +" "+dataJson.datos[0].sede
+                $edad__trabajador.value =  edad ;//aqui xd
+                $sede__trabajador.value =  dataJson.datos[0].sucursal;
+                $sexo__trabajador.value = dataJson.datos[0].sexo;
+                $fecha__nacimiento.value =  dataJson.datos[0].nacimiento.slice(0,10);//aqui tmb
+                $estado__trabajador.value =  dataJson.datos[0].estado ;
+                $direccion__trabajador.value =  dataJson.datos[0].direccion ;
+                $telefono__trabajador.value =  dataJson.datos[0].telefono;
             }
         })
+}
+
+$actualizarReg.onclick = (e) => {
+    e.preventDefault();
+    try {
+        let data = new FormData();
+            data.append("cut",$numero__registro.value);
+            data.append("empleado",$nombres__apellidos.value);
+            data.append("correo",$correo__electronico.value);
+            data.append("dni",$documento__identidad.value);
+            data.append("cargo",$cargo__trabajador.value);
+            data.append("ccostos",$centro_costos.value);
+            data.append("edad",$edad__trabajador.value);
+            data.append("sede",$sede__trabajador.value);
+            data.append("sexo",$sexo__trabajador.value);
+            data.append("fecnac",$fecha__nacimiento.value);
+            data.append("estado",$estado__trabajador.value);
+            data.append("direccion",$direccion__trabajador.value);
+            data.append("telefono",$telefono__trabajador.value);
+            data.append("funcion","actualizarEmpleado");
+        fetch('../inc/consultasmedicas.inc.php',{
+            method: "POST",
+            body:data,
+        })
+        .then(function(response){
+            return response.json();
+        })  
+        .then(dataJson => {
+            if (dataJson.respuesta){
+                mostrarMensaje("Se ha actualizado el registro","msj_correct");
+                $cargo__trabajador.readOnly=true;  
+                $numero__registro.readOnly=true;
+                $nombres__apellidos.readOnly=true;
+                $documento__identidad.readOnly=true;
+                $centro_costos.readOnly=true;
+                $edad__trabajador.readOnly=true;
+                $sede__trabajador.readOnly=true;
+                $sexo__trabajador.readOnly=true;
+                $fecha__nacimiento.readOnly=true;
+                $estado__trabajador.readOnly=true;
+            }else{
+                mostrarMensaje("Hubo un problema con el servidor","msj_error");
+            }
+        })
+    } catch (error) {
+        mostrarMensaje(error,"msj_error");
+    }
 }
 
 $nombres_trabajador.onkeypress = (e) => {
@@ -481,30 +582,24 @@ function listarNombres($e){
         }else{
         mostrarMensaje("No se encontraron empleados","msj_error");}
     })
-
-
 }
+
 $busqueda_boton.onclick = (e) => {
     e.preventDefault();
 
     if($radio__dni.click && $nombres_trabajador.value == ""){
         listadoDni($documento_trabajador.value);
         //listarExamenes();
-    }
-    else if($radio__nombre.click && $documento_trabajador.value==""){
+    }else if($radio__nombre.click && $documento_trabajador.value==""){
         listarNombres($nombres_trabajador.value);
-    }
-    else if($radio__nombre.click && $documento_trabajador.value!==""){
+    }else if($radio__nombre.click && $documento_trabajador.value!==""){
         listadoDni($documento_trabajador.value);
         estiloDni();
         $radio__dni.checked=true;
-    }
-    else if($nombres_trabajador!=="" && $documento_trabajador.value!==""){
+    }else if($nombres_trabajador!=="" && $documento_trabajador.value!==""){
         listadoDni($documento_trabajador.value);
         estiloDni();
-    }
-    else throw  "Ingrese un valor";
-
+    }else throw  "Ingrese un valor";
 }
 
 $btn__atencion__medica.onclick = (e) => {
@@ -514,7 +609,6 @@ $btn__atencion__medica.onclick = (e) => {
 
     return false;
 }
-
 
 $tabla__examenes_body.addEventListener("click", e=>{
     e.preventDefault();
@@ -573,7 +667,6 @@ $tabla__examenes_body.addEventListener("click", e=>{
             mostrarMensaje("Verifique el N°. Documento","msj_error");
         } 
     }
-
     return false;
 })
 
@@ -599,7 +692,6 @@ $tabla__atenciones_body.addEventListener("click", e=>{
 
 $uploadPdf.onchange = (e) => {
     e.preventDefault();
-
     try {
         if (validar($uploadPdf)) throw 'Archivo inválido. No se permite la extensión ';
 
@@ -627,10 +719,9 @@ $uploadPdf.onchange = (e) => {
         .catch(error => {
             console.error(error);
         })
-    } catch (error) {
+    }catch (error) {
         mostrarMensaje(error,"msj_error");
     }
-
 
     return false;
 }
@@ -642,8 +733,6 @@ $mail__cancel.onclick = (e) => {
 
     return false
 }
-//var editable = true 
-
 
 $editar_form.onclick = (e) => {
     e.preventDefault();
@@ -657,8 +746,7 @@ $editar_form.onclick = (e) => {
             document.getElementById("direccion__correo").readOnly =true;
             $editar_form.style.backgroundColor = "green";//ver esto u:
             $editar_form.style.color = "white";
-        } 
-
+        }
 }
 
 $cierre_form.onclick = (e) => {//cierra el formulario para enviar correos
@@ -694,7 +782,6 @@ $cambiar_env.onclick = (e) => {
     e.preventDefault();
 
     try{
-
         let data = new FormData();
         data.append("examen",document.getElementById("id__examen").value);
         data.append("funcion","buscarEnvio");
@@ -711,8 +798,7 @@ $cambiar_env.onclick = (e) => {
                 formData.append("examen",document.getElementById("id__examen").value);
                 if(dataJson.enviado==1){
                     formData.append("funcion","validarEnvio");
-                }
-                else{
+                }else{
                     formData.append("funcion","actualizarExamen");
                 }
                 fetch('../inc/consultasmedicas.inc.php',{
@@ -721,9 +807,7 @@ $cambiar_env.onclick = (e) => {
                 });
                 listarExamenes();
             }
-        })
-
-        
+        })    
         fadeOut($ficha__medica__correo);
     }catch(error){
         mostrarMensaje(error,"msj_error");
@@ -734,13 +818,11 @@ $mail__accept.onclick = (e) => {
     e.preventDefault();
 
     try {
-
         if ($documento_trabajador.value == "" && $nombres_trabajador.value=="") throw "Ingrese el número de documento";
         if (document.getElementById("clinica__examen").value == "" ) throw "Ingrese el nombre de la clinica";
         if (document.getElementById("adjunto_examen").value == "" ) throw "No se adjunto el exmane médico";
 
         let data = new FormData();
-
         data.append("examen",document.getElementById("id__examen").value);
         data.append("nombre",document.getElementById("nombre__correo").value);
         data.append("asunto",document.getElementById("asunto__correo").value);
@@ -775,7 +857,6 @@ $mail__accept.onclick = (e) => {
         mostrarMensaje(error,"msj_error");
     }
 
-
     return false
 }
 
@@ -788,11 +869,9 @@ function listarExamenes(){
         fetch('../inc/consultasmedicas.inc.php',{
             method: "POST",
             body:data,
-        })
-        .then(function(response){
+        }).then(function(response){
             return response.json();
-        })
-        .then(dataJson => {
+        }).then(dataJson => {
             if (dataJson.respuesta){
                 $tabla__examenes_body.innerHTML = "";
     
@@ -801,6 +880,7 @@ function listarExamenes(){
                     let $cnt_costos = dataJson.lista[index].ccostos == null ? " " : dataJson.lista[index].ccostos ;
                     let $clase_enviado = dataJson.lista[index].enviado == null ? 'no__enviado' : 'enviado';
                     let $titulo_enviado = dataJson.lista[index].enviado == null ? 'Pendiente Envio' : 'Enviado';
+                    let $sangre_tipo = dataJson.lista[index].sangre == null ? "" : dataJson.lista[index].sangre;
                     let $icono_enviado = dataJson.lista[index].enviado == null ? '<i class="fas fa-external-link-alt"></i>' :'<i class="fas fa-check" style="color:green"></i>';
                     let $icono_cargado = dataJson.lista[index].adjunto == null ? '<i class="fas fa-upload"></i>' : '<i class="fas fa-upload" style="color:green"></i>';
                     let $restricciones = dataJson.lista[index].restricciones == null ? " " : dataJson.lista[index].restricciones;
@@ -814,7 +894,7 @@ function listarExamenes(){
                                     <td>${$recomendaciones}</td>
                                     <td>${$restricciones}</td>
                                     <td>${dataJson.lista[index].alergias}</td>
-                                    <td>${dataJson.lista[index].sangre}</td>
+                                    <td>${$sangre_tipo}</td>
                                     <td class="textoCentro">
                                         <a href="${dataJson.lista[index].id}" data-accion="sendMail" 
                                                                               data-examen="${dataJson.lista[index].tipo}" 
@@ -837,12 +917,10 @@ function listarExamenes(){
     
                     $tabla__examenes_body.appendChild(tr);
                 }
-                
             }else{
                 mostrarMensaje("No se encontraron examenes","msj_error");
             }
         })
-
 }
 
 function listarConsultas(){
@@ -853,11 +931,9 @@ function listarConsultas(){
     fetch('../inc/consultasmedicas.inc.php',{
         method: "POST",
         body:data,
-    })
-    .then(function(response){
+    }).then(function(response){
         return response.json();
-    })
-    .then(
+    }).then(
         dataJson => {
             if (dataJson.respuesta){
                 $tabla__atenciones_body.innerHTML = "";

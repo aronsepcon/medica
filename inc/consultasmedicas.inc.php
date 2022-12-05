@@ -51,6 +51,16 @@
                                         $_POST['pisco'],));
         }else if($_POST['funcion'] == "listarPases"){
             echo json_encode(listarPases($pdo,$_POST["documento"]));
+        }else if($_POST['funcion'] == "actualizarEmpleado"){
+            echo json_encode(actualizarEmpleado($pdo,$_POST['cut'],
+                                                $_POST['empleado'],$_POST['correo'],
+                                                $_POST['dni'],$_POST['cargo'],
+                                                $_POST['ccostos'],$_POST['edad'],
+                                                $_POST['sede'],$_POST['sexo'],
+                                                $_POST['fecnac'],$_POST['estado'],
+                                                $_POST['direccion'],$_POST['telefono']));
+        }else if($_POST['funcion'] == "datosEmpleados"){
+            echo json_encode(datosEmpleados($pdo,$_POST['doc']));
         }
     }
 
@@ -673,11 +683,25 @@
             $pisco = ($lotpisc==true) ? 1 : 0;
 
             $formato = explode(".",htmlspecialchars( basename($_FILES['subidaPase']["name"])));
+            $i=0;
+            $s="";
+        
+            foreach($formato as $fr){
+                switch($formato[$i]){
+                    case $formatos[0]:
+                    case $formatos[1]:
+                    case $formatos[2]:    
+                    case $formatos[3]:    
+                        $s = $formato[$i];
+                    break;
+                }
+                $i++;
+            }
 
             $archivos =  $_FILES['subidaPase'];
             $temporal	= $_FILES['subidaPase']['tmp_name'];
 
-            switch($formato[1]){
+            switch($s){
                 case $formatos[0]:
                 case $formatos[1]:
                 case $formatos[2]:
@@ -724,11 +748,24 @@
             $respuestaAdJ = true;
 
             $formato = explode(".",htmlspecialchars( basename($_FILES['subidaPase']["name"])));
-
+            $i=0;
+            $s="";
+        
+            foreach($formato as $fr){
+                switch($formato[$i]){
+                    case $formatos[0]:
+                    case $formatos[1]:
+                    case $formatos[2]:    
+                    case $formatos[3]:    
+                        $s = $formato[$i];
+                    break;
+                }
+                $i++;
+            }
             $archivos =  $_FILES['subidaPase'];
             $temporal = $_FILES['subidaPase']['tmp_name'];
 
-            switch($formato[1]){
+            switch($s){
                 case $formatos[0]:
                 case $formatos[1]:
                 case $formatos[2]:
@@ -759,6 +796,89 @@
             return $respuesta;
 
         }  catch (PDOException $th) {
+            echo $th->getMessage();
+            return false;
+        }
+    }
+
+    function actualizarEmpleado($pdo,$cut,$empleado,$correo,$dni,$cargo,
+        $ccostos,$edad,$sede,$sexo,$fecnac,$estado,$direccion,$telefono){
+            try {
+                $sql = "INSERT INTO fichas_empleados SET cut=?,empleadonomb=?,correo=?,dni=?,cargo=?,
+                    	    ccostos=?,edad=?,sede=?,sexo=?,fecnac=?,estado=?,direccion=?,telefono=?	
+                        ON DUPLICATE KEY UPDATE empleadonomb=?,correo=?,cargo=?,ccostos=?,edad=?,sede=?,
+                            sexo=?,fecnac=?,estado=?,direccion=?,telefono=?";
+                $statement = $pdo->prepare($sql);
+                $statement ->execute(array($cut,$empleado,$correo,$dni,$cargo,$ccostos,$edad,$sede,
+                                        $sexo,$fecnac,$estado,$direccion,$telefono,$empleado,$correo,
+                                        $cargo,$ccostos,$edad,$sede,$sexo,$fecnac,$estado,$direccion,
+                                        $telefono));
+                $respuesta = array("respuesta"  => true,
+                                    "clase"     =>"msj_correct",
+                                    "error"     =>"no hay error", );
+                return $respuesta;
+        
+            } catch (PDOException $th) {
+                echo $th->getMessage();
+                return false;
+            }
+    }
+
+    function datosEmpleados($pdo,$doc){
+        try {
+            $respuesta = false;
+            $lista = [];
+            $sql = "SELECT 
+                        fichas_empleados.cut,
+                        fichas_empleados.dni,
+                        fichas_empleados.empleadonomb,
+                        fichas_empleados.fecnac,
+                        fichas_empleados.correo,
+                        fichas_empleados.sexo,
+                        fichas_empleados.cargo,
+                        fichas_empleados.ccostos,
+                        fichas_empleados.sede,
+                        fichas_empleados.estado,
+                        fichas_empleados.direccion,
+                        fichas_empleados.edad,
+                        fichas_empleados.telefono
+                    FROM 
+                        fichas_empleados
+                    WHERE
+                        fichas_empleados.dni=?";
+            $statement = $pdo->prepare($sql);
+            $statement ->execute(array($doc));
+            $result = $statement ->fetchAll();
+            $rowCount = $statement -> rowcount();
+
+            if ($rowCount > 0) {
+                foreach($result as $row) {
+                    $salida = array("cut"=>$row['cut'],
+                                    "dni"=>$row['dni'],
+                                    "nombres"=>$row['empleadonomb'],
+                                    "fecnac"=>$row['fecnac'],
+                                    "correo"=>$row['correo'],
+                                    "sexo"=>$row['sexo'],
+                                    "cargo"=>$row['cargo'],
+                                    "ccostos"=>$row['ccostos'],
+                                    "sede"=>$row['sede'],
+                                    "estado"=>$row['estado'],
+                                    "direccion"=>$row['direccion'],
+                                    "edad"=>$row['edad'],
+                                    "telefono"=>$row['telefono'],
+                                );
+                    array_push($lista,$salida);
+                }
+                $respuesta = true;
+            }else{
+                $respuesta = false;
+            }
+
+            $salida = array("respuesta"=>$respuesta,
+                            "lista" => $lista);
+
+            return $salida; 
+        }catch(PDOException $th) {
             echo $th->getMessage();
             return false;
         }

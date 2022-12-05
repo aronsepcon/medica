@@ -99,6 +99,11 @@
     <div class="modal" id="ficha__vistaprevia_vac">  
         <div class="inside h90p">
             <button type="button" id="cierre_form_vp_vac">X</button>
+            <div class="pest_sup" id="pest_sup_vac">
+                <a href="#" value="vac" class="alejar"><i class="fas fa-minus"></i></a>
+                <a href="#" value="vac" class="acercar"><i class="fas fa-plus"></i></a>
+                <a href="#" id="descarga_vac" download><i class="fas fa-download desc"></i></a>
+            </div>            
             <img src="" id="imagen" alt="">        
         </div>    
     </div>
@@ -107,13 +112,12 @@
         <div class="inside h90p">
             <button type="button" id="cierre_pestañas">X</button>
                 <div class="tab-container">
-                        <a href="#" id="tab4" class="tab" value="tab4,tab-content-r4">Pestaña 4</a>         
-                        <a href="#" id="tab3" class="tab" value="tab3,tab-content-r3">Pestaña 3</a>
-                        <a href="#" id="tab2" class="tab" value="tab2,tab-content-r2">Pestaña 2</a>
-                        <a href="#" id="tab1" class="tab" value="tab1,tab-content-r1">Pestaña 1</a>
+                    <a href="#" id="tab1" class="tab" value="tab1,tab-content-r1">Pestaña 1</a>
+                    <a href="#" id="tab2" class="tab" value="tab2,tab-content-r2">Pestaña 2</a>
+                    <a href="#" id="tab3" class="tab" value="tab3,tab-content-r3">Pestaña 3</a>
+                    <a href="#" id="tab4" class="tab" value="tab4,tab-content-r4">Pestaña 4</a>         
                 </div>
                 <div class="tab-content"  id="tab-content-r4">
-                    <div class="tab_imagen" id="tab_imagen_r4">
                         <div class="pest_sup" id="pest_sup_r4">
                             <a href="#" value="r4" class="alejar"><i class="fas fa-minus"></i></a>
                             <a href="#" value="r4" class="acercar"><i class="fas fa-plus"></i></a>
@@ -121,32 +125,26 @@
                         </div>
                         <img src="" class="img_pestaña" id="imagen_pestaña_r4" alt="">  
                         <iframe src="" id="adjunto_pestaña_r4" ></iframe>      
-                    </div>
                 </div>
                 <div class="tab-content" id="tab-content-r3">
-                    <div class="tab_imagen">
                         <div class="pest_sup" id="pest_sup_r3">
                             <a href="#" value="r3" class="alejar"><i class="fas fa-minus"></i></a>
                             <a href="#" value="r3" class="acercar"><i class="fas fa-plus"></i></a>
-                            <a href="#" id="descarga_3" download><i class="fas fa-download desc"></i></a>
+                            <a href="#" id="descarga_2" download><i class="fas fa-download desc"></i></a>
                         </div>
                         <img src="" class="img_pestaña" id="imagen_pestaña_r3" alt=""> 
                         <iframe src="" id="adjunto_pestaña_r3" ></iframe>   
-                    </div>
                 </div>
                 <div class="tab-content" id="tab-content-r2">
-                    <div class="tab_imagen">
                         <div class="pest_sup" id="pest_sup_r2">
                             <a href="#" value="r2" class="alejar"><i class="fas fa-minus"></i></a>
                             <a href="#" value="r2" class="acercar"><i class="fas fa-plus"></i></a>
-                            <a href="" id="descarga_2" download><i class="fas fa-download desc"></i></a>
+                            <a href="" id="descarga_3" download><i class="fas fa-download desc"></i></a>
                         </div>
                         <img src="" class="img_pestaña" id="imagen_pestaña_r2" alt=""> 
                         <iframe src="" id="adjunto_pestaña_r2" ></iframe>    
-                    </div>
                 </div>
                 <div class="tab-content" id="tab-content-r1">
-                    <div class="tab_imagen">
                         <div class="pest_sup" id="pest_sup_r1">
                             <a href="#" value="r1" class="alejar"><i class="fas fa-minus"></i></a>
                             <a href="#" value="r1" class="acercar"><i class="fas fa-plus"></i></a>
@@ -154,7 +152,6 @@
                         </div>    
                         <img src="" class="img_pestaña" id="imagen_pestaña" alt="">
                         <iframe src="" id="adjunto_pestaña_r1"></iframe>
-                    </div>
                 </div> 
         </div>
     </div>
@@ -164,13 +161,13 @@
         <div class="inside h90p">
             <button type="button" id="cierre_pestañas_rabia">X</button>
                 <div class="tab-container">
-                    <a href="#" id="tab7" class="tab" value="tab7,tab-content-r7">Pestaña 7</a>
-                    <a href="#" id="tab6" class="tab" value="tab6,tab-content-r6">Pestaña 6</a>
-                    <a href="#" id="tab5" class="tab" value="tab5,tab-content-r5">Pestaña 5</a>
-                    <a href="#" id="tab4_r" class="tab" value="tab4_r,tab-content-rab-r4">Pestaña 4</a>
-                    <a href="#" id="tab3_r" class="tab" value="tab3_r,tab-content-rab-r3">Pestaña 3</a>
-                    <a href="#" id="tab2_r" class="tab" value="tab2_r,tab-content-rab-r2">Pestaña 2</a>
-                    <a href="#" id="tab1_r" class="tab" value="tab1_r,tab-content-rab-r1">Pestaña 1</a>
+                    <a href="#" id="tab1_r" class="tab_r" value="tab1_r,tab-content-rab-r1">Pestaña 1</a>
+                    <a href="#" id="tab2_r" class="tab_r" value="tab2_r,tab-content-rab-r2">Pestaña 2</a>
+                    <a href="#" id="tab3_r" class="tab_r" value="tab3_r,tab-content-rab-r3">Pestaña 3</a>
+                    <a href="#" id="tab4_r" class="tab_r" value="tab4_r,tab-content-rab-r4">Pestaña 4</a>
+                    <a href="#" id="tab5" class="tab_r" value="tab5,tab-content-r5">Pestaña 5</a>
+                    <a href="#" id="tab6" class="tab_r" value="tab6,tab-content-r6">Pestaña 6</a>
+                    <a href="#" id="tab7" class="tab_r" value="tab7,tab-content-r7">Pestaña 7</a>
                 </div>
                 <div class="tab-content" id="tab-content-r7">
                     <div class="pest_sup" id="pest_sup_rab_7">
@@ -181,7 +178,6 @@
                     <img src="" id="imagen_pestaña_rabia_r7" alt="">
                     <iframe src="" id="adjunto_pestaña_rabia_r7"></iframe>
                 </div>
-    
                 <div class="tab-content" id="tab-content-r6">
                     <div class="pest_sup" id="pest_sup_rab_6">
                         <a href="#" value="r6_rab" class="alejar"><i class="fas fa-minus"></i></a>
@@ -420,6 +416,7 @@
                 <div>
                     <form id="formulario_datos_trabajador">
                         <input type="file" name="uploadPdf" id="uploadPdf" accept=".pdf" class="oculto">
+                        <button type="button" id="actualizarReg">Actualizar</button>
                         <div>
                             <h3>Datos del trabajador</h3>
                             <div class="formulario_datos_trabajador_4columnas">
@@ -432,7 +429,7 @@
                                 <label for="fecha__nacimiento">Fecha Nacimiento</label>
                                 <input type="date" name="fecha__nacimiento" id="fecha__nacimiento" readonly>
                                 <label for="correo__electronico">Correo Electrónico</label>
-                                <input type="text" name="correo__electronico" id="correo__electronico" readonly>
+                                <input type="text" name="correo__electronico" id="correo__electronico">
                                 <label for="sexo__trabajador">Sexo :</label>
                                 <input type="text" name="sexo__trabajador" id="sexo__trabajador" readonly>
                                 <label for="cargo__trabajador">Cargo :</label>
@@ -444,11 +441,11 @@
                                 <label for="estado__trabajador">Estado :</label>
                                 <input type="text" name="estado__trabajador" id="estado__trabajador" readonly>
                                 <label for="direccion__trabajador">Dirección :</label>
-                                <input type="text" name="direccion__trabajador" id="direccion__trabajador" readonly>
+                                <input type="text" name="direccion__trabajador" id="direccion__trabajador">
                                 <label for="edad__trabajador">Edad :</label>
                                 <input type="text" name="edad__trabajador" id="edad__trabajador" readonly>
                                 <label for="telefono__trabajador">Telefono :</label>
-                                <input type="text" name="telefono__trabajador" id="telefono__trabajador" readonly>
+                                <input type="text" name="telefono__trabajador" id="telefono__trabajador">
                             </div> 
                         </div>
                     </form>

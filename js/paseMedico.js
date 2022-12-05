@@ -76,15 +76,16 @@ $enviar_pase.onclick = (e) => {
 
 $vista_pase.onclick = (e) =>{
     e.preventDefault();
-    
+    console.log($nomb_adjunto.value);
     if($subida_pase.style.color=="green"){
-        let formato = ($nomb_adjunto.value).split('.')
+        let formato = ($nomb_adjunto.value).split('.');
         if(formato[1]=="pdf"){
-            $frame__adjunto.setAttribute("src",'../pases/'+$dni_pase.value+'.pdf');
+            $frame__adjunto.setAttribute("src",'../pases/'+$nomb_adjunto.value);
             fadeIn($ficha__vistaprevia);
         }else if(formato[1]=="jpeg"){
-            $display_image.src = '../pases/'+$dni_pase.value+'.jpeg';
+            $display_image.src = '../pases/'+$nomb_adjunto.value;
             fadeIn($ficha__vistaprevia_vac);
+            (document.getElementById("descarga_vac")).setAttribute("href","../vacunas/"+$nomb_adjunto.value);
         }
         else{
             mostrarMensaje("Existe un problema","msj_error");
