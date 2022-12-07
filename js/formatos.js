@@ -13,7 +13,7 @@ $exportar.onclick = (e) => {
 
     let data = new FormData();
         data.append("documento",42081842);
-        data.append("funcion","listarPases");
+        data.append("funcion","listarConsultas");
    /* if($ccostos==0){
         data.append("ccostos","2100");
     }else if($ccostos==1){

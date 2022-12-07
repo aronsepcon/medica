@@ -416,7 +416,6 @@
                 <div>
                     <form id="formulario_datos_trabajador">
                         <input type="file" name="uploadPdf" id="uploadPdf" accept=".pdf" class="oculto">
-                        <button type="button" id="actualizarReg">Actualizar</button>
                         <div>
                             <h3>Datos del trabajador</h3>
                             <div class="formulario_datos_trabajador_4columnas">
@@ -447,6 +446,7 @@
                                 <label for="telefono__trabajador">Telefono :</label>
                                 <input type="text" name="telefono__trabajador" id="telefono__trabajador">
                             </div> 
+                            <button type="button" id="actualizarReg">Actualizar</button>
                         </div>
                     </form>
                 </div>
@@ -719,7 +719,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div >
+                        <div class="pase_medico_form">
                             <input type="hidden" id="id_pase">
                             <input type="hidden" id="nomb_adjunto">
                             <div>

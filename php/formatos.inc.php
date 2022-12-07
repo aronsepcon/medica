@@ -36,26 +36,7 @@
             </select>
         </div>
         <button type="button" id="exportar">Exportar</button>
-        <table id="tabla">
-            <thead>
-                <tr>
-                    <th>N1</th>
-                    <th>N2</th>
-                    <th>N3</th>
-                    <th>N4</th>
-                    <th>N5</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>B1</td>
-                    <td>B2</td>
-                    <td>B3</td>
-                    <td>B4</td>
-                    <td>B5</td>
-                </tr>
-            </tbody>
-        </table>
+        
     </section>
 </section>
 <script src="../js/xlsx.full.min.js"></script>
