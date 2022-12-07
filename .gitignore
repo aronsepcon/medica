@@ -1,3 +1,5 @@
 
 *.pdf
 inc/connectrrhh.inc.php
+*.jpeg
+*.xlsx

@@ -261,12 +261,13 @@ function mostrarImagen($value){
                             let adj1=dataJson.adjunto[0].split('.');
                             console.log(adj1[1]);
                             if(adj1[1]=="jpeg"){
+                                document.getElementById("marco_r4").style.display = "block";
                                 $display_image_pest_r4.src="../vacunas/"+dataJson.adjunto[0];//adjunto[0]
                                 $adjunto_pestaña_r4.style.display = 'none';
                                 $display_image_pest_r4.style.display = 'block';
                                 $pest_sup_r4.style.display = 'block';
-                            } 
-                            else if(adj1[1]=="pdf"){
+                            }else if(adj1[1]=="pdf"){
+                                document.getElementById("marco_r4").style.display = "none";
                                 $adjunto_pestaña_r4.style.display = 'block';
                                 $display_image_pest_r4.style.display = 'none';
                                 $pest_sup_r4.style.display = 'none';
@@ -281,12 +282,13 @@ function mostrarImagen($value){
                             $tab3.style.display="inline";
                             let adj2=dataJson.adjunto[1].split('.');//si es null no lo abre U:
                             if(adj2[1]=="jpeg"){
+                                document.getElementById("marco_r3").style.display = "block";
                                 $display_image_pest_r3.src="../vacunas/"+dataJson.adjunto[1];//adjunto[0]
                                 $adjunto_pestaña_r3.style.display = 'none';
                                 $display_image_pest_r3.style.display = 'block';
                                 $pest_sup_r3.style.display = 'block';
-                            }
-                            else if(adj2[1]=="pdf"){
+                            }else if(adj2[1]=="pdf"){
+                                document.getElementById("marco_r3").style.display = "none";
                                 $adjunto_pestaña_r3.style.display = 'block';
                                 $display_image_pest_r3.style.display = 'none';     
                                 $pest_sup_r3.style.display = 'none';                        
@@ -301,12 +303,14 @@ function mostrarImagen($value){
                             $tab2.style.display='inline';
                             let adj3=dataJson.adjunto[2].split('.');
                             if(adj3[1]=="jpeg"){
+                                document.getElementById("marco_r2").style.display = "block";
                                 $display_image_pest_r2.src="../vacunas/"+dataJson.adjunto[2];//adjunto[0]
                                 $adjunto_pestaña_r2.style.display = 'none';
                                 $display_image_pest_r2.style.display = 'block';
                                 $pest_sup_r2.style.display = 'block';                        
                             }
                             else if(adj3[1]=="pdf"){
+                                document.getElementById("marco_r2").style.display = "none";
                                 $adjunto_pestaña_r2.style.display = 'block';
                                 $display_image_pest_r2.style.display = 'none';  
                                 $pest_sup_r2.style.display = 'none';
@@ -322,12 +326,14 @@ function mostrarImagen($value){
                             $tab1.style.display='inline';
                             let adj4=dataJson.adjunto[3].split('.');
                             if(adj4[1]=="jpeg"){
+                                document.getElementById("marco_r1").style.display = "block";
                                 $adjunto_pestaña_r1.style.display = 'none';
                                 $display_image_pest_r1.style.display = 'block';
                                 $pest_sup_r1.style.display = 'block';                        
                                 $display_image_pest_r1.src="../vacunas/"+dataJson.adjunto[3];//empieza en el ultima --- complicado U:
                             }
                             else if(adj4[1]=="pdf"){
+                                document.getElementById("marco_r1").style.display = "none";
                                 $adjunto_pestaña_r1.style.display = 'block';
                                 $display_image_pest_r1.style.display = 'none';   
                                 $pest_sup_r1.style.display = 'none';                                               
@@ -338,8 +344,7 @@ function mostrarImagen($value){
                     
                         fadeIn($pestañas);
                         
-                    }
-                    else if($value=="Rabia_R1"){
+                    }else if($value=="Rabia_R1"){
                         if(dataJson.adjunto[0]==null){
                             document.getElementById("tab7").style.display="none";
                             $pest_sup_rab_r7.style.display = 'none';
@@ -347,12 +352,14 @@ function mostrarImagen($value){
                             document.getElementById("tab7").style.display="inline";
                             let adj7 = dataJson.adjunto[0].split('.');
                             if(adj7[1]=="jpeg"){
+                                document.getElementById("marco_rabia_r7").style.display = "block";
                                 $display_image_pest_rabia_r7.style.display = "block";
                                 $adjunto_pestaña_rabia_r7.style.display = "none";
                                 $pest_sup_rab_r7.style.display = 'block';
                                 $display_image_pest_rabia_r7.src="../vacunas/"+dataJson.adjunto[0];
                             }
                             else if(adj7[1]=="pdf"){
+                                document.getElementById("marco_rabia_r7").style.display = "none";
                                 $display_image_pest_rabia_r7.style.display = "none";
                                 $adjunto_pestaña_rabia_r7.style.display = "block";
                                 $pest_sup_rab_r7.style.display = 'none';
@@ -366,12 +373,13 @@ function mostrarImagen($value){
                             document.getElementById("tab6").style.display="inline";
                             let adj6 = dataJson.adjunto[1].split('.');
                             if(adj6[1]=="jpeg"){
+                                document.getElementById("marco_rabia_r6").style.display = "block";
                                 $display_image_pest_rabia_r6.style.display = "block";
                                 $adjunto_pestaña_rabia_r6.style.display = "none";
                                 $pest_sup_rab_r6.style.display = 'block';
                                 $display_image_pest_rabia_r6.src="../vacunas/"+dataJson.adjunto[1];
-                            }
-                            else if(adj6[1]=="pdf"){
+                            }else if(adj6[1]=="pdf"){
+                                document.getElementById("marco_rabia_r6").style.display = "none";
                                 $display_image_pest_rabia_r6.style.display = "none";
                                 $adjunto_pestaña_rabia_r6.style.display = "block";
                                 $pest_sup_rab_r6.style.display = 'none';
@@ -385,11 +393,13 @@ function mostrarImagen($value){
                             document.getElementById("tab5").style.display="inline";
                             let adj5 = dataJson.adjunto[2].split('.');
                             if(adj5[1]=="jpeg"){
+                                document.getElementById("marco_rabia_r5").style.display = "block";
                                 $display_image_pest_rabia_r5.style.display = "block";
                                 $adjunto_pestaña_rabia_r5.style.display = "none";
                                 $pest_sup_rab_r5.style.display = 'block';
                                 $display_image_pest_rabia_r5.src="../vacunas/"+dataJson.adjunto[2];
                             }else if(adj5[1]=="pdf"){
+                                document.getElementById("marco_rabia_r5").style.display = "none";
                                 $display_image_pest_rabia_r5.style.display = "none";
                                 $adjunto_pestaña_rabia_r5.style.display = "block";
                                 $pest_sup_rab_r5.style.display = 'none';
@@ -403,11 +413,13 @@ function mostrarImagen($value){
                         }else{
                             let adj4 = dataJson.adjunto[3].split('.');
                             if(adj4[1]=="jpeg"){
+                                document.getElementById("marco_rabia_r4").style.display = "block";
                                 $display_image_pest_rabia_r4.style.display = "block";
                                 $adjunto_pestaña_rabia_r4.style.display = "none";
                                 $pest_sup_rab_r4.style.display = 'block';
                                 $display_image_pest_rabia_r4.src="../vacunas/"+dataJson.adjunto[3];
                             }else if(adj4[1]=="pdf"){
+                                document.getElementById("marco_rabia_r4").style.display = "none";
                                 $display_image_pest_rabia_r4.style.display = "none";
                                 $adjunto_pestaña_rabia_r4.style.display = "block";
                                 $pest_sup_rab_r4.style.display = 'none';
@@ -422,11 +434,13 @@ function mostrarImagen($value){
                         }else{
                             let adj3 = dataJson.adjunto[4].split('.');
                             if(adj3[1]=="jpeg"){
+                                document.getElementById("marco_rabia_r3").style.display = "block";
                                 $display_image_pest_rabia_r3.style.display = "block";
                                 $adjunto_pestaña_rabia_r3.style.display = "none";
                                 $pest_sup_rab_r3.style.display = 'block';
                                 $display_image_pest_rabia_r3.src="../vacunas/"+dataJson.adjunto[4];
                             }else if(adj3[1]=="pdf"){
+                                document.getElementById("marco_rabia_r3").style.display = "none";
                                 $display_image_pest_rabia_r3.style.display = "none";
                                 $adjunto_pestaña_rabia_r3.style.display = "block";
                                 $pest_sup_rab_r3.style.display = 'none';
@@ -441,12 +455,14 @@ function mostrarImagen($value){
                             document.getElementById("tab2_r").style.display="inline";
                             let adj2 = dataJson.adjunto[5].split('.');
                             if(adj2[1]=="jpeg"){
+                                document.getElementById("marco_rabia_r2").style.display = "block";
                                 $display_image_pest_rabia_r2.style.display = "block";
                                 $adjunto_pestaña_rabia_r2.style.display = "none";
                                 $pest_sup_rab_r2.style.display = 'block';
                                 $display_image_pest_rabia_r2.src="../vacunas/"+dataJson.adjunto[5];
                             }
                             else if(adj2[1]=="pdf"){
+                                document.getElementById("marco_rabia_r2").style.display = "none";
                                 $display_image_pest_rabia_r2.style.display = "none";
                                 $adjunto_pestaña_rabia_r2.style.display = "block";
                                 $pest_sup_rab_r2.style.display = 'none';
@@ -461,11 +477,13 @@ function mostrarImagen($value){
                             document.getElementById("tab1_r").style.display="inline";
                             let adj1 = dataJson.adjunto[6].split('.');
                             if(adj1[1]=="jpeg"){
+                                document.getElementById("marco_rabia_r1").style.display = "block";
                                 $display_image_pest_rabia.style.display = "block";
                                 $adjunto_pestaña_rabia_r1.style.display = "none";
                                 $pest_sup_rab_r1.style.display = 'block';
                                 $display_image_pest_rabia.src="../vacunas/"+dataJson.adjunto[6];
                             }else if(adj1[1]=="pdf"){
+                                document.getElementById("marco_rabia_r1").style.display = "none";
                                 $display_image_pest_rabia.style.display = "none" ;
                                 $adjunto_pestaña_rabia_r1.style.display = "block";
                                 $pest_sup_rab_r1.style.display = 'none';
@@ -478,11 +496,13 @@ function mostrarImagen($value){
                           
                     }else{
                         let formatos = (dataJson.adjunto).split('.');
-                        if(formatos[1]=="pdf"){//esto deberia ir arriba de hecho pero por mientras uu
+                        if(formatos[1]=="pdf"){
+                            document.getElementById("marco").style.display = "none";
                             (document.getElementById("pest_sup_vac")).style.display = "none"
                             $frame__adjunto.setAttribute("src",'../vacunas/'+dataJson.adjunto);
                             fadeIn($ficha__vistaprevia);
-                        }else if(formatos[1]=="jpeg"){//el de los multiples deberia ir aqui U:
+                        }else if(formatos[1]=="jpeg"){
+                            document.getElementById("marco").style.display = "block";
                             $display_image.src = "../vacunas/"+dataJson.adjunto;
                             (document.getElementById("pest_sup_vac")).style.display = "block"
                             console.log(dataJson.adjunto);    
@@ -663,9 +683,7 @@ $envio_vacuna.onclick = (e) => {
 }
 
 export function listarVacunas(){
-
-    //paseMedico();
-
+    
     let formData = new FormData();
     formData.append("documento",$documento_trabajador.value);
     formData.append("funcion","crearDatosVac");
@@ -1081,16 +1099,14 @@ $alejar.forEach(function($alejar){
         e.preventDefault();
 
         zoomOut($alejar.getAttribute("value"));
-    }
-})
+    }});
 
 $acercar.forEach(function($acercar){
     $acercar.onclick = (e) => {
         e.preventDefault();
 
         zoomIn($acercar.getAttribute("value"));
-    }
-})
+    }});
 
 function zoomIn($val){
     let imgZ;

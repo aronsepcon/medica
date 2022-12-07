@@ -186,12 +186,12 @@ iframe {
   display: -ms-grid;
   display: grid;
   /*-ms-grid-columns: 0.5fr 10px 0.5fr 10px 0.5fr 10px 1fr 10px 0.5fr 10px 1fr 10px 0.5fr 10px 1fr;*/
-  grid-template-columns: repeat(4, 0.4fr 0.5fr);
+  grid-template-columns: repeat(4, 0.2fr 0.7fr);
   -ms-grid-rows: 2rem;
   grid-template-rows: 2rem;
   -webkit-column-gap: 10px;
      -moz-column-gap: 10px;
-          column-gap: 10px;
+          column-gap: 8px;
 }
 
 .columnas_8 > *:nth-child(1) {
@@ -955,11 +955,11 @@ input[name = "filtrado"]{
 
 #ficha__vistaprevia_vac img{
   margin-top: 50px;
-  max-width: 90%;
   height: auto;
   display: block;
   margin-left: auto;
-  margin-right: auto
+  margin-right: auto;
+  overflow-inline: scroll;
 }
 
 
@@ -982,7 +982,7 @@ input[name = "filtrado"]{
 
 .tab-content iframe {
   border: 1px;
-  width: 450px;
+  width: 100%;
   height: 650px;
   margin-top: 10px;
 }
@@ -1179,3 +1179,11 @@ input[name = "filtrado"]{
 .pase_medico_form i{
   margin-left: 7px;
 }
+
+.marco{
+  border: 2px solid #000;
+  overflow: auto;
+  width: 100%;
+  height: 650px;
+}
+

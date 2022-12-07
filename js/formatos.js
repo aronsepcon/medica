@@ -12,8 +12,7 @@ $exportar.onclick = (e) => {
     e.preventDefault();
 
     let data = new FormData();
-        data.append("documento",42081842);
-        data.append("funcion","listarConsultas");
+        data.append("funcion","formato");
    /* if($ccostos==0){
         data.append("ccostos","2100");
     }else if($ccostos==1){
@@ -29,7 +28,6 @@ $exportar.onclick = (e) => {
         data.append("funcion","");
     }
 */
-    
     fetch('../inc/consultasmedicas.inc.php',{
         method: "POST",
         body:data,

@@ -310,7 +310,8 @@ export function paseMedico(){
             if(vigencia>Date.now() && diffd>=30){
                 $fecha_vigencia.style.color="green";
             }else if(diffd>=1 && diffd<30){
-                $fecha_vigencia.style.color="orange";
+                $fecha_vigencia.style.color="#D5D71A";
+                $fecha_vigencia.style.fontWeight = "bold";
             }else if(vigencia<=Date.now()){
                 $fecha_vigencia.style.color="red";
             }else{

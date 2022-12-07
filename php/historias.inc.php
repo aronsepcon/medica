@@ -103,8 +103,10 @@
                 <a href="#" value="vac" class="alejar"><i class="fas fa-minus"></i></a>
                 <a href="#" value="vac" class="acercar"><i class="fas fa-plus"></i></a>
                 <a href="#" id="descarga_vac" download><i class="fas fa-download desc"></i></a>
-            </div>            
-            <img src="" id="imagen" alt="">        
+            </div>
+            <div class="marco" id="marco">
+                <img src="" id="imagen" alt="">
+            </div>
         </div>    
     </div>
 
@@ -123,7 +125,9 @@
                             <a href="#" value="r4" class="acercar"><i class="fas fa-plus"></i></a>
                             <a href="#" id="descarga" download><i class="fas fa-download desc"></i></a>
                         </div>
-                        <img src="" class="img_pestaña" id="imagen_pestaña_r4" alt="">  
+                        <div class="marco" id="marco_r4">
+                            <img src="" class="img_pestaña" id="imagen_pestaña_r4" alt="">  
+                        </div>
                         <iframe src="" id="adjunto_pestaña_r4" ></iframe>      
                 </div>
                 <div class="tab-content" id="tab-content-r3">
@@ -132,7 +136,10 @@
                             <a href="#" value="r3" class="acercar"><i class="fas fa-plus"></i></a>
                             <a href="#" id="descarga_2" download><i class="fas fa-download desc"></i></a>
                         </div>
-                        <img src="" class="img_pestaña" id="imagen_pestaña_r3" alt=""> 
+                        <div class="marco" id="marco_r3">
+                            <img src="" class="img_pestaña" id="imagen_pestaña_r3" alt=""> 
+                        </div>    
+
                         <iframe src="" id="adjunto_pestaña_r3" ></iframe>   
                 </div>
                 <div class="tab-content" id="tab-content-r2">
@@ -141,7 +148,9 @@
                             <a href="#" value="r2" class="acercar"><i class="fas fa-plus"></i></a>
                             <a href="" id="descarga_3" download><i class="fas fa-download desc"></i></a>
                         </div>
-                        <img src="" class="img_pestaña" id="imagen_pestaña_r2" alt=""> 
+                        <div class="marco" id="marco_r2">
+                            <img src="" class="img_pestaña" id="imagen_pestaña_r2" alt=""> 
+                        </div>
                         <iframe src="" id="adjunto_pestaña_r2" ></iframe>    
                 </div>
                 <div class="tab-content" id="tab-content-r1">
@@ -149,8 +158,10 @@
                             <a href="#" value="r1" class="alejar"><i class="fas fa-minus"></i></a>
                             <a href="#" value="r1" class="acercar"><i class="fas fa-plus"></i></a>
                             <a href="#" id="descarga_1" download><i class="fas fa-download desc"></i></a>
-                        </div>    
-                        <img src="" class="img_pestaña" id="imagen_pestaña" alt="">
+                        </div>
+                        <div class="marco" id="marco_r1">
+                            <img src="" class="img_pestaña" id="imagen_pestaña" alt="">
+                        </div>
                         <iframe src="" id="adjunto_pestaña_r1"></iframe>
                 </div> 
         </div>
@@ -175,7 +186,9 @@
                         <a href="#" value="r7_rab" class="acercar"><i class="fas fa-plus"></i></a>
                         <a href="" id="descarga_rab_7" download><i class="fas fa-download desc"></i></a>
                     </div>
-                    <img src="" id="imagen_pestaña_rabia_r7" alt="">
+                    <div class="marco" id="marco_rabia_r7">
+                        <img src="" id="imagen_pestaña_rabia_r7" alt="">
+                    </div>
                     <iframe src="" id="adjunto_pestaña_rabia_r7"></iframe>
                 </div>
                 <div class="tab-content" id="tab-content-r6">
@@ -184,7 +197,9 @@
                         <a href="#" value="r6_rab" class="acercar"><i class="fas fa-plus"></i></a>
                         <a href="" id="descarga_rab_6" download><i class="fas fa-download desc"></i></a>
                     </div>
-                    <img src="" id="imagen_pestaña_rabia_r6" alt="">
+                    <div class="marco" id="marco_rabia_r6">
+                        <img src="" id="imagen_pestaña_rabia_r6" alt="">
+                    </div>
                     <iframe src="" id="adjunto_pestaña_rabia_r6"></iframe>
                 </div>
 
@@ -194,7 +209,9 @@
                         <a href="#" value="r5_rab" class="acercar"><i class="fas fa-plus"></i></a>
                         <a href="" id="descarga_rab_5" download><i class="fas fa-download desc"></i></a>
                     </div>
-                    <img src="" id="imagen_pestaña_rabia_r5" alt="">
+                    <div class="marco" id="marco_rabia_r5">
+                        <img src="" id="imagen_pestaña_rabia_r5" alt="">
+                    </div>
                     <iframe src="" id="adjunto_pestaña_rabia_r5"></iframe>
                 </div>
                
@@ -204,7 +221,9 @@
                         <a href="#" value="r4_rab" class="acercar"><i class="fas fa-plus"></i></a>
                         <a href="" id="descarga_rab_4" download><i class="fas fa-download desc"></i></a>
                     </div>
-                    <img src="" id="imagen_pestaña_rabia_r4" alt="">
+                    <div class="marco" id="marco_rabia_r4">
+                        <img src="" id="imagen_pestaña_rabia_r4" alt="">
+                    </div>
                     <iframe src="" id="adjunto_pestaña_rabia_r4"></iframe>
                 </div>
                 
@@ -214,7 +233,9 @@
                         <a href="#" value="r3_rab" class="acercar"><i class="fas fa-plus"></i></a>
                         <a href="" id="descarga_rab_3" download><i class="fas fa-download desc"></i></a>
                     </div>
-                    <img src="" id="imagen_pestaña_rabia_r3" alt="">
+                    <div class="marco" id="marco_rabia_r3">
+                        <img src="" id="imagen_pestaña_rabia_r3" alt="">
+                    </div>
                     <iframe src="" id="adjunto_pestaña_rabia_r3"></iframe>
                 </div>
         
@@ -224,7 +245,9 @@
                         <a href="#" value="r2_rab" class="acercar"><i class="fas fa-plus"></i></a>
                         <a href="" id="descarga_rab_2" download><i class="fas fa-download desc"></i></a>
                     </div>
-                    <img src="" id="imagen_pestaña_rabia_r2" alt="">
+                    <div class="marco" id="marco_rabia_r2">
+                        <img src="" id="imagen_pestaña_rabia_r2" alt="">
+                    </div>
                     <iframe src="" id="adjunto_pestaña_rabia_r2"></iframe>
                 </div>
         
@@ -234,7 +257,9 @@
                         <a href="#" value="r1_rab" class="acercar"><i class="fas fa-plus"></i></a>
                         <a href="" id="descarga_rab_1" download><i class="fas fa-download desc"></i></a>
                     </div>
-                    <img src="" id="imagen_pestaña_rabia" alt="">
+                    <div class="marco" id="marco_rabia_r1">
+                        <img src="" id="imagen_pestaña_rabia" alt="">
+                    </div>
                     <iframe src="" id="adjunto_pestaña_rabia_r1"></iframe>
                 </div>
         </div>
