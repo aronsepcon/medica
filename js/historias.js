@@ -14,13 +14,22 @@ const $alergias_pase = document.getElementById("alergias_pase");
 const $nomb_adjunto = document.getElementById("nomb_adjunto");
 const $subida_pase = document.getElementById("subida_pase");
 const $numero_pase = document.getElementById("numero_pase");
+const $fecha_emoA1 = document.getElementById("fecha_emoa1");
+const $fecha_emoA2 = document.getElementById("fecha_emoa2");
+const $fecha_emo_v = document.getElementById("fecha_emoa_v");
 const $fecha_emo = document.getElementById("fecha_emo");
+const $fecha_emoP1 = document.getElementById("fecha_emop1");
+const $fecha_emoP2 = document.getElementById("fecha_emop2");
+const $fecha_emoP3_v = document.getElementById("fecha_emop3_v");
+const $fecha_emoP3 = document.getElementById("fecha_emop3");
 const $fecha_vigencia = document.getElementById("fecha_vigencia");
 const $lote56 = document.getElementById("lote56");
 const $lote88 = document.getElementById("lote88");
 const $pisco = document.getElementById("pisco");
 const $obs_pase = document.getElementById("obs_pase");
 const $medicamotivotext = document.getElementById("medicamotivotext");
+const $clinica = document.getElementById("clinica");
+const $clinicaEmoA = document.getElementById("clinicaEmoA");
 
 //import {mostrarMensaje,fadeIn,fadeOut,validar } from "./funciones.js";
 
@@ -274,7 +283,7 @@ export function paseMedico(){
                 $sangre_pase.style.color="";
             }
             $alergias_pase.value = dataJson.lista[0].alergias;
-            console.log($alergias_pase.value);
+            //console.log($alergias_pase.value);
             if( dataJson.lista[0].alergias=="NO REFIERE" || dataJson.lista[0].alergias=="NINGUNA"){
                 $alergias_pase.style.color = "";
             }
@@ -299,11 +308,35 @@ export function paseMedico(){
     })
     .then(dataJson => {
         if (dataJson.respuesta){
-            $id_pase.value = dataJson.lista[0].id;
-            $numero_pase.value=dataJson.lista[0].numero_pase;
-            $fecha_emo.value=dataJson.lista[0].fechaEmo;
-            $fecha_vigencia.value=dataJson.lista[0].fecha_vigencia;
+           
+            $fecha_emoP3.value = dataJson.lista[0].fechaEmoP1;
 
+            if(dataJson.lista[0].fechaEmo3!=null){
+                $clinicaEmoA.value = dataJson.lista[0].clinicaEmoA3;
+                $fecha_emo.value = dataJson.lista[0].fechaEmo3;
+                $fecha_emoA2.value = dataJson.lista[0].fechaEmo2;
+                $fecha_emoA1.value = dataJson.lista[0].fechaEmo;
+            }
+            else if(dataJson.lista[0].fechaEmo2!=null){
+                $clinicaEmoA.value = dataJson.lista[0].clinicaEmoA2;
+                $fecha_emo.value = dataJson.lista[0].fechaEmo2;
+                $fecha_emoA2.value = dataJson.lista[0].fechaEmo;
+            }
+            else{
+                $clinicaEmoA.value = dataJson.lista[0].clinicaEmoA1;
+                $fecha_emo_v.value = dataJson.lista[0].fechaEmo;
+                $fecha_emo.value = dataJson.lista[0].fechaEmo;
+            }
+            console.log("emoA1:"+ $fecha_emoA1.value)
+            console.log("emoA2:"+ $fecha_emoA2.value)
+            console.log("emoA3:"+ $fecha_emo.value)
+            console.log("emoA3_v:"+ $fecha_emo_v.value)
+
+            $id_pase.value=dataJson.lista[0].id;
+            $numero_pase.value=dataJson.lista[0].numero_pase;
+            $clinica.value=dataJson.lista[0].clinica;
+            $fecha_vigencia.value=dataJson.lista[0].fecha_vigencia;
+            
             let vigencia = new Date(dataJson.lista[0].fecha_vigencia);
             let dias = new Date(vigencia-Date.now())
             let diffd = Math.ceil(dias/(1000*60*60*24))
@@ -401,18 +434,7 @@ function listadoDni($e){
               //  $numero__registro.value = dataJson.cut
               //  $estado__trabajador.value = dataJson.estado;
             }else{
-                mostrarMensaje("Puede editar el registro","msj_error");
-                $nombres_trabajador.value = "";
-                $cargo__trabajador.readOnly=false;  
-                $numero__registro.readOnly=false;
-                $nombres__apellidos.readOnly=false;
-                $documento__identidad.readOnly=false;
-                $centro_costos.readOnly=false;
-                $edad__trabajador.readOnly=false;
-                $sede__trabajador.readOnly=false;
-                $sexo__trabajador.readOnly=false;
-                $fecha__nacimiento.readOnly=false;
-                $estado__trabajador.readOnly=false;
+                mostrarMensaje("No se encuentra el DNI","msj_error");
             }
         })
     
@@ -514,16 +536,6 @@ $actualizarReg.onclick = (e) => {
         .then(dataJson => {
             if (dataJson.respuesta){
                 mostrarMensaje("Se ha actualizado el registro","msj_correct");
-                $cargo__trabajador.readOnly=true;  
-                $numero__registro.readOnly=true;
-                $nombres__apellidos.readOnly=true;
-                $documento__identidad.readOnly=true;
-                $centro_costos.readOnly=true;
-                $edad__trabajador.readOnly=true;
-                $sede__trabajador.readOnly=true;
-                $sexo__trabajador.readOnly=true;
-                $fecha__nacimiento.readOnly=true;
-                $estado__trabajador.readOnly=true;
             }else{
                 mostrarMensaje("Hubo un problema con el servidor","msj_error");
             }

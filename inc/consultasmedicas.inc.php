@@ -37,16 +37,20 @@
             echo json_encode(actualizarPase($pdo,$_POST['num_pase'],
                                         $_POST['lote56'],$_POST['obs_pase'],
                                         $_POST['nombre'],$_POST['documento'],
-                                        $_POST['fecha_emo'],$_POST['fecha_vigencia'],
-                                        $_POST['medica_motivo_txt'],$_POST['lote88'],
+                                        $_POST['clinicaEmoA'],$_POST['clinica'],
+                                        $_POST['fecha_emo'],
+                                        $_POST['fecha_emop'],$_POST['validaEmoP'],
+                                        $_POST['fecha_vigencia'],$_POST['medica_motivo_txt'],
+                                        $_POST['lote88'],
                                         $_POST['pisco'],$_POST['id']));
-        }
-        else if($_POST['funcion'] == "enviarPase"){
+        }else if($_POST['funcion'] == "enviarPase"){
             echo json_encode(enviarPase($pdo,$_POST['num_pase'],
                                         $_POST['lote56'],$_POST['obs_pase'],
                                         $_POST['nombre'],$_POST['documento'],
                                         $_POST['grupo_sangre'],$_POST['alergias'],
-                                        $_POST['fecha_emo'],$_POST['fecha_vigencia'],
+                                        $_POST['clinicaEmoA'],$_POST['clinica'],
+                                        $_POST['fecha_emo'],
+                                        $_POST['fecha_emop'],$_POST['fecha_vigencia'],
                                         $_POST['medica_motivo_txt'],$_POST['lote88'],
                                         $_POST['pisco'],));
         }else if($_POST['funcion'] == "listarPases"){
@@ -357,7 +361,7 @@
                 fichas_api 
             WHERE
                 fichas_api.dni = ? 
-            ORDER BY fichas_api.fecha DESC, CASE WHEN fichas_api.tipoExa=? THEN 3 ELSE 1 END ASC";//PROBAR CON LIKE
+            ORDER BY fichas_api.fecha DESC, CASE WHEN fichas_api.tipoExa = ? THEN 3 ELSE 1 END ASC";//PROBAR CON LIKE
             $statement = $pdo->prepare($sql);
             $statement ->execute(array($doc,$retiroo));
             $result = $statement ->fetchAll();
@@ -513,7 +517,10 @@
         try {
             $respuesta = false;
             $lista = [];
-            $sql="SELECT id,fechaEmo,numPase,fechaVigencia,motivotexto,adjuntoPase,lot56,lot88,lotpisco,observacion FROM pase_medico WHERE dni=?";
+            $sql="SELECT id,fechaEmoP1,clinica,fechaEmoA1,fechaEmoA2,fechaEmoA3,
+                    clinicaEmoA1,clinicaEmoA2,clinicaEmoA3,
+                    numPase,fechaVigencia,motivotexto,adjuntoPase,lot56,lot88,lotpisco,observacion 
+                    FROM pase_medico WHERE dni=?";
             $statement = $pdo->prepare($sql);
             $statement ->execute(array($doc));
             $result = $statement ->fetchAll();
@@ -521,7 +528,14 @@
             if($rowCount > 0){
                 foreach($result as $row) {
                     $salida = array("id"=>$row['id'],
-                                    "fechaEmo" => $row['fechaEmo'],
+                                    "clinica"=>$row['clinica'],
+                                    "fechaEmoP1" => $row['fechaEmoP1'],
+                                    "fechaEmo" => $row['fechaEmoA1'],
+                                    "fechaEmo2" => $row['fechaEmoA2'],
+                                    "fechaEmo3" => $row['fechaEmoA3'],
+                                    "clinicaEmoA1" => $row['clinicaEmoA1'],
+                                    "clinicaEmoA2" => $row['clinicaEmoA2'],
+                                    "clinicaEmoA3" => $row['clinicaEmoA3'],
                                     "numero_pase"=>$row['numPase'],
                                     "fecha_vigencia"=>$row['fechaVigencia'],
                                     "motivotexto"=>$row['motivotexto'],
@@ -671,7 +685,7 @@
 
     }
 
-    function actualizarPase($pdo,$cod,$lot56,$obs,$nombre,$doc,$fechaEmo,$fechaVigencia,$medica_motivo_txt,$lot88,$lotpisc,$id){//problemas U;
+    function actualizarPase($pdo,$cod,$lot56,$obs,$nombre,$doc,$clinicaEmoA,$clinica,$fechaEmo,$fechaEmoP,$validaEmoP,$fechaVigencia,$medica_motivo_txt,$lot88,$lotpisc,$id){//problemas U;
         try {
             $formatos = ["jpeg","jpg","png","pdf"];
 
@@ -718,9 +732,19 @@
                 $adjunto = "archivo subido";
                 $respuestaAdJ = true;
             }
-            $sql ="UPDATE pase_medico SET numPase=?,lot56=?,observacion=?,fechaEmo=?,fechaVigencia=?,motivotexto=?,lot88=?,lotpisco=?,adjuntoPase=? WHERE id=?";        
+            switch($validaEmoP){
+                case "validacionEmoA1":
+                    $sql ="UPDATE pase_medico SET numPase=?,lot56=?,observacion=?,clinicaEmoA1=?,clinica=?,fechaEmoA1=?,fechaEmoP1=?,fechaVigencia=?,motivotexto=?,lot88=?,lotpisco=?,adjuntoPase=? WHERE id=?";        
+                    break;
+                case "validacionEmoA2":
+                    $sql ="UPDATE pase_medico SET numPase=?,lot56=?,observacion=?,clinicaEmoA2=?,clinica=?,fechaEmoA2=?,fechaEmoP1=?,fechaVigencia=?,motivotexto=?,lot88=?,lotpisco=?,adjuntoPase=? WHERE id=?";
+                    break;
+                case "validacionEmoA3":
+                    $sql ="UPDATE pase_medico SET numPase=?,lot56=?,observacion=?,clinicaEmoA3=?,clinica=?,fechaEmoA3=?,fechaEmoP1=?,fechaVigencia=?,motivotexto=?,lot88=?,lotpisco=?,adjuntoPase=? WHERE id=?";
+                    break;
+            }
             $statement = $pdo->prepare($sql);
-            $statement ->execute(array($cod,$lote56,$obs,$fechaEmo,$fechaVigencia,$medica_motivo_txt,$lote88,$pisco,$nombres,$id));
+            $statement ->execute(array($cod,$lote56,$obs,$clinicaEmoA,$clinica,$fechaEmo,$fechaEmoP,$fechaVigencia,$medica_motivo_txt,$lote88,$pisco,$nombres,$id));
             $respuesta = array("respuesta"  => true,
                                 "clase"     =>"msj_correct",
                                 "error"     =>"no hay error", 
@@ -736,7 +760,7 @@
     }
 
 
-    function enviarPase($pdo,$cod,$lot56,$obs,$nombre,$doc,$grupoSangre,$alergias,$fechaEmo,$fechaVigencia,$medica_motivo_txt,$lot88,$lotpisc){
+    function enviarPase($pdo,$cod,$lot56,$obs,$nombre,$doc,$grupoSangre,$alergias,$clinicaEmoA,$clinica,$fechaEmo,$fechaEmoP,$fechaVigencia,$medica_motivo_txt,$lot88,$lotpisc){
         try {
             $formatos = ["jpeg","jpg","png","pdf"];
 
@@ -783,9 +807,9 @@
             }
             $id=uniqid();
             
-            $sql = "INSERT INTO pase_medico SET id=?,numPase=?,lot56=?,observacion=?,nombre=?,dni=?,grupoSangre=?,alergias=?,fechaEmo=?,fechaVigencia=?,motivotexto=?,lot88=?,lotpisco=?,adjuntoPase=?";
+            $sql = "INSERT INTO pase_medico SET id=?,numPase=?,lot56=?,observacion=?,nombre=?,dni=?,grupoSangre=?,alergias=?,clinicaEmoA1=?,clinica=?,fechaEmoA1=?,fechaEmoP1=?,fechaVigencia=?,motivotexto=?,lot88=?,lotpisco=?,adjuntoPase=?";
             $statement = $pdo->prepare($sql);
-            $statement ->execute(array($id,$cod,$lote56,$obs,$nombre,$doc,$grupoSangre,$alergias,$fechaEmo,$fechaVigencia,$medica_motivo_txt,$lote88,$pisco,$nombres));
+            $statement ->execute(array($id,$cod,$lote56,$obs,$nombre,$doc,$grupoSangre,$alergias,$clinicaEmoA,$clinica,$fechaEmo,$fechaEmoP,$fechaVigencia,$medica_motivo_txt,$lote88,$pisco,$nombres));
             $respuesta = array("respuesta"  => true,
                                 "clase"     =>"msj_correct",
                                 "error"     =>"no hay error",

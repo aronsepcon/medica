@@ -48,6 +48,7 @@
             <ul>
                 <li><a href="#" title="Ir Inicio"><i class="fas fa-home"></i></a></li>
                 <li><a href="#" id="historias" title="Historias Clínicas"><i class="far fa-file-alt"></i></a></li>
+                <li><a href="#" id="subcontratas" title="Subcontratas"><i class='fas fa-hard-hat'></i></a></li>
                 <li><a href="#" id="estadisticas" title="Estadisticas"><i class="fas fa-chart-bar"></i></a></li>
                 <li><a href="#" title="Control de medicamentos"><i class="fas fa-box"></i></a></li>
                 <li><a href="#" id="atenciones" title="Atenciones Médicas"><i class="fas fa-user-md"></i></a></li><!-- target="frame__loader"-->
@@ -62,6 +63,10 @@
         <div class="main__loader" id="main__loader">
             <div id="ficha__historias" class="fichas oculto">
                 <?php include_once( '../php/historias.inc.php' ); ?>
+            </div>
+
+            <div id="ficha__subcontratas" class="fichas oculto">
+                <?php include_once( '../php/subcontratas.inc.php'); ?>
             </div>
 
             <div id="ficha__cargar" class="fichas oculto">

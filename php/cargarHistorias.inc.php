@@ -96,7 +96,8 @@
                         <div id="formUpload__data__process">
                             <a href="#" id="btn__uploadPDF"></i></a>
                         </div>
-                    </div>    
+                    </div>
+                    <progress id="carga_subida_excel" value="0" max="100" ></progress>
                 </form>
             </div>
 
@@ -108,7 +109,8 @@
                         <div id="formUpload__data__process">
                             <a href="#" id="btn__uploadPDF"></i></a>
                         </div>
-                    </div>    
+                    </div>
+                    <progress id="carga_subida" value="0" max="100" ></progress>
                 </form>
             </div>
            

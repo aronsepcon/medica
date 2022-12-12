@@ -4,7 +4,10 @@ import {fadeOut} from "./funciones.js";
 
 const $historias = document.getElementById('historias');
 const $loader = document.getElementById('main__loader');
+const $subcontratas = document.getElementById('subcontratas');
 const $ficha__historias = document.getElementById('ficha__historias');
+const $ficha__subcontratas = document.getElementById('ficha__subcontratas');
+
 const $ficha__cargar = document.getElementById('ficha__cargar');
 const $configuracion = document.getElementById('configuracion');
 const $modal__esperar = document.getElementById('modal__esperar');
@@ -23,10 +26,21 @@ $historias.onclick =(e) => {
     return false;
 }
 
+$subcontratas.onclick = (e) => {
+    e.preventDefault();
+
+    fadeIn($ficha__subcontratas);
+    fadeOut($ficha__cargar);
+    fadeOut($cargar__estadisticas);
+    fadeOut($ficha__historias);
+    return false;
+}
+
 $estadisticas.onclick = (e) => {
     e.preventDefault();
 
     fadeIn($cargar__estadisticas);
+    fadeOut($ficha__subcontratas);
     fadeOut($ficha__cargar);
     fadeOut($ficha__historias);
     fadeOut($permisos_panel);

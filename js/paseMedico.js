@@ -24,7 +24,16 @@ const $lote88 = document.getElementById("lote88");
 const $pisco = document.getElementById("pisco");
 const $enviar_pase = document.getElementById("enviar_pase_medico");
 const $numero_pase = document.getElementById("numero_pase");
+const $clinicaEmoA = document.getElementById("clinicaEmoA");
+const $clinica = document.getElementById("clinica");
+const $fecha_emoA1 = document.getElementById("fecha_emoa1");
+const $fecha_emoA2 = document.getElementById("fecha_emoa2");
 const $fecha_emo = document.getElementById("fecha_emo");
+const $fecha_emo_v = document.getElementById("fecha_emoa_v");
+const $fecha_emoP1 = document.getElementById("fecha_emop1");
+const $fecha_emoP2 = document.getElementById("fecha_emop2");
+const $fecha_emoP3 = document.getElementById("fecha_emop3");
+const $fecha_emoP3_v = document.getElementById("fecha_emop3_v");
 const $fecha_vigencia = document.getElementById("fecha_vigencia");
 const $medicamotivotext = document.getElementById("medicamotivotext");
 
@@ -100,6 +109,21 @@ $subida_pase.onclick = (e) => {
 }    
 
 function enviarPase(){
+
+    let validacionEmoP="";
+    if($fecha_emo=="" && $fecha_emo_v==""){//agregar hasta 5 U:
+        validacionEmoP = "validacionEmoA1";
+    }else if($fecha_emoA2.value=="" && $fecha_emo_v.value!=""){
+        validacionEmoP = "validacionEmoA2";
+    }else if($fecha_emoA1.value=="" && $fecha_emoA2.value!=""){
+        validacionEmoP = "validacionEmoA3";
+    }else{
+        validacionEmoP = "validacionEmoA1";
+    }
+        console.log(validacionEmoP);
+        console.log($fecha_emo.value);
+        console.log($fecha_emoA2.value);
+
     let data = new FormData();
     data.append('subidaPase',$subirPdf.files[0]);
     data.append("num_pase", $numero_pase.value);
@@ -109,7 +133,10 @@ function enviarPase(){
     data.append("documento", $dni_pase.value);
     data.append("grupo_sangre", $sangre_pase.value );
     data.append("alergias", $alergias_pase.value);
+    data.append("clinicaEmoA",$clinicaEmoA.value);
+    data.append("clinica",$clinica.value);
     data.append("fecha_emo",$fecha_emo.value);
+    data.append("fecha_emop",$fecha_emoP3.value);
     data.append("fecha_vigencia",$fecha_vigencia.value);
     data.append("medica_motivo_txt",$medicamotivotext.value);
     data.append("lote56",$lote56.checked);
@@ -117,6 +144,7 @@ function enviarPase(){
     data.append("pisco",$pisco.checked);
     if($id_pase.value !=""){
         data.append("funcion","actualizarPase");
+        data.append("validaEmoP",validacionEmoP);
         data.append("id",$id_pase.value);
     }else{
         data.append("funcion","enviarPase");

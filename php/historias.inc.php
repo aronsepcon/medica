@@ -777,10 +777,35 @@
                                 <span>Alergias</span>
                                 <input type="text" id="alergias_pase" readonly>
                             </div>
-                            
+                            <input type="date" id="fecha_emop1" class="oculto">
+                            <input type="date" id="fecha_emop2" class="oculto">
+                            <input type="date" id="fecha_emop3_v" class="oculto">
                             <div>
-                                <span>Fecha EMO</span>
+                                <span>Fecha EMOP</span>
+                                <input type="date" id="fecha_emop3">
+                            </div>
+                            <div>
+                                <span>Clinica EMOP</span>
+                                <select name="" id="clinica">
+                                    <option value="1">MEDEX</option>
+                                    <option value="2">SERFARMED</option>
+                                    <option value="3">LAS AMERICAS</option>
+                                </select>
+                            </div>
+                            <input type="date" id="fecha_emoa1" class="oculto">
+                            <input type="date" id="fecha_emoa2" class="oculto">
+                            <input type="date" id="fecha_emoa_v" class="oculto">
+                            <div>
+                                <span>Fecha EMOA</span>
                                 <input type="date" id="fecha_emo">
+                            </div>
+                            <div>
+                                <span>Clinica EMOA</span>
+                                <select name="" id="clinicaEmoA">
+                                    <option value="1">MEDEX</option>
+                                    <option value="2">SERFARMED</option>
+                                    <option value="3">LAS AMERICAS</option>
+                                </select>
                             </div>
                             <div>
                                 <span>Fecha Vigencia</span>
