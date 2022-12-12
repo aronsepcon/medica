@@ -28,6 +28,7 @@ include("consultasmedicas.inc.php");
         break;
       case "AMERICAS": //preguntar como se pasan las americas
         $clinicaVal = 3;
+        
         break;
       }
     //validar tipoExa

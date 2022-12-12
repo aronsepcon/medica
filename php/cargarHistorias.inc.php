@@ -97,7 +97,7 @@
                             <a href="#" id="btn__uploadPDF"></i></a>
                         </div>
                     </div>
-                    <progress id="carga_subida_excel" value="0" max="100" ></progress>
+                    <progress id="carga_subida_excel" value="0" max="100" class="oculto"></progress>
                 </form>
             </div>
 
@@ -110,7 +110,7 @@
                             <a href="#" id="btn__uploadPDF"></i></a>
                         </div>
                     </div>
-                    <progress id="carga_subida" value="0" max="100" ></progress>
+                    <progress id="carga_subida" value="0" max="100" class="oculto"></progress>
                 </form>
             </div>
            

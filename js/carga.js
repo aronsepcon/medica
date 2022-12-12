@@ -163,7 +163,7 @@ $subida_masiva_excel.onchange = (e) => {
                         .then(response => response.json())
                         .then(data => {
                             if (data.respuesta) {
-                                mostrarMensaje("Historias Actualizadas"+(index+1),"msj_correct");
+                                mostrarMensaje("Historias Actualizadas" ,"msj_correct");
                             }else{
                                 mostrarMensaje("Hubo un error al actualizar","msj_error");
                             }
@@ -217,6 +217,7 @@ $uploadFile.onchange = (e) =>{//para la carga masiva de PDFs
                     .then(data => {
                         if (data.respuesta) {
                             mostrarMensaje("Documento subido","msj_correct");
+                            $uploadFile.files.value = 0;
                         }else{
                             mostrarMensaje("Hubo un error al subir el archivo","msj_error");
                         }

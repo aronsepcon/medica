@@ -28,11 +28,12 @@ $exportar.onclick = (e) => {
         data.append("funcion","");
     }
 */
-    fetch('../inc/consultasmedicas.inc.php',{
+    fetch('../inc/consultasvistas.inc.php',{
         method: "POST",
         body:data,
     })
     .then(function(response){
+        if(!response.ok) throw new Error("Fallo la subida");
         return response.json();
     })
     .then(dataJson=>{
@@ -40,6 +41,13 @@ $exportar.onclick = (e) => {
             let ws = XLSX.utils.json_to_sheet(dataJson.lista);
             const workbook = XLSX.utils.book_new();
             XLSX.utils.book_append_sheet(workbook, ws, "Hoja1");
+
+            XLSX.utils.sheet_add_aoa(ws,[["N°","APELLIDOS Y NOMBRES","FECHA DE NACIMIENTO","DNI","EDAD","AREA DE TRABAJO","PUESTO DE TRABAJO","EMPRESA",
+                    "CORREO ELECTRONICO","CELULAR","GRUPO SANG. Y RH","ALERGIAS","FECHA EMO","CLINICA","CONDICIÓN","PESO","TALLA","IMC","CLASIFICACION",
+                    "ENVIO DE EMO EMAIL","PROGRAMADO","REALIZADO","CLINICA","CONDICIÓN","PESO","TALLA","IMC","CLASIFICACION","ENVIO DE EMO EMAIL",
+                    "PROGRAMADO","REALIZADO","CLINICA","CONDICIÓN","PESO","TALLA","IMC","CLASIFICACION","ENVIO DE EMO EMAIL","REALIZADO","CLÍNICA",
+                    "OBSERVACIÓNES","ENVIO DE EMO EMAIL","FIEBRE AMARILLA","DIFTERIA TETANO-1RA DOSIS","DIFTERIA TETANO-2DA DOSIS","DIFTERIA TETANO-3RA DOSIS",
+                    "DIFTERIA TETANO-REFUERZO"]]);
 
             XLSX.writeFile(workbook, "lista.xlsx", { compression: true });
 
