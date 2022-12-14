@@ -868,14 +868,12 @@ export function listarVacunas(){
                 $hepatitis_B__d2.style.fontWeight = "";
                 $hepatitis_B__d2.style.color="";
 
-            }
-            else if(dataJson.adjuntoHepBD2==null && $hepatitis_B__d2.value!=""){
+            }else if(dataJson.adjuntoHepBD2==null && $hepatitis_B__d2.value!=""){
                 document.getElementById("icono_hb_d2").style.color="";
                 $hepatitis_B__d2.style.fontStyle="italic";
                 $hepatitis_B__d2.style.fontWeight = "bold";
                 $hepatitis_B__d2.style.color="red";
-            }
-            else{
+            }else{
                 document.getElementById("icono_hb_d2").style.color="";
                 $hepatitis_B__d2.style.fontStyle="";
                 $hepatitis_B__d2.style.fontWeight = "";

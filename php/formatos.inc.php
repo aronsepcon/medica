@@ -23,8 +23,8 @@
         <div>
             <span>Centro de Costo</span>
             <select name="" id="ccostos">
-                <option value="0">2100</option>
-                <option value="1">2300</option>
+                <option value="0">0200</option>
+                <option value="1">2800</option>
                 <option value="2">2600</option>
             </select>
         </div>
