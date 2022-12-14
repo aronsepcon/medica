@@ -36,7 +36,7 @@
             </select>
         </div>
         <button type="button" id="exportar">Exportar</button>
-        
+        <a href="" download id="descarga_formato" class="oculto"></a>
     </section>
 </section>
 <script src="../js/xlsx.full.min.js"></script>
