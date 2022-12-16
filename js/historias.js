@@ -908,6 +908,7 @@ function listarExamenes(){
                                     <td>${$restricciones}</td>
                                     <td>${dataJson.lista[index].alergias}</td>
                                     <td>${$sangre_tipo}</td>
+                                    <td><a href></a></td>
                                     <td class="textoCentro">
                                         <a href="${dataJson.lista[index].id}" data-accion="sendMail" 
                                                                               data-examen="${dataJson.lista[index].tipo}" 

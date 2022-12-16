@@ -14,7 +14,7 @@ $exportar.onclick = (e) => {
     e.preventDefault();
 
     let data = new FormData();
-        data.append("funcion","formato");
+    //    data.append("funcion","formato");
   /* if($ccostos==0){
         data.append("ccostos","0200");
     }else if($ccostos==1){
@@ -34,6 +34,9 @@ $exportar.onclick = (e) => {
         method: "POST",
         body:data,
     })
-    
+   
 
+    
+    $descarga_formato.setAttribute("href","../formatos/Formato 006.xlsx");
+    $descarga_formato.click();
 }

@@ -489,13 +489,14 @@
                             <tr>
                                 <th width="4%">CC</th>
                                 <th width="8%">Clinica</th>
-                                <th width="10%">Tipo</th>
+                                <th width="9%">Tipo</th>
                                 <th width="7%">Fecha</th>
                                 <th width="5%">Aptitud</th>
-                                <th width="20%">Restricciones</th>
-                                <th width="20%">Observaciones</th>
+                                <th width="18%">Restricciones</th>
+                                <th width="28%">Observaciones</th>
                                 <th width="8%">Alergias</th>
-                                <th width="10%">Tipo Sangre</th>
+                                <th width="9%">Tipo Sangre</th>
+                                <th width="6%">Historial</th>
                                 <th width="6%">Correo</th>
                                 <th width="6%">Ver</th>
                                 <th width="6%">Cargar</th>
