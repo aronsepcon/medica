@@ -66,8 +66,7 @@ $buscar.onclick = (e) =>{
                                 <td>${dataJson.lista[index].fecnac}</td>
                                 <td>${dataJson.lista[index].dni}</td>
                                 <td>${dataJson.lista[index].edad}</td>
-                                <td>${$DTD3}</td>
-                                <td>${dataJson.lista[index].TEST}</td>`;
+                                <td>${$DTD3}</td>`;
                 $tabla_formato_006.appendChild(tr);
             }
         }else{
