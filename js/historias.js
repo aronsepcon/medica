@@ -1,11 +1,10 @@
-//import {paseMedico} from "./paseMedico.js";
 import {mostrarMensaje} from "./funciones.js";
 import {fadeIn} from "./funciones.js";
 import {fadeOut} from "./funciones.js";
 import { validar } from "./funciones.js";
 import {listarVacunas} from "./cargaMasiva.js";
-//import {paseMedico} from "./funciones.js";
 
+const $documento_trabajador = document.getElementById('documento_trabajador');
 const $id_pase = document.getElementById("id_pase");
 const $nombre_pase = document.getElementById("nombre_pase");
 const $dni_pase = document.getElementById("dni_pase");
@@ -31,6 +30,10 @@ const $medicamotivotext = document.getElementById("medicamotivotext");
 const $clinica = document.getElementById("clinica");
 const $clinicaEmoA = document.getElementById("clinicaEmoA");
 
+
+(function(){
+    //import {paseMedico} from "./paseMedico.js";
+//import {paseMedico} from "./funciones.js";
 //import {mostrarMensaje,fadeIn,fadeOut,validar } from "./funciones.js";
 
 const $menu_vertical = document.getElementsByClassName('menu-historias__vertical__menu');
@@ -49,8 +52,7 @@ const $pagina3 = document.getElementById('pagina3');
 const $pagina4 = document.getElementById('pagina4');
 const $pagina5 = document.getElementById('pagina5');
 
-const $documento_trabajador = document.getElementById('documento_trabajador');
-const $nombres_trabajador = document.getElementById('nombres_trabajador')
+const $nombres_trabajador = document.getElementById('nombres_trabajador');
 
 const $radio__nombre = document.getElementById('radio__nombre');
 const $radio__dni = document.getElementById('radio__dni');
@@ -113,7 +115,44 @@ const $cargo_hc = document.getElementById('cargo_hc');
 const $ccostos_hc = document.getElementById('ccostos_hc');
 const $tipoExa_hc = document.getElementById('tipoExa_hc');
 const $clinica_hc = document.getElementById('clinica_hc');
-
+const $pase_hc = document.getElementById('pase_hc');
+const $actitud_hc = document.getElementById('actitud_hc');
+const $edad_hc = document.getElementById('edad_hc');
+const $peso_hc = document.getElementById('peso_hc');
+const $imc_hc = document.getElementById('imc_hc');
+const $sangre_hc = document.getElementById('sangre_hc');
+const $talla_hc = document.getElementById('talla_hc');
+const $sexo_hc = document.getElementById('sexo_hc');
+const $alergias_hc = document.getElementById('alergias_hc');
+const $ant_psi_hc = document.getElementById('ant_psi_hc');
+const $estadoNut_hc = document.getElementById('estadoNut_hc');
+const $espiro_hc = document.getElementById('espiro_hc');
+const $evOftalmo_hc = document.getElementById('evOftalmo_hc');
+const $evAudio_hc = document.getElementById('evAudio_hc');
+const $evOsteo_hc = document.getElementById('evOsteo_hc');
+const $exRayX_hc = document.getElementById('exRayX_hc');
+const $exPsi_hc = document.getElementById('exPsi_hc');
+const $exAltura_hc = document.getElementById('exAltura_hc');
+const $hbg_hc = document.getElementById('hbg_hc');
+const $hto_hc = document.getElementById('hto_hc');
+const $gota_hc = document.getElementById('gota_hc');
+const $plaquetas_hc = document.getElementById('plaquetas_hc');
+const $colesterol_hc = document.getElementById('colesterol_hc');
+const $hdl_hc = document.getElementById('hdl_hc');
+const $ldl_hc = document.getElementById('ldl_hc');
+const $triglic_hc = document.getElementById('triglic_hc');
+const $tgp_hc = document.getElementById('tgp_hc');
+const $tgo_hc = document.getElementById('tgo_hc');
+const $glucosa_hc = document.getElementById('glucosa_hc');
+const $urea_hc = document.getElementById('urea_hc');
+const $acUrico_hc = document.getElementById('acUrico_hc');
+const $creatinina_hc = document.getElementById('creatinina_hc');
+const $vdrl_hc = document.getElementById('vdrl_hc');
+const $rpr_hc = document.getElementById('rpr_hc');
+const $toxic_hc = document.getElementById('toxic_hc');
+const $rcv_hc = document.getElementById('rcv_hc');
+const $leucocitos_hc = document.getElementById('leucocitos_hc');
+const $hepB_hc = document.getElementById('hepB_hc');
 
 let registro = 0;
 
@@ -271,122 +310,6 @@ $radio__dni.onclick = (e) =>{
     $nombres_trabajador.value = "";
 }
 
-export function paseMedico(){
-    
-    let data2 = new FormData();
-    data2.append("documento",$documento_trabajador.value);
-    data2.append("funcion","listarExamenes");
-    fetch('../inc/consultasmedicas.inc.php',{
-        method: "POST",
-        body:data2,
-    })
-    .then(function(response){
-        return response.json();
-    })
-    .then(dataJson => {
-        if (dataJson.respuesta){
-            $nombre_pase.value = dataJson.lista[0].paciente;
-            $dni_pase.value = dataJson.lista[0].dni;
-            $sangre_pase.value = dataJson.lista[0].sangre;
-            let sp = (dataJson.lista[0].sangre).split(" ");
-            if(sp[2]=="NEGATIVO" || sp[2]=="negativo" || sp[2]=="-" || sp[1]=="Rh-"){
-                $sangre_pase.style.color="red";
-            }
-            else{
-                $sangre_pase.style.color="";
-            }
-            $alergias_pase.value = dataJson.lista[0].alergias;
-            //console.log($alergias_pase.value);
-            if( dataJson.lista[0].alergias=="NO REFIERE" || dataJson.lista[0].alergias=="NINGUNA"){
-                $alergias_pase.style.color = "";
-            }
-            else{
-                $alergias_pase.style.color = "red";
-            }
-        }else{
-            mostrarMensaje("Verifique el N°. Documento","msj_error");
-        }
-    
-    });
-
-    let data3 = new FormData();
-    data3.append("documento",$documento_trabajador.value);
-    data3.append("funcion","listarPases");
-    fetch('../inc/consultasmedicas.inc.php',{
-        method: "POST",
-        body:data3,
-    })
-    .then(function(response){
-        return response.json();
-    })
-    .then(dataJson => {
-        if (dataJson.respuesta){
-           
-            $fecha_emoP3.value = dataJson.lista[0].fechaEmoP1;
-
-            if(dataJson.lista[0].fechaEmo3!=null){
-                $clinicaEmoA.value = dataJson.lista[0].clinicaEmoA3;
-                $fecha_emo.value = dataJson.lista[0].fechaEmo3;
-                $fecha_emoA2.value = dataJson.lista[0].fechaEmo2;
-                $fecha_emoA1.value = dataJson.lista[0].fechaEmo;
-            }
-            else if(dataJson.lista[0].fechaEmo2!=null){
-                $clinicaEmoA.value = dataJson.lista[0].clinicaEmoA2;
-                $fecha_emo.value = dataJson.lista[0].fechaEmo2;
-                $fecha_emoA2.value = dataJson.lista[0].fechaEmo;
-            }
-            else{
-                $clinicaEmoA.value = dataJson.lista[0].clinicaEmoA1;
-                $fecha_emo_v.value = dataJson.lista[0].fechaEmo;
-                $fecha_emo.value = dataJson.lista[0].fechaEmo;
-            }
-            console.log("emoA1:"+ $fecha_emoA1.value)
-            console.log("emoA2:"+ $fecha_emoA2.value)
-            console.log("emoA3:"+ $fecha_emo.value)
-            console.log("emoA3_v:"+ $fecha_emo_v.value)
-
-            $id_pase.value=dataJson.lista[0].id;
-            $numero_pase.value=dataJson.lista[0].numero_pase;
-            $clinica.value=dataJson.lista[0].clinica;
-            $fecha_vigencia.value=dataJson.lista[0].fecha_vigencia;
-            
-            let vigencia = new Date(dataJson.lista[0].fecha_vigencia);
-            let dias = new Date(vigencia-Date.now())
-            let diffd = Math.ceil(dias/(1000*60*60*24))
-            if(vigencia>Date.now() && diffd>=30){
-                $fecha_vigencia.style.color="green";
-            }else if(diffd>=1 && diffd<30){
-                $fecha_vigencia.style.color="#D5D71A";
-                $fecha_vigencia.style.fontWeight = "bold";
-            }else if(vigencia<=Date.now()){
-                $fecha_vigencia.style.color="red";
-            }else{
-                console.log(dataJson.lista[0].fecha_vigencia);
-            }
-   
-            dataJson.lista[0].lote56==1 ? $lote56.checked=true : $lote56.checked=false;
-            dataJson.lista[0].lote88==1 ? $lote88.checked=true : $lote88.checked=false;
-            dataJson.lista[0].lotepisco==1 ? $pisco.checked=true : $pisco.checked=false;
-            $obs_pase.value = dataJson.lista[0].obs_pase;
-            $nomb_adjunto.value = dataJson.lista[0].adjunto_pase;
-            $medicamotivotext.value = dataJson.lista[0].motivotexto;
-            if(dataJson.lista[0].adjunto_pase){
-                $subida_pase.style.color="green";
-            }else{
-                $id_pase.value ="";
-                $subida_pase.style.color="";
-            }
-            
-        }
-        else{
-            $id_pase.value ="";
-            $numero_pase.value="";
-            $fecha_vigencia.value="";
-            $subida_pase.style.color="";
-        }
-    });   
-}
-
 $tabla__busqueda_body.addEventListener("click", e=>{
     e.preventDefault();
 
@@ -499,7 +422,7 @@ function listadoDni($e){
                         $fecha__nacimiento.value = dataJson.lista[0].fecnac == null ? dataJson.datos[0].nacimiento.slice(0,10) : dataJson.lista[0].fecnac;//aqui tmb
                         $estado__trabajador.value = dataJson.lista[0].estado == null ? dataJson.datos[0].estado : dataJson.lista[0].estado;
                         $direccion__trabajador.value = dataJson.lista[0].direccion == null ? dataJson.datos[0].direccion : dataJson.lista[0].direccion;
-                        $telefono__trabajador.value = dataJson.lista[0].cut==null ? dataJson.datos[0].telefono : dataJson.lista[0].telefono;
+                        $telefono__trabajador.value = dataJson.lista[0].telefono==null ? dataJson.datos[0].telefono : dataJson.lista[0].telefono;
                 
                     } 
                 });
@@ -716,6 +639,7 @@ $tabla__examenes_body.addEventListener("click", e=>{
                     $cargo_hc.value = dataJson.lista[0].cargo;
                     $tipoExa_hc.value = dataJson.lista[0].tipo;
                     $clinica_hc.value = dataJson.lista[0].clinica;
+                    $pase_hc.value = dataJson.lista[0].pase;
                     fadeIn($historia_clinica);
                 }
             })
@@ -1023,5 +947,120 @@ function listarConsultas(){
             }
         })
 }
+})()
 
+export function paseMedico(){
+    
+    let data2 = new FormData();
+    data2.append("documento",$documento_trabajador.value);
+    data2.append("funcion","listarExamenes");
+    fetch('../inc/consultasmedicas.inc.php',{
+        method: "POST",
+        body:data2,
+    })
+    .then(function(response){
+        return response.json();
+    })
+    .then(dataJson => {
+        if (dataJson.respuesta){
+            $nombre_pase.value = dataJson.lista[0].paciente;
+            $dni_pase.value = dataJson.lista[0].dni;
+            $sangre_pase.value = dataJson.lista[0].sangre;
+            let sp = (dataJson.lista[0].sangre).split(" ");
+            if(sp[2]=="NEGATIVO" || sp[2]=="negativo" || sp[2]=="-" || sp[1]=="Rh-"){
+                $sangre_pase.style.color="red";
+            }
+            else{
+                $sangre_pase.style.color="";
+            }
+            $alergias_pase.value = dataJson.lista[0].alergias;
+            //console.log($alergias_pase.value);
+            if( dataJson.lista[0].alergias=="NO REFIERE" || dataJson.lista[0].alergias=="NINGUNA"){
+                $alergias_pase.style.color = "";
+            }
+            else{
+                $alergias_pase.style.color = "red";
+            }
+        }else{
+            mostrarMensaje("Verifique el N°. Documento","msj_error");
+        }
+    
+    });
 
+    let data3 = new FormData();
+    data3.append("documento",$documento_trabajador.value);
+    data3.append("funcion","listarPases");
+    fetch('../inc/consultasmedicas.inc.php',{
+        method: "POST",
+        body:data3,
+    })
+    .then(function(response){
+        return response.json();
+    })
+    .then(dataJson => {
+        if (dataJson.respuesta){
+           
+            $fecha_emoP3.value = dataJson.lista[0].fechaEmoP1;
+
+            if(dataJson.lista[0].fechaEmo3!=null){
+                $clinicaEmoA.value = dataJson.lista[0].clinicaEmoA3;
+                $fecha_emo.value = dataJson.lista[0].fechaEmo3;
+                $fecha_emoA2.value = dataJson.lista[0].fechaEmo2;
+                $fecha_emoA1.value = dataJson.lista[0].fechaEmo;
+            }
+            else if(dataJson.lista[0].fechaEmo2!=null){
+                $clinicaEmoA.value = dataJson.lista[0].clinicaEmoA2;
+                $fecha_emo.value = dataJson.lista[0].fechaEmo2;
+                $fecha_emoA2.value = dataJson.lista[0].fechaEmo;
+            }
+            else{
+                $clinicaEmoA.value = dataJson.lista[0].clinicaEmoA1;
+                $fecha_emo_v.value = dataJson.lista[0].fechaEmo;
+                $fecha_emo.value = dataJson.lista[0].fechaEmo;
+            }
+            console.log("emoA1:"+ $fecha_emoA1.value)
+            console.log("emoA2:"+ $fecha_emoA2.value)
+            console.log("emoA3:"+ $fecha_emo.value)
+            console.log("emoA3_v:"+ $fecha_emo_v.value)
+
+            $id_pase.value=dataJson.lista[0].id;
+            $numero_pase.value=dataJson.lista[0].numero_pase;
+            $clinica.value=dataJson.lista[0].clinica;
+            $fecha_vigencia.value=dataJson.lista[0].fecha_vigencia;
+            
+            let vigencia = new Date(dataJson.lista[0].fecha_vigencia);
+            let dias = new Date(vigencia-Date.now())
+            let diffd = Math.ceil(dias/(1000*60*60*24))
+            if(vigencia>Date.now() && diffd>=30){
+                $fecha_vigencia.style.color="green";
+            }else if(diffd>=1 && diffd<30){
+                $fecha_vigencia.style.color="#D5D71A";
+                $fecha_vigencia.style.fontWeight = "bold";
+            }else if(vigencia<=Date.now()){
+                $fecha_vigencia.style.color="red";
+            }else{
+                console.log(dataJson.lista[0].fecha_vigencia);
+            }
+   
+            dataJson.lista[0].lote56==1 ? $lote56.checked=true : $lote56.checked=false;
+            dataJson.lista[0].lote88==1 ? $lote88.checked=true : $lote88.checked=false;
+            dataJson.lista[0].lotepisco==1 ? $pisco.checked=true : $pisco.checked=false;
+            $obs_pase.value = dataJson.lista[0].obs_pase;
+            $nomb_adjunto.value = dataJson.lista[0].adjunto_pase;
+            $medicamotivotext.value = dataJson.lista[0].motivotexto;
+            if(dataJson.lista[0].adjunto_pase){
+                $subida_pase.style.color="green";
+            }else{
+                $id_pase.value ="";
+                $subida_pase.style.color="";
+            }
+            
+        }
+        else{
+            $id_pase.value ="";
+            $numero_pase.value="";
+            $fecha_vigencia.value="";
+            $subida_pase.style.color="";
+        }
+    });   
+}

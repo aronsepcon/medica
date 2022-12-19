@@ -19,7 +19,7 @@
 </head>
 <body>
 <form class="historias__cuerpo__busqueda" action="../inc/cargarHistoriaMedica.inc.php" method="post"> 
-        <input type="text" id="documento_trabajador" name="documento_trabajador" placeholder="Documento de Identificación" value="42081842">
+        <input type="text" id="documento_trabajador_sc" name="documento_trabajador" placeholder="Documento de Identificación" value="42081842">
         <div>
             <a href="#" id="busqueda_boton"><i class="fas fa-search" ></i></a>
         </div>
@@ -27,57 +27,59 @@
 <section class="wrap">
     <section class="historias__cuerpo_completo" id="historias__cuerpo_completo" style="display: block;"><!--style="display: none;"-->
         <nav class="historias__vertical__menu">
-            <a href="#" id="opcion1" class="opcion_vertical resaltado">1.- Datos Generales</a>
-            <a href="#" id="opcion2" class="opcion_vertical">2.- Exámenes Médicos</a> 
-            <a href="#" id="opcion3" class="opcion_vertical">3.- Atenciones Médicas</a>
-            <a href="#" id="opcion4" class="opcion_vertical">4.- Vacunas</a>
-            <a href="#" id="opcion5" class="opcion_vertical">5.- Documentops Adjuntos</a>
+            <a href="#" id="opcion1_sc" class="opcion_vertical resaltado">1.- Datos Generales</a>
+            <a href="#" id="opcion2_sc" class="opcion_vertical">2.- Exámenes Médicos</a> 
+            <a href="#" id="opcion3_sc" class="opcion_vertical">3.- Atenciones Médicas</a>
+            <a href="#" id="opcion4_sc" class="opcion_vertical">4.- Vacunas</a>
+            <a href="#" id="opcion5_sc" class="opcion_vertical">5.- Documentops Adjuntos</a>
         </nav>
         <section class="historias__cuerpo">
-            <section class="historias__cuerpo__pagina bars" > 
+            <section class="historias__cuerpo__pagina bars" id="pagina1_sc"> 
                 <div>
                     <form id="formulario_datos_trabajador">
                         <div>
                             <h3>Datos del trabajador</h3>
                             <div class="formulario_datos_trabajador_4columnas">
-                                <label for="numero__registro">N° Registro</label>
-                                <input type="text" name="numero__registro" readonly>
-                                <label for="documento__identidad">Documento Identidad</label>
-                                <input type="text" name="documento__identidad" readonly>
-                                <label for="nombres__apellidos">Nombres y apellidos</label>
-                                <input type="text" name="nombres__apellidos" readonly>
-                                <label for="fecha__nacimiento">Fecha Nacimiento</label>
-                                <input type="date" name="fecha__nacimiento" readonly>
-                                <label for="correo__electronico">Correo Electrónico</label>
-                                <input type="text" name="correo__electronico">
-                                <label for="sexo__trabajador">Sexo :</label>
-                                <input type="text" name="sexo__trabajador" readonly>
-                                <label for="cargo__trabajador">Cargo :</label>
-                                <input type="text" name="cargo__trabajador" readonly>
-                                <label for="centro_costos">Centro de Costos :</label>
-                                <input type="text" name="centro_costos" readonly>
-                                <label for="sede__trabajador">Sede :</label>
-                                <input type="text" name="sede__trabajador" readonly>
-                                <label for="estado__trabajador">Estado :</label>
-                                <input type="text" name="estado__trabajador" readonly>
-                                <label for="direccion__trabajador">Dirección :</label>
-                                <input type="text" name="direccion__trabajador">
-                                <label for="edad__trabajador">Edad :</label>
-                                <input type="text" name="edad__trabajador" readonly>
-                                <label for="telefono__trabajador">Telefono :</label>
-                                <input type="text" name="telefono__trabajador">
+                                <label for="numero__registro_sc">N° Registro</label>
+                                <input type="text" name="numero__registro_sc" id="numero__registro_sc">
+                                <label for="documento__identidad_sc">Documento Identidad</label>
+                                <input type="text" name="documento__identidad_sc" id="documento__identidad_sc">
+                                <label for="nombres__apellidos_sc">Nombres y apellidos</label>
+                                <input type="text" name="nombres__apellidos_sc" id="nombres__apellidos_sc">
+                                <label for="fecha__nacimiento_sc">Fecha Nacimiento</label>
+                                <input type="date" name="fecha__nacimiento_sc" id="fecha__nacimiento_sc">
+                                <label for="correo__electronico_sc">Correo Electrónico</label>
+                                <input type="text" name="correo__electronico_sc" id="correo__electronico_sc">
+                                <label for="sexo__trabajador_sc">Sexo :</label>
+                                <input type="text" name="sexo__trabajador_sc" id="sexo__trabajador_sc">
+                                <label for="cargo__trabajador_sc">Cargo :</label>
+                                <input type="text" name="cargo__trabajador_sc" id="cargo__trabajador_sc">
+                                <label for="centro_costos_sc">Centro de Costos :</label>
+                                <input type="text" name="centro_costos_sc" id="centro_costos_sc">
+                                <label for="sede__trabajador_sc">Sede :</label>
+                                <input type="text" name="sede__trabajador_sc" id="sede__trabajador_sc">
+                                <label for="estado__trabajador_sc">Estado :</label>
+                                <input type="text" name="estado__trabajador_sc" id="estado__trabajador_sc">
+                                <label for="direccion__trabajador_sc">Dirección :</label>
+                                <input type="text" name="direccion__trabajador_sc" id="direccion__trabajador_sc">
+                                <label for="edad__trabajador_sc">Edad :</label>
+                                <input type="text" name="edad__trabajador_sc" id="edad__trabajador_sc">
+                                <label for="telefono__trabajador_sc">Telefono :</label>
+                                <input type="text" name="telefono__trabajador_sc" id="telefono__trabajador_sc">
+                                <label for="empresa__trabajador_sc">Empresa :</label>
+                                <input type="text" name="empresa__trabajador_sc">
                             </div> 
-                            <button type="button">Actualizar</button>
+                            <button type="button" id="actualizarSubcontratas">Actualizar</button>
                         </div>
                     </form>
                 </div>
             </section>
         </section>
-        <section class="historias__cuerpo__pagina oculto" id="pagina2">
+        <section class="historias__cuerpo__pagina oculto" id="pagina2_sc">
             <div class="historias__cuerpo__agregar">
                 <div>
                     <button type="button" id="abrir_pestañas" class="oculto">pestañas</button>
-                    <button type="button" class="oculto">+ Subir Examenes</button >
+                    <!--button type="button" class="oculto">+ Subir Examenes</button -->
                 </div>
             </div>
             <div class="historias__tabla bars">
@@ -105,7 +107,7 @@
                 </table>
             </div>
         </section>
-        <section class="historias__cuerpo__pagina oculto" id="pagina3">
+        <section class="historias__cuerpo__pagina oculto" id="pagina3_sc">
             <div class="historias__cuerpo__agregar">
                 <div>
                     <button type="button" id="btn__atencion__medica">+ Agregar Atención</button>
@@ -128,7 +130,7 @@
                 </table>
             </div>
         </section>
-        <section class="historias__cuerpo__pagina oculto" id="pagina4">
+        <section class="historias__cuerpo__pagina oculto" id="pagina4_sc">
             <div class="historias__cuerpo__agregar">
                 <div>
                     <!--button type="button">Modificar</button>
@@ -430,7 +432,7 @@
                 </div>
             </div>
         </section>
-        <section class="historias__cuerpo__pagina oculto" id="pagina5">
+        <section class="historias__cuerpo__pagina oculto" id="pagina5_sc">
             <div class="historias__cuerpo__agregar">
                 <div>
                     <button type="button">+ Agregar Documento</button>
@@ -456,6 +458,6 @@
         </section>
     </section>
 </section>
-<script src="../js/historias.js?v<?php echo $random;?>" type="module"></script>    
+<script src="../js/subcontratas.js?v<?php echo $random;?>" type="module"></script>    
 </body>
 </html>

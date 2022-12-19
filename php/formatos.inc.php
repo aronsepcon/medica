@@ -29,18 +29,20 @@
                 <option value="3">2800</option>
                 <option value="4">2600</option>
             </select>
-        </div>
-        <div>
-            <span>Formato</span>
+            <span class="span_formato">Formato</span>
             <select name="" id="formato">
                 <option value="0">001</option>
                 <option value="1">006</option>
             </select>
+            <span class="span_formato">DNI</span>
+            <input type="text" id="dni_formato">
+        </div>
+        <div>
             <button type="button" id="buscar">Buscar</button>
             <button type="button" id="exportar">Exportar</button>
             <a href="" download id="descarga_formato" class="oculto"></a>
         </div>
-        <div class="historias__tabla bars">
+        <div class="historias__tabla bars oculto" id="tabla_006">
             <table class="w100porcen">
                 <thead>
                     <tr>
@@ -96,6 +98,46 @@
             </table>
         </div>
         
+        <div class="historias__tabla bars" id="tabla_001">
+            <table  class="w100porcen">
+                <thead>
+                    <tr>
+                        <th>N°</th>
+                        <th>Año</th>
+                        <th>N° HC</th>
+                        <th>DNI</th>
+                        <th>Apellidos y Nombres</th>
+                        <th>Edad</th>
+                        <th>Sexo</th>
+                        <th>Puesto de trabajo</th>
+                        <th>Area</th>
+                        <th>Empresa</th>
+                        <th>Centro de Costo</th>
+                        <th>Proyecto</th>
+                        <th>Fecha EMO</th>
+                        <th>Tipo de Examen</th>
+                        <th>Clinica</th>
+                        <th>Aptitud</th>
+                        <th>N° Pase Medico</th>
+                        <th>Programado</th>
+                        <th>Antec. Riesg. Ocupacional</th>
+                        <th>Antec. Pat. Personales</th>
+                        <th>Alergias</th>
+                        <th>Grupo Sanguineo</th>
+                        <th>Presion Arterial</th>
+                        <th>Peso(kg)</th>
+                        <th>Talla(mt)</th>
+                        <th>IMC</th>
+                        <th>Estado Nutricional</th>
+                        <th>Espirometria</th>
+                        <th>Ex. Rayos X</th>
+
+
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
     </section>
 </section>
 <script src="../js/xlsx.full.min.js"></script>

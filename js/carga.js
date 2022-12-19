@@ -11,6 +11,12 @@ const $btnUpdateMedex = document.getElementById("btnUpdateMedex");
 const $fecha__inicio__medex = document.getElementById("fecha__inicio__medex");
 const $fecha__final__medex = document.getElementById("fecha__final__medex");
 
+const $lista_subc = document.getElementById("lista_subc");
+const $btnUpdateSubcontratas = document.getElementById("btnUpdateSubcontratas");
+const $fecha__inicio__subc = document.getElementById("fecha__inicio__subc");
+const $fecha__final__subc = document.getElementById("fecha__final__subc");
+const $nro__doc_subc = document.getElementById("nro__doc_subc");
+
 const $nro__doc = document.getElementById("nro__doc");
 const $subida_masiva_excel=document.getElementById("subidaMasiva");
 const $elegirClinicaExcel = document.getElementById("elegirClinicaExcel");
@@ -235,6 +241,14 @@ $uploadFile.onchange = (e) =>{//para la carga masiva de PDFs
     }
 }
 
+$btnUpdateSubcontratas.onclick = (e) => {
+    e.preventDefault();
+
+    getToken("subc");
+
+    return false;
+}
+
 $btnUpdateMedex.onclick = (e) => {
     e.preventDefault();
 
@@ -245,7 +259,7 @@ $btnUpdateMedex.onclick = (e) => {
     return false;
 }
 
-const getToken = () => {
+const getToken = (t) => {
 	let url = 'https://www.medex.com.pe/ApiCitas/api/Usuario/Login';
 	let data = {"usuario":"sistemas.sepcon","password":"sistemas.sepcon"};
     
@@ -260,7 +274,11 @@ const getToken = () => {
 	.then(res => res.json())
 	.catch(error => console.error('Error:', error))
 	.then(response => {
-        getDataMedex(response.token);
+        if(t=="subc"){
+            getDataSubContratas(response.token);      }
+        else{
+            getDataMedex(response.token);
+        }
         //console.log(response.token);
     
     });
@@ -273,7 +291,7 @@ const getDataMedex = (tokenMedex) => {
 
 	let url = 'https://www.medex.com.pe/ApiCitas/api/ResultadoDigitalExt/GetBaseDatos/20504898173/'+inicio+'/'+final+'/'+documento;
 	let token = "Bearer " + tokenMedex;
-
+    
 	fetch(url, {
 		method: 'GET',
 		headers:{
@@ -285,11 +303,36 @@ const getDataMedex = (tokenMedex) => {
 	.catch(error => console.error('Error:', error))
 	.then(response => {
         passDatatoMaster(response);
-        console.log('hola');
         mostrarMensaje("Registros Actualizados: " + response.length,"msj_info");
         $modal__esperar.style.display = "none";
     });
 
+}
+
+const getDataSubContratas = (tokenMedex) => {
+    let ruc = $lista_subc.value;
+    let inicio_sc = $fecha__inicio__subc.value;
+    let final_sc = $fecha__final__subc.value;
+    let doc_sc = $nro__doc_subc.value == "" ? "-":$nro__doc_subc.value;//exigir q tenga un numero de dni si o si
+    let listaRuc = [];//testear pasar el array como una funcion y luego comparar 
+
+    let url = 'https://www.medex.com.pe/ApiCitas/api/ResultadoDigitalExt/GetBaseDatos/'+listaRuc[ruc]+'/'+inicio_sc+'/'+final_sc+'/'+doc_sc;
+    let token = "Bearer " + tokenMedex;
+
+    fetch(url, {
+		method: 'GET',
+		headers:{
+	    	'Authorization': token,
+	    	'Content-Type': 'application/json'
+	  	}
+	})
+	.then(res => res.json())
+	.catch(error => console.error('Error:', error))
+	.then(response => {
+        passDatatoMaster(response);
+        mostrarMensaje("Registros Actualizados: " + response.length,"msj_info");
+        $modal__esperar.style.display = "none";
+    });
 }
 
 const passDatatoMaster = (ApiResult) => {
@@ -303,4 +346,13 @@ const passDatatoMaster = (ApiResult) => {
     })
 }
 
+const passDataSubContratas = (ApiResult) => {
+    let data = new FormData();
+                data.append("fichas",JSON.stringify(ApiResult));
+                
+    fetch('../inc/cargaApi.inc.php',{
+            method: "POST",
+            body:data,
+    })
+}
 

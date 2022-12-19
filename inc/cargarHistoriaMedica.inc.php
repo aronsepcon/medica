@@ -1,7 +1,7 @@
 <?php
     session_start();
     require_once("connectmedica.inc.php");
-    include("consultasmedicas.inc.php");
+   // include("consultasmedicas.inc.php");
 
     $doc=$_POST['indice'];
   //  $dni=$_POST['documento'];

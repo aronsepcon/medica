@@ -1201,6 +1201,18 @@ input[name = "filtrado"]{
   overflow: auto;
 }
 
-.tabla_formatos tr{
+#tabla_006 tr{
   overflow: auto;
+}
+
+#tabla_001 tr{
+  overflow: auto;
+}
+
+.creacion_formatos div {
+  margin-top: 10px;
+}
+
+.span_formato {
+  margin-left: 20px;
 }

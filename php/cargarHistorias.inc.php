@@ -39,6 +39,33 @@
                     <input type="text" name="nro__doc" id="nro__doc">
                     <input type="submit" value="Actualizar" id="btnUpdateMedex">
                 </form>
+                <h3>Subcontratas API</h3>
+                <form action="" id="subcontratasForm">
+                    <label for="">RUC</label>
+                    <select name="" id="lista_subc">
+                        <option value="1">AISLASISTEMAS SAC</option>
+                        <option value="2">ALERCOGE SAC</option>
+                        <option value="3">ASEC PERU SAC</option>
+                        <option value="4">ATLAS COPCO PERU SAC</option>
+                        <option value="5">CATHODIC PROTECTION OF PERU SAC</option>
+                        <option value="6">CERTIFICACIONES Y CALIBRACIONES SAC</option>
+                        <option value="7">EMMERSON PROCESS MANAGEMENT DEL PERU SAC</option>
+                        <option value="8">FIMA MONTAJES SAC</option>
+                        <option value="9">FIMA SA</option>
+                        <option value="10">GERDIPAC INDUSTRIAL EIRL</option>
+                        <option value="11">HUERTA MINING SERVICE SAC</option>
+                        <option value="12">IMARK SOLUCIONES INTEGRALES SAC</option>
+                        <option value="13">AISLASISTEMAS.SAC</option>
+
+                    </select>
+                    <label for="fecha__inicio__subc">Fecha Inicio</label>
+                    <input type="date" name="fecha__inicio__subc" id="fecha__inicio__subc" value="">
+                    <label for="fecha__final__subc">Fecha Final</label>
+                    <input type="date" name="fecha__final__subc" id="fecha__final__subc" value="">
+                    <label for="nro__doc_subc">N°. Documento</label>
+                    <input type="text" name="nro__doc_subc" id="nro__doc_subc">
+                    <input type="submit" value="ActualizarSC" id="btnUpdateSubcontratas">
+                </form>
                 <h2>Excel</h2>
                 <form action="" id="formUpload">
                     <input type="file" name="fileUpload" id="fileUpload" accept=".xls,.xlsx" class="oculto" >
@@ -55,6 +82,7 @@
                         <option value="3">LAS AMERICAS</option>
                     </select>
                 </form>
+               
             </div>
             <br>
             <!--h2>Serfarmed</h2>

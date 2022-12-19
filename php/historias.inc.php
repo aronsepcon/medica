@@ -295,44 +295,44 @@
                 <label for="">Clinica</label>
                 <input type="text" id="clinica_hc">
                 <label for="">N° de Pase Medico</label>
-                <input type="text">
+                <input type="text" id="pase_hc">
                 <label for="">Aptitud</label>
-                <input type="text">
+                <input type="text" id="actitud_hc">
                 <label for="">Sgte Examen</label>
                 <input type="text">
             </div>
             <div>
                 <label for="">Eval. Preliminares</label>
                 <label for="">Edad</label>
-                <input type="text">
+                <input type="text" id="edad_hc">
                 <label for="">Peso(kg)</label>
-                <input type="text">
+                <input type="text" id="peso_hc">
                 <label for="">IMC</label>
-                <input type="text">
+                <input type="text" id="imc_hc">
                 <label for="">Grupo Sanguineo</label>
-                <input type="text">
+                <input type="text" id="sangre_hc">
                 <label for="">Talla (mt)</label>
-                <input type="text">
+                <input type="text" id="talla_hc">
                 <label for="">Sexo</label>
-                <input type="text">
+                <input type="text" id="sexo_hc">
                 <label for="">Alergia</label>
-                <input type="text">
+                <input type="text" id="alergias_hc">
                 <label for="">Prueba de Esfuerzo</label>
                 <input type="text">
                 <label for="">Antec. Psicologicos</label>
-                <input type="text">
+                <input type="text" id="ant_psi_hc">
                 <label for="">Antec. Riesg. Ocupacional</label>
                 <input type="text">
                 <label for="">Estado Nutricional</label>
-                <input type="text">
+                <input type="text" id="estadoNut_hc">
                 <label for="">Espirometria</label>
-                <input type="text">
+                <input type="text" id="espiro_hc">
                 <label for="">Ev. Oftalmologica</label>
-                <input type="text">
+                <input type="text" id="evOftalmo_hc">
                 <label for="">Ev. Audiometria</label>
-                <input type="text">
+                <input type="text" id="evAudio_hc">
                 <label for="">Ev. Osteomuscular</label>
-                <input type="text">
+                <input type="text" id="evOsteo_hc">
                 <label for="">Ev. PA(mHg)</label>
                 <input type="text">
                 <label for="">Ev. Ondontoestomat.</label>
@@ -340,11 +340,11 @@
                 <label for="">Ev. EKG</label>
                 <input type="text">
                 <label for="">Examen Rayos X</label>
-                <input type="text">
+                <input type="text"id="exRayX_hc">
                 <label for="">Exa. Psicologico</label>
-                <input type="text">
+                <input type="text" id="exPsi_hc">
                 <label for="">Exa. Altura</label>
-                <input type="text">
+                <input type="text" id="exAltura_hc">
                 <label for="">Exa. Psicosem.</label>
                 <input type="text">
                 <label for="">Exa. Espa. Confi.</label>
@@ -353,45 +353,45 @@
             <div>
                 <label for="">Examenes</label>
                 <label for="">HBG</label>
-                <input type="text">
+                <input type="text" id="hbg_hc">
                 <label for="">HTO</label>
-                <input type="text">
+                <input type="text" id="hto_hc">
                 <label for="">Gota G.</label>
-                <input type="text">
+                <input type="text" id="gota_hc">
                 <label for="">Plaquetas</label>
-                <input type="text">
+                <input type="text" id="plaquetas_hc">
                 <label for="">Colesterol</label>
-                <input type="text">
+                <input type="text" id="colesterol_hc">
                 <label for="">HDL</label>
-                <input type="text">
+                <input type="text" id="hdl_hc">
                 <label for="">LDL</label>
-                <input type="text">
+                <input type="text" id="ldl_hc">
                 <label for="">Triglic.</label>
-                <input type="text">
+                <input type="text" id="triglic_hc">
                 <label for="">TGP</label>
-                <input type="text">
+                <input type="text" id="tgp_hc">
                 <label for="">TGO</label>
-                <input type="text">
+                <input type="text" id="tgo_hc">
                 <label for="">Glucosa</label>
-                <input type="text">
+                <input type="text" id="glucosa_hc">
                 <label for="">Urea</label>
-                <input type="text">
+                <input type="text" id="urea_hc">
                 <label for="">Ac. Urico</label>
-                <input type="text">
+                <input type="text" id="acUrico_hc">
                 <label for="">Creatinina</label>
-                <input type="text">
+                <input type="text" id="creatinina_hc">
                 <label for="">VDRL</label>
-                <input type="text">
+                <input type="text" id="vdrl_hc">
                 <label for="">RPR</label>
-                <input type="text">
+                <input type="text" id="rpr_hc">
                 <label for="">Toxiscreen</label>
-                <input type="text">
+                <input type="text" id="toxic_hc">
                 <label for="">RCV</label>
-                <input type="text">
+                <input type="text" id="rcv_hc">
                 <label for="">Leucocitos</label>
-                <input type="text">
+                <input type="text" id="leucocitos_hc">
                 <label for="">A.S. Hep.B</label>
-                <input type="text">
+                <input type="text" id="hepB_hc">
                 <label for="">Ex. Parasit.</label>
                 <input type="text">
                 <label for="">H. Nasofar.</label>
