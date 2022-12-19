@@ -3,11 +3,19 @@
     require_once("connectmedica.inc.php");
     require_once('../vendor/autoload.php');
 
+    if(isset($_POST['funcion'])){
+        if($_POST['funcion']=="formatosTablas"){
+            echo json_encode(formatosTablas($pdo,$_POST['ccostos']));
+        }
+    }
+
     use PhpOffice\PhpSpreadsheet\Spreadsheet;
     use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
   /*  if(file_exists("../formatos/Formato 006.xlsx")){
         unlink("../formatos/Formato 006.xlsx");
     }*/
+
+   
 
     $spreadsheet = new Spreadsheet();
     $spreadsheet->setActiveSheetIndex(0);
@@ -222,82 +230,86 @@
         ->getStartColor()->setARGB('15F0EA');
 
         $centrosAdm = ["0200","0300","0600"];
-        
+        $r = 0;
+        $fila = 8;
         $c = formato($pdo,$centrosAdm[$i]);
         $nc = count($c);
 
         for($j=0;$j<$nc;$j++){
 
             $spreadsheet->getActiveSheet()-> setCellValue('A'.$fila,$r);
-            $spreadsheet->getActiveSheet()-> setCellValue('B'.$fila,utf8_decode($row['empleadonomb']));
-            $spreadsheet->getActiveSheet()-> setCellValue('C'.$fila,date("d/m/Y", strtotime($row['fecnac'])));
-            $spreadsheet->getActiveSheet()-> setCellValue('D'.$fila,$row['dni']);
-            $spreadsheet->getActiveSheet()-> setCellValue('E'.$fila,$row['edad']);
-            $spreadsheet->getActiveSheet()-> setCellValue('F'.$fila,utf8_decode($centro));
-            $spreadsheet->getActiveSheet()-> setCellValue('G'.$fila,utf8_decode($row['cargo']));
+            $spreadsheet->getActiveSheet()-> setCellValue('B'.$fila,utf8_decode($c[$j]['empleadonomb']));
+            $spreadsheet->getActiveSheet()-> setCellValue('C'.$fila,date("d/m/Y", strtotime($c[$j]['fecnac'])));
+            $spreadsheet->getActiveSheet()-> setCellValue('D'.$fila,$c[$j]['dni']);
+            $spreadsheet->getActiveSheet()-> setCellValue('E'.$fila,$c[$j]['edad']);
+            $spreadsheet->getActiveSheet()-> setCellValue('F'.$fila,utf8_decode($c[$j]['ccostos']));//ver luego
+            $spreadsheet->getActiveSheet()-> setCellValue('G'.$fila,utf8_decode($c[$j]['cargo']));
             $spreadsheet->getActiveSheet()-> setCellValue('H'.$fila,utf8_decode("SEPCON"));
-            $spreadsheet->getActiveSheet()-> setCellValue('I'.$fila,utf8_decode($row['correo']));
-            $spreadsheet->getActiveSheet()-> setCellValue('J'.$fila,utf8_decode($row['telefono']));
-            $spreadsheet->getActiveSheet()-> setCellValue('K'.$fila,utf8_decode($row['grupoSangre']));
-            $spreadsheet->getActiveSheet()-> setCellValue('L'.$fila,utf8_decode($row['alergias']));
-            $spreadsheet->getActiveSheet()-> setCellValue('M'.$fila,date("d/m/Y", strtotime($row['fecha'])));
-            $spreadsheet->getActiveSheet()-> setCellValue('N'.$fila,utf8_decode($row['nomb_clinica']));
-            $spreadsheet->getActiveSheet()-> setCellValue('O'.$fila,utf8_decode($row['aptitud']));
-            $spreadsheet->getActiveSheet()-> setCellValue('P'.$fila,$row['peso']);
-            $spreadsheet->getActiveSheet()-> setCellValue('Q'.$fila,$row['talla']);
-            $spreadsheet->getActiveSheet()-> setCellValue('R'.$fila,$row['imc']);
-            $spreadsheet->getActiveSheet()-> setCellValue('S'.$fila,utf8_decode($row['estadoNutricional']));
-            $spreadsheet->getActiveSheet()-> setCellValue('T'.$fila,$row['enviado']);
-            $spreadsheet->getActiveSheet()-> setCellValue('U'.$fila,date("d/m/Y", strtotime($row['programadopre'])));
-            $spreadsheet->getActiveSheet()-> setCellValue('V'.$fila,date("d/m/Y", strtotime($row['f_per1'])));
-            $spreadsheet->getActiveSheet()-> setCellValue('W'.$fila,utf8_decode($row['f_cln1'])); 
-            $spreadsheet->getActiveSheet()-> setCellValue('X'.$fila,utf8_decode($row['f_act1']));
-            $spreadsheet->getActiveSheet()-> setCellValue('Y'.$fila,$row['f_pes1']);
-            $spreadsheet->getActiveSheet()-> setCellValue('Z'.$fila,$row['f_tal1']);
-            $spreadsheet->getActiveSheet()-> setCellValue('AA'.$fila,$row['f_imc1']);
-            $spreadsheet->getActiveSheet()-> setCellValue('AB'.$fila,utf8_decode($row['f_est1'])); 
-            $spreadsheet->getActiveSheet()-> setCellValue('AC'.$fila,$row['f_env1']); 
-            $spreadsheet->getActiveSheet()-> setCellValue('AD'.$fila,date("d/m/Y", strtotime($row['programado1'])));
-            $spreadsheet->getActiveSheet()-> setCellValue('AE'.$fila,date("d/m/Y", strtotime($row['f_per2'])));
-            $spreadsheet->getActiveSheet()-> setCellValue('AF'.$fila,utf8_decode($row['f_cln2'])); 
-            $spreadsheet->getActiveSheet()-> setCellValue('AG'.$fila,utf8_decode($row['f_act2'])); 
-            $spreadsheet->getActiveSheet()-> setCellValue('AH'.$fila,$row['f_pes2']); 
-            $spreadsheet->getActiveSheet()-> setCellValue('AI'.$fila,$row['f_tal2']); 
-            $spreadsheet->getActiveSheet()-> setCellValue('AJ'.$fila,$row['f_imc2']); 
-            $spreadsheet->getActiveSheet()-> setCellValue('AK'.$fila,utf8_decode($row['f_est2'])); 
-            $spreadsheet->getActiveSheet()-> setCellValue('AL'.$fila,$row['f_env2']);
-            $spreadsheet->getActiveSheet()-> setCellValue('AM'.$fila,date("d/m/Y", strtotime($row['programado2'])));//a partir de por aqui iria el switch case U:
-            $spreadsheet->getActiveSheet()-> setCellValue('AN'.$fila,date("d/m/Y", strtotime($row['f_retiro'])));
-            $spreadsheet->getActiveSheet()-> setCellValue('AO'.$fila,utf8_decode($row['clinica'])); 
-            $spreadsheet->getActiveSheet()-> setCellValue('AP'.$fila,utf8_decode($row['observaciones'])); 
-            $spreadsheet->getActiveSheet()-> setCellValue('AQ'.$fila,$row['f_envr']);
-            $spreadsheet->getActiveSheet()-> setCellValue('AR'.$fila,date("d/m/Y", strtotime($row['fechaFbrAmarilla'])));
-            $spreadsheet->getActiveSheet()-> setCellValue('AS'.$fila,date("d/m/Y", strtotime($row['fechaDifTD1'])));
-            $spreadsheet->getActiveSheet()-> setCellValue('AT'.$fila,date("d/m/Y", strtotime($row['fechaDifTD2'])));
-            $spreadsheet->getActiveSheet()-> setCellValue('AU'.$fila,date("d/m/Y", strtotime($row['fechaDifTD3'])));
-            $spreadsheet->getActiveSheet()-> setCellValue('AV'.$fila,date("d/m/Y", strtotime($row['fechaDifTR1'])));                        
-            $spreadsheet->getActiveSheet()-> setCellValue('AW'.$fila,date("d/m/Y", strtotime($row['fechaHepAD1'])));   
-            $spreadsheet->getActiveSheet()-> setCellValue('AX'.$fila,date("d/m/Y", strtotime($row['fechaHepAD2'])));   
-            $spreadsheet->getActiveSheet()-> setCellValue('AY'.$fila,date("d/m/Y", strtotime($row['fechaHepAR1'])));   
-            $spreadsheet->getActiveSheet()-> setCellValue('AZ'.$fila,date("d/m/Y", strtotime($row['fechaHepBD1'])));   
-            $spreadsheet->getActiveSheet()-> setCellValue('BA'.$fila,date("d/m/Y", strtotime($row['fechaHepBD2'])));   
-            $spreadsheet->getActiveSheet()-> setCellValue('BB'.$fila,date("d/m/Y", strtotime($row['fechaHepBD3'])));   
-            $spreadsheet->getActiveSheet()-> setCellValue('BC'.$fila,date("d/m/Y", strtotime($row['fechaInflR1'])));   
-            $spreadsheet->getActiveSheet()-> setCellValue('BD'.$fila,date("d/m/Y", strtotime($row['fechaInflR2'])));   
-            $spreadsheet->getActiveSheet()-> setCellValue('BE'.$fila,date("d/m/Y", strtotime($row['fechaPolioD1'])));   
-            $spreadsheet->getActiveSheet()-> setCellValue('BF'.$fila,date("d/m/Y", strtotime($row['fechaTrivD1'])));
-            $spreadsheet->getActiveSheet()-> setCellValue('BG'.$fila,date("d/m/Y", strtotime($row['fechaRabD1'])));
-            $spreadsheet->getActiveSheet()-> setCellValue('BH'.$fila,date("d/m/Y", strtotime($row['fechaRabD2'])));
-            $spreadsheet->getActiveSheet()-> setCellValue('BI'.$fila,date("d/m/Y", strtotime($row['fechaRabD3'])));
-            $spreadsheet->getActiveSheet()-> setCellValue('BJ'.$fila,date("d/m/Y", strtotime($row['fechaRabR1'])));                        
-            $spreadsheet->getActiveSheet()-> setCellValue('BK'.$fila,date("d/m/Y", strtotime($row['fechaTifoR1'])));   
-            $spreadsheet->getActiveSheet()-> setCellValue('BL'.$fila,date("d/m/Y", strtotime($row['fechaTifoR2'])));   
-            $spreadsheet->getActiveSheet()-> setCellValue('BM'.$fila,date("d/m/Y", strtotime($row['fechaNeumR1'])));   
-            $spreadsheet->getActiveSheet()-> setCellValue('BN'.$fila,date("d/m/Y", strtotime($row['fechaNeumR2'])));   
-            $spreadsheet->getActiveSheet()-> setCellValue('BO'.$fila,date("d/m/Y", strtotime($row['fechaCovidD1'])));   
-            $spreadsheet->getActiveSheet()-> setCellValue('BP'.$fila,date("d/m/Y", strtotime($row['fechaCovidD2'])));   
-            $spreadsheet->getActiveSheet()-> setCellValue('BQ'.$fila,date("d/m/Y", strtotime($row['fechaCovidD3'])));
-            $spreadsheet->getActiveSheet()-> setCellValue('BR'.$fila,date("d/m/Y", strtotime($row['fechaCovidD4'])));
+            $spreadsheet->getActiveSheet()-> setCellValue('I'.$fila,utf8_decode($c[$j]['correo']));
+            $spreadsheet->getActiveSheet()-> setCellValue('J'.$fila,utf8_decode($c[$j]['telefono']));
+            $spreadsheet->getActiveSheet()-> setCellValue('K'.$fila,utf8_decode($c[$j]['grupoSangre']));
+            $spreadsheet->getActiveSheet()-> setCellValue('L'.$fila,utf8_decode($c[$j]['alergias']));
+            $spreadsheet->getActiveSheet()-> setCellValue('M'.$fila,date("d/m/Y", strtotime($c[$j]['fecha'])));
+            $spreadsheet->getActiveSheet()-> setCellValue('N'.$fila,utf8_decode($c[$j]['nomb_clinica']));
+            $spreadsheet->getActiveSheet()-> setCellValue('O'.$fila,utf8_decode($c[$j]['aptitud']));
+            $spreadsheet->getActiveSheet()-> setCellValue('P'.$fila,$c[$j]['peso']);
+            $spreadsheet->getActiveSheet()-> setCellValue('Q'.$fila,$c[$j]['talla']);
+            $spreadsheet->getActiveSheet()-> setCellValue('R'.$fila,$c[$j]['imc']);
+            $spreadsheet->getActiveSheet()-> setCellValue('S'.$fila,utf8_decode($c[$j]['estadoNutricional']));
+            $spreadsheet->getActiveSheet()-> setCellValue('T'.$fila,$c[$j]['enviado']);
+            $spreadsheet->getActiveSheet()-> setCellValue('U'.$fila,date("d/m/Y", strtotime($c[$j]['programadopre'])));
+            $spreadsheet->getActiveSheet()-> setCellValue('V'.$fila,date("d/m/Y", strtotime($c[$j]['f_per1'])));
+            $spreadsheet->getActiveSheet()-> setCellValue('W'.$fila,utf8_decode($c[$j]['f_cln1'])); 
+            $spreadsheet->getActiveSheet()-> setCellValue('X'.$fila,utf8_decode($c[$j]['f_act1']));
+            $spreadsheet->getActiveSheet()-> setCellValue('Y'.$fila,$c[$j]['f_pes1']);
+            $spreadsheet->getActiveSheet()-> setCellValue('Z'.$fila,$c[$j]['f_tal1']);
+            $spreadsheet->getActiveSheet()-> setCellValue('AA'.$fila,$c[$j]['f_imc1']);
+            $spreadsheet->getActiveSheet()-> setCellValue('AB'.$fila,utf8_decode($c[$j]['f_est1'])); 
+            $spreadsheet->getActiveSheet()-> setCellValue('AC'.$fila,$c[$j]['f_env1']); 
+            $spreadsheet->getActiveSheet()-> setCellValue('AD'.$fila,date("d/m/Y", strtotime($c[$j]['programado1'])));
+            $spreadsheet->getActiveSheet()-> setCellValue('AE'.$fila,date("d/m/Y", strtotime($c[$j]['f_per2'])));
+            $spreadsheet->getActiveSheet()-> setCellValue('AF'.$fila,utf8_decode($c[$j]['f_cln2'])); 
+            $spreadsheet->getActiveSheet()-> setCellValue('AG'.$fila,utf8_decode($c[$j]['f_act2'])); 
+            $spreadsheet->getActiveSheet()-> setCellValue('AH'.$fila,$c[$j]['f_pes2']); 
+            $spreadsheet->getActiveSheet()-> setCellValue('AI'.$fila,$c[$j]['f_tal2']); 
+            $spreadsheet->getActiveSheet()-> setCellValue('AJ'.$fila,$c[$j]['f_imc2']); 
+            $spreadsheet->getActiveSheet()-> setCellValue('AK'.$fila,utf8_decode($c[$j]['f_est2'])); 
+            $spreadsheet->getActiveSheet()-> setCellValue('AL'.$fila,$c[$j]['f_env2']);
+            $spreadsheet->getActiveSheet()-> setCellValue('AM'.$fila,date("d/m/Y", strtotime($c[$j]['programado2'])));//a partir de por aqui iria el switch case U:
+            $spreadsheet->getActiveSheet()-> setCellValue('AN'.$fila,date("d/m/Y", strtotime($c[$j]['f_retiro'])));
+            $spreadsheet->getActiveSheet()-> setCellValue('AO'.$fila,utf8_decode($c[$j]['clinica'])); 
+            $spreadsheet->getActiveSheet()-> setCellValue('AP'.$fila,utf8_decode($c[$j]['observaciones'])); 
+            $spreadsheet->getActiveSheet()-> setCellValue('AQ'.$fila,$c[$j]['f_envr']);
+            $spreadsheet->getActiveSheet()-> setCellValue('AR'.$fila,date("d/m/Y", strtotime($c[$j]['fechaFbrAmarilla'])));
+            $spreadsheet->getActiveSheet()-> setCellValue('AS'.$fila,date("d/m/Y", strtotime($c[$j]['fechaDifTD1'])));
+            $spreadsheet->getActiveSheet()-> setCellValue('AT'.$fila,date("d/m/Y", strtotime($c[$j]['fechaDifTD2'])));
+            $spreadsheet->getActiveSheet()-> setCellValue('AU'.$fila,date("d/m/Y", strtotime($c[$j]['fechaDifTD3'])));
+            $spreadsheet->getActiveSheet()-> setCellValue('AV'.$fila,date("d/m/Y", strtotime($c[$j]['fechaDifTR1'])));                        
+            $spreadsheet->getActiveSheet()-> setCellValue('AW'.$fila,date("d/m/Y", strtotime($c[$j]['fechaHepAD1'])));   
+            $spreadsheet->getActiveSheet()-> setCellValue('AX'.$fila,date("d/m/Y", strtotime($c[$j]['fechaHepAD2'])));   
+            $spreadsheet->getActiveSheet()-> setCellValue('AY'.$fila,date("d/m/Y", strtotime($c[$j]['fechaHepAR1'])));   
+            $spreadsheet->getActiveSheet()-> setCellValue('AZ'.$fila,date("d/m/Y", strtotime($c[$j]['fechaHepBD1'])));   
+            $spreadsheet->getActiveSheet()-> setCellValue('BA'.$fila,date("d/m/Y", strtotime($c[$j]['fechaHepBD2'])));   
+            $spreadsheet->getActiveSheet()-> setCellValue('BB'.$fila,date("d/m/Y", strtotime($c[$j]['fechaHepBD3'])));   
+            $spreadsheet->getActiveSheet()-> setCellValue('BC'.$fila,date("d/m/Y", strtotime($c[$j]['fechaInflR1'])));   
+            $spreadsheet->getActiveSheet()-> setCellValue('BD'.$fila,date("d/m/Y", strtotime($c[$j]['fechaInflR2'])));   
+            $spreadsheet->getActiveSheet()-> setCellValue('BE'.$fila,date("d/m/Y", strtotime($c[$j]['fechaPolioD1'])));   
+            $spreadsheet->getActiveSheet()-> setCellValue('BF'.$fila,date("d/m/Y", strtotime($c[$j]['fechaTrivD1'])));
+            $spreadsheet->getActiveSheet()-> setCellValue('BG'.$fila,date("d/m/Y", strtotime($c[$j]['fechaRabD1'])));
+            $spreadsheet->getActiveSheet()-> setCellValue('BH'.$fila,date("d/m/Y", strtotime($c[$j]['fechaRabD2'])));
+            $spreadsheet->getActiveSheet()-> setCellValue('BI'.$fila,date("d/m/Y", strtotime($c[$j]['fechaRabD3'])));
+            $spreadsheet->getActiveSheet()-> setCellValue('BJ'.$fila,date("d/m/Y", strtotime($c[$j]['fechaRabR1'])));                        
+            $spreadsheet->getActiveSheet()-> setCellValue('BK'.$fila,date("d/m/Y", strtotime($c[$j]['fechaTifoR1'])));   
+            $spreadsheet->getActiveSheet()-> setCellValue('BL'.$fila,date("d/m/Y", strtotime($c[$j]['fechaTifoR2'])));   
+            $spreadsheet->getActiveSheet()-> setCellValue('BM'.$fila,date("d/m/Y", strtotime($c[$j]['fechaNeumR1'])));   
+            $spreadsheet->getActiveSheet()-> setCellValue('BN'.$fila,date("d/m/Y", strtotime($c[$j]['fechaNeumR2'])));   
+            $spreadsheet->getActiveSheet()-> setCellValue('BO'.$fila,date("d/m/Y", strtotime($c[$j]['fechaCovidD1'])));   
+            $spreadsheet->getActiveSheet()-> setCellValue('BP'.$fila,date("d/m/Y", strtotime($c[$j]['fechaCovidD2'])));   
+            $spreadsheet->getActiveSheet()-> setCellValue('BQ'.$fila,date("d/m/Y", strtotime($c[$j]['fechaCovidD3'])));
+            $spreadsheet->getActiveSheet()-> setCellValue('BR'.$fila,date("d/m/Y", strtotime($c[$j]['fechaCovidD4'])));
+
+            $fila++;
+            $r++;
         }
 
 
@@ -310,15 +322,16 @@
 
     function formato($pdo,$ccostos){//){
         try {
-            $r = 0;
-            $fila = 8;
-            $respuesta = false;
             $lista = [];
-            $sql = "SELECT empleadonomb,fecnac,dni,edad,ccostos,cargo,correo,telefono,grupoSangre,alergias,fecha,nomb_clinica,aptitud,peso,talla,imc,estadoNutricional,enviado,
-                    programadopre,f_per1,f_cln1,f_act1,f_pes1,f_tal1,f_imc1,f_est1,f_env1,programado1,f_per2,f_cln2,f_act2,f_pes2,f_tal2,f_imc2,f_est2,f_env2,programado2,
-                    f_retiro,clinica,observaciones,f_envr,fechaFbrAmarilla,fechaDifTD1,fechaDifTD2,fechaDifTD3,fechaDifTR1,fechaHepAD1,fechaHepAD2,fechaHepAR1,fechaHepBD1,
-                    fechaHepBD2,fechaHepBD3,fechaInflR1,fechaInflR2,fechaPolioD1,fechaTrivD1,fechaRabD1,fechaRabD2,fechaRabD3,fechaRabR1,fechaTifoR1,
-                    fechaTifoR2,fechaNeumR1,fechaNeumR2,fechaCovidD1,fechaCovidD2,fechaCovidD3,fechaCovidD4 FROM vista_formato_006 WHERE ccostos='0200%' GROUP BY dni";
+            $sql = "SELECT empleadonomb,fecnac,dni,edad,ccostos,cargo,correo,telefono,grupoSangre,alergias, 
+            MAX(fecha) AS fecha,nomb_clinica,aptitud,peso,talla,imc,estadoNutricional,enviado,programadopre,
+            f_per1,f_cln1,f_act1,f_pes1,f_tal1,f_imc1,f_est1,f_env1,programado1,f_per2,f_cln2,f_act2,
+            f_pes2,f_tal2,f_imc2,f_est2,f_env2,programado2, f_retiro,clinica,observaciones,f_envr,
+            fechaFbrAmarilla,fechaDifTD1,fechaDifTD2,fechaDifTD3,fechaDifTR1,fechaHepAD1,fechaHepAD2,
+            fechaHepAR1,fechaHepBD1, fechaHepBD2,fechaHepBD3,fechaInflR1,fechaInflR2,fechaPolioD1,
+            fechaTrivD1,fechaRabD1,fechaRabD2,fechaRabD3,fechaRabR1,fechaTifoR1,fechaTifoR2,fechaNeumR1,
+            fechaNeumR2,fechaCovidD1,fechaCovidD2,fechaCovidD3,fechaCovidD4 
+            FROM vista_formato_006 WHERE ccostos LIKE '$ccostos%' GROUP BY dni ORDER BY empleadonomb";;
              
             $statement = $pdo->prepare($sql);
             $statement ->execute();
@@ -326,15 +339,6 @@
             $rowCount = $statement -> rowcount();
 
             if ($rowCount > 0) {
-                foreach($result as $row) {
-                    $respuesta= array(
-                        "respuesta" => true,
-                        "empleadonomb"=>$row['empleadonomb'],
-                        "dni"=>$row['dni'],
-                        "fechaDifTD3"=>$row['fechaDifTD3'],
-                    );
-                }
-   /*         if ($rowCount > 0) {
                 foreach($result as $row) {
                     $cc =explode(" ",$row['ccostos']);
                     switch($cc[0]){
@@ -348,21 +352,212 @@
                             $centro = "OTROS";
                             break;
                     }
-
+                    $lista[]= array(
+                        "empleadonomb"=>$row['empleadonomb'],
+                        "fecnac"=> date("d/m/Y", strtotime($row['fecnac'])),
+                        "dni"=>$row['dni'],
+                        "edad"=> $row['edad'],
+                        "ccostos"=>$centro,
+                        "cargo"=>$row['cargo'],
+                        "empresa"=>"SEPCON",
+                        "correo"=>$row['correo'],
+                        "telefono"=>$row['telefono'],
+                        "grupoSangre"=>$row['grupoSangre'],
+                        "alergias"=>$row['alergias'],
+                        "fecha"=>date("d/m/Y", strtotime($row['fecha'])),
+                        "nomb_clinica"=>$row['nomb_clinica'],
+                        "aptitud"=>$row['aptitud'],
+                        "peso"=>$row['peso'],
+                        "talla"=>$row['talla'],
+                        "imc"=>$row['imc'],
+                        "estadoNutricional"=>$row['estadoNutricional'],
+                        "enviado"=>$row['enviado'],
+                        "programadopre"=>date("d/m/Y", strtotime($row['programadopre'])),
+                        "f_per1"=>date("d/m/Y", strtotime($row['f_per1'])),
+                        "f_cln1"=>$row['f_cln1'],
+                        "f_act1"=>$row['f_act1'],
+                        "f_pes1"=>$row['f_pes1'],
+                        "f_tal1"=>$row['f_tal1'],
+                        "f_imc1"=>$row['f_imc1'],
+                        "f_est1"=>$row['f_est1'], 
+                        "f_env1"=>$row['f_env1'], 
+                        "programado1"=>date("d/m/Y", strtotime($row['programado1'])),
+                        "f_per2"      =>date("d/m/Y", strtotime($row['f_per2'])),
+                        "f_cln2"=>$row['f_cln2'],
+                        "f_act2"=>$row['f_act2'], 
+                        "f_pes2"=>$row['f_pes2'], 
+                        "f_tal2"=>$row['f_tal2'], 
+                        "f_imc2"=>$row['f_imc2'], 
+                        "f_est2"=>$row['f_est2'], 
+                        "f_env2"=>$row['f_env2'],
+                        "programado2"=>date("d/m/Y", strtotime($row['programado2'])),
+                        "f_retiro"=>date("d/m/Y", strtotime($row['f_retiro'])),
+                        "clinica"=>$row['clinica'],
+                        "observaciones"=>$row['observaciones'],
+                        "f_envr"=>$row['f_envr'],
+                        "fechaFbrAmarilla"=>date("d/m/Y", strtotime($row['fechaFbrAmarilla'])),
+                        "fechaDifTD1"=>date("d/m/Y", strtotime($row['fechaDifTD1'])),
+                        "fechaDifTD2"=>date("d/m/Y", strtotime($row['fechaDifTD2'])),
+                        "fechaDifTD3"=>date("d/m/Y", strtotime($row['fechaDifTD3'])),
+                        "fechaDifTR1"=> date("d/m/Y", strtotime($row['fechaDifTR1'])),                        
+                        "fechaHepAD1"=>date("d/m/Y", strtotime($row['fechaHepAD1'])),   
+                        "fechaHepAD2"=>date("d/m/Y", strtotime($row['fechaHepAD2'])),   
+                        "fechaHepAR1"=>date("d/m/Y", strtotime($row['fechaHepAR1'])),   
+                        "fechaHepBD1"=>date("d/m/Y", strtotime($row['fechaHepBD1'])),   
+                        "fechaHepBD2"=>date("d/m/Y", strtotime($row['fechaHepBD2'])),   
+                        "fechaHepBD3"=>date("d/m/Y", strtotime($row['fechaHepBD3'])),   
+                        "fechaInflR1"=>date("d/m/Y", strtotime($row['fechaInflR1'])),   
+                        "fechaInflR2"=>date("d/m/Y", strtotime($row['fechaInflR2'])),   
+                        "fechaPolioD1"=>date("d/m/Y", strtotime($row['fechaPolioD1'])),   
+                        "fechaTrivD1"=>date("d/m/Y", strtotime($row['fechaTrivD1'])),
+                        "fechaRabD1"=>date("d/m/Y", strtotime($row['fechaRabD1'])),
+                        "fechaRabD2"=>date("d/m/Y", strtotime($row['fechaRabD2'])),
+                        "fechaRabD3"=>date("d/m/Y", strtotime($row['fechaRabD3'])),
+                        "fechaRabR1"=>date("d/m/Y", strtotime($row['fechaRabR1'])),                        
+                        "fechaTifoR1"=>date("d/m/Y", strtotime($row['fechaTifoR1'])),   
+                        "fechaTifoR2"=>date("d/m/Y", strtotime($row['fechaTifoR2'])),   
+                        "fechaNeumR1"=>date("d/m/Y", strtotime($row['fechaNeumR1'])),   
+                        "fechaNeumR2"=>date("d/m/Y", strtotime($row['fechaNeumR2'])),   
+                        "fechaCovidD1"=>date("d/m/Y", strtotime($row['fechaCovidD1'])),   
+                        "fechaCovidD2"=>date("d/m/Y", strtotime($row['fechaCovidD2'])),   
+                        "fechaCovidD3"=>date("d/m/Y", strtotime($row['fechaCovidD3'])),
+                        "fechaCovidD4"=>date("d/m/Y", strtotime($row['fechaCovidD4'])),
+                    );
+                }
+   /*         if ($rowCount > 0) {
+                foreach($result as $row) {
                     $r++;
                     $fila++;
-                       */
-
-                        
-                
-            }else{
-                $respuesta = array("respuesta"=>$respuesta);    
+*/             
             }
-
-            return $respuesta;
+            return $lista;
+    
         } catch(PDOException $th) {
             echo $th->getMessage();
             return false;
         }
+    }
+
+    function formatosTablas($pdo,$ccostos){
+        try {
+            $cc = ["0200","0300","0600","2800","2600"];//cambiar por consulta o bd luego 
+            $respuesta = false;
+            $lista = [];
+            $sql = "SELECT empleadonomb,fecnac,dni,edad,ccostos,cargo,correo,telefono,grupoSangre,alergias, 
+            MAX(fecha) AS fecha,nomb_clinica,aptitud,peso,talla,imc,estadoNutricional,enviado,programadopre,
+            f_per1,f_cln1,f_act1,f_pes1,f_tal1,f_imc1,f_est1,f_env1,programado1,f_per2,f_cln2,f_act2,
+            f_pes2,f_tal2,f_imc2,f_est2,f_env2,programado2, f_retiro,clinica,observaciones,f_envr,
+            fechaFbrAmarilla,fechaDifTD1,fechaDifTD2,fechaDifTD3,fechaDifTR1,fechaHepAD1,fechaHepAD2,
+            fechaHepAR1,fechaHepBD1, fechaHepBD2,fechaHepBD3,fechaInflR1,fechaInflR2,fechaPolioD1,
+            fechaTrivD1,fechaRabD1,fechaRabD2,fechaRabD3,fechaRabR1,fechaTifoR1,fechaTifoR2,fechaNeumR1,
+            fechaNeumR2,fechaCovidD1,fechaCovidD2,fechaCovidD3,fechaCovidD4 
+            FROM vista_formato_006 WHERE ccostos LIKE '$cc[$ccostos]%' GROUP BY dni ORDER BY empleadonomb";;
+            
+            $statement = $pdo->prepare($sql);
+            $statement ->execute();
+            $result = $statement ->fetchAll();
+            $rowCount = $statement -> rowcount();
+
+            if ($rowCount > 0) {
+                foreach($result as $row) {
+                    $cc =explode(" ",$row['ccostos']);
+                    switch($cc[0]){
+                        case "0200":
+                            $centro = "ADMINISTRACION DE OFICINA";
+                            break;
+                        case "2800":
+                            $centro = "MALVINAS";
+                            break;
+                        default:
+                            $centro = "OTROS";
+                            break;
+                    }
+                    $salida= array(
+                        "empleadonomb"=>$row['empleadonomb'],
+                        "fecnac"=> date("d/m/Y", strtotime($row['fecnac'])),
+                        "dni"=>$row['dni'],
+                        "edad"=>$row['edad'],
+                        "ccostos"=>$centro,
+                        "cargo"=>$row['cargo'],
+                        "empresa"=>"SEPCON",
+                        "correo"=>$row['correo'],
+                        "telefono"=>$row['telefono'],
+                        "grupoSangre"=>$row['grupoSangre'],
+                        "alergias"=>$row['alergias'],
+                        "fecha"=>date("d/m/Y", strtotime($row['fecha'])),
+                        "nomb_clinica"=>$row['nomb_clinica'],
+                        "aptitud"=>$row['aptitud'],
+                        "peso"=>$row['peso'],
+                        "talla"=>$row['talla'],
+                        "imc"=>$row['imc'],
+                        "estadoNutricional"=>$row['estadoNutricional'],
+                        "enviado"=>$row['enviado'],
+                        "programadopre"=>date("d/m/Y", strtotime($row['programadopre'])),
+                        "f_per1"=>date("d/m/Y", strtotime($row['f_per1'])),
+                        "f_cln1"=>$row['f_cln1'],
+                        "f_act1"=>$row['f_act1'],
+                        "f_pes1"=>$row['f_pes1'],
+                        "f_tal1"=>$row['f_tal1'],
+                        "f_imc1"=>$row['f_imc1'],
+                        "f_est1"=>$row['f_est1'], 
+                        "f_env1"=>$row['f_env1'], 
+                        "programado1"=>date("d/m/Y", strtotime($row['programado1'])),
+                        "f_per2"      =>date("d/m/Y", strtotime($row['f_per2'])),
+                        "f_cln2"=>$row['f_cln2'],
+                        "f_act2"=>$row['f_act2'], 
+                        "f_pes2"=>$row['f_pes2'], 
+                        "f_tal2"=>$row['f_tal2'], 
+                        "f_imc2"=>$row['f_imc2'], 
+                        "f_est2"=>$row['f_est2'], 
+                        "f_env2"=>$row['f_env2'],
+                        "programado2"=>date("d/m/Y", strtotime($row['programado2'])),
+                        "f_retiro"=>date("d/m/Y", strtotime($row['f_retiro'])),
+                        "clinica"=>$row['clinica'],
+                        "observaciones"=>$row['observaciones'],
+                        "f_envr"=>$row['f_envr'],
+                        "fechaFbrAmarilla"=>date("d/m/Y", strtotime($row['fechaFbrAmarilla'])),
+                        "fechaDifTD1"=>date("d/m/Y", strtotime($row['fechaDifTD1'])),
+                        "fechaDifTD2"=>date("d/m/Y", strtotime($row['fechaDifTD2'])),
+                        "fechaDifTD3"=>date("d/m/Y", strtotime($row['fechaDifTD3'])),
+                        "fechaDifTR1"=> date("d/m/Y", strtotime($row['fechaDifTR1'])),                        
+                        "fechaHepAD1"=>date("d/m/Y", strtotime($row['fechaHepAD1'])),   
+                        "fechaHepAD2"=>date("d/m/Y", strtotime($row['fechaHepAD2'])),   
+                        "fechaHepAR1"=>date("d/m/Y", strtotime($row['fechaHepAR1'])),   
+                        "fechaHepBD1"=>date("d/m/Y", strtotime($row['fechaHepBD1'])),   
+                        "fechaHepBD2"=>date("d/m/Y", strtotime($row['fechaHepBD2'])),   
+                        "fechaHepBD3"=>date("d/m/Y", strtotime($row['fechaHepBD3'])),   
+                        "fechaInflR1"=>date("d/m/Y", strtotime($row['fechaInflR1'])),   
+                        "fechaInflR2"=>date("d/m/Y", strtotime($row['fechaInflR2'])),   
+                        "fechaPolioD1"=>date("d/m/Y", strtotime($row['fechaPolioD1'])),   
+                        "fechaTrivD1"=>date("d/m/Y", strtotime($row['fechaTrivD1'])),
+                        "fechaRabD1"=>date("d/m/Y", strtotime($row['fechaRabD1'])),
+                        "fechaRabD2"=>date("d/m/Y", strtotime($row['fechaRabD2'])),
+                        "fechaRabD3"=>date("d/m/Y", strtotime($row['fechaRabD3'])),
+                        "fechaRabR1"=>date("d/m/Y", strtotime($row['fechaRabR1'])),                        
+                        "fechaTifoR1"=>date("d/m/Y", strtotime($row['fechaTifoR1'])),   
+                        "fechaTifoR2"=>date("d/m/Y", strtotime($row['fechaTifoR2'])),   
+                        "fechaNeumR1"=>date("d/m/Y", strtotime($row['fechaNeumR1'])),   
+                        "fechaNeumR2"=>date("d/m/Y", strtotime($row['fechaNeumR2'])),   
+                        "fechaCovidD1"=>date("d/m/Y", strtotime($row['fechaCovidD1'])),   
+                        "fechaCovidD2"=>date("d/m/Y", strtotime($row['fechaCovidD2'])),   
+                        "fechaCovidD3"=>date("d/m/Y", strtotime($row['fechaCovidD3'])),
+                        "fechaCovidD4"=>date("d/m/Y", strtotime($row['fechaCovidD4'])),
+                        "TEST" => $ccostos,
+                    );
+                array_push($lista,$salida);
+            }
+                $respuesta = true;
+            }else{
+                $respuesta = false;
+            }
+            $salida = array("respuesta"=>$respuesta,
+                            "lista" => $lista);
+
+            return $salida; 
+        } catch(PDOException $th) {
+            echo $th->getMessage();
+            return false;
+        }
+        
     }
 ?>

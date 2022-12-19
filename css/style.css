@@ -132,6 +132,9 @@ iframe {
   width: 150%;
 }
 
+.w90porcen {
+  width: 90%;
+}
 
 .w100porcen {
   width: 100%;
@@ -1189,4 +1192,15 @@ input[name = "filtrado"]{
 
 .historias__subcontratas {
   margin-bottom: 1000px;
+}
+
+#historia_clinica div{
+  box-sizing: border-box;
+  border: 2px solid #000;
+  margin-top: 20px;
+  overflow: auto;
+}
+
+.tabla_formatos tr{
+  overflow: auto;
 }

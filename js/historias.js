@@ -82,6 +82,7 @@ const $tabla__atenciones_body = document.getElementById('tabla__atenciones_body'
 
 const ficha__medica = document.getElementById('ficha__medica');
 const $ficha__vistaprevia = document.getElementById('ficha__vistaprevia');
+const $historia_clinica = document.getElementById('historia_clinica');
 
 const $uploadPdf = document.getElementById('uploadPdf');
 const $frame__adjunto = document.getElementById('frame__adjunto');
@@ -96,11 +97,23 @@ const $editar_form = document.getElementById('editar_form');
 const $cambiar_env = document.getElementById('cambiar_env');
 
 const $cierre_atencion = document.getElementById('cierre_atencion');
-const $cierre_form_vistp = document.getElementById('cierre_form_vistp')
+const $cierre_form_vistp = document.getElementById('cierre_form_vistp');
+const $cierre_historia_clinica = document.getElementById('cierre_historia_clinica');
 
 const $btn__atencion__medica = document.getElementById('btn__atencion__medica');
 const $atencion__medica = document.getElementById('atencion__medica');
 const $actualizarReg = document.getElementById('actualizarReg');
+
+const $documento_hc = document.getElementById('documento_hc');
+const $telefono_hc = document.getElementById('telefono_hc');
+const $nombre_hc = document.getElementById('nombre_hc');
+const $fecnac_hc = document.getElementById('fecnac_hc');
+const $area_hc = document.getElementById('area_hc');
+const $cargo_hc = document.getElementById('cargo_hc');
+const $ccostos_hc = document.getElementById('ccostos_hc');
+const $tipoExa_hc = document.getElementById('tipoExa_hc');
+const $clinica_hc = document.getElementById('clinica_hc');
+
 
 let registro = 0;
 
@@ -679,6 +692,36 @@ $tabla__examenes_body.addEventListener("click", e=>{
         } catch (error) {
             mostrarMensaje("Verifique el N°. Documento","msj_error");
         } 
+    }else if(accion=="abrirHistoria"){
+        try{
+            let id = e.target.parentElement.getAttribute("href");
+            let data2 = new FormData();
+            data2.append("documento",$documento_trabajador.value);
+            data2.append("id",id);
+            data2.append("funcion","historiaClinica");
+            fetch('../inc/consultasmedicas.inc.php',{
+                method: "POST",
+                body:data2,
+            })
+            .then(function(response){
+                return response.json();
+            })
+            .then(dataJson => {
+                if(dataJson.respuesta){
+                    $documento_hc.value = dataJson.lista[0].dni;
+                    $nombre_hc.value = dataJson.lista[0].nombres;
+                    $telefono_hc.value = dataJson.lista[0].telefono;
+                    $fecnac_hc.value = dataJson.lista[0].fecnac;
+                    $ccostos_hc.value = dataJson.lista[0].ccostos;
+                    $cargo_hc.value = dataJson.lista[0].cargo;
+                    $tipoExa_hc.value = dataJson.lista[0].tipo;
+                    $clinica_hc.value = dataJson.lista[0].clinica;
+                    fadeIn($historia_clinica);
+                }
+            })
+        }catch (error) {
+            mostrarMensaje("Verifique el N°. Documento","msj_error");
+        } 
     }
     return false;
 })
@@ -777,6 +820,12 @@ $cierre_form_ing.onclick = (e) => {
     e.preventDefault();
 
     fadeOut($ficha__vistaprevia);
+}
+
+$cierre_historia_clinica.onclick = (e) => {
+    e.preventDefault();
+
+    fadeOut($historia_clinica);
 }
 
 $cierre_form_vistp.onclick = (e) => {
@@ -908,7 +957,7 @@ function listarExamenes(){
                                     <td>${$restricciones}</td>
                                     <td>${dataJson.lista[index].alergias}</td>
                                     <td>${$sangre_tipo}</td>
-                                    <td><a href></a></td>
+                                    <td><a href="${dataJson.lista[index].id}" data-accion="abrirHistoria"><i class="fas fa-address-book"></a></td>
                                     <td class="textoCentro">
                                         <a href="${dataJson.lista[index].id}" data-accion="sendMail" 
                                                                               data-examen="${dataJson.lista[index].tipo}" 

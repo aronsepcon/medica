@@ -264,7 +264,270 @@
                 </div>
         </div>
     </div>
-
+    <div class="modal" id="historia_clinica">
+        <div class="inside w150porcen h90p">
+            <button type="button" id="cierre_historia_clinica">X</button>
+            <div class="registro_historia_clinica">
+                <label for="">Nro de Registro</label>
+                <input type="text" id=""><!--de donde sale?-->
+                <label for="">Documento de identidad</label>
+                <input type="text" id="documento_hc">
+                <label for="">Telefono</label>
+                <input type="text" id="telefono_hc">
+                <label for="">Nombre Trabajador</label>
+                <input type="text" id="nombre_hc">
+                <label for="">Fecha de Nacimiento</label>
+                <input type="date" id="fecnac_hc">
+                <label for="">Area</label>
+                <input type="text" id="area_hc">
+                <label for="">Cargo</label>
+                <input type="text" id="cargo_hc">
+                <label for="">Centro de Costos</label>
+                <input type="text" id="ccostos_hc"> 
+                <label for="">Cliente/Operador</label>
+                <input type="text"> 
+                <label for="">Empresa</label>
+                <input type="text"> 
+                <label for="">Tipo de Examen</label>
+                <input type="text" id="tipoExa_hc"> 
+                <label for="">Fecha Ex. Ocup.</label><!--ver q es ocupacional-->
+                <input type="text">
+                <label for="">Clinica</label>
+                <input type="text" id="clinica_hc">
+                <label for="">N° de Pase Medico</label>
+                <input type="text">
+                <label for="">Aptitud</label>
+                <input type="text">
+                <label for="">Sgte Examen</label>
+                <input type="text">
+            </div>
+            <div>
+                <label for="">Eval. Preliminares</label>
+                <label for="">Edad</label>
+                <input type="text">
+                <label for="">Peso(kg)</label>
+                <input type="text">
+                <label for="">IMC</label>
+                <input type="text">
+                <label for="">Grupo Sanguineo</label>
+                <input type="text">
+                <label for="">Talla (mt)</label>
+                <input type="text">
+                <label for="">Sexo</label>
+                <input type="text">
+                <label for="">Alergia</label>
+                <input type="text">
+                <label for="">Prueba de Esfuerzo</label>
+                <input type="text">
+                <label for="">Antec. Psicologicos</label>
+                <input type="text">
+                <label for="">Antec. Riesg. Ocupacional</label>
+                <input type="text">
+                <label for="">Estado Nutricional</label>
+                <input type="text">
+                <label for="">Espirometria</label>
+                <input type="text">
+                <label for="">Ev. Oftalmologica</label>
+                <input type="text">
+                <label for="">Ev. Audiometria</label>
+                <input type="text">
+                <label for="">Ev. Osteomuscular</label>
+                <input type="text">
+                <label for="">Ev. PA(mHg)</label>
+                <input type="text">
+                <label for="">Ev. Ondontoestomat.</label>
+                <input type="text">
+                <label for="">Ev. EKG</label>
+                <input type="text">
+                <label for="">Examen Rayos X</label>
+                <input type="text">
+                <label for="">Exa. Psicologico</label>
+                <input type="text">
+                <label for="">Exa. Altura</label>
+                <input type="text">
+                <label for="">Exa. Psicosem.</label>
+                <input type="text">
+                <label for="">Exa. Espa. Confi.</label>
+                <input type="text">
+            </div>
+            <div>
+                <label for="">Examenes</label>
+                <label for="">HBG</label>
+                <input type="text">
+                <label for="">HTO</label>
+                <input type="text">
+                <label for="">Gota G.</label>
+                <input type="text">
+                <label for="">Plaquetas</label>
+                <input type="text">
+                <label for="">Colesterol</label>
+                <input type="text">
+                <label for="">HDL</label>
+                <input type="text">
+                <label for="">LDL</label>
+                <input type="text">
+                <label for="">Triglic.</label>
+                <input type="text">
+                <label for="">TGP</label>
+                <input type="text">
+                <label for="">TGO</label>
+                <input type="text">
+                <label for="">Glucosa</label>
+                <input type="text">
+                <label for="">Urea</label>
+                <input type="text">
+                <label for="">Ac. Urico</label>
+                <input type="text">
+                <label for="">Creatinina</label>
+                <input type="text">
+                <label for="">VDRL</label>
+                <input type="text">
+                <label for="">RPR</label>
+                <input type="text">
+                <label for="">Toxiscreen</label>
+                <input type="text">
+                <label for="">RCV</label>
+                <input type="text">
+                <label for="">Leucocitos</label>
+                <input type="text">
+                <label for="">A.S. Hep.B</label>
+                <input type="text">
+                <label for="">Ex. Parasit.</label>
+                <input type="text">
+                <label for="">H. Nasofar.</label>
+                <input type="text">
+                <label for="">Ex. Orina</label>
+                <input type="text">
+            </div>
+            <div>
+                <label for="">Diagnosticos y Recomendaciones</label>
+                <label for="">1er. Diagnostico</label>
+                <input type="text">
+                <label for="">2do. Diagnostico</label>
+                <input type="text">
+                <label for="">3er. Diagnostico</label>
+                <input type="text">
+                <label for="">4to. Diagnostico</label>
+                <input type="text">
+                <label for="">5to. Diagnostico</label>
+                <input type="text">
+                <label for="">6to. Diagnostico</label>
+                <input type="text">
+                <label for="">Recomend. a Enf. Ocupac.</label>
+                <input type="text">
+                <label for="">Recomend. a Enf. Comunes</label>
+                <input type="text">
+                <label for="">Trat. Med. Actual</label>
+                <input type="text">
+                <label for="">Ing. Programa 1</label>
+                <input type="text">
+                <label for="">Ing. Programa 2</label>
+                <input type="text">
+                <label for="">Ing. Programa 3</label>
+                <input type="text">
+                <label for="">Ing. Programa 4</label>
+                <input type="text">
+                <label for="">Ing. Programa 5</label>
+                <input type="text">
+                <label for="">Ing. Programa 6</label>
+                <input type="text">
+            </div>
+            <div>
+                <label for="">Vacunas</label>
+                <div>
+                    <label for="">Fiebre Amarilla</label>
+                    <div>
+                        <label for="">D1</label>
+                        <input type="text">
+                    </div>
+                </div>
+                <div>
+                    <label for="">Difteria Tetano</label>
+                    <div>
+                        <label for="">D1</label>
+                        <input type="text">
+                        <label for="">D2</label>
+                        <input type="text">
+                        <label for="">D3</label>
+                        <input type="text">
+                        <label for="">R1</label>
+                        <input type="text">
+                    </div>
+                </div>
+                <div>
+                    <label for="">Hepatitis A</label>
+                    <label for="">D1</label>
+                    <input type="text">
+                    <label for="">D2</label>
+                    <input type="text">
+                    <label for="">R1</label>
+                    <input type="text">
+                </div>
+                <div>
+                    <label for="">Hepatitis B</label>
+                    <label for="">D1</label>
+                    <input type="text">
+                    <label for="">D2</label>
+                    <input type="text">
+                    <label for="">D3</label>
+                    <input type="text">                
+                </div>
+                <div>
+                    <label for="">Influenza</label>
+                    <label for="">R1</label>
+                    <input type="text">
+                    <label for="">R2</label>
+                    <input type="text">             
+                </div>
+                <div>
+                    <label for="">Poliomelitis</label>
+                    <label for="">D1</label>
+                    <input type="text">
+                </div> 
+                <div>
+                    <label for="">Trivirica</label>
+                    <label for="">D1</label>
+                    <input type="text">
+                </div>
+                <div>
+                    <label for="">Rabia</label>
+                    <label for="">D1</label>
+                    <input type="text">
+                    <label for="">D2</label>
+                    <input type="text">
+                    <label for="">D3</label>
+                    <input type="text">
+                    <label for="">R1</label>
+                    <input type="text">
+                </div>
+                <div>
+                    <label for="">Tifoidea</label>
+                    <label for="">R1</label>
+                    <input type="text">
+                    <label for="">R2</label>
+                    <input type="text"> 
+                </div>
+                <div>
+                    <label for="">Neumococo</label>
+                    <label for="">R1</label>
+                    <input type="text">
+                    <label for="">R2</label>
+                    <input type="text">                 
+                </div>
+                <div>
+                    <label for="">COVID</label>
+                    <label for="">D1</label>
+                    <input type="text">
+                    <label for="">D2</label>
+                    <input type="text">
+                    <label for="">D3</label>
+                    <input type="text">
+                    <label for="">D4</label>
+                    <input type="text">                
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="modal" id="ficha_vacunas">
         <div class="inside w30porcen h15p">
             <div>
