@@ -36,11 +36,15 @@
             </select>
             <span class="span_formato">DNI</span>
             <input type="text" id="dni_formato">
+            <label for="activo_sc" id="label_ac">Activo</label>
+            <input type="checkbox" name="estado" id="activo_sc">
+            <label for="cesado_sc">Cesado</label>
+            <input type="checkbox" name="estado" id="cesado_sc">
         </div>
         <div>
             <button type="button" id="buscar">Buscar</button>
             <button type="button" id="exportar">Exportar</button>
-            <a href="" download id="descarga_formato" class="oculto"></a>
+            <a href="" id="descarga_formato" class="oculto" download></a>
         </div>
         <div class="historias__tabla bars oculto" id="tabla_006">
             <table class="w100porcen">
@@ -110,7 +114,7 @@
                         <th>Edad</th>
                         <th>Sexo</th>
                         <th>Puesto de trabajo</th>
-                        <th>Area</th>
+                        <th width="3%">Area</th>
                         <th>Empresa</th>
                         <th>Centro de Costo</th>
                         <th>Proyecto</th>
@@ -131,16 +135,16 @@
                         <th>Estado Nutricional</th>
                         <th>Espirometria</th>
                         <th>Ex. Rayos X</th>
-                        <th>Ex. Rayos X</th>
-                        <th>Ex. Rayos X</th>
-                        <th>Ex. Rayos X</th>
-                        <th>Ex. Rayos X</th>
-                        <th>Ex. Rayos X</th>
+                        <th>Ev. Oftalmologica</th>
+                        <th>Otoscopia</th>
+                        <th>Ex. Audiometrico</th>
+                        <th>Ev. Osteomuscular</th>
+                        <th>Ex. Odontologico</th>
 
 
                     </tr>
                 </thead>
-                <tbody></tbody>
+                <tbody  id="tabla_formato_001"></tbody>
             </table>
         </div>
     </section>

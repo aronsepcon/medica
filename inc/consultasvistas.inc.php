@@ -11,7 +11,9 @@
             echo json_encode(formato_006($pdo));
         }
         else if($_POST['funcion']=="formato_001"){
-            echo json_encode(formato_001($pdo));
+            echo json_encode(formato_001($pdo,$_POST['dni']));
+        }else if($_POST['funcion']=="formatoTablas001"){
+            echo json_encode(formatoTablas001($pdo,$_POST['ccostos'],$_POST['dni']));
         }
     }
 
@@ -22,308 +24,308 @@
     }*/
 
 
-function formato_006($pdo){
-    try {
-        $spreadsheet = new Spreadsheet();
-        $spreadsheet->setActiveSheetIndex(0);
-        $spreadsheet->getActiveSheet()->setTitle("ACTIVOS LIMA");
-    
-        $spreadsheet->createSheet();
-        $spreadsheet->setActiveSheetIndex(1);
-        $spreadsheet->getActiveSheet()->setTitle("ACTIVOS LURIN");
-    
-        $spreadsheet->createSheet();
-        $spreadsheet->setActiveSheetIndex(2);
-        $spreadsheet->getActiveSheet()->setTitle("ACTIVOS PUCALLPA");
-    
-        for($i=0;$i<=2;$i++){
-            $spreadsheet->setActiveSheetIndex($i);
-            $spreadsheet->getActiveSheet()->setCellValue("A5","N°");
-            $spreadsheet->getActiveSheet()->setCellValue("B5","APELLIDOS Y NOMBRES");
-            $spreadsheet->getActiveSheet()->setCellValue("C5","FECHA DE NACIMIENTO");
-            $spreadsheet->getActiveSheet()->setCellValue("D5","DNI");
-            $spreadsheet->getActiveSheet()->setCellValue("E5","EDAD");
-            $spreadsheet->getActiveSheet()->setCellValue("F5","AREA DE TRABAJOs");
-            $spreadsheet->getActiveSheet()->setCellValue("G5","PUESTO DE TRABAJO");
-            $spreadsheet->getActiveSheet()->setCellValue("H5","EMPRESA");
-            $spreadsheet->getActiveSheet()->setCellValue("I5",utf8_decode("CORREO ELECTRONICO"));
-            $spreadsheet->getActiveSheet()->setCellValue("J5","CELULAR");
-            $spreadsheet->getActiveSheet()->setCellValue("K5","GRUPO SANG. Y RH");
-            $spreadsheet->getActiveSheet()->setCellValue("L5","ALERGIAS");
-            $spreadsheet->getActiveSheet()->setCellValue("M6","EMO PREOCUPACIONAL");
-            $spreadsheet->getActiveSheet()->setCellValue("M5","EXAMENES MEDICOS OCUPACIONALES");
-            $spreadsheet->getActiveSheet()->setCellValue("M7","FECHA EMO");
-            $spreadsheet->getActiveSheet()->setCellValue("N7","CLINICA");
-            $spreadsheet->getActiveSheet()->setCellValue("O7",utf8_decode("CONDICIÓN"));
-            $spreadsheet->getActiveSheet()->setCellValue("P7","VALORACION NUTRICIONAL");
-            $spreadsheet->getActiveSheet()->setCellValue("P8","PESO");
-            $spreadsheet->getActiveSheet()->setCellValue("Q8","TALLA");
-            $spreadsheet->getActiveSheet()->setCellValue("R8","IMC");
-            $spreadsheet->getActiveSheet()->setCellValue("S8","CLASIFICACION");
-            $spreadsheet->getActiveSheet()->setCellValue("T7","ENVIO DE EMO EMAIL");
-            $spreadsheet->getActiveSheet()->setCellValue("U6","EMO PERIODICO");
-            $spreadsheet->getActiveSheet()->setCellValue("U7","PROGRAMADO");
-            $spreadsheet->getActiveSheet()->setCellValue("V7","REALIZADO");
-            $spreadsheet->getActiveSheet()->setCellValue("W7","CLINICA");
-            $spreadsheet->getActiveSheet()->setCellValue("X7",utf8_decode("CONDICIÓN"));
-            $spreadsheet->getActiveSheet()->setCellValue("Y7","VALORACION NUTRICIONAL");
-            $spreadsheet->getActiveSheet()->setCellValue("Y8","PESO");
-            $spreadsheet->getActiveSheet()->setCellValue("Z8","TALLA");
-            $spreadsheet->getActiveSheet()->setCellValue("AA8","IMC");
-            $spreadsheet->getActiveSheet()->setCellValue("AB8","CLASIFICACION");
-            $spreadsheet->getActiveSheet()->setCellValue("AC7","ENVIO DE EMO EMAIL");
-            $spreadsheet->getActiveSheet()->setCellValue("AD7","PROGRAMADO");
-            $spreadsheet->getActiveSheet()->setCellValue("AE7","REALIZADO");
-            $spreadsheet->getActiveSheet()->setCellValue("AF7",utf8_decode("CLÍNICA"));
-            $spreadsheet->getActiveSheet()->setCellValue("AG7",utf8_decode("CONDICIÓN"));
-            $spreadsheet->getActiveSheet()->setCellValue("AH7","VALORACION NUTRICIONAL");
-            $spreadsheet->getActiveSheet()->setCellValue("AH8","PESO");
-            $spreadsheet->getActiveSheet()->setCellValue("AI8","TALLA");
-            $spreadsheet->getActiveSheet()->setCellValue("AJ8","IMC");
-            $spreadsheet->getActiveSheet()->setCellValue("AK8","CLASIFICACION");
-            $spreadsheet->getActiveSheet()->setCellValue("AL7","ENVIO DE EMO EMAIL");
-            $spreadsheet->getActiveSheet()->setCellValue("AM7","PROGRAMADO");
-            $spreadsheet->getActiveSheet()->setCellValue("AN6","EMO RETIRO");
-            $spreadsheet->getActiveSheet()->setCellValue("AN7","REALIZADO");
-            $spreadsheet->getActiveSheet()->setCellValue("AO7",utf8_decode("CLÍNICA"));
-            $spreadsheet->getActiveSheet()->setCellValue("AP7",utf8_decode("OBSERVACIÓNES"));
-            $spreadsheet->getActiveSheet()->setCellValue("AQ7","ENVIO DE EMO EMAIL");
-            $spreadsheet->getActiveSheet()->setCellValue("AR4","INMUNIZACIONES");
-            $spreadsheet->getActiveSheet()->setCellValue("AR6","FIEBRE AMARILLA");
-            $spreadsheet->getActiveSheet()->setCellValue("AR7","1RA DOSIS");
-            $spreadsheet->getActiveSheet()->setCellValue("AS6","DIFTERIA TETANO");
-            $spreadsheet->getActiveSheet()->setCellValue("AS7","1RA DOSIS");
-            $spreadsheet->getActiveSheet()->setCellValue("AT7","2DA DOSIS");
-            $spreadsheet->getActiveSheet()->setCellValue("AU7","3RA DOSIS");
-            $spreadsheet->getActiveSheet()->setCellValue("AV7","REFUERZO");
-            $spreadsheet->getActiveSheet()->setCellValue("AW6","HEPATITIS A");
-            $spreadsheet->getActiveSheet()->setCellValue("AW7","1RA DOSIS");
-            $spreadsheet->getActiveSheet()->setCellValue("AX7","2DA DOSIS");
-            $spreadsheet->getActiveSheet()->setCellValue("AY7","REFUERZO");
-            $spreadsheet->getActiveSheet()->setCellValue("AZ6","HEPATITIS B");
-            $spreadsheet->getActiveSheet()->setCellValue("AZ7","1RA DOSIS");
-            $spreadsheet->getActiveSheet()->setCellValue("BA7","2DA DOSIS");
-            $spreadsheet->getActiveSheet()->setCellValue("BB7","3RA DOSIS");
-            $spreadsheet->getActiveSheet()->setCellValue("BC6","INFLUENZA");
-            $spreadsheet->getActiveSheet()->setCellValue("BC7","1RA DOSIS");
-            $spreadsheet->getActiveSheet()->setCellValue("BD7","REFUERZO");
-            $spreadsheet->getActiveSheet()->setCellValue("BE6","POLIOMELITIS");
-            $spreadsheet->getActiveSheet()->setCellValue("BE7","1RA DOSIS");
-            $spreadsheet->getActiveSheet()->setCellValue("BF6","TRIVIRICA");
-            $spreadsheet->getActiveSheet()->setCellValue("BF7","1RA DOSIS");
-            $spreadsheet->getActiveSheet()->setCellValue("BG6","RABIA");
-            $spreadsheet->getActiveSheet()->setCellValue("BG7","1RA DOSIS");
-            $spreadsheet->getActiveSheet()->setCellValue("BH7","2DA DOSIS");
-            $spreadsheet->getActiveSheet()->setCellValue("BI7","3RA DOSIS");
-            $spreadsheet->getActiveSheet()->setCellValue("BJ7","REFUERZO");
-            $spreadsheet->getActiveSheet()->setCellValue("BK6","TIFOIDEA");
-            $spreadsheet->getActiveSheet()->setCellValue("BK7","1RA DOSIS");
-            $spreadsheet->getActiveSheet()->setCellValue("BL7","REFUERZO");
-            $spreadsheet->getActiveSheet()->setCellValue("BM6","NEUMOCOCO");
-            $spreadsheet->getActiveSheet()->setCellValue("BM7","1RA DOSIS");
-            $spreadsheet->getActiveSheet()->setCellValue("BN7","REFUERZO");
-            $spreadsheet->getActiveSheet()->setCellValue("BO6","COVID");
-            $spreadsheet->getActiveSheet()->setCellValue("BO7","1RA DOSIS");
-            $spreadsheet->getActiveSheet()->setCellValue("BP7","2DA DOSIS");
-            $spreadsheet->getActiveSheet()->setCellValue("BQ7","3RA DOSIS");
-            $spreadsheet->getActiveSheet()->setCellValue("BR7","4TA DOSIS");
-    
-            $spreadsheet->getActiveSheet()->mergeCells("A5:A8");
-            $spreadsheet->getActiveSheet()->mergeCells("B5:B8");
-            $spreadsheet->getActiveSheet()->mergeCells("C5:C8");
-            $spreadsheet->getActiveSheet()->mergeCells("D5:D8");
-            $spreadsheet->getActiveSheet()->mergeCells("E5:E8");
-            $spreadsheet->getActiveSheet()->mergeCells("F5:F8");
-            $spreadsheet->getActiveSheet()->mergeCells("G5:G8");
-            $spreadsheet->getActiveSheet()->mergeCells("H5:H8");
-            $spreadsheet->getActiveSheet()->mergeCells("I5:I8");
-            $spreadsheet->getActiveSheet()->mergeCells("J5:J8");
-            $spreadsheet->getActiveSheet()->mergeCells("K5:K8");
-            $spreadsheet->getActiveSheet()->mergeCells("L5:L8");
-            $spreadsheet->getActiveSheet()->mergeCells("M6:T6");
-            $spreadsheet->getActiveSheet()->mergeCells("M5:AQ5");
-            $spreadsheet->getActiveSheet()->mergeCells("M7:M8");
-            $spreadsheet->getActiveSheet()->mergeCells("N7:N8");
-            $spreadsheet->getActiveSheet()->mergeCells("O7:O8");
-            $spreadsheet->getActiveSheet()->mergeCells("P7:S7");
-            $spreadsheet->getActiveSheet()->mergeCells("T7:T8");
-            $spreadsheet->getActiveSheet()->mergeCells("U6:AM6");
-            $spreadsheet->getActiveSheet()->mergeCells("U7:U8");
-            $spreadsheet->getActiveSheet()->mergeCells("V7:V8");
-            $spreadsheet->getActiveSheet()->mergeCells("W7:W8");
-            $spreadsheet->getActiveSheet()->mergeCells("X7:X8");
-            $spreadsheet->getActiveSheet()->mergeCells("Y7:AB7");
-            $spreadsheet->getActiveSheet()->mergeCells("AC7:AC8");
-            $spreadsheet->getActiveSheet()->mergeCells("AD7:AD8");
-            $spreadsheet->getActiveSheet()->mergeCells("AE7:AE8");
-            $spreadsheet->getActiveSheet()->mergeCells("AF7:AF8");
-            $spreadsheet->getActiveSheet()->mergeCells("AG7:AG8");
-            $spreadsheet->getActiveSheet()->mergeCells("AH7:AK7");
-            $spreadsheet->getActiveSheet()->mergeCells("AL7:AL8");
-            $spreadsheet->getActiveSheet()->mergeCells("AM7:AM8");
-            $spreadsheet->getActiveSheet()->mergeCells("AN6:AQ6");
-            $spreadsheet->getActiveSheet()->mergeCells("AN7:AN8");
-            $spreadsheet->getActiveSheet()->mergeCells("AO7:AO8");
-            $spreadsheet->getActiveSheet()->mergeCells("AP7:AP8");
-            $spreadsheet->getActiveSheet()->mergeCells("AQ7:AQ8");
-            $spreadsheet->getActiveSheet()->mergeCells("AR4:BR4");
-            $spreadsheet->getActiveSheet()->mergeCells("AR5:BR5");
-            $spreadsheet->getActiveSheet()->mergeCells("AR7:AR8");
-            $spreadsheet->getActiveSheet()->mergeCells("AS6:AV6");
-            $spreadsheet->getActiveSheet()->mergeCells("AS7:AS8");
-            $spreadsheet->getActiveSheet()->mergeCells("AT7:AT8");
-            $spreadsheet->getActiveSheet()->mergeCells("AU7:AU8");
-            $spreadsheet->getActiveSheet()->mergeCells("AV7:AV8");
-            $spreadsheet->getActiveSheet()->mergeCells("AW6:AY6");
-            $spreadsheet->getActiveSheet()->mergeCells("AW7:AW8");
-            $spreadsheet->getActiveSheet()->mergeCells("AX7:AX8");
-            $spreadsheet->getActiveSheet()->mergeCells("AY7:AY8");
-            $spreadsheet->getActiveSheet()->mergeCells("AZ6:BB6");
-            $spreadsheet->getActiveSheet()->mergeCells("AZ7:AZ8");
-            $spreadsheet->getActiveSheet()->mergeCells("BA7:BA8");
-            $spreadsheet->getActiveSheet()->mergeCells("BB7:BB8");
-            $spreadsheet->getActiveSheet()->mergeCells("BC6:BD6");
-            $spreadsheet->getActiveSheet()->mergeCells("BC7:BC8");
-            $spreadsheet->getActiveSheet()->mergeCells("BD7:BD8");
-            $spreadsheet->getActiveSheet()->mergeCells("BE6:BE6");
-            $spreadsheet->getActiveSheet()->mergeCells("BE7:BE8");
-            $spreadsheet->getActiveSheet()->mergeCells("BF6:BF6");
-            $spreadsheet->getActiveSheet()->mergeCells("BF7:BF8");
-            $spreadsheet->getActiveSheet()->mergeCells("BG6:BJ6");
-            $spreadsheet->getActiveSheet()->mergeCells("BG7:BG8");
-            $spreadsheet->getActiveSheet()->mergeCells("BH7:BH8");
-            $spreadsheet->getActiveSheet()->mergeCells("BI7:BI8");
-            $spreadsheet->getActiveSheet()->mergeCells("BJ7:BJ8");
-            $spreadsheet->getActiveSheet()->mergeCells("BK6:BL6");
-            $spreadsheet->getActiveSheet()->mergeCells("BK7:BK8");
-            $spreadsheet->getActiveSheet()->mergeCells("BL7:BL8");
-            $spreadsheet->getActiveSheet()->mergeCells("BM6:BN6");
-            $spreadsheet->getActiveSheet()->mergeCells("BM7:BM8");
-            $spreadsheet->getActiveSheet()->mergeCells("BN7:BN8");
-            $spreadsheet->getActiveSheet()->mergeCells("BO6:BR6");
-            $spreadsheet->getActiveSheet()->mergeCells("BO7:BO8");
-            $spreadsheet->getActiveSheet()->mergeCells("BP7:BP8");
-            $spreadsheet->getActiveSheet()->mergeCells("BQ7:BQ8");
-            $spreadsheet->getActiveSheet()->mergeCells("BR7:BR8");
-    
-            $styleArray = [
-                'borders'=>[
-                    'allBorders'=>[
-                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
-                        'color' => ['argb' => '000000'],
+    function formato_006($pdo){
+        try {
+            $spreadsheet = new Spreadsheet();
+            $spreadsheet->setActiveSheetIndex(0);
+            $spreadsheet->getActiveSheet()->setTitle("ACTIVOS LIMA");
+        
+            $spreadsheet->createSheet();
+            $spreadsheet->setActiveSheetIndex(1);
+            $spreadsheet->getActiveSheet()->setTitle("ACTIVOS LURIN");
+        
+            $spreadsheet->createSheet();
+            $spreadsheet->setActiveSheetIndex(2);
+            $spreadsheet->getActiveSheet()->setTitle("ACTIVOS PUCALLPA");
+        
+            for($i=0;$i<=2;$i++){
+                $spreadsheet->setActiveSheetIndex($i);
+                $spreadsheet->getActiveSheet()->setCellValue("A5","N°");
+                $spreadsheet->getActiveSheet()->setCellValue("B5","APELLIDOS Y NOMBRES");
+                $spreadsheet->getActiveSheet()->setCellValue("C5","FECHA DE NACIMIENTO");
+                $spreadsheet->getActiveSheet()->setCellValue("D5","DNI");
+                $spreadsheet->getActiveSheet()->setCellValue("E5","EDAD");
+                $spreadsheet->getActiveSheet()->setCellValue("F5","AREA DE TRABAJOs");
+                $spreadsheet->getActiveSheet()->setCellValue("G5","PUESTO DE TRABAJO");
+                $spreadsheet->getActiveSheet()->setCellValue("H5","EMPRESA");
+                $spreadsheet->getActiveSheet()->setCellValue("I5",utf8_decode("CORREO ELECTRONICO"));
+                $spreadsheet->getActiveSheet()->setCellValue("J5","CELULAR");
+                $spreadsheet->getActiveSheet()->setCellValue("K5","GRUPO SANG. Y RH");
+                $spreadsheet->getActiveSheet()->setCellValue("L5","ALERGIAS");
+                $spreadsheet->getActiveSheet()->setCellValue("M6","EMO PREOCUPACIONAL");
+                $spreadsheet->getActiveSheet()->setCellValue("M5","EXAMENES MEDICOS OCUPACIONALES");
+                $spreadsheet->getActiveSheet()->setCellValue("M7","FECHA EMO");
+                $spreadsheet->getActiveSheet()->setCellValue("N7","CLINICA");
+                $spreadsheet->getActiveSheet()->setCellValue("O7",utf8_decode("CONDICIÓN"));
+                $spreadsheet->getActiveSheet()->setCellValue("P7","VALORACION NUTRICIONAL");
+                $spreadsheet->getActiveSheet()->setCellValue("P8","PESO");
+                $spreadsheet->getActiveSheet()->setCellValue("Q8","TALLA");
+                $spreadsheet->getActiveSheet()->setCellValue("R8","IMC");
+                $spreadsheet->getActiveSheet()->setCellValue("S8","CLASIFICACION");
+                $spreadsheet->getActiveSheet()->setCellValue("T7","ENVIO DE EMO EMAIL");
+                $spreadsheet->getActiveSheet()->setCellValue("U6","EMO PERIODICO");
+                $spreadsheet->getActiveSheet()->setCellValue("U7","PROGRAMADO");
+                $spreadsheet->getActiveSheet()->setCellValue("V7","REALIZADO");
+                $spreadsheet->getActiveSheet()->setCellValue("W7","CLINICA");
+                $spreadsheet->getActiveSheet()->setCellValue("X7",utf8_decode("CONDICIÓN"));
+                $spreadsheet->getActiveSheet()->setCellValue("Y7","VALORACION NUTRICIONAL");
+                $spreadsheet->getActiveSheet()->setCellValue("Y8","PESO");
+                $spreadsheet->getActiveSheet()->setCellValue("Z8","TALLA");
+                $spreadsheet->getActiveSheet()->setCellValue("AA8","IMC");
+                $spreadsheet->getActiveSheet()->setCellValue("AB8","CLASIFICACION");
+                $spreadsheet->getActiveSheet()->setCellValue("AC7","ENVIO DE EMO EMAIL");
+                $spreadsheet->getActiveSheet()->setCellValue("AD7","PROGRAMADO");
+                $spreadsheet->getActiveSheet()->setCellValue("AE7","REALIZADO");
+                $spreadsheet->getActiveSheet()->setCellValue("AF7",utf8_decode("CLÍNICA"));
+                $spreadsheet->getActiveSheet()->setCellValue("AG7",utf8_decode("CONDICIÓN"));
+                $spreadsheet->getActiveSheet()->setCellValue("AH7","VALORACION NUTRICIONAL");
+                $spreadsheet->getActiveSheet()->setCellValue("AH8","PESO");
+                $spreadsheet->getActiveSheet()->setCellValue("AI8","TALLA");
+                $spreadsheet->getActiveSheet()->setCellValue("AJ8","IMC");
+                $spreadsheet->getActiveSheet()->setCellValue("AK8","CLASIFICACION");
+                $spreadsheet->getActiveSheet()->setCellValue("AL7","ENVIO DE EMO EMAIL");
+                $spreadsheet->getActiveSheet()->setCellValue("AM7","PROGRAMADO");
+                $spreadsheet->getActiveSheet()->setCellValue("AN6","EMO RETIRO");
+                $spreadsheet->getActiveSheet()->setCellValue("AN7","REALIZADO");
+                $spreadsheet->getActiveSheet()->setCellValue("AO7",utf8_decode("CLÍNICA"));
+                $spreadsheet->getActiveSheet()->setCellValue("AP7",utf8_decode("OBSERVACIÓNES"));
+                $spreadsheet->getActiveSheet()->setCellValue("AQ7","ENVIO DE EMO EMAIL");
+                $spreadsheet->getActiveSheet()->setCellValue("AR4","INMUNIZACIONES");
+                $spreadsheet->getActiveSheet()->setCellValue("AR6","FIEBRE AMARILLA");
+                $spreadsheet->getActiveSheet()->setCellValue("AR7","1RA DOSIS");
+                $spreadsheet->getActiveSheet()->setCellValue("AS6","DIFTERIA TETANO");
+                $spreadsheet->getActiveSheet()->setCellValue("AS7","1RA DOSIS");
+                $spreadsheet->getActiveSheet()->setCellValue("AT7","2DA DOSIS");
+                $spreadsheet->getActiveSheet()->setCellValue("AU7","3RA DOSIS");
+                $spreadsheet->getActiveSheet()->setCellValue("AV7","REFUERZO");
+                $spreadsheet->getActiveSheet()->setCellValue("AW6","HEPATITIS A");
+                $spreadsheet->getActiveSheet()->setCellValue("AW7","1RA DOSIS");
+                $spreadsheet->getActiveSheet()->setCellValue("AX7","2DA DOSIS");
+                $spreadsheet->getActiveSheet()->setCellValue("AY7","REFUERZO");
+                $spreadsheet->getActiveSheet()->setCellValue("AZ6","HEPATITIS B");
+                $spreadsheet->getActiveSheet()->setCellValue("AZ7","1RA DOSIS");
+                $spreadsheet->getActiveSheet()->setCellValue("BA7","2DA DOSIS");
+                $spreadsheet->getActiveSheet()->setCellValue("BB7","3RA DOSIS");
+                $spreadsheet->getActiveSheet()->setCellValue("BC6","INFLUENZA");
+                $spreadsheet->getActiveSheet()->setCellValue("BC7","1RA DOSIS");
+                $spreadsheet->getActiveSheet()->setCellValue("BD7","REFUERZO");
+                $spreadsheet->getActiveSheet()->setCellValue("BE6","POLIOMELITIS");
+                $spreadsheet->getActiveSheet()->setCellValue("BE7","1RA DOSIS");
+                $spreadsheet->getActiveSheet()->setCellValue("BF6","TRIVIRICA");
+                $spreadsheet->getActiveSheet()->setCellValue("BF7","1RA DOSIS");
+                $spreadsheet->getActiveSheet()->setCellValue("BG6","RABIA");
+                $spreadsheet->getActiveSheet()->setCellValue("BG7","1RA DOSIS");
+                $spreadsheet->getActiveSheet()->setCellValue("BH7","2DA DOSIS");
+                $spreadsheet->getActiveSheet()->setCellValue("BI7","3RA DOSIS");
+                $spreadsheet->getActiveSheet()->setCellValue("BJ7","REFUERZO");
+                $spreadsheet->getActiveSheet()->setCellValue("BK6","TIFOIDEA");
+                $spreadsheet->getActiveSheet()->setCellValue("BK7","1RA DOSIS");
+                $spreadsheet->getActiveSheet()->setCellValue("BL7","REFUERZO");
+                $spreadsheet->getActiveSheet()->setCellValue("BM6","NEUMOCOCO");
+                $spreadsheet->getActiveSheet()->setCellValue("BM7","1RA DOSIS");
+                $spreadsheet->getActiveSheet()->setCellValue("BN7","REFUERZO");
+                $spreadsheet->getActiveSheet()->setCellValue("BO6","COVID");
+                $spreadsheet->getActiveSheet()->setCellValue("BO7","1RA DOSIS");
+                $spreadsheet->getActiveSheet()->setCellValue("BP7","2DA DOSIS");
+                $spreadsheet->getActiveSheet()->setCellValue("BQ7","3RA DOSIS");
+                $spreadsheet->getActiveSheet()->setCellValue("BR7","4TA DOSIS");
+        
+                $spreadsheet->getActiveSheet()->mergeCells("A5:A8");
+                $spreadsheet->getActiveSheet()->mergeCells("B5:B8");
+                $spreadsheet->getActiveSheet()->mergeCells("C5:C8");
+                $spreadsheet->getActiveSheet()->mergeCells("D5:D8");
+                $spreadsheet->getActiveSheet()->mergeCells("E5:E8");
+                $spreadsheet->getActiveSheet()->mergeCells("F5:F8");
+                $spreadsheet->getActiveSheet()->mergeCells("G5:G8");
+                $spreadsheet->getActiveSheet()->mergeCells("H5:H8");
+                $spreadsheet->getActiveSheet()->mergeCells("I5:I8");
+                $spreadsheet->getActiveSheet()->mergeCells("J5:J8");
+                $spreadsheet->getActiveSheet()->mergeCells("K5:K8");
+                $spreadsheet->getActiveSheet()->mergeCells("L5:L8");
+                $spreadsheet->getActiveSheet()->mergeCells("M6:T6");
+                $spreadsheet->getActiveSheet()->mergeCells("M5:AQ5");
+                $spreadsheet->getActiveSheet()->mergeCells("M7:M8");
+                $spreadsheet->getActiveSheet()->mergeCells("N7:N8");
+                $spreadsheet->getActiveSheet()->mergeCells("O7:O8");
+                $spreadsheet->getActiveSheet()->mergeCells("P7:S7");
+                $spreadsheet->getActiveSheet()->mergeCells("T7:T8");
+                $spreadsheet->getActiveSheet()->mergeCells("U6:AM6");
+                $spreadsheet->getActiveSheet()->mergeCells("U7:U8");
+                $spreadsheet->getActiveSheet()->mergeCells("V7:V8");
+                $spreadsheet->getActiveSheet()->mergeCells("W7:W8");
+                $spreadsheet->getActiveSheet()->mergeCells("X7:X8");
+                $spreadsheet->getActiveSheet()->mergeCells("Y7:AB7");
+                $spreadsheet->getActiveSheet()->mergeCells("AC7:AC8");
+                $spreadsheet->getActiveSheet()->mergeCells("AD7:AD8");
+                $spreadsheet->getActiveSheet()->mergeCells("AE7:AE8");
+                $spreadsheet->getActiveSheet()->mergeCells("AF7:AF8");
+                $spreadsheet->getActiveSheet()->mergeCells("AG7:AG8");
+                $spreadsheet->getActiveSheet()->mergeCells("AH7:AK7");
+                $spreadsheet->getActiveSheet()->mergeCells("AL7:AL8");
+                $spreadsheet->getActiveSheet()->mergeCells("AM7:AM8");
+                $spreadsheet->getActiveSheet()->mergeCells("AN6:AQ6");
+                $spreadsheet->getActiveSheet()->mergeCells("AN7:AN8");
+                $spreadsheet->getActiveSheet()->mergeCells("AO7:AO8");
+                $spreadsheet->getActiveSheet()->mergeCells("AP7:AP8");
+                $spreadsheet->getActiveSheet()->mergeCells("AQ7:AQ8");
+                $spreadsheet->getActiveSheet()->mergeCells("AR4:BR4");
+                $spreadsheet->getActiveSheet()->mergeCells("AR5:BR5");
+                $spreadsheet->getActiveSheet()->mergeCells("AR7:AR8");
+                $spreadsheet->getActiveSheet()->mergeCells("AS6:AV6");
+                $spreadsheet->getActiveSheet()->mergeCells("AS7:AS8");
+                $spreadsheet->getActiveSheet()->mergeCells("AT7:AT8");
+                $spreadsheet->getActiveSheet()->mergeCells("AU7:AU8");
+                $spreadsheet->getActiveSheet()->mergeCells("AV7:AV8");
+                $spreadsheet->getActiveSheet()->mergeCells("AW6:AY6");
+                $spreadsheet->getActiveSheet()->mergeCells("AW7:AW8");
+                $spreadsheet->getActiveSheet()->mergeCells("AX7:AX8");
+                $spreadsheet->getActiveSheet()->mergeCells("AY7:AY8");
+                $spreadsheet->getActiveSheet()->mergeCells("AZ6:BB6");
+                $spreadsheet->getActiveSheet()->mergeCells("AZ7:AZ8");
+                $spreadsheet->getActiveSheet()->mergeCells("BA7:BA8");
+                $spreadsheet->getActiveSheet()->mergeCells("BB7:BB8");
+                $spreadsheet->getActiveSheet()->mergeCells("BC6:BD6");
+                $spreadsheet->getActiveSheet()->mergeCells("BC7:BC8");
+                $spreadsheet->getActiveSheet()->mergeCells("BD7:BD8");
+                $spreadsheet->getActiveSheet()->mergeCells("BE6:BE6");
+                $spreadsheet->getActiveSheet()->mergeCells("BE7:BE8");
+                $spreadsheet->getActiveSheet()->mergeCells("BF6:BF6");
+                $spreadsheet->getActiveSheet()->mergeCells("BF7:BF8");
+                $spreadsheet->getActiveSheet()->mergeCells("BG6:BJ6");
+                $spreadsheet->getActiveSheet()->mergeCells("BG7:BG8");
+                $spreadsheet->getActiveSheet()->mergeCells("BH7:BH8");
+                $spreadsheet->getActiveSheet()->mergeCells("BI7:BI8");
+                $spreadsheet->getActiveSheet()->mergeCells("BJ7:BJ8");
+                $spreadsheet->getActiveSheet()->mergeCells("BK6:BL6");
+                $spreadsheet->getActiveSheet()->mergeCells("BK7:BK8");
+                $spreadsheet->getActiveSheet()->mergeCells("BL7:BL8");
+                $spreadsheet->getActiveSheet()->mergeCells("BM6:BN6");
+                $spreadsheet->getActiveSheet()->mergeCells("BM7:BM8");
+                $spreadsheet->getActiveSheet()->mergeCells("BN7:BN8");
+                $spreadsheet->getActiveSheet()->mergeCells("BO6:BR6");
+                $spreadsheet->getActiveSheet()->mergeCells("BO7:BO8");
+                $spreadsheet->getActiveSheet()->mergeCells("BP7:BP8");
+                $spreadsheet->getActiveSheet()->mergeCells("BQ7:BQ8");
+                $spreadsheet->getActiveSheet()->mergeCells("BR7:BR8");
+        
+                $styleArray = [
+                    'borders'=>[
+                        'allBorders'=>[
+                            'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                            'color' => ['argb' => '000000'],
+                        ],
                     ],
-                ],
-                'alignment'=>[
-                    'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
-                    'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
-                ],
-            ];
-    
-            $spreadsheet->getActiveSheet()->getStyle('B5:L8')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
-            ->getStartColor()->setARGB('99AD71');
-    
-            $spreadsheet->getActiveSheet()->getStyle('A4:BR8')->applyFromArray($styleArray);
-    
-            $spreadsheet->getActiveSheet()->getStyle('M5:AQ8')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
-            ->getStartColor()->setARGB('6DB4CA');
-    
-            $spreadsheet->getActiveSheet()->getStyle('AR5:BR5')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
-            ->getStartColor()->setARGB('E2E51E');
-    
-            $spreadsheet->getActiveSheet()->getStyle('AR6:AR8')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
-            ->getStartColor()->setARGB('E2E51E');
-    
-            $spreadsheet->getActiveSheet()->getStyle('AS6:AV8')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
-            ->getStartColor()->setARGB('15F0EA');
-    
-            $centrosAdm = ["0200","0300","0600"];
-            $r = 0;
-            $fila = 8;
-            $c = formato($pdo,$centrosAdm[$i]);
-            $nc = count($c);
-    
-            for($j=0;$j<$nc;$j++){
-    
-                $spreadsheet->getActiveSheet()-> setCellValue('A'.$fila,$r);
-                $spreadsheet->getActiveSheet()-> setCellValue('B'.$fila,utf8_decode($c[$j]['empleadonomb']));
-                $spreadsheet->getActiveSheet()-> setCellValue('C'.$fila,date("d/m/Y", strtotime($c[$j]['fecnac'])));
-                $spreadsheet->getActiveSheet()-> setCellValue('D'.$fila,$c[$j]['dni']);
-                $spreadsheet->getActiveSheet()-> setCellValue('E'.$fila,$c[$j]['edad']);
-                $spreadsheet->getActiveSheet()-> setCellValue('F'.$fila,utf8_decode($c[$j]['ccostos']));//ver luego
-                $spreadsheet->getActiveSheet()-> setCellValue('G'.$fila,utf8_decode($c[$j]['cargo']));
-                $spreadsheet->getActiveSheet()-> setCellValue('H'.$fila,utf8_decode("SEPCON"));
-                $spreadsheet->getActiveSheet()-> setCellValue('I'.$fila,utf8_decode($c[$j]['correo']));
-                $spreadsheet->getActiveSheet()-> setCellValue('J'.$fila,utf8_decode($c[$j]['telefono']));
-                $spreadsheet->getActiveSheet()-> setCellValue('K'.$fila,utf8_decode($c[$j]['grupoSangre']));
-                $spreadsheet->getActiveSheet()-> setCellValue('L'.$fila,utf8_decode($c[$j]['alergias']));
-                $spreadsheet->getActiveSheet()-> setCellValue('M'.$fila,date("d/m/Y", strtotime($c[$j]['fecha'])));
-                $spreadsheet->getActiveSheet()-> setCellValue('N'.$fila,utf8_decode($c[$j]['nomb_clinica']));
-                $spreadsheet->getActiveSheet()-> setCellValue('O'.$fila,utf8_decode($c[$j]['aptitud']));
-                $spreadsheet->getActiveSheet()-> setCellValue('P'.$fila,$c[$j]['peso']);
-                $spreadsheet->getActiveSheet()-> setCellValue('Q'.$fila,$c[$j]['talla']);
-                $spreadsheet->getActiveSheet()-> setCellValue('R'.$fila,$c[$j]['imc']);
-                $spreadsheet->getActiveSheet()-> setCellValue('S'.$fila,utf8_decode($c[$j]['estadoNutricional']));
-                $spreadsheet->getActiveSheet()-> setCellValue('T'.$fila,$c[$j]['enviado']);
-                $spreadsheet->getActiveSheet()-> setCellValue('U'.$fila,date("d/m/Y", strtotime($c[$j]['programadopre'])));
-                $spreadsheet->getActiveSheet()-> setCellValue('V'.$fila,date("d/m/Y", strtotime($c[$j]['f_per1'])));
-                $spreadsheet->getActiveSheet()-> setCellValue('W'.$fila,utf8_decode($c[$j]['f_cln1'])); 
-                $spreadsheet->getActiveSheet()-> setCellValue('X'.$fila,utf8_decode($c[$j]['f_act1']));
-                $spreadsheet->getActiveSheet()-> setCellValue('Y'.$fila,$c[$j]['f_pes1']);
-                $spreadsheet->getActiveSheet()-> setCellValue('Z'.$fila,$c[$j]['f_tal1']);
-                $spreadsheet->getActiveSheet()-> setCellValue('AA'.$fila,$c[$j]['f_imc1']);
-                $spreadsheet->getActiveSheet()-> setCellValue('AB'.$fila,utf8_decode($c[$j]['f_est1'])); 
-                $spreadsheet->getActiveSheet()-> setCellValue('AC'.$fila,$c[$j]['f_env1']); 
-                $spreadsheet->getActiveSheet()-> setCellValue('AD'.$fila,date("d/m/Y", strtotime($c[$j]['programado1'])));
-                $spreadsheet->getActiveSheet()-> setCellValue('AE'.$fila,date("d/m/Y", strtotime($c[$j]['f_per2'])));
-                $spreadsheet->getActiveSheet()-> setCellValue('AF'.$fila,utf8_decode($c[$j]['f_cln2'])); 
-                $spreadsheet->getActiveSheet()-> setCellValue('AG'.$fila,utf8_decode($c[$j]['f_act2'])); 
-                $spreadsheet->getActiveSheet()-> setCellValue('AH'.$fila,$c[$j]['f_pes2']); 
-                $spreadsheet->getActiveSheet()-> setCellValue('AI'.$fila,$c[$j]['f_tal2']); 
-                $spreadsheet->getActiveSheet()-> setCellValue('AJ'.$fila,$c[$j]['f_imc2']); 
-                $spreadsheet->getActiveSheet()-> setCellValue('AK'.$fila,utf8_decode($c[$j]['f_est2'])); 
-                $spreadsheet->getActiveSheet()-> setCellValue('AL'.$fila,$c[$j]['f_env2']);
-                $spreadsheet->getActiveSheet()-> setCellValue('AM'.$fila,date("d/m/Y", strtotime($c[$j]['programado2'])));//a partir de por aqui iria el switch case U:
-                $spreadsheet->getActiveSheet()-> setCellValue('AN'.$fila,date("d/m/Y", strtotime($c[$j]['f_retiro'])));
-                $spreadsheet->getActiveSheet()-> setCellValue('AO'.$fila,utf8_decode($c[$j]['clinica'])); 
-                $spreadsheet->getActiveSheet()-> setCellValue('AP'.$fila,utf8_decode($c[$j]['observaciones'])); 
-                $spreadsheet->getActiveSheet()-> setCellValue('AQ'.$fila,$c[$j]['f_envr']);
-                $spreadsheet->getActiveSheet()-> setCellValue('AR'.$fila,date("d/m/Y", strtotime($c[$j]['fechaFbrAmarilla'])));
-                $spreadsheet->getActiveSheet()-> setCellValue('AS'.$fila,date("d/m/Y", strtotime($c[$j]['fechaDifTD1'])));
-                $spreadsheet->getActiveSheet()-> setCellValue('AT'.$fila,date("d/m/Y", strtotime($c[$j]['fechaDifTD2'])));
-                $spreadsheet->getActiveSheet()-> setCellValue('AU'.$fila,date("d/m/Y", strtotime($c[$j]['fechaDifTD3'])));
-                $spreadsheet->getActiveSheet()-> setCellValue('AV'.$fila,date("d/m/Y", strtotime($c[$j]['fechaDifTR1'])));                        
-                $spreadsheet->getActiveSheet()-> setCellValue('AW'.$fila,date("d/m/Y", strtotime($c[$j]['fechaHepAD1'])));   
-                $spreadsheet->getActiveSheet()-> setCellValue('AX'.$fila,date("d/m/Y", strtotime($c[$j]['fechaHepAD2'])));   
-                $spreadsheet->getActiveSheet()-> setCellValue('AY'.$fila,date("d/m/Y", strtotime($c[$j]['fechaHepAR1'])));   
-                $spreadsheet->getActiveSheet()-> setCellValue('AZ'.$fila,date("d/m/Y", strtotime($c[$j]['fechaHepBD1'])));   
-                $spreadsheet->getActiveSheet()-> setCellValue('BA'.$fila,date("d/m/Y", strtotime($c[$j]['fechaHepBD2'])));   
-                $spreadsheet->getActiveSheet()-> setCellValue('BB'.$fila,date("d/m/Y", strtotime($c[$j]['fechaHepBD3'])));   
-                $spreadsheet->getActiveSheet()-> setCellValue('BC'.$fila,date("d/m/Y", strtotime($c[$j]['fechaInflR1'])));   
-                $spreadsheet->getActiveSheet()-> setCellValue('BD'.$fila,date("d/m/Y", strtotime($c[$j]['fechaInflR2'])));   
-                $spreadsheet->getActiveSheet()-> setCellValue('BE'.$fila,date("d/m/Y", strtotime($c[$j]['fechaPolioD1'])));   
-                $spreadsheet->getActiveSheet()-> setCellValue('BF'.$fila,date("d/m/Y", strtotime($c[$j]['fechaTrivD1'])));
-                $spreadsheet->getActiveSheet()-> setCellValue('BG'.$fila,date("d/m/Y", strtotime($c[$j]['fechaRabD1'])));
-                $spreadsheet->getActiveSheet()-> setCellValue('BH'.$fila,date("d/m/Y", strtotime($c[$j]['fechaRabD2'])));
-                $spreadsheet->getActiveSheet()-> setCellValue('BI'.$fila,date("d/m/Y", strtotime($c[$j]['fechaRabD3'])));
-                $spreadsheet->getActiveSheet()-> setCellValue('BJ'.$fila,date("d/m/Y", strtotime($c[$j]['fechaRabR1'])));                        
-                $spreadsheet->getActiveSheet()-> setCellValue('BK'.$fila,date("d/m/Y", strtotime($c[$j]['fechaTifoR1'])));   
-                $spreadsheet->getActiveSheet()-> setCellValue('BL'.$fila,date("d/m/Y", strtotime($c[$j]['fechaTifoR2'])));   
-                $spreadsheet->getActiveSheet()-> setCellValue('BM'.$fila,date("d/m/Y", strtotime($c[$j]['fechaNeumR1'])));   
-                $spreadsheet->getActiveSheet()-> setCellValue('BN'.$fila,date("d/m/Y", strtotime($c[$j]['fechaNeumR2'])));   
-                $spreadsheet->getActiveSheet()-> setCellValue('BO'.$fila,date("d/m/Y", strtotime($c[$j]['fechaCovidD1'])));   
-                $spreadsheet->getActiveSheet()-> setCellValue('BP'.$fila,date("d/m/Y", strtotime($c[$j]['fechaCovidD2'])));   
-                $spreadsheet->getActiveSheet()-> setCellValue('BQ'.$fila,date("d/m/Y", strtotime($c[$j]['fechaCovidD3'])));
-                $spreadsheet->getActiveSheet()-> setCellValue('BR'.$fila,date("d/m/Y", strtotime($c[$j]['fechaCovidD4'])));
-    
-                $fila++;
-                $r++;
+                    'alignment'=>[
+                        'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+                        'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                    ],
+                ];
+        
+                $spreadsheet->getActiveSheet()->getStyle('B5:L8')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
+                ->getStartColor()->setARGB('99AD71');
+        
+                $spreadsheet->getActiveSheet()->getStyle('A4:BR8')->applyFromArray($styleArray);
+        
+                $spreadsheet->getActiveSheet()->getStyle('M5:AQ8')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
+                ->getStartColor()->setARGB('6DB4CA');
+        
+                $spreadsheet->getActiveSheet()->getStyle('AR5:BR5')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
+                ->getStartColor()->setARGB('E2E51E');
+        
+                $spreadsheet->getActiveSheet()->getStyle('AR6:AR8')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
+                ->getStartColor()->setARGB('E2E51E');
+        
+                $spreadsheet->getActiveSheet()->getStyle('AS6:AV8')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
+                ->getStartColor()->setARGB('15F0EA');
+        
+                $centrosAdm = ["0200","0300","0600"];
+                $r = 0;
+                $fila = 8;
+                $c = formato($pdo,$centrosAdm[$i]);
+                $nc = count($c);
+        
+                for($j=0;$j<$nc;$j++){
+        
+                    $spreadsheet->getActiveSheet()-> setCellValue('A'.$fila,$r);
+                    $spreadsheet->getActiveSheet()-> setCellValue('B'.$fila,utf8_decode($c[$j]['empleadonomb']));
+                    $spreadsheet->getActiveSheet()-> setCellValue('C'.$fila,date("d/m/Y", strtotime($c[$j]['fecnac'])));
+                    $spreadsheet->getActiveSheet()-> setCellValue('D'.$fila,$c[$j]['dni']);
+                    $spreadsheet->getActiveSheet()-> setCellValue('E'.$fila,$c[$j]['edad']);
+                    $spreadsheet->getActiveSheet()-> setCellValue('F'.$fila,utf8_decode($c[$j]['ccostos']));//ver luego
+                    $spreadsheet->getActiveSheet()-> setCellValue('G'.$fila,utf8_decode($c[$j]['cargo']));
+                    $spreadsheet->getActiveSheet()-> setCellValue('H'.$fila,utf8_decode("SEPCON"));
+                    $spreadsheet->getActiveSheet()-> setCellValue('I'.$fila,utf8_decode($c[$j]['correo']));
+                    $spreadsheet->getActiveSheet()-> setCellValue('J'.$fila,utf8_decode($c[$j]['telefono']));
+                    $spreadsheet->getActiveSheet()-> setCellValue('K'.$fila,utf8_decode($c[$j]['grupoSangre']));
+                    $spreadsheet->getActiveSheet()-> setCellValue('L'.$fila,utf8_decode($c[$j]['alergias']));
+                    $spreadsheet->getActiveSheet()-> setCellValue('M'.$fila,date("d/m/Y", strtotime($c[$j]['fecha'])));
+                    $spreadsheet->getActiveSheet()-> setCellValue('N'.$fila,utf8_decode($c[$j]['nomb_clinica']));
+                    $spreadsheet->getActiveSheet()-> setCellValue('O'.$fila,utf8_decode($c[$j]['aptitud']));
+                    $spreadsheet->getActiveSheet()-> setCellValue('P'.$fila,$c[$j]['peso']);
+                    $spreadsheet->getActiveSheet()-> setCellValue('Q'.$fila,$c[$j]['talla']);
+                    $spreadsheet->getActiveSheet()-> setCellValue('R'.$fila,$c[$j]['imc']);
+                    $spreadsheet->getActiveSheet()-> setCellValue('S'.$fila,utf8_decode($c[$j]['estadoNutricional']));
+                    $spreadsheet->getActiveSheet()-> setCellValue('T'.$fila,$c[$j]['enviado']);
+                    $spreadsheet->getActiveSheet()-> setCellValue('U'.$fila,date("d/m/Y", strtotime($c[$j]['programadopre'])));
+                    $spreadsheet->getActiveSheet()-> setCellValue('V'.$fila,date("d/m/Y", strtotime($c[$j]['f_per1'])));
+                    $spreadsheet->getActiveSheet()-> setCellValue('W'.$fila,utf8_decode($c[$j]['f_cln1'])); 
+                    $spreadsheet->getActiveSheet()-> setCellValue('X'.$fila,utf8_decode($c[$j]['f_act1']));
+                    $spreadsheet->getActiveSheet()-> setCellValue('Y'.$fila,$c[$j]['f_pes1']);
+                    $spreadsheet->getActiveSheet()-> setCellValue('Z'.$fila,$c[$j]['f_tal1']);
+                    $spreadsheet->getActiveSheet()-> setCellValue('AA'.$fila,$c[$j]['f_imc1']);
+                    $spreadsheet->getActiveSheet()-> setCellValue('AB'.$fila,utf8_decode($c[$j]['f_est1'])); 
+                    $spreadsheet->getActiveSheet()-> setCellValue('AC'.$fila,$c[$j]['f_env1']); 
+                    $spreadsheet->getActiveSheet()-> setCellValue('AD'.$fila,date("d/m/Y", strtotime($c[$j]['programado1'])));
+                    $spreadsheet->getActiveSheet()-> setCellValue('AE'.$fila,date("d/m/Y", strtotime($c[$j]['f_per2'])));
+                    $spreadsheet->getActiveSheet()-> setCellValue('AF'.$fila,utf8_decode($c[$j]['f_cln2'])); 
+                    $spreadsheet->getActiveSheet()-> setCellValue('AG'.$fila,utf8_decode($c[$j]['f_act2'])); 
+                    $spreadsheet->getActiveSheet()-> setCellValue('AH'.$fila,$c[$j]['f_pes2']); 
+                    $spreadsheet->getActiveSheet()-> setCellValue('AI'.$fila,$c[$j]['f_tal2']); 
+                    $spreadsheet->getActiveSheet()-> setCellValue('AJ'.$fila,$c[$j]['f_imc2']); 
+                    $spreadsheet->getActiveSheet()-> setCellValue('AK'.$fila,utf8_decode($c[$j]['f_est2'])); 
+                    $spreadsheet->getActiveSheet()-> setCellValue('AL'.$fila,$c[$j]['f_env2']);
+                    $spreadsheet->getActiveSheet()-> setCellValue('AM'.$fila,date("d/m/Y", strtotime($c[$j]['programado2'])));//a partir de por aqui iria el switch case U:
+                    $spreadsheet->getActiveSheet()-> setCellValue('AN'.$fila,date("d/m/Y", strtotime($c[$j]['f_retiro'])));
+                    $spreadsheet->getActiveSheet()-> setCellValue('AO'.$fila,utf8_decode($c[$j]['clinica'])); 
+                    $spreadsheet->getActiveSheet()-> setCellValue('AP'.$fila,utf8_decode($c[$j]['observaciones'])); 
+                    $spreadsheet->getActiveSheet()-> setCellValue('AQ'.$fila,$c[$j]['f_envr']);
+                    $spreadsheet->getActiveSheet()-> setCellValue('AR'.$fila,date("d/m/Y", strtotime($c[$j]['fechaFbrAmarilla'])));
+                    $spreadsheet->getActiveSheet()-> setCellValue('AS'.$fila,date("d/m/Y", strtotime($c[$j]['fechaDifTD1'])));
+                    $spreadsheet->getActiveSheet()-> setCellValue('AT'.$fila,date("d/m/Y", strtotime($c[$j]['fechaDifTD2'])));
+                    $spreadsheet->getActiveSheet()-> setCellValue('AU'.$fila,date("d/m/Y", strtotime($c[$j]['fechaDifTD3'])));
+                    $spreadsheet->getActiveSheet()-> setCellValue('AV'.$fila,date("d/m/Y", strtotime($c[$j]['fechaDifTR1'])));                        
+                    $spreadsheet->getActiveSheet()-> setCellValue('AW'.$fila,date("d/m/Y", strtotime($c[$j]['fechaHepAD1'])));   
+                    $spreadsheet->getActiveSheet()-> setCellValue('AX'.$fila,date("d/m/Y", strtotime($c[$j]['fechaHepAD2'])));   
+                    $spreadsheet->getActiveSheet()-> setCellValue('AY'.$fila,date("d/m/Y", strtotime($c[$j]['fechaHepAR1'])));   
+                    $spreadsheet->getActiveSheet()-> setCellValue('AZ'.$fila,date("d/m/Y", strtotime($c[$j]['fechaHepBD1'])));   
+                    $spreadsheet->getActiveSheet()-> setCellValue('BA'.$fila,date("d/m/Y", strtotime($c[$j]['fechaHepBD2'])));   
+                    $spreadsheet->getActiveSheet()-> setCellValue('BB'.$fila,date("d/m/Y", strtotime($c[$j]['fechaHepBD3'])));   
+                    $spreadsheet->getActiveSheet()-> setCellValue('BC'.$fila,date("d/m/Y", strtotime($c[$j]['fechaInflR1'])));   
+                    $spreadsheet->getActiveSheet()-> setCellValue('BD'.$fila,date("d/m/Y", strtotime($c[$j]['fechaInflR2'])));   
+                    $spreadsheet->getActiveSheet()-> setCellValue('BE'.$fila,date("d/m/Y", strtotime($c[$j]['fechaPolioD1'])));   
+                    $spreadsheet->getActiveSheet()-> setCellValue('BF'.$fila,date("d/m/Y", strtotime($c[$j]['fechaTrivD1'])));
+                    $spreadsheet->getActiveSheet()-> setCellValue('BG'.$fila,date("d/m/Y", strtotime($c[$j]['fechaRabD1'])));
+                    $spreadsheet->getActiveSheet()-> setCellValue('BH'.$fila,date("d/m/Y", strtotime($c[$j]['fechaRabD2'])));
+                    $spreadsheet->getActiveSheet()-> setCellValue('BI'.$fila,date("d/m/Y", strtotime($c[$j]['fechaRabD3'])));
+                    $spreadsheet->getActiveSheet()-> setCellValue('BJ'.$fila,date("d/m/Y", strtotime($c[$j]['fechaRabR1'])));                        
+                    $spreadsheet->getActiveSheet()-> setCellValue('BK'.$fila,date("d/m/Y", strtotime($c[$j]['fechaTifoR1'])));   
+                    $spreadsheet->getActiveSheet()-> setCellValue('BL'.$fila,date("d/m/Y", strtotime($c[$j]['fechaTifoR2'])));   
+                    $spreadsheet->getActiveSheet()-> setCellValue('BM'.$fila,date("d/m/Y", strtotime($c[$j]['fechaNeumR1'])));   
+                    $spreadsheet->getActiveSheet()-> setCellValue('BN'.$fila,date("d/m/Y", strtotime($c[$j]['fechaNeumR2'])));   
+                    $spreadsheet->getActiveSheet()-> setCellValue('BO'.$fila,date("d/m/Y", strtotime($c[$j]['fechaCovidD1'])));   
+                    $spreadsheet->getActiveSheet()-> setCellValue('BP'.$fila,date("d/m/Y", strtotime($c[$j]['fechaCovidD2'])));   
+                    $spreadsheet->getActiveSheet()-> setCellValue('BQ'.$fila,date("d/m/Y", strtotime($c[$j]['fechaCovidD3'])));
+                    $spreadsheet->getActiveSheet()-> setCellValue('BR'.$fila,date("d/m/Y", strtotime($c[$j]['fechaCovidD4'])));
+        
+                    $fila++;
+                    $r++;
+                }
             }
-        }
-    
-        $writer = new Xlsx($spreadsheet); 
-        $writer->save('Formato 006.xlsx');
-    
-        return 'Formato 006.xlsx';
+        
+            $writer = new Xlsx($spreadsheet); 
+            $writer->save('../formatos/Formato 006.xlsx');
+        
+            return 'Formato 006.xlsx';
 
         } catch(PDOException $th) {
             echo $th->getMessage();
@@ -331,7 +333,7 @@ function formato_006($pdo){
         }
     }
     
-    function formato_001($pdo){
+    function formato_001($pdo,$dni){
         $spreadsheet = new Spreadsheet();
         $spreadsheet->setActiveSheetIndex(0);
         $spreadsheet->getActiveSheet()->setTitle("ACTIVOS LIMA");
@@ -583,18 +585,99 @@ function formato_006($pdo){
             $spreadsheet->getActiveSheet()->mergeCells("DG6:DG7");
             $spreadsheet->getActiveSheet()->mergeCells("DH5:DH7");
 
-            $centrosAdm = ["0200","0300","0600"];
-            $r = 0;
+            $centrosAdm = ["0200","0600","0300"];
+            $r = 1;
             $fila = 8;
-            $c = formato($pdo,$centrosAdm[$k]);
-            $nc = count($c);
+            $n = formato001($pdo,$centrosAdm[$k],$dni);
+            $nc = count($n);
 
             for($m=0;$m<=2;$m++){
-                
+                $spreadsheet->getActiveSheet()-> setCellValue('A'.$fila,$r);
+                $spreadsheet->getActiveSheet()-> setCellValue('C'.$fila,$n[$m]['id']);
+                $spreadsheet->getActiveSheet()-> setCellValue('D'.$fila,$n[$m]['dni']);
+                $spreadsheet->getActiveSheet()-> setCellValue('E'.$fila,$n[$m]['nombres']);
+                $spreadsheet->getActiveSheet()-> setCellValue('F'.$fila,$n[$m]['edad']);
+                $spreadsheet->getActiveSheet()-> setCellValue('G'.$fila,$n[$m]['sexo']);
+                $spreadsheet->getActiveSheet()-> setCellValue('H'.$fila,$n[$m]['cargo']);
+                $spreadsheet->getActiveSheet()-> setCellValue('J'.$fila,$n[$m]['empresa']);
+                $spreadsheet->getActiveSheet()-> setCellValue('K'.$fila,$n[$m]['ccostos']);
+                $spreadsheet->getActiveSheet()-> setCellValue('M'.$fila,$n[$m]['fecha']);
+                $spreadsheet->getActiveSheet()-> setCellValue('N'.$fila,$n[$m]['tipo']);
+                $spreadsheet->getActiveSheet()-> setCellValue('O'.$fila,$n[$m]['clinica']);
+                $spreadsheet->getActiveSheet()-> setCellValue('P'.$fila,$n[$m]['aptitud']);
+                $spreadsheet->getActiveSheet()-> setCellValue('Q'.$fila,$n[$m]['pase']);
+                $spreadsheet->getActiveSheet()-> setCellValue('R'.$fila,$n[$m]['sgtefecha']);
+                $spreadsheet->getActiveSheet()-> setCellValue('U'.$fila,$n[$m]['alergias']);
+                $spreadsheet->getActiveSheet()-> setCellValue('V'.$fila,$n[$m]['sangre']);
+                $spreadsheet->getActiveSheet()-> setCellValue('W'.$fila,$n[$m]['presion']);
+                $spreadsheet->getActiveSheet()-> setCellValue('X'.$fila,$n[$m]['peso']);
+                $spreadsheet->getActiveSheet()-> setCellValue('Y'.$fila,$n[$m]['talla']);
+                $spreadsheet->getActiveSheet()-> setCellValue('Z'.$fila,$n[$m]['imc']);
+                $spreadsheet->getActiveSheet()-> setCellValue('AA'.$fila,$n[$m]['estadoNutricional']);
+                $spreadsheet->getActiveSheet()-> setCellValue('AB'.$fila,$n[$m]['espirometria']);
+                $spreadsheet->getActiveSheet()-> setCellValue('AC'.$fila,$n[$m]['rayosx']);
+                $spreadsheet->getActiveSheet()-> setCellValue('AD'.$fila,$n[$m]['oftalmologia']);
+                $spreadsheet->getActiveSheet()-> setCellValue('AE'.$fila,$n[$m]['otoscopia']);
+                $spreadsheet->getActiveSheet()-> setCellValue('AF'.$fila,$n[$m]['audiometria']);                                    
+                $spreadsheet->getActiveSheet()-> setCellValue('AG'.$fila,$n[$m]['osteo']);
+                $spreadsheet->getActiveSheet()-> setCellValue('AH'.$fila,$n[$m]['odontograma']);
+                $spreadsheet->getActiveSheet()-> setCellValue('AI'.$fila,$n[$m]['ekg']);
+                $spreadsheet->getActiveSheet()-> setCellValue('AJ'.$fila,$n[$m]['pEsfuerzo']);
+                $spreadsheet->getActiveSheet()-> setCellValue('AL'.$fila,$n[$m]['psicologia']);
+                $spreadsheet->getActiveSheet()-> setCellValue('AR'.$fila,$n[$m]['gotaGruesa']);
+                $spreadsheet->getActiveSheet()-> setCellValue('AS'.$fila,$n[$m]['leucocitos']);
+                $spreadsheet->getActiveSheet()-> setCellValue('AT'.$fila,$n[$m]['plaquetas']);
+                $spreadsheet->getActiveSheet()-> setCellValue('AU'.$fila,$n[$m]['colesterol']);
+                $spreadsheet->getActiveSheet()-> setCellValue('AV'.$fila,$n[$m]['hdl']);
+                $spreadsheet->getActiveSheet()-> setCellValue('AW'.$fila,$n[$m]['ldl']);
+                $spreadsheet->getActiveSheet()-> setCellValue('AX'.$fila,$n[$m]['trigliceridos']);
+                $spreadsheet->getActiveSheet()-> setCellValue('AY'.$fila,$n[$m]['tgp']);
+                $spreadsheet->getActiveSheet()-> setCellValue('AZ'.$fila,$n[$m]['tgo']);
+                $spreadsheet->getActiveSheet()-> setCellValue('BA'.$fila,$n[$m]['glucosa']);
+                $spreadsheet->getActiveSheet()-> setCellValue('BB'.$fila,$n[$m]['ureaSanguinea']);
+                $spreadsheet->getActiveSheet()-> setCellValue('BC'.$fila,$n[$m]['acidoUrico']);
+                $spreadsheet->getActiveSheet()-> setCellValue('BD'.$fila,$n[$m]['creatinina']);
+                $spreadsheet->getActiveSheet()-> setCellValue('BE'.$fila,$n[$m]['vdrl']);
+                $spreadsheet->getActiveSheet()-> setCellValue('BH'.$fila,$n[$m]['hepatitisB']);
+                $spreadsheet->getActiveSheet()-> setCellValue('BL'.$fila,$n[$m]['diagno1']);
+                $spreadsheet->getActiveSheet()-> setCellValue('BN'.$fila,$n[$m]['diagno2']);
+                $spreadsheet->getActiveSheet()-> setCellValue('BP'.$fila,$n[$m]['diagno3']);
+                $spreadsheet->getActiveSheet()-> setCellValue('BR'.$fila,$n[$m]['diagno4']);
+                $spreadsheet->getActiveSheet()-> setCellValue('BT'.$fila,$n[$m]['diagno5']);
+                $spreadsheet->getActiveSheet()-> setCellValue('BW'.$fila,$n[$m]['diagno6']);
+                $spreadsheet->getActiveSheet()-> setCellValue('CG'.$fila,$n[$m]['fechaFbrA']);
+                $spreadsheet->getActiveSheet()-> setCellValue('CH'.$fila,$n[$m]['fechaDTD1']);
+                $spreadsheet->getActiveSheet()-> setCellValue('CI'.$fila,$n[$m]['fechaDTD2']);
+                $spreadsheet->getActiveSheet()-> setCellValue('CJ'.$fila,$n[$m]['fechaDTD3']);
+                $spreadsheet->getActiveSheet()-> setCellValue('CK'.$fila,$n[$m]['fechaDTR1']);
+                $spreadsheet->getActiveSheet()-> setCellValue('CL'.$fila,$n[$m]['fechaHAD1']);
+                $spreadsheet->getActiveSheet()-> setCellValue('CM'.$fila,$n[$m]['fechaHAD2']);
+                $spreadsheet->getActiveSheet()-> setCellValue('CN'.$fila,$n[$m]['fechaHAR1']);
+                $spreadsheet->getActiveSheet()-> setCellValue('CO'.$fila,$n[$m]['fechaHBD1']);
+                $spreadsheet->getActiveSheet()-> setCellValue('CP'.$fila,$n[$m]['fechaHBD2']);
+                $spreadsheet->getActiveSheet()-> setCellValue('CQ'.$fila,$n[$m]['fechaHBD3']);
+                $spreadsheet->getActiveSheet()-> setCellValue('CR'.$fila,$n[$m]['fechaIFR1']);
+                $spreadsheet->getActiveSheet()-> setCellValue('CS'.$fila,$n[$m]['fechaIFR2']);
+                $spreadsheet->getActiveSheet()-> setCellValue('CT'.$fila,$n[$m]['fechaPLD1']);
+                $spreadsheet->getActiveSheet()-> setCellValue('CU'.$fila,$n[$m]['fechaTVD1']);
+                $spreadsheet->getActiveSheet()-> setCellValue('CV'.$fila,$n[$m]['fechaRBD1']);
+                $spreadsheet->getActiveSheet()-> setCellValue('CW'.$fila,$n[$m]['fechaRBD2']);
+                $spreadsheet->getActiveSheet()-> setCellValue('CX'.$fila,$n[$m]['fechaRBD3']);
+                $spreadsheet->getActiveSheet()-> setCellValue('CY'.$fila,$n[$m]['fechaRBR1']);
+                $spreadsheet->getActiveSheet()-> setCellValue('CZ'.$fila,$n[$m]['fechaTFR1']);
+                $spreadsheet->getActiveSheet()-> setCellValue('DA'.$fila,$n[$m]['fechaTFR2']);
+                $spreadsheet->getActiveSheet()-> setCellValue('DB'.$fila,$n[$m]['fechaNMR1']);
+                $spreadsheet->getActiveSheet()-> setCellValue('DC'.$fila,$n[$m]['fechaNMR2']);
+                $spreadsheet->getActiveSheet()-> setCellValue('DD'.$fila,$n[$m]['fechaCVD1']); 
+                $spreadsheet->getActiveSheet()-> setCellValue('DE'.$fila,$n[$m]['fechaCVD2']); 
+                $spreadsheet->getActiveSheet()-> setCellValue('DF'.$fila,$n[$m]['fechaCVD3']); 
+                $spreadsheet->getActiveSheet()-> setCellValue('DG'.$fila,$n[$m]['fechaCVD4']); 
+                $fila++;
+                $r++;
             }
         }
         $writer = new Xlsx($spreadsheet); 
-        $writer->save('Formato 001.xlsx');
+        $writer->save('../formatos/Formato 001.xlsx');
     
         return 'Formato 001.xlsx';
     }
@@ -726,7 +809,7 @@ function formato_006($pdo){
         }
     }
 
-    function formato001($pdo,$ccostos){
+    function formato001($pdo,$ccostos,$dni){
         try{
             $lista = [];
             $sql ="SELECT fe.cut,fe.empleadonomb,fe.correo,fe.dni,fe.cargo,fe.ccostos,
@@ -776,9 +859,9 @@ function formato_006($pdo){
                     LEFT JOIN fichas_empleados AS fe ON fa.dni=fe.dni
                     LEFT JOIN fichas_vacunacion AS v ON fa.dni=v.dni
                     LEFT JOIN lista_clinicas AS lc ON lc.id = fa.clinica
-                    WHERE fa.idreg=? AND fe.dni=?";
+                    WHERE (fa.dni=? OR NOT EXISTS(SELECT idreg FROM fichas_api fa4 WHERE fa4.dni=?)) AND fe.ccostos like '$ccostos%'";
             $statement = $pdo->prepare($sql);
-            $statement ->execute();
+            $statement ->execute(array($dni,$dni));
             $result = $statement ->fetchAll();
             $rowCount = $statement -> rowcount();
 
@@ -1146,7 +1229,8 @@ function formato_006($pdo){
                 $respuesta = false;
             }
             $salida = array("respuesta"=>$respuesta,
-                            "lista" => $lista);
+                            "lista" => $lista
+                            );
 
             return $salida; 
         } catch(PDOException $th) {
@@ -1156,8 +1240,9 @@ function formato_006($pdo){
         
     }
 
-    function formatoTablas001($pdo,$ccostos){
+    function formatoTablas001($pdo,$ccostos,$dni){
         try{
+            $cc =  ["0200","0300","0600"];
             $respuesta = false;
             $lista = [];
             $sql = "SELECT fe.cut,fe.empleadonomb,fe.correo,fe.dni,fe.cargo,fe.ccostos,
@@ -1177,7 +1262,7 @@ function formato_006($pdo){
                         fa.eAspecto,fa.eColor,fa.eConsistencia,fa.eMucus,DATE_ADD(fa.fecha,INTERVAL 1 YEAR) AS sgtefecha,
                         fa.ecoAbdominal,fa.edad,fa.ekg,fa.empresa,fa.espirometria,
                         fa.estado,fa.estadoNutricional,fa.expoFactorRiesgo,fa.fecNaci,fa.fecPase,
-                        fa.fecha,fa.filamentoMucoide,fa.fosfaAlca,fa.germenes,fa.ginecologia,
+                        MAX(fa.fecha) AS fecha,fa.filamentoMucoide,fa.fosfaAlca,fa.germenes,fa.ginecologia,
                         fa.glucosa,fa.gotaGruesa,fa.grasaCorporal,fa.grupoSangre,fa.habiAfisica,
                         fa.habiTabaco,fa.hcvHepatitisC,fa.hdl,fa.hematies,fa.hematiesHece,
                         fa.hematocrito,fa.hemoGlico,fa.hemoglobina,fa.hepatitisA,fa.hepatitisB,
@@ -1207,9 +1292,9 @@ function formato_006($pdo){
                     LEFT JOIN fichas_empleados AS fe ON fa.dni=fe.dni
                     LEFT JOIN fichas_vacunacion AS v ON fa.dni=v.dni
                     LEFT JOIN lista_clinicas AS lc ON lc.id = fa.clinica
-                    WHERE fa.idreg=? AND fe.dni=?";
+                    WHERE (fa.dni=? OR NOT EXISTS(SELECT idreg FROM fichas_api fa4 WHERE fa4.dni=?)) AND fe.ccostos LIKE '$cc[$ccostos]%' GROUP BY fe.dni ORDER BY empleadonomb ";            
             $statement = $pdo->prepare($sql);
-            $statement ->execute();
+            $statement ->execute(array($dni,$dni));
             $result = $statement ->fetchAll();
             $rowCount = $statement -> rowcount();
 
@@ -1251,7 +1336,7 @@ function formato_006($pdo){
                                     "cardiologia"=>$row['cardiologia'],
                                     "cea"=>$row['cea'],
                                     "celulasEpiteliales"=>$row['celulasEpiteliales'],
-                                    "ccostos"=>$row['centroCosto'],
+                                    "centrocostos"=>$row['centroCosto'],
                                     "cervical"=>$row['cervical'],
                                     "cheFrca"=>$row['cheFrca'],
                                     "cheFrre"=>$row['cheFrre'],
@@ -1447,7 +1532,8 @@ function formato_006($pdo){
                 $respuesta = false;
             }
             $salida = array("respuesta"=>$respuesta,
-                            "lista" => $lista);
+                            "lista" => $lista,
+                            "DB" => $dni);
 
             return $salida; 
         }catch(PDOException $th) {

@@ -1194,7 +1194,7 @@ input[name = "filtrado"]{
   margin-bottom: 1000px;
 }
 
-#historia_clinica div{
+#historia_clinica .caja{
   box-sizing: border-box;
   border: 2px solid #000;
   margin-top: 20px;
@@ -1214,5 +1214,32 @@ input[name = "filtrado"]{
 }
 
 .span_formato {
+  margin-left: 20px;
+}
+
+.hc {
+  background: #fff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  width: 90%;
+  border-radius: 20px;
+  -webkit-box-shadow: 2px 3px 5px #a2a2a2;
+  box-shadow: 2px 3px 5px #a2a2a2;
+  padding: 10px;
+}
+
+.exacaja{
+  width: 210px;
+}
+
+.examen{
+  display: grid;
+  grid-template-columns: repeat(2,100px);
+}
+
+#label_ac{
   margin-left: 20px;
 }
