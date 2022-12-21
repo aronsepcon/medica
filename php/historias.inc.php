@@ -72,7 +72,7 @@
         <span id="mensaje_texto">Vamos a ver si lo muestra</span>
     </div>
    
-    <form class="historias__cuerpo__busqueda" action="../inc/cargarHistoriaMedica.inc.php" method="post">
+    <form class="historias__cuerpo__busqueda" method="post">
         <div>
             <input type="radio" name="filtrado" id="radio__nombre">
             <label for="radio__nombre">Por Nombre</label>
@@ -269,58 +269,58 @@
             <button type="button" id="cierre_historia_clinica">X</button>
             <div class="registro_historia_clinica">
                 <label for="">Nro de Registro</label>
-                <input type="text" id=""><!--de donde sale?-->
+                <input type="text" id="idreg" readonly><!--de donde sale?--Igual preguntar luego e.e-->
                 <label for="">Documento de identidad</label>
-                <input type="text" id="documento_hc">
+                <input type="text" id="documento_hc" readonly>
                 <label for="">Telefono</label>
-                <input type="text" id="telefono_hc">
+                <input type="text" id="telefono_hc" readonly>
                 <label for="">Nombre Trabajador</label>
-                <input type="text" id="nombre_hc">
+                <input type="text" id="nombre_hc" readonly>
                 <label for="">Fecha de Nacimiento</label>
-                <input type="date" id="fecnac_hc">
+                <input type="date" id="fecnac_hc" readonly>
                 <label for="">Area</label>
-                <input type="text" id="area_hc">
+                <input type="text" id="area_hc" readonly>
                 <label for="">Cargo</label>
-                <input type="text" id="cargo_hc">
+                <input type="text" id="cargo_hc"readonly>
                 <label for="">Centro de Costos</label>
-                <input type="text" id="ccostos_hc"> 
+                <input type="text" id="ccostos_hc" readonly> 
                 <label for="">Cliente/Operador</label>
-                <input type="text"> 
+                <input type="text" readonly> 
                 <label for="">Empresa</label>
-                <input type="text"> 
+                <input type="text" id="empresa_hc" readonly> 
                 <label for="">Tipo de Examen</label>
-                <input type="text" id="tipoExa_hc"> 
+                <input type="text" id="tipoExa_hc" readonly> 
                 <label for="">Fecha Ex. Ocup.</label><!--ver q es ocupacional-->
-                <input type="text">
+                <input type="text" id="fecha_hc" readonly>
                 <label for="">Clinica</label>
-                <input type="text" id="clinica_hc">
+                <input type="text" id="clinica_hc" readonly>
                 <label for="">N° de Pase Medico</label>
-                <input type="text" id="pase_hc">
+                <input type="text" id="pase_hc" readonly>
                 <label for="">Aptitud</label>
-                <input type="text" id="actitud_hc">
+                <input type="text" id="actitud_hc" readonly>
                 <label for="">Sgte Examen</label>
-                <input type="text">
+                <input type="text" id="sgtefecha">
             </div>
             <div>
                 <label for="">Eval. Preliminares</label>
                 <label for="">Edad</label>
-                <input type="text" id="edad_hc">
+                <input type="text" id="edad_hc" readonly>
                 <label for="">Peso(kg)</label>
-                <input type="text" id="peso_hc">
+                <input type="text" id="peso_hc" readonly>
                 <label for="">IMC</label>
-                <input type="text" id="imc_hc">
+                <input type="text" id="imc_hc" readonly>
                 <label for="">Grupo Sanguineo</label>
-                <input type="text" id="sangre_hc">
+                <input type="text" id="sangre_hc" readonly>
                 <label for="">Talla (mt)</label>
-                <input type="text" id="talla_hc">
+                <input type="text" id="talla_hc" readonly>
                 <label for="">Sexo</label>
-                <input type="text" id="sexo_hc">
+                <input type="text" id="sexo_hc" readonly>
                 <label for="">Alergia</label>
-                <input type="text" id="alergias_hc">
+                <input type="text" id="alergias_hc" readonly>
                 <label for="">Prueba de Esfuerzo</label>
-                <input type="text">
+                <input type="text" id="pEsfuerzo_hc" readonly>
                 <label for="">Antec. Psicologicos</label>
-                <input type="text" id="ant_psi_hc">
+                <input type="text" id="ant_psi_hc" readonly>
                 <label for="">Antec. Riesg. Ocupacional</label>
                 <input type="text">
                 <label for="">Estado Nutricional</label>
@@ -353,84 +353,84 @@
             <div>
                 <label for="">Examenes</label>
                 <label for="">HBG</label>
-                <input type="text" id="hbg_hc">
+                <input type="text" id="hbg_hc" readonly>
                 <label for="">HTO</label>
-                <input type="text" id="hto_hc">
+                <input type="text" id="hto_hc" readonly>
                 <label for="">Gota G.</label>
-                <input type="text" id="gota_hc">
+                <input type="text" id="gota_hc" readonly>
                 <label for="">Plaquetas</label>
-                <input type="text" id="plaquetas_hc">
+                <input type="text" id="plaquetas_hc" readonly>
                 <label for="">Colesterol</label>
-                <input type="text" id="colesterol_hc">
+                <input type="text" id="colesterol_hc" readonly>
                 <label for="">HDL</label>
-                <input type="text" id="hdl_hc">
+                <input type="text" id="hdl_hc" readonly>
                 <label for="">LDL</label>
-                <input type="text" id="ldl_hc">
+                <input type="text" id="ldl_hc" readonly>
                 <label for="">Triglic.</label>
-                <input type="text" id="triglic_hc">
+                <input type="text" id="triglic_hc" readonly>
                 <label for="">TGP</label>
                 <input type="text" id="tgp_hc">
                 <label for="">TGO</label>
                 <input type="text" id="tgo_hc">
                 <label for="">Glucosa</label>
-                <input type="text" id="glucosa_hc">
+                <input type="text" id="glucosa_hc" readonly>
                 <label for="">Urea</label>
                 <input type="text" id="urea_hc">
                 <label for="">Ac. Urico</label>
-                <input type="text" id="acUrico_hc">
+                <input type="text" id="acUrico_hc" readonly>
                 <label for="">Creatinina</label>
-                <input type="text" id="creatinina_hc">
+                <input type="text" id="creatinina_hc" readonly>
                 <label for="">VDRL</label>
-                <input type="text" id="vdrl_hc">
+                <input type="text" id="vdrl_hc" readonly>
                 <label for="">RPR</label>
-                <input type="text" id="rpr_hc">
+                <input type="text" id="rpr_hc" readonly>
                 <label for="">Toxiscreen</label>
-                <input type="text" id="toxic_hc">
+                <input type="text" id="toxic_hc" readonly>
                 <label for="">RCV</label>
-                <input type="text" id="rcv_hc">
+                <input type="text" id="rcv_hc" readonly>
                 <label for="">Leucocitos</label>
-                <input type="text" id="leucocitos_hc">
+                <input type="text" id="leucocitos_hc" readonly>
                 <label for="">A.S. Hep.B</label>
-                <input type="text" id="hepB_hc">
+                <input type="text" id="hepB_hc" readonly>
                 <label for="">Ex. Parasit.</label>
-                <input type="text">
+                <input type="text" readonly>
                 <label for="">H. Nasofar.</label>
-                <input type="text">
+                <input type="text" readonly>
                 <label for="">Ex. Orina</label>
-                <input type="text">
+                <input type="text" readonly>
             </div>
             <div>
                 <label for="">Diagnosticos y Recomendaciones</label>
                 <label for="">1er. Diagnostico</label>
-                <input type="text">
+                <input type="text" id="diag_hc_1" readonly>
                 <label for="">2do. Diagnostico</label>
-                <input type="text">
+                <input type="text" id="diag_hc_2" readonly>
                 <label for="">3er. Diagnostico</label>
-                <input type="text">
+                <input type="text" id="diag_hc_3" readonly>
                 <label for="">4to. Diagnostico</label>
-                <input type="text">
+                <input type="text" id="diag_hc_4" readonly>
                 <label for="">5to. Diagnostico</label>
-                <input type="text">
+                <input type="text" id="diag_hc_5" readonly>
                 <label for="">6to. Diagnostico</label>
-                <input type="text">
+                <input type="text" id="diag_hc_6" readonly>
                 <label for="">Recomend. a Enf. Ocupac.</label>
-                <input type="text">
+                <input type="text" readonly>
                 <label for="">Recomend. a Enf. Comunes</label>
-                <input type="text">
+                <input type="text" readonly>
                 <label for="">Trat. Med. Actual</label>
-                <input type="text">
+                <input type="text" readonly>
                 <label for="">Ing. Programa 1</label>
-                <input type="text">
+                <input type="text" readonly>
                 <label for="">Ing. Programa 2</label>
-                <input type="text">
+                <input type="text" readonly>
                 <label for="">Ing. Programa 3</label>
-                <input type="text">
+                <input type="text" readonly>
                 <label for="">Ing. Programa 4</label>
-                <input type="text">
+                <input type="text" readonly>
                 <label for="">Ing. Programa 5</label>
-                <input type="text">
+                <input type="text" readonly>
                 <label for="">Ing. Programa 6</label>
-                <input type="text">
+                <input type="text" readonly>
             </div>
             <div>
                 <label for="">Vacunas</label>
@@ -438,92 +438,92 @@
                     <label for="">Fiebre Amarilla</label>
                     <div>
                         <label for="">D1</label>
-                        <input type="text">
+                        <input type="date" id="fa_hc" readonly>
                     </div>
                 </div>
                 <div>
                     <label for="">Difteria Tetano</label>
                     <div>
                         <label for="">D1</label>
-                        <input type="text">
+                        <input type="date" id="dt_d1_hc" readonly>
                         <label for="">D2</label>
-                        <input type="text">
+                        <input type="date" id="dt_d2_hc" readonly>
                         <label for="">D3</label>
-                        <input type="text">
+                        <input type="date" id="dt_d3_hc" readonly>
                         <label for="">R1</label>
-                        <input type="text">
+                        <input type="date" id="dt_r1_hc" readonly>
                     </div>
                 </div>
                 <div>
                     <label for="">Hepatitis A</label>
                     <label for="">D1</label>
-                    <input type="text">
+                    <input type="date" id="ha_d1_hc" readonly>
                     <label for="">D2</label>
-                    <input type="text">
+                    <input type="date" id="ha_d2_hc" readonly>
                     <label for="">R1</label>
-                    <input type="text">
+                    <input type="date" id="ha_r1_hc" readonly>
                 </div>
                 <div>
                     <label for="">Hepatitis B</label>
                     <label for="">D1</label>
-                    <input type="text">
+                    <input type="date" id="hb_d1_hc" readonly>
                     <label for="">D2</label>
-                    <input type="text">
+                    <input type="date" id="hb_d2_hc" readonly>
                     <label for="">D3</label>
-                    <input type="text">                
+                    <input type="date" id="hb_d3_hc" readonly>                
                 </div>
                 <div>
                     <label for="">Influenza</label>
                     <label for="">R1</label>
-                    <input type="text">
+                    <input type="date" id="if_r1_hc" readonly>
                     <label for="">R2</label>
-                    <input type="text">             
+                    <input type="date" id="if_r2_hc" readonly>             
                 </div>
                 <div>
                     <label for="">Poliomelitis</label>
                     <label for="">D1</label>
-                    <input type="text">
+                    <input type="date" id="pm_d1_hc" readonly>
                 </div> 
                 <div>
                     <label for="">Trivirica</label>
                     <label for="">D1</label>
-                    <input type="text">
+                    <input type="date" id="tv_d1_hc" readonly>
                 </div>
                 <div>
                     <label for="">Rabia</label>
                     <label for="">D1</label>
-                    <input type="text">
+                    <input type="date" id="rb_d1_hc" readonly>
                     <label for="">D2</label>
-                    <input type="text">
+                    <input type="date" id="rb_d2_hc" readonly>
                     <label for="">D3</label>
-                    <input type="text">
+                    <input type="date" id="rb_d3_hc" readonly>
                     <label for="">R1</label>
-                    <input type="text">
+                    <input type="date" id="rb_r1_hc" readonly>
                 </div>
                 <div>
                     <label for="">Tifoidea</label>
                     <label for="">R1</label>
-                    <input type="text">
+                    <input type="date" id="tf_r1_hc" readonly>
                     <label for="">R2</label>
-                    <input type="text"> 
+                    <input type="date" id="tf_r2_hc" readonly> 
                 </div>
                 <div>
                     <label for="">Neumococo</label>
                     <label for="">R1</label>
-                    <input type="text">
+                    <input type="date" id="nm_r1_hc" readonly>
                     <label for="">R2</label>
-                    <input type="text">                 
+                    <input type="date" id="nm_r2_hc" readonly>                 
                 </div>
                 <div>
                     <label for="">COVID</label>
                     <label for="">D1</label>
-                    <input type="text">
+                    <input type="date" id="cv_d1_hc" readonly>
                     <label for="">D2</label>
-                    <input type="text">
+                    <input type="date" id="cv_d2_hc" readonly>
                     <label for="">D3</label>
-                    <input type="text">
+                    <input type="date" id="cv_d3_hc" readonly>
                     <label for="">D4</label>
-                    <input type="text">                
+                    <input type="date" id="cv_d4_hc" readonly>                
                 </div>
             </div>
         </div>

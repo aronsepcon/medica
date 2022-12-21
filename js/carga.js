@@ -12,6 +12,7 @@ const $fecha__inicio__medex = document.getElementById("fecha__inicio__medex");
 const $fecha__final__medex = document.getElementById("fecha__final__medex");
 
 const $lista_subc = document.getElementById("lista_subc");
+const $nro__ruc = document.getElementById("nro__ruc");
 const $btnUpdateSubcontratas = document.getElementById("btnUpdateSubcontratas");
 const $fecha__inicio__subc = document.getElementById("fecha__inicio__subc");
 const $fecha__final__subc = document.getElementById("fecha__final__subc");
@@ -306,33 +307,54 @@ const getDataMedex = (tokenMedex) => {
         mostrarMensaje("Registros Actualizados: " + response.length,"msj_info");
         $modal__esperar.style.display = "none";
     });
-
 }
 
 const getDataSubContratas = (tokenMedex) => {
-    let ruc = $lista_subc.value;
-    let inicio_sc = $fecha__inicio__subc.value;
-    let final_sc = $fecha__final__subc.value;
-    let doc_sc = $nro__doc_subc.value == "" ? "-":$nro__doc_subc.value;//exigir q tenga un numero de dni si o si
-    let listaRuc = [];//testear pasar el array como una funcion y luego comparar 
+    let data = new FormData();
+    data.append("funcion","listaSubContratas");
+    fetch('../inc/consultasmedicas.inc.php',{
+        method: "POST",
+        body:data,
+    })
+    .then(  function(response){
+        return response.json();
+    })
+    .then(dataJson=>{
+        if(dataJson.respuesta){
+            let ruc = $lista_subc.value;
+            let num_ruc;
+            for(let row=0;row<dataJson.lista.length;row++){
+                if(dataJson.lista[row].id == ruc){
+                    $nro__ruc.value = dataJson.lista[row].ruc;
+                }
+            }
+            let inicio_sc = $fecha__inicio__subc.value;
+            let final_sc = $fecha__final__subc.value;
+            if( $nro__doc_subc.value==""){
+                mostrarMensaje("Ingrese el número de documento","msj_info");
+            } //exigir q tenga un numero de dni si o si
+        
+            let url = 'https://www.medex.com.pe/ApiCitas/api/ResultadoDigitalExt/GetBaseDatos/'+$nro__ruc.value+'/'+inicio_sc+'/'+final_sc+'/'+ $nro__doc_subc.value;
+            let token = "Bearer " + tokenMedex;
 
-    let url = 'https://www.medex.com.pe/ApiCitas/api/ResultadoDigitalExt/GetBaseDatos/'+listaRuc[ruc]+'/'+inicio_sc+'/'+final_sc+'/'+doc_sc;
-    let token = "Bearer " + tokenMedex;
+            fetch(url, {
+                method: 'GET',
+                headers:{
+                    'Authorization': token,
+                    'Content-Type': 'application/json'
+                  }
+            })
+            .then(res => res.json())
+            .catch(error => console.error('Error:', error))
+            .then(response => {
+                passDatatoMaster(response);
+                mostrarMensaje("Registros Actualizados: " + response.length,"msj_info");
+                $modal__esperar.style.display = "none";
+            });
 
-    fetch(url, {
-		method: 'GET',
-		headers:{
-	    	'Authorization': token,
-	    	'Content-Type': 'application/json'
-	  	}
-	})
-	.then(res => res.json())
-	.catch(error => console.error('Error:', error))
-	.then(response => {
-        passDatatoMaster(response);
-        mostrarMensaje("Registros Actualizados: " + response.length,"msj_info");
-        $modal__esperar.style.display = "none";
+        }
     });
+   
 }
 
 const passDatatoMaster = (ApiResult) => {
@@ -346,13 +368,4 @@ const passDatatoMaster = (ApiResult) => {
     })
 }
 
-const passDataSubContratas = (ApiResult) => {
-    let data = new FormData();
-                data.append("fichas",JSON.stringify(ApiResult));
-                
-    fetch('../inc/cargaApi.inc.php',{
-            method: "POST",
-            body:data,
-    })
-}
 

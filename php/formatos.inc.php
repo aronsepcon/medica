@@ -131,6 +131,11 @@
                         <th>Estado Nutricional</th>
                         <th>Espirometria</th>
                         <th>Ex. Rayos X</th>
+                        <th>Ex. Rayos X</th>
+                        <th>Ex. Rayos X</th>
+                        <th>Ex. Rayos X</th>
+                        <th>Ex. Rayos X</th>
+                        <th>Ex. Rayos X</th>
 
 
                     </tr>

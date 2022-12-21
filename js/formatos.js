@@ -63,9 +63,6 @@ $exportar.onclick = (e) => {
         }
     })
     //window.location.href = "";
-
-    
-    
 }
 
 $buscar.onclick = (e) =>{

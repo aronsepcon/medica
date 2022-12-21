@@ -106,23 +106,28 @@ const $btn__atencion__medica = document.getElementById('btn__atencion__medica');
 const $atencion__medica = document.getElementById('atencion__medica');
 const $actualizarReg = document.getElementById('actualizarReg');
 
+const $idreg_hc = document.getElementById('idreg');
 const $documento_hc = document.getElementById('documento_hc');
 const $telefono_hc = document.getElementById('telefono_hc');
 const $nombre_hc = document.getElementById('nombre_hc');
+const $empresa_hc = document.getElementById('empresa_hc');
 const $fecnac_hc = document.getElementById('fecnac_hc');
+const $fecha_hc = document.getElementById('fecha_hc');
+const $sgtefecha = document.getElementById('sgtefecha');
 const $area_hc = document.getElementById('area_hc');
 const $cargo_hc = document.getElementById('cargo_hc');
 const $ccostos_hc = document.getElementById('ccostos_hc');
 const $tipoExa_hc = document.getElementById('tipoExa_hc');
 const $clinica_hc = document.getElementById('clinica_hc');
 const $pase_hc = document.getElementById('pase_hc');
-const $actitud_hc = document.getElementById('actitud_hc');
+const $aptitud_hc = document.getElementById('actitud_hc');
 const $edad_hc = document.getElementById('edad_hc');
 const $peso_hc = document.getElementById('peso_hc');
 const $imc_hc = document.getElementById('imc_hc');
 const $sangre_hc = document.getElementById('sangre_hc');
 const $talla_hc = document.getElementById('talla_hc');
 const $sexo_hc = document.getElementById('sexo_hc');
+const $pEsfuerzo_hc = document.getElementById('pEsfuerzo_hc');
 const $alergias_hc = document.getElementById('alergias_hc');
 const $ant_psi_hc = document.getElementById('ant_psi_hc');
 const $estadoNut_hc = document.getElementById('estadoNut_hc');
@@ -153,6 +158,40 @@ const $toxic_hc = document.getElementById('toxic_hc');
 const $rcv_hc = document.getElementById('rcv_hc');
 const $leucocitos_hc = document.getElementById('leucocitos_hc');
 const $hepB_hc = document.getElementById('hepB_hc');
+const $diag_hc_1 = document.getElementById('diag_hc_1');
+const $diag_hc_2 = document.getElementById('diag_hc_2');
+const $diag_hc_3 = document.getElementById('diag_hc_3');
+const $diag_hc_4 = document.getElementById('diag_hc_4');
+const $diag_hc_5 = document.getElementById('diag_hc_5');
+const $diag_hc_6 = document.getElementById('diag_hc_6');
+const $fa_hc = document.getElementById('fa_hc');
+const $dt_d1_hc = document.getElementById('dt_d1_hc');
+const $dt_d2_hc = document.getElementById('dt_d2_hc');
+const $dt_d3_hc = document.getElementById('dt_d3_hc');
+const $dt_r1_hc = document.getElementById('dt_r1_hc');
+const $ha_d1_hc = document.getElementById('ha_d1_hc');
+const $ha_d2_hc = document.getElementById('ha_d2_hc');
+const $ha_r1_hc = document.getElementById('ha_r1_hc');
+const $hb_d1_hc = document.getElementById('hb_d1_hc');
+const $hb_d2_hc = document.getElementById('hb_d2_hc');
+const $hb_d3_hc = document.getElementById('hb_d3_hc');
+const $if_r1_hc = document.getElementById('if_r1_hc');
+const $if_r2_hc = document.getElementById('if_r2_hc');
+const $pm_d1_hc = document.getElementById('pm_d1_hc');
+const $tv_d1_hc = document.getElementById('tv_d1_hc');
+const $rb_d1_hc = document.getElementById('rb_d1_hc');
+const $rb_d2_hc = document.getElementById('rb_d2_hc');
+const $rb_d3_hc = document.getElementById('rb_d3_hc');
+const $rb_r1_hc = document.getElementById('rb_r1_hc');
+const $tf_r1_hc = document.getElementById('tf_r1_hc');
+const $tf_r2_hc = document.getElementById('tf_r2_hc');
+const $nm_r1_hc = document.getElementById('nm_r1_hc');
+const $nm_r2_hc = document.getElementById('nm_r2_hc');
+const $cv_d1_hc = document.getElementById('cv_d1_hc');
+const $cv_d2_hc = document.getElementById('cv_d2_hc');
+const $cv_d3_hc = document.getElementById('cv_d3_hc');
+const $cv_d4_hc = document.getElementById('cv_d4_hc');
+
 
 let registro = 0;
 
@@ -447,6 +486,7 @@ function listadoDni($e){
 $actualizarReg.onclick = (e) => {
     e.preventDefault();
     try {
+        let empresa = 0;
         let data = new FormData();
             data.append("cut",$numero__registro.value);
             data.append("empleado",$nombres__apellidos.value);
@@ -461,6 +501,7 @@ $actualizarReg.onclick = (e) => {
             data.append("estado",$estado__trabajador.value);
             data.append("direccion",$direccion__trabajador.value);
             data.append("telefono",$telefono__trabajador.value);
+            data.append("empresa",empresa);
             data.append("funcion","actualizarEmpleado");
         fetch('../inc/consultasmedicas.inc.php',{
             method: "POST",
@@ -631,15 +672,86 @@ $tabla__examenes_body.addEventListener("click", e=>{
             })
             .then(dataJson => {
                 if(dataJson.respuesta){
+                    $idreg_hc.value = dataJson.lista[0].id;
                     $documento_hc.value = dataJson.lista[0].dni;
                     $nombre_hc.value = dataJson.lista[0].nombres;
                     $telefono_hc.value = dataJson.lista[0].telefono;
                     $fecnac_hc.value = dataJson.lista[0].fecnac;
+                    $fecha_hc.value = dataJson.lista[0].fecha;
+                    $sgtefecha.value = dataJson.lista[0].sgtefecha;
                     $ccostos_hc.value = dataJson.lista[0].ccostos;
                     $cargo_hc.value = dataJson.lista[0].cargo;
                     $tipoExa_hc.value = dataJson.lista[0].tipo;
                     $clinica_hc.value = dataJson.lista[0].clinica;
                     $pase_hc.value = dataJson.lista[0].pase;
+                    $aptitud_hc.value = dataJson.lista[0].aptitud;
+                    $edad_hc.value = dataJson.lista[0].edad;
+                    $empresa_hc.value = dataJson.lista[0].empresa;
+                    $peso_hc.value = dataJson.lista[0].peso;
+                    $pEsfuerzo_hc.value = dataJson.lista[0].pEsfuerzo;
+                    $imc_hc.value = dataJson.lista[0].imc;
+                    $sangre_hc.value = dataJson.lista[0].sangre;
+                    $talla_hc.value = dataJson.lista[0].talla;
+                    $sexo_hc.value = dataJson.lista[0].sexo;
+                    $alergias_hc.value = dataJson.lista[0].alergias;
+                    $estadoNut_hc.value = dataJson.lista[0].estadoNutricional;
+                    $espiro_hc.value = dataJson.lista[0].espirometria;
+                    $evOftalmo_hc.value = dataJson.lista[0].oftalmologia;
+                    $evAudio_hc.value = dataJson.lista[0].audiometria;
+                    $evOsteo_hc.value = dataJson.lista[0].osteo;
+                    $exRayX_hc.value = dataJson.lista[0].rayosx;
+                    $exPsi_hc.value = dataJson.lista[0].psicologia;
+                    $gota_hc.value = dataJson.lista[0].gotaGruesa;
+                    $plaquetas_hc.value = dataJson.lista[0].plaquetas;
+                    $colesterol_hc.value = dataJson.lista[0].colesterol
+                    $hdl_hc.value = dataJson.lista[0].hdl;
+                    $ldl_hc.value = dataJson.lista[0].ldl;
+                    $triglic_hc.value = dataJson.lista[0].trigliceridos;
+                    $tgp_hc.value = dataJson.lista[0].tgp;
+                    $tgo_hc.value = dataJson.lista[0].tgo;
+                    $glucosa_hc.value = dataJson.lista[0].glucosa;
+                    $urea_hc.value = dataJson.lista[0].ureaSanguinea;
+                    $acUrico_hc.value = dataJson.lista[0].acidoUrico
+                    $creatinina_hc.value = dataJson.lista[0].creatinina;
+                    $vdrl_hc.value = dataJson.lista[0].vdrl;
+                    $rpr_hc.value = dataJson.lista[0].rpr;
+                    $leucocitos_hc.value = dataJson.lista[0].leucocitos;
+                    $hepB_hc.value = dataJson.lista[0].hepatitisB;
+                    $diag_hc_1.value = dataJson.lista[0].diagno1;
+                    $diag_hc_2.value = dataJson.lista[0].diagno2;
+                    $diag_hc_3.value = dataJson.lista[0].diagno3;
+                    $diag_hc_4.value = dataJson.lista[0].diagno4;
+                    $diag_hc_5.value = dataJson.lista[0].diagno5;
+                    $diag_hc_6.value = dataJson.lista[0].diagno6;
+                    $fa_hc.value = dataJson.lista[0].fechaFbrA;
+                    $dt_d1_hc.value = dataJson.lista[0].fechaDTD1;
+                    $dt_d2_hc.value = dataJson.lista[0].fechaDTD2;
+                    $dt_d3_hc.value = dataJson.lista[0].fechaDTD3;
+                    $dt_r1_hc.value = dataJson.lista[0].fechaDTR1;
+                    $ha_d1_hc.value = dataJson.lista[0].fechaHAD1;
+                    $ha_d2_hc.value = dataJson.lista[0].fechaHAD2;
+                    $ha_r1_hc.value = dataJson.lista[0].fechaHAR1;
+                    $hb_d1_hc.value = dataJson.lista[0].fechaHBD1;
+                    $hb_d2_hc.value = dataJson.lista[0].fechaHBD2;
+                    $hb_d3_hc.value = dataJson.lista[0].fechaHBD3;
+                    $if_r1_hc.value = dataJson.lista[0].fechaIFR1;
+                    $if_r2_hc.value = dataJson.lista[0].fechaIFR2;
+                    $pm_d1_hc.value = dataJson.lista[0].fechaPLD1;
+                    $tv_d1_hc.value = dataJson.lista[0].fechaTVD1;
+                    $rb_d1_hc.value = dataJson.lista[0].fechaRBD1;
+                    $rb_d2_hc.value = dataJson.lista[0].fechaRBD2;
+                    $rb_d3_hc.value = dataJson.lista[0].fechaRBD3;
+                    $rb_r1_hc.value = dataJson.lista[0].fechaRBR1;
+                    $tf_r1_hc.value = dataJson.lista[0].fechaTFR1;
+                    $tf_r2_hc.value = dataJson.lista[0].fechaTFR2;
+                    $nm_r1_hc.value = dataJson.lista[0].fechaNMR1;
+                    $nm_r1_hc.value = dataJson.lista[0].fechaNMR2;
+                    $cv_d1_hc.value = dataJson.lista[0].fechaCVD1;
+                    $cv_d2_hc.value = dataJson.lista[0].fechaCVD2;
+                    $cv_d3_hc.value = dataJson.lista[0].fechaCVD3;
+                    $cv_d4_hc.value = dataJson.lista[0].fechaCVD4;
+                    
+
                     fadeIn($historia_clinica);
                 }
             })

@@ -41,6 +41,7 @@
                 </form>
                 <h3>Subcontratas API</h3>
                 <form action="" id="subcontratasForm">
+                    <input type="text" id="nro__ruc" class="oculto">
                     <label for="">RUC</label>
                     <select name="" id="lista_subc">
                         <option value="1">AISLASISTEMAS SAC</option>
@@ -56,12 +57,11 @@
                         <option value="11">HUERTA MINING SERVICE SAC</option>
                         <option value="12">IMARK SOLUCIONES INTEGRALES SAC</option>
                         <option value="13">AISLASISTEMAS.SAC</option>
-
                     </select>
                     <label for="fecha__inicio__subc">Fecha Inicio</label>
-                    <input type="date" name="fecha__inicio__subc" id="fecha__inicio__subc" value="">
+                    <input type="date" name="fecha__inicio__subc" id="fecha__inicio__subc" value="<?php echo date('Y-m-d')?>">
                     <label for="fecha__final__subc">Fecha Final</label>
-                    <input type="date" name="fecha__final__subc" id="fecha__final__subc" value="">
+                    <input type="date" name="fecha__final__subc" id="fecha__final__subc" value="<?php echo date('Y-m-d')?>">
                     <label for="nro__doc_subc">N°. Documento</label>
                     <input type="text" name="nro__doc_subc" id="nro__doc_subc">
                     <input type="submit" value="ActualizarSC" id="btnUpdateSubcontratas">

@@ -62,11 +62,14 @@
                                                 $_POST['ccostos'],$_POST['edad'],
                                                 $_POST['sede'],$_POST['sexo'],
                                                 $_POST['fecnac'],$_POST['estado'],
-                                                $_POST['direccion'],$_POST['telefono']));
+                                                $_POST['direccion'],$_POST['telefono'],$_POST['empresa']));
         }else if($_POST['funcion'] == "datosEmpleados"){
             echo json_encode(datosEmpleados($pdo,$_POST['doc']));
         }else if($_POST['funcion'] == "historiaClinica"){
             echo json_encode(historiaClinica($pdo,$_POST['documento'],$_POST['id']));
+        }
+        else if($_POST['funcion'] == "listaSubContratas"){
+            echo json_encode(listaSubContratas($pdo));
         }
     }
 
@@ -828,17 +831,17 @@
     }
 
     function actualizarEmpleado($pdo,$cut,$empleado,$correo,$dni,$cargo,
-        $ccostos,$edad,$sede,$sexo,$fecnac,$estado,$direccion,$telefono){
+        $ccostos,$edad,$sede,$sexo,$fecnac,$estado,$direccion,$telefono,$empresa){
             try {
                 $sql = "INSERT INTO fichas_empleados SET cut=?,empleadonomb=?,correo=?,dni=?,cargo=?,
-                    	    ccostos=?,edad=?,sede=?,sexo=?,fecnac=?,estado=?,direccion=?,telefono=?	
+                    	    ccostos=?,edad=?,sede=?,sexo=?,fecnac=?,estado=?,direccion=?,telefono=?,empresa=?
                         ON DUPLICATE KEY UPDATE empleadonomb=?,correo=?,cargo=?,ccostos=?,edad=?,sede=?,
-                            sexo=?,fecnac=?,estado=?,direccion=?,telefono=?";
+                            sexo=?,fecnac=?,estado=?,direccion=?,telefono=?,empresa=?";
                 $statement = $pdo->prepare($sql);
                 $statement ->execute(array($cut,$empleado,$correo,$dni,$cargo,$ccostos,$edad,$sede,
-                                        $sexo,$fecnac,$estado,$direccion,$telefono,$empleado,$correo,
+                                        $sexo,$fecnac,$estado,$direccion,$telefono,$empresa,$empleado,$correo,
                                         $cargo,$ccostos,$edad,$sede,$sexo,$fecnac,$estado,$direccion,
-                                        $telefono));
+                                        $telefono,$empresa));
                 $respuesta = array("respuesta"  => true,
                                     "clase"     =>"msj_correct",
                                     "error"     =>"no hay error", );
@@ -867,7 +870,8 @@
                         fichas_empleados.estado,
                         fichas_empleados.direccion,
                         fichas_empleados.edad,
-                        fichas_empleados.telefono
+                        fichas_empleados.telefono,
+                        fichas_empleados.empresa
                     FROM 
                         fichas_empleados
                     WHERE
@@ -892,6 +896,7 @@
                                     "direccion"=>$row['direccion'],
                                     "edad"=>$row['edad'],
                                     "telefono"=>$row['telefono'],
+                                    "empresa"=>$row['empresa']
                                 );
                     array_push($lista,$salida);
                 }
@@ -928,7 +933,7 @@
                         fa.creatinina,fa.cristales,fa.cuerposCetonicos,fa.dermatologia,fa.desAseg,
                         fa.diagno1,fa.diagno2,fa.diagno3,fa.diagno4,fa.diagno5,
                         fa.diagno7,fa.diagno6,fa.diagno8,fa.diagno9,fa.diagno10,
-                        fa.eAspecto,fa.eColor,fa.eConsistencia,fa.eMucus,
+                        fa.eAspecto,fa.eColor,fa.eConsistencia,fa.eMucus,DATE_ADD(fa.fecha,INTERVAL 1 YEAR) AS sgtefecha,
                         fa.ecoAbdominal,fa.edad,fa.ekg,fa.empresa,fa.espirometria,
                         fa.estado,fa.estadoNutricional,fa.expoFactorRiesgo,fa.fecNaci,fa.fecPase,
                         fa.fecha,fa.filamentoMucoide,fa.fosfaAlca,fa.germenes,fa.ginecologia,
@@ -1057,7 +1062,7 @@
                                     "fecNaci"=>$row['fecNaci'],
                                     "fecPase"=>$row['fecPase'],
                                     "fecha"=>date("d/m/Y", strtotime($row['fecha'])),
-
+                                    "sgtefecha"=>date("d/m/Y", strtotime($row['sgtefecha'])),
                                     "filamentoMucoide"=>$row['filamentoMucoide'],
                                     "fosfaAlca"=>$row['fosfaAlca'],
                                     "germenes"=>$row['germenes'],
@@ -1200,6 +1205,37 @@
                 $respuesta = false;
             }
 
+            $salida = array("respuesta"=>$respuesta,
+                            "lista" => $lista);
+
+            return $salida; 
+        } catch(PDOException $th) {
+            echo $th->getMessage();
+            return false;
+        }
+    }
+
+    function listaSubContratas($pdo){
+        try {
+            $respuesta = false;
+            $lista = [];
+            $sql = "SELECT id,ruc,nombre FROM `empresas_terceros`";
+            $statement = $pdo->prepare($sql);
+            $statement ->execute();
+            $result = $statement ->fetchAll();
+            $rowCount = $statement -> rowcount();
+
+            if ($rowCount > 0) {
+                foreach($result as $row) {
+                    $salida = array("id"=>$row['id'],
+                                    "ruc"=>$row['ruc'],
+                                    );
+                array_push($lista,$salida);
+                }  
+                $respuesta = true;
+            }else{
+                $respuesta = false;
+            }
             $salida = array("respuesta"=>$respuesta,
                             "lista" => $lista);
 

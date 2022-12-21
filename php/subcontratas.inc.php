@@ -18,10 +18,10 @@
     <title>Document</title>
 </head>
 <body>
-<form class="historias__cuerpo__busqueda" action="../inc/cargarHistoriaMedica.inc.php" method="post"> 
+<form class="historias__cuerpo__busqueda"> 
         <input type="text" id="documento_trabajador_sc" name="documento_trabajador" placeholder="Documento de Identificación" value="42081842">
         <div>
-            <a href="#" id="busqueda_boton"><i class="fas fa-search" ></i></a>
+            <a href="#" id="busqueda_boton_sc"><i class="fas fa-search" ></i></a>
         </div>
     </form>
 <section class="wrap">
@@ -67,7 +67,21 @@
                                 <label for="telefono__trabajador_sc">Telefono :</label>
                                 <input type="text" name="telefono__trabajador_sc" id="telefono__trabajador_sc">
                                 <label for="empresa__trabajador_sc">Empresa :</label>
-                                <input type="text" name="empresa__trabajador_sc">
+                                <select name="" id="empresa__trabajador_sc">
+                                    <option value="1">AISLASISTEMAS SAC</option>
+                                    <option value="2">ALERCOGE SAC</option>
+                                    <option value="3">ASEC PERU SAC</option>
+                                    <option value="4">ATLAS COPCO PERU SAC</option>
+                                    <option value="5">CATHODIC PROTECTION OF PERU SAC</option>
+                                    <option value="6">CERTIFICACIONES Y CALIBRACIONES SAC</option>
+                                    <option value="7">EMMERSON PROCESS MANAGEMENT DEL PERU SAC</option>
+                                    <option value="8">FIMA MONTAJES SAC</option>
+                                    <option value="9">FIMA SA</option>
+                                    <option value="10">GERDIPAC INDUSTRIAL EIRL</option>
+                                    <option value="11">HUERTA MINING SERVICE SAC</option>
+                                    <option value="12">IMARK SOLUCIONES INTEGRALES SAC</option>
+                                    <option value="13">AISLASISTEMAS.SAC</option>
+                                </select>
                             </div> 
                             <button type="button" id="actualizarSubcontratas">Actualizar</button>
                         </div>
@@ -101,7 +115,7 @@
                             <th width="6%">Cargar</th>
                         </tr>
                     </thead>
-                    <tbody class="tabla__examenes_body" id="tabla__examenes_body">
+                    <tbody class="tabla__examenes_body" id="tabla__examenes_body_sc">
                     </tbody>
                     
                 </table>
