@@ -1266,7 +1266,7 @@
                     left join `medica`.`lista_clinicas` `lc` on(`lc`.`id` = `fa`.`clinica`)
                     left join fichas_empleados AS f ON f.dni = fa.dni
                     LEFT JOIN fichas_vacunacion AS v ON fa.dni=v.dni
-                    where (`fa`.`tipoExa` like '%PREOCUPACIONAL' or `fa`.`tipoExa` like '%EMPO') AND fe.ccostos LIKE '0300%' AND fe.dni IS NOT NULL GROUP BY dni ORDER BY empleadonomb";
+                    where (`fa`.`tipoExa` like '%PREOCUPACIONAL' or `fa`.`tipoExa` like '%EMPO') AND fe.ccostos LIKE '0200%' AND fe.dni IS NOT NULL GROUP BY dni ORDER BY empleadonomb";
             $statement = $pdo->prepare($sql);
             $statement ->execute();
             $result = $statement ->fetchAll();
@@ -1332,6 +1332,72 @@
         }
     }
 
+    function retornoPeriodico($pdo){
+        try {
+            $respuesta = false;
+            $lista = [];
+            $sql = "SELECT fa.dni, fa.fecha, lc.nomb_clinica, fa.aptitud, fa.peso, fa.talla, fa.imc, fa.estadoNutricional, fa.enviado 
+                    FROM `fichas_api` AS fa 
+                    LEFT JOIN lista_clinicas as lc on lc.id = fa.clinica
+                    RIGHT JOIN rrhh.tabla_aquarius AS f ON f.dni = fa.dni
+                    WHERE (fa.tipoExa LIKE '%PERIODICO' OR fa.tipoExa LIKE '%EMOA') AND f.ccostos LIKE '0200%'
+                    ORDER BY fa.dni,fa.fecha ASC";
+            $statement = $pdo->prepare($sql);//ORDER BY DATE ASC
+            $statement ->execute();
+            $result = $statement ->fetchAll();
+            $rowCount = $statement -> rowcount();
+            if ($rowCount > 0) {
+                foreach($result as $row) {
+                    $lista[] = array(
+                        "dni"=>$row['dni'],
+                        "fechap"=>date("d/m/Y", strtotime($row['fecha'])),
+                        "nomb_clinica"=>$row['nomb_clinica'],
+                        "aptitud"=>$row['aptitud'],
+                        "peso"=>$row['peso'],
+                        "talla"=>$row['talla'],
+                        "imc"=>$row['imc'],
+                        "estadoNutricional"=>$row['estadoNutricional'],
+                        "enviado"=>$row['enviado']
+                    );
+                }
+            }
+            return $lista;
+        } catch(PDOException $th) {
+            echo $th->getMessage();
+            return false;
+        }
+    }
+
+    function unionPeriodico($pdo){
+        try {
+            $lista = []; 
+            $a = retornoBase($pdo);
+            $na = count($a);
+            $d = retornoPeriodico($pdo);
+            $nd = count($d);
+            $r=0;
+            for($g=0;$g<$na;$g++){
+                for($p=0;$p<$nd;$p++){
+                    for($z=0;$z<5;$z++){}
+                    $fechap1 = $a[$g]['dni']==$d[$p]['dni'] ? $d[$p]['fechap'] : "";
+                        //$fechap1 = ;
+                    
+                    $salida= array(
+                       // "fecha" => $test,
+                       "dni"=>$a[$g]['dni'],
+                       "fechap"=> $fechap1
+                    );
+                    array_push($lista,$salida);
+
+                }
+            }
+            return $salida;
+        } catch(PDOException $th) {
+            echo $th->getMessage();
+            return false;
+        }
+    }
+
     function retornoRetiro($pdo){
         try {
             $respuesta = false;
@@ -1340,7 +1406,7 @@
                     FROM `fichas_api` AS vrr
                     LEFT JOIN lista_clinicas AS lc ON lc.id = vrr.clinica
                     RIGHT JOIN rrhh.tabla_aquarius AS f ON f.dni = vrr.dni
-                    WHERE vrr.tipoExa='RETIRO' AND vrr.centroCosto LIKE '0300%' GROUP BY f.dni";
+                    WHERE vrr.tipoExa='RETIRO' AND vrr.centroCosto LIKE '0200%' GROUP BY f.dni";
             $statement = $pdo->prepare($sql);
             $statement ->execute();
             $result = $statement ->fetchAll();
@@ -1369,7 +1435,9 @@
             $respuesta = false;
             $lista = [];
             $a=retornoBase($pdo);
-            $b=retornoRetiro($pdo);
+            $b=retornoRetiro($pdo); 
+            $d=retornoPeriodico($pdo);
+            $f= unionPeriodico($pdo);
             $na = count($a);
             $nb = count($b);
             $c = 0; 
@@ -1403,7 +1471,7 @@
                             "imc"=>$a[$m]['imc'],
                             "estadoNutricional"=>$a[$m]['estadoNutricional'],
                             "enviado"=>$a[$m]['enviado'],
-                            "programadopre"=>date("d/m/Y", strtotime($a[$m]['programadopre'])),
+                            "programadopre"=>$a[$m]['programadopre'],
                             "retiro" =>$fecha_r,
                             "clinica_r"=>$clinica_r,
                             "observ_r" =>$observ_r,
@@ -1445,7 +1513,7 @@
             }
             $salida = array("respuesta"=>$respuesta,
                                 "lista" => $lista,
-                                "DB" => $a);
+                                "DB" => $f);
     
                 return $salida; 
         }catch(PDOException $th) {

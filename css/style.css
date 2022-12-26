@@ -192,6 +192,7 @@ iframe {
   grid-template-columns: repeat(4, 0.2fr 0.7fr);
   -ms-grid-rows: 2rem;
   grid-template-rows: 2rem;
+  row-gap: 8px;
   -webkit-column-gap: 10px;
      -moz-column-gap: 10px;
           column-gap: 8px;
@@ -1243,3 +1244,24 @@ input[name = "filtrado"]{
 #label_ac{
   margin-left: 20px;
 }
+
+.lista_vacunas{
+  display: grid;
+}
+
+.separacion{
+  display: grid;
+  grid-template-columns:0.053fr 0.186fr 0.053fr 0.189fr 0.35fr;
+  column-gap: 8px;
+
+}
+
+.hepb_sep{
+  margin-top: 8px;
+}
+/*
+.pase_grid{
+  display: grid;
+  grid-template-columns: 0.22fr 0.45fr;
+  grid-template-rows: 10px;
+}*/
