@@ -64,7 +64,7 @@
                     <input type="date" name="fecha__final__subc" id="fecha__final__subc" value="<?php echo date('Y-m-d')?>">
                     <label for="nro__doc_subc">N°. Documento</label>
                     <input type="text" name="nro__doc_subc" id="nro__doc_subc">
-                    <input type="submit" value="ActualizarSC" id="btnUpdateSubcontratas">
+                    <input type="submit" value="Actualizar" id="btnUpdateSubcontratas">
                 </form>
                 <h2>Excel</h2>
                 <form action="" id="formUpload">

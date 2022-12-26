@@ -3,11 +3,14 @@ import {fadeIn} from "./funciones.js";
 import {fadeOut} from "./funciones.js";
 import {validar} from "./funciones.js";
 
+const $probar = document.getElementById("probar");
 const $exportar = document.getElementById("exportar");
 const $tabla = document.getElementById("tabla");
 const $formato = document.getElementById("formato");
 const $ccostos = document.getElementById("ccostos");
 const $dni_formato = document.getElementById("dni_formato");
+const $activo_sc = document.getElementById("activo_sc");
+const $cesado_sc = document.getElementById("cesado_sc");
 const $descarga_formato = document.getElementById("descarga_formato");
 const $buscar = document.getElementById("buscar");
 const $tabla_formato_006 = document.getElementById("tabla_formato_006");
@@ -33,7 +36,11 @@ $formato.onchange = (e) => {
 
 $exportar.onclick = (e) => {
     e.preventDefault();
-
+    
+    if(($activo_sc.checked==false && $cesado_sc.checked ==false) || ($activo_sc.checked==true && $cesado_sc.checked ==true)){
+        mostrarMensaje("Elegir entre Activos o Cesados","msj_error");
+        throw "opciones";
+    }
     let data = new FormData();
     //    data.append("funcion","formato");
   /* if($ccostos==0){
@@ -45,7 +52,11 @@ $exportar.onclick = (e) => {
     }*/
 
     if($formato.value==0){
+        let activo = $activo_sc.checked == true ? 1 : 0;
+        let cesado = $cesado_sc.checked == true ? 1 : 0;
         let dni = $dni_formato.value == "" ? null : $dni_formato.value;
+        data.append("activo",activo);
+        data.append("cesado",cesado);
         data.append("dni",dni);
         data.append("funcion","formato_001");
     }
@@ -61,29 +72,58 @@ $exportar.onclick = (e) => {
         if(response.status==200){
             if($formato.value==0){
                 $descarga_formato.href = "../formatos/Formato 001.xlsx";
-                $descarga_formato.download = "PSPC-120-X-PR-001-FR-001_0 Registro de Evaluaciones Ocupacionales";
+                $descarga_formato.download = "PSPC-120-X-PR-001-FR-001_0 Registro de Evaluaciones Ocupacionales";  
             }
             else if($formato.value==1){
                 $descarga_formato.href = "../formatos/Formato 006.xlsx";
                 $descarga_formato.download = "PSPC-120-X-PR-001-FR-006_1 Control de EMOs y Esq  de Vacunación";
             }
-            $descarga_formato.click();
+            setTimeout(()=>{
+                $descarga_formato.click();
+            },3000);//testear la cantidad de tiempo
         }
         else{
             mostrarMensaje("Hubo un problema","msj_error");
         }
     })
     //window.location.href = "";
+}    
+
+$probar.onclick = (e) =>{
+    e.preventDefault();
+
+    let data = new FormData();
+    data.append("funcion","union006");
+    fetch('../inc/consultasvistas.inc.php',{
+        method: "POST",
+        body:data,
+    })
+    .then(function(response){
+        return response.json();
+    })
+    .then(dataJson => {
+        if(dataJson.respuesta){
+            console.log(dataJson.lista);
+        }
+    })
 }
 
 $buscar.onclick = (e) =>{
     e.preventDefault();
+    if(($activo_sc.checked==false && $cesado_sc.checked ==false) || ($activo_sc.checked==true && $cesado_sc.checked ==true)){
+        mostrarMensaje("Elegir entre Activos o Cesados","msj_error");
+        throw "opciones";
+    }
 
     let formData = new FormData();
     formData.append("ccostos",$ccostos.value);
     if($formato.value==0){
         let dni = $dni_formato.value == "" ? null : $dni_formato.value;
+        let activo = $activo_sc.checked == true ? 1 : 0;
+        let cesado = $cesado_sc.checked == true ? 1 : 0;
         formData.append("dni",dni);
+        formData.append("activo",activo);
+        formData.append("cesado",cesado);
         formData.append("funcion","formatoTablas001");
         fetch('../inc/consultasvistas.inc.php',{
             method: "POST",
@@ -96,7 +136,6 @@ $buscar.onclick = (e) =>{
             if(dataJson.respuesta){
                 $tabla_formato_001.innerHTML="";
                 for(let index =0;index < dataJson.lista.length;index++){
-                    console.log(dataJson.lista[index].fechaDTD3);
                     let tr = document.createElement("tr");
                     let $DTD3 = dataJson.lista[index].fechaDTD3 == null ? "" : dataJson.lista[index].fechaDifTD3;
                     tr.innerHTML = `<td>${index+1}</td>

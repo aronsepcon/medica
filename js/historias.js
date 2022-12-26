@@ -428,10 +428,10 @@ function listadoDni($e){
             if(dataJson.existe){
 
                 let fec_nac= new Date(dataJson.datos[0].nacimiento.slice(0,10)).getTime();
-                    let diff_mes = Date.now()-fec_nac;
-                    let edad1 = new Date(diff_mes);
-                    let año = edad1.getUTCFullYear();
-                    let edad = Math.abs(año-1970);
+                let diff_mes = Date.now()-fec_nac;
+                let edad1 = new Date(diff_mes);
+                let año = edad1.getUTCFullYear();
+                let edad = Math.abs(año-1970);
                 
                 $nombres_trabajador.value =  dataJson.datos[0].paterno+" "+dataJson.datos[0].materno+" "+dataJson.datos[0].nombres;
 

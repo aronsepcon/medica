@@ -218,6 +218,11 @@ const $empresa__trabajador_sc = document.getElementById('empresa__trabajador_sc'
         e.preventDefault();
         try {
             console.log($empresa__trabajador_sc.value);
+            let fec_nac= new Date($fecha__nacimiento_sc.value.slice(0,10)).getTime();
+            let diff_mes = Date.now()-fec_nac;
+            let edad1 = new Date(diff_mes);
+            let año = edad1.getUTCFullYear();
+            let edad = Math.abs(año-1970);
             let data = new FormData();
                 data.append("cut",$numero__registro_sc.value);
                 data.append("empleado",$nombres__apellidos_sc.value);
@@ -225,7 +230,7 @@ const $empresa__trabajador_sc = document.getElementById('empresa__trabajador_sc'
                 data.append("dni",$documento__identidad_sc.value);
                 data.append("cargo",$cargo__trabajador_sc.value);
                 data.append("ccostos",$centro_costos_sc.value);
-                data.append("edad",$edad__trabajador_sc.value);
+                data.append("edad",edad);
                 data.append("sede",$sede__trabajador_sc.value);
                 data.append("sexo",$sexo__trabajador_sc.value);
                 data.append("fecnac",$fecha__nacimiento_sc.value);

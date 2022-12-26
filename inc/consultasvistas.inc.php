@@ -11,9 +11,11 @@
             echo json_encode(formato_006($pdo));
         }
         else if($_POST['funcion']=="formato_001"){
-            echo json_encode(formato_001($pdo,$_POST['dni']));
+            echo json_encode(formato_001($pdo,$_POST['dni'],$_POST['activo'],$_POST['cesado']));
         }else if($_POST['funcion']=="formatoTablas001"){
-            echo json_encode(formatoTablas001($pdo,$_POST['ccostos'],$_POST['dni']));
+            echo json_encode(formatoTablas001($pdo,$_POST['ccostos'],$_POST['dni'],$_POST['activo'],$_POST['cesado']));
+        }else if($_POST['funcion']=="union006"){
+            echo json_encode(union006($pdo));
         }
     }
 
@@ -333,11 +335,11 @@
         }
     }
     
-    function formato_001($pdo,$dni){
+    function formato_001($pdo,$dni,$activo,$cesado){
         $spreadsheet = new Spreadsheet();
         $spreadsheet->setActiveSheetIndex(0);
         $spreadsheet->getActiveSheet()->setTitle("ACTIVOS LIMA");
-        
+        /*     
         $spreadsheet->createSheet();
         $spreadsheet->setActiveSheetIndex(1);
         $spreadsheet->getActiveSheet()->setTitle("ACTIVOS LURIN");
@@ -345,9 +347,8 @@
         $spreadsheet->createSheet();
         $spreadsheet->setActiveSheetIndex(2);
         $spreadsheet->getActiveSheet()->setTitle("ACTIVOS PUCALLPA");
-
-        for($k=0;$k<=2;$k++){
-            $spreadsheet->setActiveSheetIndex($k);
+        */
+            $spreadsheet->setActiveSheetIndex(0);
             $spreadsheet->getActiveSheet()->setCellValue("A5","N°");
             $spreadsheet->getActiveSheet()->setCellValue("B5","AÑO");
             $spreadsheet->getActiveSheet()->setCellValue("C5","N° HC");
@@ -586,12 +587,18 @@
             $spreadsheet->getActiveSheet()->mergeCells("DH5:DH7");
 
             $centrosAdm = ["0200","0600","0300"];
+            if($activo==1){
+                $estado = "AC";
+            }
+            elseif ($cesado == 1) {
+                $estado = "CE";
+            }
             $r = 1;
             $fila = 8;
-            $n = formato001($pdo,$centrosAdm[$k],$dni);
+            $n = formato001($pdo,$centrosAdm[0],$dni,$estado);
             $nc = count($n);
 
-            for($m=0;$m<=2;$m++){
+            for($m=0;$m<=$nc;$m++){
                 $spreadsheet->getActiveSheet()-> setCellValue('A'.$fila,$r);
                 $spreadsheet->getActiveSheet()-> setCellValue('C'.$fila,$n[$m]['id']);
                 $spreadsheet->getActiveSheet()-> setCellValue('D'.$fila,$n[$m]['dni']);
@@ -675,7 +682,7 @@
                 $fila++;
                 $r++;
             }
-        }
+        
         $writer = new Xlsx($spreadsheet); 
         $writer->save('../formatos/Formato 001.xlsx');
     
@@ -708,7 +715,7 @@
                     left join `medica`.`fichas_api` `vrr` on(`vrr`.`idreg` = `fa`.`idreg`)) 
                     left join `medica`.`fichas_vacunacion` `fv` on(`fv`.`dni` = `fa`.`dni`)) 
                     left join `medica`.`lista_clinicas` `lc` on(`lc`.`id` = `fa`.`clinica`)) 
-                    where (`fa`.`tipoExa` like '%PREOCUPACIONAL' or `fa`.`tipoExa` like '%EMPO' OR `vrp1`.tipoExa LIKE '%PERIODICO' OR vrr.tipoExa LIKE '%RETIRO') AND ccostos LIKE '$ccostos%' GROUP BY dni;";             
+                    where (`fa`.`tipoExa` like '%PREOCUPACIONAL' or `fa`.`tipoExa` like '%EMPO' OR `vrp1`.tipoExa LIKE '%PERIODICO' OR vrr.tipoExa LIKE '%RETIRO') AND ccostos LIKE '$ccostos%' GROUP BY dni";             
             $statement = $pdo->prepare($sql);
             $statement ->execute();
             $result = $statement ->fetchAll();
@@ -809,11 +816,11 @@
         }
     }
 
-    function formato001($pdo,$ccostos,$dni){
+    function formato001($pdo,$ccostos,$dni,$estado){
         try{
             $lista = [];
-            $sql ="SELECT fe.cut,fe.empleadonomb,fe.correo,fe.dni,fe.cargo,fe.ccostos,
-                        fe.edad,fe.sede,fe.sexo,fe.fecnac,fe.estado,fe.direccion,fe.telefono,
+            $sql ="SELECT fe.cut,fa.paciente AS empleadonomb,fe.correo,fe.dni,fe.dcargo AS cargo,fe.dcostos AS ccostos,f.direccion,f.telefono,
+                        fa.edad,fe.dsede AS sede,fa.codSexo AS sexo,fa.fecNaci AS fecnac,fe.estado,
                         fa.idreg,fa.acidoUrico,fa.aglutinaciones,fa.alergias,fa.anfetaminas,fa.antFamiliares,
                         fa.antece1,fa.antece2,fa.antece3,fa.antece4,fa.antece5,
                         fa.antece6,fa.aptitud,fa.atencion,fa.audiometria,fa.benceno,
@@ -829,7 +836,7 @@
                         fa.eAspecto,fa.eColor,fa.eConsistencia,fa.eMucus,DATE_ADD(fa.fecha,INTERVAL 1 YEAR) AS sgtefecha,
                         fa.ecoAbdominal,fa.edad,fa.ekg,fa.empresa,fa.espirometria,
                         fa.estado,fa.estadoNutricional,fa.expoFactorRiesgo,fa.fecNaci,fa.fecPase,
-                        fa.fecha,fa.filamentoMucoide,fa.fosfaAlca,fa.germenes,fa.ginecologia,
+                        MAX(fa.fecha) AS fecha,fa.filamentoMucoide,fa.fosfaAlca,fa.germenes,fa.ginecologia,
                         fa.glucosa,fa.gotaGruesa,fa.grasaCorporal,fa.grupoSangre,fa.habiAfisica,
                         fa.habiTabaco,fa.hcvHepatitisC,fa.hdl,fa.hematies,fa.hematiesHece,
                         fa.hematocrito,fa.hemoGlico,fa.hemoglobina,fa.hepatitisA,fa.hepatitisB,
@@ -856,10 +863,11 @@
                         v.fechaRabR1,v.fechaTifoR1,v.fechaTifoR2,v.fechaNeumR1,v.fechaNeumR2,v.fechaCovidD1,
                         v.fechaCovidD2,v.fechaCovidD3,v.fechaCovidD4
                     FROM fichas_api AS fa
-                    LEFT JOIN fichas_empleados AS fe ON fa.dni=fe.dni
+                    LEFT JOIN rrhh.tabla_aquarius AS fe ON fa.dni=fe.dni
+                    LEFT JOIN fichas_empleados AS f ON fa.dni = f.dni
                     LEFT JOIN fichas_vacunacion AS v ON fa.dni=v.dni
                     LEFT JOIN lista_clinicas AS lc ON lc.id = fa.clinica
-                    WHERE (fa.dni=? OR NOT EXISTS(SELECT idreg FROM fichas_api fa4 WHERE fa4.dni=?)) AND fe.ccostos like '$ccostos%'";
+                    WHERE (fa.dni=? OR NOT EXISTS(SELECT idreg FROM fichas_api fa4 WHERE fa4.dni=?)) AND fe.ccostos LIKE '$ccostos%' AND fe.estado='$estado' GROUP BY fe.dni ORDER BY fa.paciente";  
             $statement = $pdo->prepare($sql);
             $statement ->execute(array($dni,$dni));
             $result = $statement ->fetchAll();
@@ -1240,13 +1248,226 @@
         
     }
 
-    function formatoTablas001($pdo,$ccostos,$dni){
+    function retornoBase($pdo){
+        try{
+            $respuesta = false;
+            $lista = [];
+            $sql = "SELECT `fa`.`paciente` AS `empleadonomb`,`fa`.`fecNaci` AS `fecnac`,`fe`.`dni` AS `dni`,`fa`.`edad` AS `edad`,`fe`.`ccostos` AS `ccostos`, fa.tipoExa,
+                    `fe`.`dcargo` AS `cargo`,`fe`.`correo` AS `correo`,`f`.`telefono` AS `telefono`,`fa`.`grupoSangre` AS `grupoSangre`,`fa`.`alergias` AS `alergias`,
+                    MAX(`fa`.`fecha`) AS `fecha`,`lc`.`nomb_clinica` AS `nomb_clinica`,`fa`.`aptitud` AS `aptitud`,`fa`.`peso` AS `peso`,`fa`.`talla` AS `talla`,`fa`.`imc` AS `imc`,
+                    `fa`.`estadoNutricional` AS `estadoNutricional`,`fa`.`enviado` AS `enviado`,DATE_ADD(`fa`.`fecha`,interval 1 year) AS `programadopre`,
+                    v.fechaFbrAmarilla,v.fechaDifTD1,v.fechaDifTD2,v.fechaDifTD3,v.fechaDifTR1,v.fechaHepAD1,
+                    v.fechaHepAD2,v.fechaHepAR1,v.fechaHepBD1,v.fechaHepBD2,v.fechaHepBD3,v.fechaInflR1,
+                    v.fechaInflR2,v.fechaPolioD1,v.fechaTrivD1,v.fechaRabD1,v.fechaRabD2,v.fechaRabD3,
+                    v.fechaRabR1,v.fechaTifoR1,v.fechaTifoR2,v.fechaNeumR1,v.fechaNeumR2,v.fechaCovidD1,
+                    v.fechaCovidD2,v.fechaCovidD3,v.fechaCovidD4
+                    from `medica`.`fichas_api` `fa` 
+                    CROSS join `rrhh`.`tabla_aquarius` `fe` on(`fa`.`dni` = `fe`.`dni`)
+                    left join `medica`.`lista_clinicas` `lc` on(`lc`.`id` = `fa`.`clinica`)
+                    left join fichas_empleados AS f ON f.dni = fa.dni
+                    LEFT JOIN fichas_vacunacion AS v ON fa.dni=v.dni
+                    where (`fa`.`tipoExa` like '%PREOCUPACIONAL' or `fa`.`tipoExa` like '%EMPO') AND fe.ccostos LIKE '0300%' AND fe.dni IS NOT NULL GROUP BY dni ORDER BY empleadonomb";
+            $statement = $pdo->prepare($sql);
+            $statement ->execute();
+            $result = $statement ->fetchAll();
+            $rowCount = $statement -> rowcount();
+
+            if ($rowCount > 0) {
+                foreach($result as $row) {
+                    $lista[]= array(
+                        "empleadonomb"=>$row['empleadonomb'],
+                        "fecnac"=> date("d/m/Y", strtotime($row['fecnac'])),
+                        "dni"=>$row['dni'],
+                        "edad"=> $row['edad'],
+                        "ccostos"=>$row['ccostos'],
+                        "cargo"=>$row['cargo'],
+                        "empresa"=>"SEPCON",
+                        "correo"=>$row['correo'],
+                        "telefono"=>$row['telefono'],
+                        "grupoSangre"=>$row['grupoSangre'],
+                        "alergias"=>$row['alergias'],
+                        "fecha"=>date("d/m/Y", strtotime($row['fecha'])),
+                        "nomb_clinica"=>$row['nomb_clinica'],
+                        "aptitud"=>$row['aptitud'],
+                        "peso"=>$row['peso'],
+                        "talla"=>$row['talla'],
+                        "imc"=>$row['imc'],
+                        "estadoNutricional"=>$row['estadoNutricional'],
+                        "enviado"=>$row['enviado'],
+                        "programadopre"=>date("d/m/Y", strtotime($row['programadopre'])),
+                        "fechaFbrAmarilla"=>date("d/m/Y", strtotime($row['fechaFbrAmarilla'])),
+                        "fechaDifTD1"=>date("d/m/Y", strtotime($row['fechaDifTD1'])),
+                        "fechaDifTD2"=>date("d/m/Y", strtotime($row['fechaDifTD2'])),
+                        "fechaDifTD3"=>date("d/m/Y", strtotime($row['fechaDifTD3'])),
+                        "fechaDifTR1"=> date("d/m/Y", strtotime($row['fechaDifTR1'])),                        
+                        "fechaHepAD1"=>date("d/m/Y", strtotime($row['fechaHepAD1'])),   
+                        "fechaHepAD2"=>date("d/m/Y", strtotime($row['fechaHepAD2'])),   
+                        "fechaHepAR1"=>date("d/m/Y", strtotime($row['fechaHepAR1'])),   
+                        "fechaHepBD1"=>date("d/m/Y", strtotime($row['fechaHepBD1'])),   
+                        "fechaHepBD2"=>date("d/m/Y", strtotime($row['fechaHepBD2'])),   
+                        "fechaHepBD3"=>date("d/m/Y", strtotime($row['fechaHepBD3'])),   
+                        "fechaInflR1"=>date("d/m/Y", strtotime($row['fechaInflR1'])),   
+                        "fechaInflR2"=>date("d/m/Y", strtotime($row['fechaInflR2'])),   
+                        "fechaPolioD1"=>date("d/m/Y", strtotime($row['fechaPolioD1'])),   
+                        "fechaTrivD1"=>date("d/m/Y", strtotime($row['fechaTrivD1'])),
+                        "fechaRabD1"=>date("d/m/Y", strtotime($row['fechaRabD1'])),
+                        "fechaRabD2"=>date("d/m/Y", strtotime($row['fechaRabD2'])),
+                        "fechaRabD3"=>date("d/m/Y", strtotime($row['fechaRabD3'])),
+                        "fechaRabR1"=>date("d/m/Y", strtotime($row['fechaRabR1'])),                        
+                        "fechaTifoR1"=>date("d/m/Y", strtotime($row['fechaTifoR1'])),   
+                        "fechaTifoR2"=>date("d/m/Y", strtotime($row['fechaTifoR2'])),   
+                        "fechaNeumR1"=>date("d/m/Y", strtotime($row['fechaNeumR1'])),   
+                        "fechaNeumR2"=>date("d/m/Y", strtotime($row['fechaNeumR2'])),   
+                        "fechaCovidD1"=>date("d/m/Y", strtotime($row['fechaCovidD1'])),   
+                        "fechaCovidD2"=>date("d/m/Y", strtotime($row['fechaCovidD2'])),   
+                        "fechaCovidD3"=>date("d/m/Y", strtotime($row['fechaCovidD3'])),
+                        "fechaCovidD4"=>date("d/m/Y", strtotime($row['fechaCovidD4'])),
+                    );
+                }
+            }
+            return $lista;
+        }catch(PDOException $th) {
+            echo $th->getMessage();
+            return false;
+        }
+    }
+
+    function retornoRetiro($pdo){
+        try {
+            $respuesta = false;
+            $lista = [];        
+            $sql = "SELECT f.dni, MAX(vrr.fecha) as fecha, lc.nomb_clinica, vrr.observaciones, vrr.enviado
+                    FROM `fichas_api` AS vrr
+                    LEFT JOIN lista_clinicas AS lc ON lc.id = vrr.clinica
+                    RIGHT JOIN rrhh.tabla_aquarius AS f ON f.dni = vrr.dni
+                    WHERE vrr.tipoExa='RETIRO' AND vrr.centroCosto LIKE '0300%' GROUP BY f.dni";
+            $statement = $pdo->prepare($sql);
+            $statement ->execute();
+            $result = $statement ->fetchAll();
+            $rowCount = $statement -> rowcount();
+
+            if ($rowCount > 0) {
+                foreach($result as $row) {
+                    $lista[]= array(
+                        "dni"=>$row['dni'],
+                        "fechar"=>date("d/m/Y", strtotime($row['fecha'])),
+                        "nomb_clinica"=>$row['nomb_clinica'],
+                        "observaciones"=>$row['observaciones'],
+                        "enviado"=>$row['enviado'],
+                    );
+                }
+            }
+            return $lista;
+        } catch(PDOException $th) {
+            echo $th->getMessage();
+            return false;
+        }
+    }
+
+    function union006($pdo){
+        try{
+            $respuesta = false;
+            $lista = [];
+            $a=retornoBase($pdo);
+            $b=retornoRetiro($pdo);
+            $na = count($a);
+            $nb = count($b);
+            $c = 0; 
+            if($na>0){
+                for($m=0;$m<$na;$m++){
+                    $c++;
+                    for($o=0;$o<$nb;$o++){
+                        $fecha_r = $a[$m]['dni']==$b[$o]['dni'] ? $b[$o]['fechar'] : "";
+                        $clinica_r = $a[$m]['dni']==$b[$o]['dni'] ? $b[$o]['nomb_clinica'] : "";
+                        $observ_r = $a[$m]['dni']==$b[$o]['dni'] ? $b[$o]['observaciones'] : "";
+                        $enviado_r = $a[$m]['dni']==$b[$o]['dni'] ? $b[$o]['enviado'] : "";
+                        $salida = array(
+                            "num" => $c,
+                            "nombres"=>$a[$m]['empleadonomb'],
+                            "fecnac" => $a[$m]['fecnac'],
+                            "dni"=>$a[$m]['dni'],
+                            "edad"=>$a[$m]['edad'],
+                            "dni"=>$a[$m]['dni'],
+                            "ccostos"=>$a[$m]['ccostos'],
+                            "cargo"=>$a[$m]['cargo'],
+                            "empresa"=>"SEPCON",
+                            "correo"=>$a[$m]['correo'],
+                            "telefono"=>$a[$m]['telefono'],
+                            "grupoSangre"=>$a[$m]['grupoSangre'],
+                            "alergias"=>$a[$m]['alergias'],
+                            "fecha"=>$a[$m]['fecha'],//revisar
+                            "nomb_clinica"=>$a[$m]['nomb_clinica'],
+                            "aptitud"=>$a[$m]['aptitud'],
+                            "peso"=>$a[$m]['peso'],
+                            "talla"=>$a[$m]['talla'],
+                            "imc"=>$a[$m]['imc'],
+                            "estadoNutricional"=>$a[$m]['estadoNutricional'],
+                            "enviado"=>$a[$m]['enviado'],
+                            "programadopre"=>date("d/m/Y", strtotime($a[$m]['programadopre'])),
+                            "retiro" =>$fecha_r,
+                            "clinica_r"=>$clinica_r,
+                            "observ_r" =>$observ_r,
+                            "enviado_r" =>$enviado_r,
+                            "fechaFbrA" =>$a[$m]['fechaFbrAmarilla'],
+                            "fechaDTD1" =>$a[$m]['fechaDifTD1'],
+                            "fechaDTD2" =>$a[$m]['fechaDifTD2'],
+                            "fechaDTD3" =>$a[$m]['fechaDifTD3'],
+                            "fechaDTR1" =>$a[$m]['fechaDifTR1'],
+                            "fechaHAD1" =>$a[$m]['fechaHepAD1'],
+                            "fechaHAD2" =>$a[$m]['fechaHepAD2'],
+                            "fechaHAR1" =>$a[$m]['fechaHepAR1'],
+                            "fechaHBD1" =>$a[$m]['fechaHepBD1'],
+                            "fechaHBD2" =>$a[$m]['fechaHepBD2'],
+                            "fechaHBD3" =>$a[$m]['fechaHepBD3'],
+                            "fechaIFR1" =>$a[$m]['fechaInflR1'],
+                            "fechaIFR2" =>$a[$m]['fechaInflR2'],
+                            "fechaPLD1" =>$a[$m]['fechaPolioD1'],
+                            "fechaTVD1" =>$a[$m]['fechaTrivD1'],
+                            "fechaRBD1" =>$a[$m]['fechaRabD1'],
+                            "fechaRBD2" =>$a[$m]['fechaRabD2'],
+                            "fechaRBD3" =>$a[$m]['fechaRabD3'],
+                            "fechaRBR1" =>$a[$m]['fechaRabR1'],
+                            "fechaTFR1" =>$a[$m]['fechaTifoR1'],
+                            "fechaTFR2" =>$a[$m]['fechaTifoR2'],
+                            "fechaNMR1" =>$a[$m]['fechaNeumR1'],
+                            "fechaNMR2" =>$a[$m]['fechaNeumR2'],
+                            "fechaCVD1" =>$a[$m]['fechaCovidD1'],
+                            "fechaCVD2" =>$a[$m]['fechaCovidD2'],
+                            "fechaCVD3" =>$a[$m]['fechaCovidD3'],
+                            "fechaCVD4" =>$a[$m]['fechaCovidD4']);
+                        array_push($lista,$salida);
+                    }  
+                }
+                $respuesta = true;
+            }
+            else{
+                $respuesta = false;
+            }
+            $salida = array("respuesta"=>$respuesta,
+                                "lista" => $lista,
+                                "DB" => $a);
+    
+                return $salida; 
+        }catch(PDOException $th) {
+            echo $th->getMessage();
+            return false;
+        }
+       
+    }
+
+    function formatoTablas001($pdo,$ccostos,$dni,$activo,$cesado){
         try{
             $cc =  ["0200","0300","0600"];
             $respuesta = false;
             $lista = [];
-            $sql = "SELECT fe.cut,fe.empleadonomb,fe.correo,fe.dni,fe.cargo,fe.ccostos,
-                        fe.edad,fe.sede,fe.sexo,fe.fecnac,fe.estado,fe.direccion,fe.telefono,
+            if($activo==1){
+                $estado = "AC";
+            }
+            elseif ($cesado == 1) {
+                $estado = "CE";
+            }
+            $sql = "SELECT fe.cut,fa.paciente AS empleadonomb,fe.correo,fe.dni,fe.dcargo AS cargo,fe.dcostos AS ccostos,f.direccion,f.telefono,
+                        fa.edad,fe.dsede AS sede,fa.codSexo AS sexo,fa.fecNaci AS fecnac,fe.estado,
                         fa.idreg,fa.acidoUrico,fa.aglutinaciones,fa.alergias,fa.anfetaminas,fa.antFamiliares,
                         fa.antece1,fa.antece2,fa.antece3,fa.antece4,fa.antece5,
                         fa.antece6,fa.aptitud,fa.atencion,fa.audiometria,fa.benceno,
@@ -1289,10 +1510,11 @@
                         v.fechaRabR1,v.fechaTifoR1,v.fechaTifoR2,v.fechaNeumR1,v.fechaNeumR2,v.fechaCovidD1,
                         v.fechaCovidD2,v.fechaCovidD3,v.fechaCovidD4
                     FROM fichas_api AS fa
-                    LEFT JOIN fichas_empleados AS fe ON fa.dni=fe.dni
+                    LEFT JOIN rrhh.tabla_aquarius AS fe ON fa.dni=fe.dni
+                    LEFT JOIN fichas_empleados AS f ON fa.dni = f.dni
                     LEFT JOIN fichas_vacunacion AS v ON fa.dni=v.dni
                     LEFT JOIN lista_clinicas AS lc ON lc.id = fa.clinica
-                    WHERE (fa.dni=? OR NOT EXISTS(SELECT idreg FROM fichas_api fa4 WHERE fa4.dni=?)) AND fe.ccostos LIKE '$cc[$ccostos]%' GROUP BY fe.dni ORDER BY empleadonomb ";            
+                    WHERE (fa.dni=? OR NOT EXISTS(SELECT idreg FROM fichas_api fa4 WHERE fa4.dni=?)) AND fe.ccostos LIKE '$cc[$ccostos]%' AND fe.estado='$estado' GROUP BY fe.dni ORDER BY fa.paciente";            
             $statement = $pdo->prepare($sql);
             $statement ->execute(array($dni,$dni));
             $result = $statement ->fetchAll();
@@ -1529,11 +1751,10 @@
                 }
                 $respuesta = true;
             }else{
-                $respuesta = false;
             }
             $salida = array("respuesta"=>$respuesta,
                             "lista" => $lista,
-                            "DB" => $dni);
+                            "DB" => $estado);
 
             return $salida; 
         }catch(PDOException $th) {

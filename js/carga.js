@@ -330,11 +330,9 @@ const getDataSubContratas = (tokenMedex) => {
             }
             let inicio_sc = $fecha__inicio__subc.value;
             let final_sc = $fecha__final__subc.value;
-            if( $nro__doc_subc.value==""){
-                mostrarMensaje("Ingrese el número de documento","msj_info");
-            } //exigir q tenga un numero de dni si o si
-        
-            let url = 'https://www.medex.com.pe/ApiCitas/api/ResultadoDigitalExt/GetBaseDatos/'+$nro__ruc.value+'/'+inicio_sc+'/'+final_sc+'/'+ $nro__doc_subc.value;
+            let documento_sc = $nro__doc_subc.value=="" ? "-": $nro__doc_subc.value;
+
+            let url = 'https://www.medex.com.pe/ApiCitas/api/ResultadoDigitalExt/GetBaseDatos/'+$nro__ruc.value+'/'+inicio_sc+'/'+final_sc+'/'+ documento_sc;
             let token = "Bearer " + tokenMedex;
 
             fetch(url, {

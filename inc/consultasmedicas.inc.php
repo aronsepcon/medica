@@ -833,6 +833,9 @@
     function actualizarEmpleado($pdo,$cut,$empleado,$correo,$dni,$cargo,
         $ccostos,$edad,$sede,$sexo,$fecnac,$estado,$direccion,$telefono,$empresa){
             try {
+                if($cut==""){
+                    $cut=uniqid();//rand(100000,999999);//preguntar la mejor opcion U:
+                }
                 $sql = "INSERT INTO fichas_empleados SET cut=?,empleadonomb=?,correo=?,dni=?,cargo=?,
                     	    ccostos=?,edad=?,sede=?,sexo=?,fecnac=?,estado=?,direccion=?,telefono=?,empresa=?
                         ON DUPLICATE KEY UPDATE empleadonomb=?,correo=?,cargo=?,ccostos=?,edad=?,sede=?,

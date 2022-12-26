@@ -51,7 +51,10 @@
                                 <label for="correo__electronico_sc">Correo Electrónico</label>
                                 <input type="text" name="correo__electronico_sc" id="correo__electronico_sc">
                                 <label for="sexo__trabajador_sc">Sexo :</label>
-                                <input type="text" name="sexo__trabajador_sc" id="sexo__trabajador_sc">
+                                <select name="" id="sexo__trabajador_sc">
+                                    <option value="MASCULINO">MASCULINO</option>
+                                    <option value="FEMENINO">FEMENINO</option>
+                                </select>
                                 <label for="cargo__trabajador_sc">Cargo :</label>
                                 <input type="text" name="cargo__trabajador_sc" id="cargo__trabajador_sc">
                                 <label for="centro_costos_sc">Centro de Costos :</label>

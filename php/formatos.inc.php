@@ -44,6 +44,7 @@
         <div>
             <button type="button" id="buscar">Buscar</button>
             <button type="button" id="exportar">Exportar</button>
+            <button type="button" id="probar">Probar</button>
             <a href="" id="descarga_formato" class="oculto" download></a>
         </div>
         <div class="historias__tabla bars oculto" id="tabla_006">
@@ -140,8 +141,57 @@
                         <th>Ex. Audiometrico</th>
                         <th>Ev. Osteomuscular</th>
                         <th>Ex. Odontologico</th>
+                        <th>EKG</th>
+                        <th>Prueba de Esfuerzo</th>
+                        <th>Riesgo Coronario</th>
+                        <th>Ex. Psicologico</th>
+                        <th>Ex. de Altura</th>
+                        <th>Ex. Espacio Confinado</th>
+                        <th>Ex. Psicosensometrico</th>
+                        <th>HBG/dl</th>
+                        <th>HTO%</th>
+                        <th>Ex. Gota Gruesa</th>
+                        <th>Leucocitos</th>
+                        <th>Recuento de Plaquetas</th>
+                        <th>Colesterol mg/dl</th>
+                        <th>HDL mg/dl</th>
+                        <th>LDL mg/dl</th>
+                        <th>Trigliceridos mg/dl</th>
+                        <th>TGP U/L</th>
+                        <th>Glucosa mg/dl</th>
+                        <th>Urea mg/dl</th>
+                        <th>Ac. Urico mg/dl</th>
+                        <th>Creatinina mg/dl</th>
+                        <th>VDRL</th>
+                        <th>RPD</th>
+                        <th>Toxiscreen</th>
+                        <th>Ant. de Superf. HepB</th>
+                        <th>Parasit. Seriado</th>
+                        <th>Hisopado Nasofaringeo</th>
+                        <th>Ex. de orina</th>
+                        <th>Diagnostico 1</th>
+                        <th>CIE-10</th>
+                        <th>Diagnostico 2</th>
+                        <th>CIE-10</th>
+                        <th>Diagnostico 3</th>
+                        <th>CIE-10</th>
+                        <th>Diagnostico 4</th>
+                        <th>CIE-10</th>
+                        <th>Diagnostico 5</th>
+                        <th>CIE-10</th>
+                        <th>Diagnostico 6</th>
+                        <th>CIE-10</th>
+                        <th>Recom. a Enf. Ocupac.</th>
+                        <th>Recom. a Enf. Comun.</th>
+                        <th>Trat. Medico Actual</th>
+                        <th>Ingresa a Programa 1</th>
+                        <th>Ingresa a Programa 2</th>
+                        <th>Ingresa a Programa 3</th>
+                        <th>Ingresa a Programa 4</th>
+                        <th>Ingresa a Programa 5</th>
+                        <th>Ingresa a Programa 6</th>
 
-
+                        
                     </tr>
                 </thead>
                 <tbody  id="tabla_formato_001"></tbody>
