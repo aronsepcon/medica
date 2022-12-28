@@ -26,8 +26,8 @@
                 <option value="0">0200</option>
                 <option value="1">0300</option>
                 <option value="2">0600</option>
-                <option value="3">2800</option>
-                <option value="4">2600</option>
+                <option value="3">2830</option>
+                <option value="4">3100</option>
             </select>
             <span class="span_formato">Formato</span>
             <select name="" id="formato">
@@ -44,12 +44,29 @@
         <div>
             <button type="button" id="buscar">Buscar</button>
             <button type="button" id="exportar">Exportar</button>
-            <button type="button" id="probar">Probar</button>
+            <button type="button" id="probar" class="oculto">Probar</button>
             <a href="" id="descarga_formato" class="oculto" download></a>
         </div>
         <div class="historias__tabla bars oculto" id="tabla_006">
             <table class="w100porcen">
                 <thead>
+                    <tr>
+                        <th colspan="12"></th>
+                        <th colspan="8" style="background-color: lightblue;">EXAMEN PREOCUPACIONAL</th>
+                        <th colspan="18" style="background-color: #007EFC;">EXAMEN PERIODICO</th>
+                        <th colspan="4">EMO RETIRO</th>
+                        <th style="background-color: yellowgreen;">Fiebre Amarilla</th>
+                        <th colspan="4" style="background-color: grey;">Difteria Tetano </th>
+                        <th colspan="3">Hepatitis A</th>
+                        <th colspan="3">Hepatitis B</th>
+                        <th colspan="2">Influenza</th>
+                        <th colspan="1">Poliomelitis</th>
+                        <th colspan="1">Trivirica</th>
+                        <th colspan="4">Rabia</th>
+                        <th colspan="2">Tifoidea</th>
+                        <th colspan="2">Neumococo</th>
+                        <th colspan="4">COVID-19</th>
+                    </tr>
                     <tr>
                         <th>N°</th>
                         <th>Apellidos y Nombres</th>
@@ -93,10 +110,33 @@
                         <th>CLÍNICA</th>
                         <th>OBSERVACIÓNES</th>
                         <th>ENVIO DE EMO EMAIL</th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
+                        <th>1ra Dosis</th>
+                        <th>1ra Dosis</th>
+                        <th>2da Dosis</th>
+                        <th>3ra Dosis</th>
+                        <th>Refuerzo</th>
+                        <th>1ra Dosis</th>
+                        <th>2da Dosis</th>
+                        <th>Refuerzo</th>
+                        <th>1ra Dosis</th>
+                        <th>2da Dosis</th>
+                        <th>3ra Dosis</th>
+                        <th>1ra Dosis</th>
+                        <th>Refuerzo</th>
+                        <th>1ra Dosis</th>
+                        <th>1ra Dosis</th>
+                        <th>1ra Dosis</th>
+                        <th>2da Dosis</th>
+                        <th>3ra Dosis</th>
+                        <th>Refuerzo</th>
+                        <th>1ra Dosis</th>
+                        <th>Refuerzo</th>
+                        <th>1ra Dosis</th>
+                        <th>Refuerzo</th>
+                        <th>1ra Dosis</th>
+                        <th>2da Dosis</th>
+                        <th>3ra Dosis</th>
+                        <th>4ta Dosis</th>
                     </tr>
                 </thead>
                 <tbody id="tabla_formato_006"></tbody>
@@ -106,6 +146,20 @@
         <div class="historias__tabla bars" id="tabla_001">
             <table  class="w100porcen">
                 <thead>
+                    <tr>
+                        <th colspan="83" ></th>
+                        <th style="background-color: yellowgreen;">Fiebre Amarilla</th>
+                        <th colspan="4" style="background-color: grey;">Difteria Tetano </th>
+                        <th colspan="3">Hepatitis A</th>
+                        <th colspan="3">Hepatitis B</th>
+                        <th colspan="2">Influenza</th>
+                        <th colspan="1">Poliomelitis</th>
+                        <th colspan="1">Trivirica</th>
+                        <th colspan="4">Rabia</th>
+                        <th colspan="2">Tifoidea</th>
+                        <th colspan="2">Neumococo</th>
+                        <th colspan="4">COVID-19</th>
+                    </tr>
                     <tr>
                         <th>N°</th>
                         <th>Año</th>
@@ -190,8 +244,33 @@
                         <th>Ingresa a Programa 4</th>
                         <th>Ingresa a Programa 5</th>
                         <th>Ingresa a Programa 6</th>
-
-                        
+                        <th>1ra Dosis</th>
+                        <th>1ra Dosis</th>
+                        <th>2da Dosis</th>
+                        <th>3ra Dosis</th>
+                        <th>Refuerzo</th>
+                        <th>1ra Dosis</th>
+                        <th>2da Dosis</th>
+                        <th>Refuerzo</th>
+                        <th>1ra Dosis</th>
+                        <th>2da Dosis</th>
+                        <th>3ra Dosis</th>
+                        <th>1ra Dosis</th>
+                        <th>Refuerzo</th>
+                        <th>1ra Dosis</th>
+                        <th>1ra Dosis</th>
+                        <th>1ra Dosis</th>
+                        <th>2da Dosis</th>
+                        <th>3ra Dosis</th>
+                        <th>Refuerzo</th>
+                        <th>1ra Dosis</th>
+                        <th>Refuerzo</th>
+                        <th>1ra Dosis</th>
+                        <th>Refuerzo</th>
+                        <th>1ra Dosis</th>
+                        <th>2da Dosis</th>
+                        <th>3ra Dosis</th>
+                        <th>4ta Dosis</th>
                     </tr>
                 </thead>
                 <tbody  id="tabla_formato_001"></tbody>

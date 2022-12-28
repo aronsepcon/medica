@@ -70,6 +70,8 @@
         }
         else if($_POST['funcion'] == "listaSubContratas"){
             echo json_encode(listaSubContratas($pdo));
+        }else if($_POST['funcion'] == "registrarTerceros"){
+            echo json_encode(registrarTerceros($pdo,$_POST['ruc'],$_POST['nombre']));
         }
     }
 
@@ -298,7 +300,7 @@
                     WHERE
                         fichas_api.dni = ? 
                     ORDER BY
-                        fichas_api.fecha DESC";
+                        fichas_api.fecha DESC, CASE WHEN fichas_api.tipoExa = 'RETIRO' THEN 3 ELSE 1 END ASC";
             $statement = $pdo->prepare($sql);
             $statement ->execute(array($doc));
             $result = $statement ->fetchAll();
@@ -1247,6 +1249,24 @@
             echo $th->getMessage();
             return false;
         }
+    }
+
+    function registrarTerceros($pdo,$ruc,$nombres){
+        try {
+            $id = rand(31,99);
+            $sql = "INSERT INTO empresas_terceros SET id=?,ruc=?, nombre=?";
+            $statement = $pdo->prepare($sql);
+            $statement ->execute(array($id,$ruc,$nombres));
+            $respuesta = array("respuesta"  => true,
+                                "clase"     =>"msj_correct",
+                                "error"     =>"no hay error",
+                                "sql"       =>$sql);
+            
+            return $respuesta;
+        } catch(PDOException $th) {
+            echo $th->getMessage();
+            return false;
+        }   
     }
 
 ?>

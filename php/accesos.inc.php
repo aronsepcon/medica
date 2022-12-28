@@ -31,6 +31,14 @@
         </div>
         <button id="dar_acceso">Dar Acceso</button>
     </section>
+    <section>
+        <h4>Terceros</h4>
+        <label for="ruc_terceros">Ruc</label>
+        <input type="text" id="ruc_terceros">
+        <label for="nombre_terceros">Nombre</label>
+        <input type="text" id="nombre_terceros">
+        <button id="registrar_terceros">Registrar</button>
+    </section>
 </section> 
 <script src="../js/accesos.js?v<?php echo $random;?>" type="module"></script>
 </body>

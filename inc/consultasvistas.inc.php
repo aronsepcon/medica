@@ -11,7 +11,7 @@
             echo json_encode(formato_006($pdo));
         }
         else if($_POST['funcion']=="formato_001"){
-            echo json_encode(formato_001($pdo,$_POST['dni'],$_POST['activo'],$_POST['cesado']));
+            echo json_encode(formato_001($pdo,$_POST['ccostos'],$_POST['dni'],$_POST['activo'],$_POST['cesado']));
         }else if($_POST['funcion']=="formatoTablas001"){
             echo json_encode(formatoTablas001($pdo,$_POST['ccostos'],$_POST['dni'],$_POST['activo'],$_POST['cesado']));
         }else if($_POST['funcion']=="union006"){
@@ -30,8 +30,8 @@
         try {
             $spreadsheet = new Spreadsheet();
             $spreadsheet->setActiveSheetIndex(0);
-            $spreadsheet->getActiveSheet()->setTitle("ACTIVOS LIMA");
-        
+            $spreadsheet->getActiveSheet()->setTitle("ACTIVOS LIMA");//probar a ver como varia el nombre en 001
+       /* 
             $spreadsheet->createSheet();
             $spreadsheet->setActiveSheetIndex(1);
             $spreadsheet->getActiveSheet()->setTitle("ACTIVOS LURIN");
@@ -39,9 +39,9 @@
             $spreadsheet->createSheet();
             $spreadsheet->setActiveSheetIndex(2);
             $spreadsheet->getActiveSheet()->setTitle("ACTIVOS PUCALLPA");
-        
-            for($i=0;$i<=2;$i++){
-                $spreadsheet->setActiveSheetIndex($i);
+        */
+       //     for($i=0;$i<=2;$i++){
+                $spreadsheet->setActiveSheetIndex(0);
                 $spreadsheet->getActiveSheet()->setCellValue("A5","N°");
                 $spreadsheet->getActiveSheet()->setCellValue("B5","APELLIDOS Y NOMBRES");
                 $spreadsheet->getActiveSheet()->setCellValue("C5","FECHA DE NACIMIENTO");
@@ -242,25 +242,25 @@
         
                 $centrosAdm = ["0200","0300","0600"];
                 $r = 0;
-                $fila = 8;
-                $c = formato($pdo,$centrosAdm[$i]);
+                $fila = 9;
+                $c = formato($pdo);//aqui pasar el centro de costos,dni y estados
                 $nc = count($c);
         
-                for($j=0;$j<$nc;$j++){
+                for($j=0;$j<$nc;$j++){//revisar las fechas y etc
         
                     $spreadsheet->getActiveSheet()-> setCellValue('A'.$fila,$r);
-                    $spreadsheet->getActiveSheet()-> setCellValue('B'.$fila,utf8_decode($c[$j]['empleadonomb']));
-                    $spreadsheet->getActiveSheet()-> setCellValue('C'.$fila,date("d/m/Y", strtotime($c[$j]['fecnac'])));
+                    $spreadsheet->getActiveSheet()-> setCellValue('B'.$fila,utf8_decode($c[$j]['nombres']));
+                    $spreadsheet->getActiveSheet()-> setCellValue('C'.$fila,$c[$j]['fecnac']);
                     $spreadsheet->getActiveSheet()-> setCellValue('D'.$fila,$c[$j]['dni']);
                     $spreadsheet->getActiveSheet()-> setCellValue('E'.$fila,$c[$j]['edad']);
                     $spreadsheet->getActiveSheet()-> setCellValue('F'.$fila,utf8_decode($c[$j]['ccostos']));//ver luego
                     $spreadsheet->getActiveSheet()-> setCellValue('G'.$fila,utf8_decode($c[$j]['cargo']));
-                    $spreadsheet->getActiveSheet()-> setCellValue('H'.$fila,utf8_decode("SEPCON"));
+                    $spreadsheet->getActiveSheet()-> setCellValue('H'.$fila,utf8_decode($c[$j]['empresa']));
                     $spreadsheet->getActiveSheet()-> setCellValue('I'.$fila,utf8_decode($c[$j]['correo']));
                     $spreadsheet->getActiveSheet()-> setCellValue('J'.$fila,utf8_decode($c[$j]['telefono']));
                     $spreadsheet->getActiveSheet()-> setCellValue('K'.$fila,utf8_decode($c[$j]['grupoSangre']));
                     $spreadsheet->getActiveSheet()-> setCellValue('L'.$fila,utf8_decode($c[$j]['alergias']));
-                    $spreadsheet->getActiveSheet()-> setCellValue('M'.$fila,date("d/m/Y", strtotime($c[$j]['fecha'])));
+                    $spreadsheet->getActiveSheet()-> setCellValue('M'.$fila,$c[$j]['fecha']);
                     $spreadsheet->getActiveSheet()-> setCellValue('N'.$fila,utf8_decode($c[$j]['nomb_clinica']));
                     $spreadsheet->getActiveSheet()-> setCellValue('O'.$fila,utf8_decode($c[$j]['aptitud']));
                     $spreadsheet->getActiveSheet()-> setCellValue('P'.$fila,$c[$j]['peso']);
@@ -268,8 +268,8 @@
                     $spreadsheet->getActiveSheet()-> setCellValue('R'.$fila,$c[$j]['imc']);
                     $spreadsheet->getActiveSheet()-> setCellValue('S'.$fila,utf8_decode($c[$j]['estadoNutricional']));
                     $spreadsheet->getActiveSheet()-> setCellValue('T'.$fila,$c[$j]['enviado']);
-                    $spreadsheet->getActiveSheet()-> setCellValue('U'.$fila,date("d/m/Y", strtotime($c[$j]['programadopre'])));
-                    $spreadsheet->getActiveSheet()-> setCellValue('V'.$fila,date("d/m/Y", strtotime($c[$j]['f_per1'])));
+                    $spreadsheet->getActiveSheet()-> setCellValue('U'.$fila,$c[$j]['programadopre']);
+                    $spreadsheet->getActiveSheet()-> setCellValue('V'.$fila,$c[$j]['f_per1']);
                     $spreadsheet->getActiveSheet()-> setCellValue('W'.$fila,utf8_decode($c[$j]['f_cln1'])); 
                     $spreadsheet->getActiveSheet()-> setCellValue('X'.$fila,utf8_decode($c[$j]['f_act1']));
                     $spreadsheet->getActiveSheet()-> setCellValue('Y'.$fila,$c[$j]['f_pes1']);
@@ -288,8 +288,8 @@
                     $spreadsheet->getActiveSheet()-> setCellValue('AL'.$fila,$c[$j]['f_env2']);
                     $spreadsheet->getActiveSheet()-> setCellValue('AM'.$fila,date("d/m/Y", strtotime($c[$j]['programado2'])));//a partir de por aqui iria el switch case U:
                     $spreadsheet->getActiveSheet()-> setCellValue('AN'.$fila,date("d/m/Y", strtotime($c[$j]['f_retiro'])));
-                    $spreadsheet->getActiveSheet()-> setCellValue('AO'.$fila,utf8_decode($c[$j]['clinica'])); 
-                    $spreadsheet->getActiveSheet()-> setCellValue('AP'.$fila,utf8_decode($c[$j]['observaciones'])); 
+                    $spreadsheet->getActiveSheet()-> setCellValue('AO'.$fila,utf8_decode($c[$j]['clinica_r'])); 
+                    $spreadsheet->getActiveSheet()-> setCellValue('AP'.$fila,utf8_decode($c[$j]['observ_r'])); 
                     $spreadsheet->getActiveSheet()-> setCellValue('AQ'.$fila,$c[$j]['f_envr']);
                     $spreadsheet->getActiveSheet()-> setCellValue('AR'.$fila,date("d/m/Y", strtotime($c[$j]['fechaFbrAmarilla'])));
                     $spreadsheet->getActiveSheet()-> setCellValue('AS'.$fila,date("d/m/Y", strtotime($c[$j]['fechaDifTD1'])));
@@ -322,7 +322,7 @@
                     $fila++;
                     $r++;
                 }
-            }
+          //  }
         
             $writer = new Xlsx($spreadsheet); 
             $writer->save('../formatos/Formato 006.xlsx');
@@ -335,7 +335,7 @@
         }
     }
     
-    function formato_001($pdo,$dni,$activo,$cesado){
+    function formato_001($pdo,$ccostos,$dni,$activo,$cesado){
         $spreadsheet = new Spreadsheet();
         $spreadsheet->setActiveSheetIndex(0);
         $spreadsheet->getActiveSheet()->setTitle("ACTIVOS LIMA");
@@ -382,6 +382,7 @@
             $spreadsheet->getActiveSheet()->setCellValue("AE5","OTOSCOPIA");
             $spreadsheet->getActiveSheet()->setCellValue("AF5","EX. AUDIOMETRICO");
             $spreadsheet->getActiveSheet()->setCellValue("AG5","EV. OSTEOMUSCULAR");
+            $spreadsheet->getActiveSheet()->setCellValue("AH3","FECHA DE INICIO");
             $spreadsheet->getActiveSheet()->setCellValue("AH5","EX. ODONTOLOGICO");
             $spreadsheet->getActiveSheet()->setCellValue("AI5","EKG");
             $spreadsheet->getActiveSheet()->setCellValue("AJ5","PRUEBA DE ESFUERZO");
@@ -588,16 +589,22 @@
 
             $centrosAdm = ["0200","0600","0300"];
             if($activo==1){
-                $estado = "AC";
+                $estadoAc = "AC";
             }
-            elseif ($cesado == 1) {
-                $estado = "CE";
+            elseif($activo==0){
+                $estadoAc = "";
+            }
+            if ($cesado == 1) {
+                $estadoCe = "CE";
+            }
+            elseif ($cesado == 0) {
+                $estadoCe = "";
             }
             $r = 1;
             $fila = 8;
-            $n = formato001($pdo,$centrosAdm[0],$dni,$estado);
+            $n = formato001($pdo,$centrosAdm[$ccostos],$dni,$estadoAc,$estadoCe);
             $nc = count($n);
-
+            $spreadsheet->getActiveSheet()-> setCellValue('AI3',date("d/m/Y"));
             for($m=0;$m<=$nc;$m++){
                 $spreadsheet->getActiveSheet()-> setCellValue('A'.$fila,$r);
                 $spreadsheet->getActiveSheet()-> setCellValue('C'.$fila,$n[$m]['id']);
@@ -647,11 +654,17 @@
                 $spreadsheet->getActiveSheet()-> setCellValue('BE'.$fila,$n[$m]['vdrl']);
                 $spreadsheet->getActiveSheet()-> setCellValue('BH'.$fila,$n[$m]['hepatitisB']);
                 $spreadsheet->getActiveSheet()-> setCellValue('BL'.$fila,$n[$m]['diagno1']);
+                $spreadsheet->getActiveSheet()-> setCellValue('BM'.$fila,$n[$m]['cod1']);
                 $spreadsheet->getActiveSheet()-> setCellValue('BN'.$fila,$n[$m]['diagno2']);
+                $spreadsheet->getActiveSheet()-> setCellValue('BO'.$fila,$n[$m]['cod2']);
                 $spreadsheet->getActiveSheet()-> setCellValue('BP'.$fila,$n[$m]['diagno3']);
+                $spreadsheet->getActiveSheet()-> setCellValue('BQ'.$fila,$n[$m]['cod3']);
                 $spreadsheet->getActiveSheet()-> setCellValue('BR'.$fila,$n[$m]['diagno4']);
+                $spreadsheet->getActiveSheet()-> setCellValue('BS'.$fila,$n[$m]['cod4']);
                 $spreadsheet->getActiveSheet()-> setCellValue('BT'.$fila,$n[$m]['diagno5']);
-                $spreadsheet->getActiveSheet()-> setCellValue('BW'.$fila,$n[$m]['diagno6']);
+                $spreadsheet->getActiveSheet()-> setCellValue('BU'.$fila,$n[$m]['cod5']);
+                $spreadsheet->getActiveSheet()-> setCellValue('BV'.$fila,$n[$m]['diagno6']);
+                $spreadsheet->getActiveSheet()-> setCellValue('BW'.$fila,$n[$m]['cod6']);
                 $spreadsheet->getActiveSheet()-> setCellValue('CG'.$fila,$n[$m]['fechaFbrA']);
                 $spreadsheet->getActiveSheet()-> setCellValue('CH'.$fila,$n[$m]['fechaDTD1']);
                 $spreadsheet->getActiveSheet()-> setCellValue('CI'.$fila,$n[$m]['fechaDTD2']);
@@ -689,185 +702,239 @@
         return 'Formato 001.xlsx';
     }
 
-    function formato($pdo,$ccostos){//){
+    function formato($pdo){//pasar aqui, centro de costos , de la lista u otra fuente-dni-estaos
         try {
             $lista = [];
-            $sql = "SELECT `fe`.`empleadonomb` AS `empleadonomb`,`fe`.`fecnac` AS `fecnac`,`fa`.`dni` AS `dni`,`fe`.`edad` AS `edad`,`fe`.`ccostos` AS `ccostos`,
-                    `fe`.`cargo` AS `cargo`,`fe`.`correo` AS `correo`,`fe`.`telefono` AS `telefono`,`fa`.`grupoSangre` AS `grupoSangre`,`fa`.`alergias` AS `alergias`,
-                    `fa`.`fecha` AS `fecha`,`lc`.`nomb_clinica` AS `nomb_clinica`,`fa`.`aptitud` AS `aptitud`,`fa`.`peso` AS `peso`,`fa`.`talla` AS `talla`,`fa`.`imc` AS `imc`,
-                    `fa`.`estadoNutricional` AS `estadoNutricional`,`fa`.`enviado` AS `enviado`,`fa`.`fecha` + interval 1 year AS `programadopre`,`vrp1`.`fecha` AS `f_per1`,
-                    `vrp1`.`clinica` AS `f_cln1`,`vrp1`.`aptitud` AS `f_act1`,`vrp1`.`peso` AS `f_pes1`,`vrp1`.`talla` AS `f_tal1`,`vrp1`.`imc` AS `f_imc1`,
-                    `vrp1`.`estadoNutricional` AS `f_est1`,`vrp1`.`enviado` AS `f_env1`,`vrp1`.`fecha` + interval 1 year AS `programado1`,`vrp2`.`fecha` AS `f_per2`,
-                    `vrp2`.`clinica` AS `f_cln2`,`vrp2`.`aptitud` AS `f_act2`,`vrp2`.`peso` AS `f_pes2`,`vrp2`.`talla` AS `f_tal2`,`vrp2`.`imc` AS `f_imc2`,`vrp2`.
-                    `estadoNutricional` AS `f_est2`,`vrp1`.`enviado` AS `f_env2`,`vrp2`.`fecha` + interval 1 year AS `programado2`,MAX(`vrr`.`fecha`) AS `f_retiro`,
-                    `vrr`.`clinica` AS `clinica`,`vrr`.`observaciones` AS `observaciones`,`vrr`.`enviado` AS `f_envr`,`vrr`.`centroCosto` AS `ccostos_r`,
-                    `fv`.`fechaFbrAmarilla` AS `fechaFbrAmarilla`,`fv`.`fechaDifTD1` AS `fechaDifTD1`,`fv`.`fechaDifTD2` AS `fechaDifTD2`,`fv`.
-                    `fechaDifTD3` AS `fechaDifTD3`,`fv`.`fechaDifTR1` AS `fechaDifTR1`,`fv`.`fechaHepAD1` AS `fechaHepAD1`,`fv`.`fechaHepAD2` AS `fechaHepAD2`,
-                    `fv`.`fechaHepAR1` AS `fechaHepAR1`,`fv`.`fechaHepBD1` AS `fechaHepBD1`,`fv`.`fechaHepBD2` AS `fechaHepBD2`,`fv`.`fechaHepBD3` AS `fechaHepBD3`,
-                    `fv`.`fechaInflR1` AS `fechaInflR1`,`fv`.`fechaInflR2` AS `fechaInflR2`,`fv`.`fechaPolioD1` AS `fechaPolioD1`,`fv`.`fechaTrivD1` AS `fechaTrivD1`,
-                    `fv`.`fechaRabD1` AS `fechaRabD1`,`fv`.`fechaRabD2` AS `fechaRabD2`,`fv`.`fechaRabD3` AS `fechaRabD3`,`fv`.`fechaRabR1` AS `fechaRabR1`,
-                    `fv`.`fechaTifoR1` AS `fechaTifoR1`,`fv`.`fechaTifoR2` AS `fechaTifoR2`,`fv`.`fechaNeumR1` AS `fechaNeumR1`,`fv`.`fechaNeumR2` AS `fechaNeumR2`,
-                    `fv`.`fechaCovidD1` AS `fechaCovidD1`,`fv`.`fechaCovidD2` AS `fechaCovidD2`,`fv`.`fechaCovidD3` AS `fechaCovidD3`,`fv`.`fechaCovidD4` AS `fechaCovidD4` 
-                    from ((((((`medica`.`fichas_api` `fa` 
-                    left join `medica`.`fichas_empleados` `fe` on(`fa`.`dni` = `fe`.`dni`)) 
-                    left join `medica`.`fichas_api` `vrp1` on(`vrp1`.`idreg` = `fa`.`idreg`)) 
-                    left join `medica`.`fichas_api` `vrp2` on(`vrp2`.`idreg` = `fa`.`idreg`))
-                    left join `medica`.`fichas_api` `vrr` on(`vrr`.`idreg` = `fa`.`idreg`)) 
-                    left join `medica`.`fichas_vacunacion` `fv` on(`fv`.`dni` = `fa`.`dni`)) 
-                    left join `medica`.`lista_clinicas` `lc` on(`lc`.`id` = `fa`.`clinica`)) 
-                    where (`fa`.`tipoExa` like '%PREOCUPACIONAL' or `fa`.`tipoExa` like '%EMPO' OR `vrp1`.tipoExa LIKE '%PERIODICO' OR vrr.tipoExa LIKE '%RETIRO') AND ccostos LIKE '$ccostos%' GROUP BY dni";             
-            $statement = $pdo->prepare($sql);
-            $statement ->execute();
-            $result = $statement ->fetchAll();
-            $rowCount = $statement -> rowcount();
-
-            if ($rowCount > 0) {
-                foreach($result as $row) {
-                    $cc =explode(" ",$row['ccostos']);
-                    switch($cc[0]){
-                        case "0200":
-                            $centro = "ADMINISTRACION DE OFICINA";
-                            break;
-                        case "2800":
-                            $centro = "MALVINAS";
-                            break;
-                        default:
-                            $centro = "OTROS";
-                            break;
-                    }
-                    $lista[]= array(
-                        "empleadonomb"=>$row['empleadonomb'],
-                        "fecnac"=> date("d/m/Y", strtotime($row['fecnac'])),
-                        "dni"=>$row['dni'],
-                        "edad"=> $row['edad'],
-                        "ccostos"=>$centro,
-                        "cargo"=>$row['cargo'],
-                        "empresa"=>"SEPCON",
-                        "correo"=>$row['correo'],
-                        "telefono"=>$row['telefono'],
-                        "grupoSangre"=>$row['grupoSangre'],
-                        "alergias"=>$row['alergias'],
-                        "fecha"=>date("d/m/Y", strtotime($row['fecha'])),
-                        "nomb_clinica"=>$row['nomb_clinica'],
-                        "aptitud"=>$row['aptitud'],
-                        "peso"=>$row['peso'],
-                        "talla"=>$row['talla'],
-                        "imc"=>$row['imc'],
-                        "estadoNutricional"=>$row['estadoNutricional'],
-                        "enviado"=>$row['enviado'],
-                        "programadopre"=>date("d/m/Y", strtotime($row['programadopre'])),
-                        "f_per1"=>date("d/m/Y", strtotime($row['f_per1'])),
-                        "f_cln1"=>$row['f_cln1'],
-                        "f_act1"=>$row['f_act1'],
-                        "f_pes1"=>$row['f_pes1'],
-                        "f_tal1"=>$row['f_tal1'],
-                        "f_imc1"=>$row['f_imc1'],
-                        "f_est1"=>$row['f_est1'], 
-                        "f_env1"=>$row['f_env1'], 
-                        "programado1"=>date("d/m/Y", strtotime($row['programado1'])),
-                        "f_per2"      =>date("d/m/Y", strtotime($row['f_per2'])),
-                        "f_cln2"=>$row['f_cln2'],
-                        "f_act2"=>$row['f_act2'], 
-                        "f_pes2"=>$row['f_pes2'], 
-                        "f_tal2"=>$row['f_tal2'], 
-                        "f_imc2"=>$row['f_imc2'], 
-                        "f_est2"=>$row['f_est2'], 
-                        "f_env2"=>$row['f_env2'],
-                        "programado2"=>date("d/m/Y", strtotime($row['programado2'])),
-                        "f_retiro"=>date("d/m/Y", strtotime($row['f_retiro'])),
-                        "clinica"=>$row['clinica'],
-                        "observaciones"=>$row['observaciones'],
-                        "f_envr"=>$row['f_envr'],
-                        "fechaFbrAmarilla"=>date("d/m/Y", strtotime($row['fechaFbrAmarilla'])),
-                        "fechaDifTD1"=>date("d/m/Y", strtotime($row['fechaDifTD1'])),
-                        "fechaDifTD2"=>date("d/m/Y", strtotime($row['fechaDifTD2'])),
-                        "fechaDifTD3"=>date("d/m/Y", strtotime($row['fechaDifTD3'])),
-                        "fechaDifTR1"=> date("d/m/Y", strtotime($row['fechaDifTR1'])),                        
-                        "fechaHepAD1"=>date("d/m/Y", strtotime($row['fechaHepAD1'])),   
-                        "fechaHepAD2"=>date("d/m/Y", strtotime($row['fechaHepAD2'])),   
-                        "fechaHepAR1"=>date("d/m/Y", strtotime($row['fechaHepAR1'])),   
-                        "fechaHepBD1"=>date("d/m/Y", strtotime($row['fechaHepBD1'])),   
-                        "fechaHepBD2"=>date("d/m/Y", strtotime($row['fechaHepBD2'])),   
-                        "fechaHepBD3"=>date("d/m/Y", strtotime($row['fechaHepBD3'])),   
-                        "fechaInflR1"=>date("d/m/Y", strtotime($row['fechaInflR1'])),   
-                        "fechaInflR2"=>date("d/m/Y", strtotime($row['fechaInflR2'])),   
-                        "fechaPolioD1"=>date("d/m/Y", strtotime($row['fechaPolioD1'])),   
-                        "fechaTrivD1"=>date("d/m/Y", strtotime($row['fechaTrivD1'])),
-                        "fechaRabD1"=>date("d/m/Y", strtotime($row['fechaRabD1'])),
-                        "fechaRabD2"=>date("d/m/Y", strtotime($row['fechaRabD2'])),
-                        "fechaRabD3"=>date("d/m/Y", strtotime($row['fechaRabD3'])),
-                        "fechaRabR1"=>date("d/m/Y", strtotime($row['fechaRabR1'])),                        
-                        "fechaTifoR1"=>date("d/m/Y", strtotime($row['fechaTifoR1'])),   
-                        "fechaTifoR2"=>date("d/m/Y", strtotime($row['fechaTifoR2'])),   
-                        "fechaNeumR1"=>date("d/m/Y", strtotime($row['fechaNeumR1'])),   
-                        "fechaNeumR2"=>date("d/m/Y", strtotime($row['fechaNeumR2'])),   
-                        "fechaCovidD1"=>date("d/m/Y", strtotime($row['fechaCovidD1'])),   
-                        "fechaCovidD2"=>date("d/m/Y", strtotime($row['fechaCovidD2'])),   
-                        "fechaCovidD3"=>date("d/m/Y", strtotime($row['fechaCovidD3'])),
-                        "fechaCovidD4"=>date("d/m/Y", strtotime($row['fechaCovidD4'])),
-                    );
+            $f=retornoBase($pdo);//luego los parametros se pasan aqui
+            $b=retornoRetiro($pdo); //y aqui
+            $d=retornoPeriodico($pdo);//y aqui
+            $a= unionPeriodico($pdo);
+            $na = count($a);
+            $nb = count($b);
+            $nf = count($f);
+            $c = 0; 
+            if($na>0){
+                for($m=0;$m<$nf;$m++){
+                    $c++;
+                    for($o=0;$o<$nb;$o++){
+                        $fecha_r = $a[$m]['dni']==$b[$o]['dni'] ? $b[$o]['fechar'] : "";
+                        $clinica_r = $a[$m]['dni']==$b[$o]['dni'] ? $b[$o]['nomb_clinica'] : "";
+                        $observ_r = $a[$m]['dni']==$b[$o]['dni'] ? $b[$o]['observaciones'] : "";
+                        $enviado_r = $a[$m]['dni']==$b[$o]['dni'] ? $b[$o]['enviado'] : "";
+                        $lista[]= array(
+                            "num" => $c,
+                            "nombres"=>$a[$m]['empleadonomb'],
+                            "fecnac" => $a[$m]['fecnac'],
+                            "dni"=>$a[$m]['dni'],
+                            "edad"=>$a[$m]['edad'],
+                            "ccostos"=>$a[$m]['ccostos'],
+                            "cargo"=>$a[$m]['cargo'],
+                            "empresa"=>"SEPCON",
+                            "correo"=>$a[$m]['correo'],
+                            "telefono"=>$a[$m]['telefono'],
+                            "grupoSangre"=>$a[$m]['grupoSangre'],
+                            "alergias"=>$a[$m]['alergias'],
+                            "fecha"=>$a[$m]['fecha'],//revisar
+                            "nomb_clinica"=>$a[$m]['nomb_clinica'],
+                            "aptitud"=>$a[$m]['aptitud'],
+                            "peso"=>$a[$m]['peso'],
+                            "talla"=>$a[$m]['talla'],
+                            "imc"=>$a[$m]['imc'],
+                            "estadoNutricional"=>$a[$m]['estadoNutricional'],
+                            "enviado"=>$a[$m]['enviado'],
+                            "programadopre"=>$a[$m]['programadopre'],
+                            "f_per1"=>$a[$m]['fechap1'],
+                            "f_cln1"=>$a[$m]['clinica1'],
+                            "f_act1"=>$a[$m]['aptitud1'],
+                            "f_pes1"=>$a[$m]['peso1'],
+                            "f_tal1"=>$a[$m]['talla1'],
+                            "f_imc1"=>$a[$m]['imc1'],
+                            "f_est1"=>$a[$m]['estadoNutricional1'],
+                            "f_env1"=>$a[$m]['enviado1'],
+                            "programado1"=>$a[$m]['programado1'],
+                            "f_per2"=>$a[$m]['fechap2'],
+                            "f_cln2"=>$a[$m]['clinica2'],
+                            "f_act2"=>$a[$m]['aptitud2'],
+                            "f_pes2"=>$a[$m]['peso2'],
+                            "f_tal2"=>$a[$m]['talla2'],
+                            "f_imc2"=>$a[$m]['imc2'],
+                            "f_est2"=>$a[$m]['estadoNutricional2'],
+                            "f_env2"=>$a[$m]['enviado2'],
+                            "programado2"=>$a[$m]['programado2'],
+                            "fechap3"=>$a[$m]['fechap3'],
+                            "clinica3"=>$a[$m]['clinica3'],
+                            "aptitud3"=>$a[$m]['aptitud3'],
+                            "peso3"=>$a[$m]['peso3'],
+                            "talla3"=>$a[$m]['talla3'],
+                            "imc3"=>$a[$m]['imc3'],
+                            "estadoNutricional3"=>$a[$m]['estadoNutricional3'],
+                            "enviado3"=>$a[$m]['enviado3'],
+                            "programado3"=>$a[$m]['programado3'],
+                            "fechap4"=>$a[$m]['fechap4'],
+                            "clinica4"=>$a[$m]['clinica4'],
+                            "aptitud4"=>$a[$m]['aptitud4'],
+                            "peso4"=>$a[$m]['peso4'],
+                            "talla4"=>$a[$m]['talla4'],
+                            "imc4"=>$a[$m]['imc4'],
+                            "estadoNutricional4"=>$a[$m]['estadoNutricional4'],
+                            "enviado4"=>$a[$m]['enviado4'],
+                            "programado4"=>$a[$m]['programado4'],
+                            "fechap5"=>$a[$m]['fechap5'],
+                            "clinica5"=>$a[$m]['clinica5'],
+                            "aptitud5"=>$a[$m]['aptitud5'],
+                            "peso5"=>$a[$m]['peso5'],
+                            "talla5"=>$a[$m]['talla5'],
+                            "imc5"=>$a[$m]['imc5'],
+                            "estadoNutricional5"=>$a[$m]['estadoNutricional5'],
+                            "enviado5"=>$a[$m]['enviado5'],
+                            "programado5"=>$a[$m]['programado5'],
+                            "f_retiro" =>$fecha_r,
+                            "clinica_r"=>$clinica_r,
+                            "observ_r" =>$observ_r,
+                            "f_envr" =>$enviado_r,
+                            "fechaFbrAmarilla" =>$a[$m]['fechaFbrAmarilla'],
+                            "fechaDifTD1" =>$a[$m]['fechaDifTD1'],
+                            "fechaDifTD2" =>$a[$m]['fechaDifTD2'],
+                            "fechaDifTD3" =>$a[$m]['fechaDifTD3'],
+                            "fechaDifTR1" =>$a[$m]['fechaDifTR1'],
+                            "fechaHepAD1" =>$a[$m]['fechaHepAD1'],
+                            "fechaHepAD2" =>$a[$m]['fechaHepAD2'],
+                            "fechaHepAR1" =>$a[$m]['fechaHepAR1'],
+                            "fechaHepBD1" =>$a[$m]['fechaHepBD1'],
+                            "fechaHepBD2" =>$a[$m]['fechaHepBD2'],
+                            "fechaHepBD3" =>$a[$m]['fechaHepBD3'],
+                            "fechaInflR1" =>$a[$m]['fechaInflR1'],
+                            "fechaInflR2" =>$a[$m]['fechaInflR2'],
+                            "fechaPolioD1" =>$a[$m]['fechaPolioD1'],
+                            "fechaTrivD1" =>$a[$m]['fechaTrivD1'],
+                            "fechaRabD1" =>$a[$m]['fechaRabD1'],
+                            "fechaRabD2" =>$a[$m]['fechaRabD2'],
+                            "fechaRabD3" =>$a[$m]['fechaRabD3'],
+                            "fechaRabR1" =>$a[$m]['fechaRabR1'],
+                            "fechaTifoR1" =>$a[$m]['fechaTifoR1'],
+                            "fechaTifoR2" =>$a[$m]['fechaTifoR2'],
+                            "fechaNeumR1" =>$a[$m]['fechaNeumR1'],
+                            "fechaNeumR2" =>$a[$m]['fechaNeumR2'],
+                            "fechaCovidD1" =>$a[$m]['fechaCovidD1'],
+                            "fechaCovidD2" =>$a[$m]['fechaCovidD2'],
+                            "fechaCovidD3" =>$a[$m]['fechaCovidD3'],
+                            "fechaCovidD4" =>$a[$m]['fechaCovidD4']);
+                        }
                 }
+                return $lista;
             }
-            return $lista;
-    
         } catch(PDOException $th) {
             echo $th->getMessage();
             return false;
         }
     }
 
-    function formato001($pdo,$ccostos,$dni,$estado){
+    function formato001($pdo,$ccostos,$dni,$activo,$cesado){
         try{
             $lista = [];
-            $sql ="SELECT fe.cut,fa.paciente AS empleadonomb,fe.correo,fe.dni,fe.dcargo AS cargo,fe.dcostos AS ccostos,f.direccion,f.telefono,
-                        fa.edad,fe.dsede AS sede,fa.codSexo AS sexo,fa.fecNaci AS fecnac,fe.estado,
-                        fa.idreg,fa.acidoUrico,fa.aglutinaciones,fa.alergias,fa.anfetaminas,fa.antFamiliares,
-                        fa.antece1,fa.antece2,fa.antece3,fa.antece4,fa.antece5,
-                        fa.antece6,fa.aptitud,fa.atencion,fa.audiometria,fa.benceno,
-                        fa.benzodiacepinas,fa.bilirrubina,fa.bk,fa.carboxihemo,fa.cardiologia,
-                        fa.cea,fa.celulasEpiteliales,fa.centroCosto,fa.cervical,fa.cheFrca,
-                        fa.cheFrre,fa.cilindros,fa.cirugias,fa.cocaina,fa.coccidias,
-                        fa.cod1,fa.cod2,fa.cod3,fa.cod4,fa.cod5,
-                        fa.cod6,fa.cod7,fa.cod8,fa.cod9,fa.cod10,
-                        fa.codPaci,fa.codSexo,fa.colTotalHdl,fa.colesterol,fa.coprocultivo,
-                        fa.creatinina,fa.cristales,fa.cuerposCetonicos,fa.dermatologia,fa.desAseg,
-                        fa.diagno1,fa.diagno2,fa.diagno3,fa.diagno4,fa.diagno5,
-                        fa.diagno7,fa.diagno6,fa.diagno8,fa.diagno9,fa.diagno10,
-                        fa.eAspecto,fa.eColor,fa.eConsistencia,fa.eMucus,DATE_ADD(fa.fecha,INTERVAL 1 YEAR) AS sgtefecha,
-                        fa.ecoAbdominal,fa.edad,fa.ekg,fa.empresa,fa.espirometria,
-                        fa.estado,fa.estadoNutricional,fa.expoFactorRiesgo,fa.fecNaci,fa.fecPase,
-                        MAX(fa.fecha) AS fecha,fa.filamentoMucoide,fa.fosfaAlca,fa.germenes,fa.ginecologia,
-                        fa.glucosa,fa.gotaGruesa,fa.grasaCorporal,fa.grupoSangre,fa.habiAfisica,
-                        fa.habiTabaco,fa.hcvHepatitisC,fa.hdl,fa.hematies,fa.hematiesHece,
-                        fa.hematocrito,fa.hemoGlico,fa.hemoglobina,fa.hepatitisA,fa.hepatitisB,
-                        fa.huevos,fa.imc,fa.inmunoglobulinaE,fa.ldl,fa.leucocitos,
-                        fa.leucocitosOrina,fa.leucosistosPmn,fa.levaduraOri,fa.levadurasHece,fa.lumbar,
-                        fa.mamografia,fa.marihuana,fa.metaAnfetamina,fa.morfina,fa.neurologia,
-                        fa.nro,fa.nroRuc,fa.ocupacion,fa.odontograma,fa.oftalmologia,
-                        fa.oriAspecto,fa.oriColor,fa.oriDensidad,fa.oriPh,fa.orinaAlbuminia,
-                        fa.orinaAzucar,fa.osteo,fa.otorrino,fa.otoscopia,fa.pEsfuerzo,
-                        fa.paciente,fa.pam,fa.papanicolau,fa.pase,fa.pase2,
-                        fa.periAbdominal,fa.peso,fa.pigmentosBiliares,fa.piocitos,
-                        fa.plaquetas,fa.plomo,fa.presion,fa.psa,fa.psicologia,
-                        fa.puestoPostula,fa.quiste,fa.rayosx,fa.razonSocial,fa.reco1,
-                        fa.reco2,fa.reco3,fa.reco4,fa.reco5,fa.reco6,
-                        fa.reco7,fa.reco8,fa.reco9,fa.reco10,fa.restricciones,
-                        fa.riesgoCoronario,fa.rpr,fa.talla,fa.tarifa,fa.tgo,
-                        fa.tgp,fa.thevenon,fa.tipoExa,fa.tipoPase,fa.tipoPase2,
-                        fa.tolueno,fa.tratamientoMedico,fa.traumatologia,fa.trichomonas,fa.trigliceridos,
-                        fa.trofozoitos,fa.ureaSanguinea,fa.urobilinogeno,fa.vdrl,fa.vih,
-                        fa.vldl,fa.xileno,fa.observaciones,fa.adjunto,fa.enviado,lc.nomb_clinica,
-                        v.fechaFbrAmarilla,v.fechaDifTD1,v.fechaDifTD2,v.fechaDifTD3,v.fechaDifTR1,v.fechaHepAD1,
-                        v.fechaHepAD2,v.fechaHepAR1,v.fechaHepBD1,v.fechaHepBD2,v.fechaHepBD3,v.fechaInflR1,
-                        v.fechaInflR2,v.fechaPolioD1,v.fechaTrivD1,v.fechaRabD1,v.fechaRabD2,v.fechaRabD3,
-                        v.fechaRabR1,v.fechaTifoR1,v.fechaTifoR2,v.fechaNeumR1,v.fechaNeumR2,v.fechaCovidD1,
-                        v.fechaCovidD2,v.fechaCovidD3,v.fechaCovidD4
-                    FROM fichas_api AS fa
-                    LEFT JOIN rrhh.tabla_aquarius AS fe ON fa.dni=fe.dni
-                    LEFT JOIN fichas_empleados AS f ON fa.dni = f.dni
-                    LEFT JOIN fichas_vacunacion AS v ON fa.dni=v.dni
-                    LEFT JOIN lista_clinicas AS lc ON lc.id = fa.clinica
-                    WHERE (fa.dni=? OR NOT EXISTS(SELECT idreg FROM fichas_api fa4 WHERE fa4.dni=?)) AND fe.ccostos LIKE '$ccostos%' AND fe.estado='$estado' GROUP BY fe.dni ORDER BY fa.paciente";  
+            if($dni != "null"){
+                $sql ="SELECT fe.cut,fa.paciente AS empleadonomb,fe.correo,fe.dni,fe.dcargo AS cargo,fe.dcostos AS ccostos,f.direccion,f.telefono,
+                fa.edad,fe.dsede AS sede,fa.codSexo AS sexo,fa.fecNaci AS fecnac,fe.estado,
+                fa.idreg,fa.acidoUrico,fa.aglutinaciones,fa.alergias,fa.anfetaminas,fa.antFamiliares,
+                fa.antece1,fa.antece2,fa.antece3,fa.antece4,fa.antece5,
+                fa.antece6,fa.aptitud,fa.atencion,fa.audiometria,fa.benceno,
+                fa.benzodiacepinas,fa.bilirrubina,fa.bk,fa.carboxihemo,fa.cardiologia,
+                fa.cea,fa.celulasEpiteliales,fa.centroCosto,fa.cervical,fa.cheFrca,
+                fa.cheFrre,fa.cilindros,fa.cirugias,fa.cocaina,fa.coccidias,
+                fa.cod1,fa.cod2,fa.cod3,fa.cod4,fa.cod5,
+                fa.cod6,fa.cod7,fa.cod8,fa.cod9,fa.cod10,
+                fa.codPaci,fa.codSexo,fa.colTotalHdl,fa.colesterol,fa.coprocultivo,
+                fa.creatinina,fa.cristales,fa.cuerposCetonicos,fa.dermatologia,fa.desAseg,
+                fa.diagno1,fa.diagno2,fa.diagno3,fa.diagno4,fa.diagno5,
+                fa.diagno7,fa.diagno6,fa.diagno8,fa.diagno9,fa.diagno10,
+                fa.eAspecto,fa.eColor,fa.eConsistencia,fa.eMucus,DATE_ADD(fa.fecha,INTERVAL 1 YEAR) AS sgtefecha,
+                fa.ecoAbdominal,fa.edad,fa.ekg,fa.empresa,fa.espirometria,
+                fa.estado,fa.estadoNutricional,fa.expoFactorRiesgo,fa.fecNaci,fa.fecPase,
+                fa.fecha AS fecha,fa.filamentoMucoide,fa.fosfaAlca,fa.germenes,fa.ginecologia,
+                fa.glucosa,fa.gotaGruesa,fa.grasaCorporal,fa.grupoSangre,fa.habiAfisica,
+                fa.habiTabaco,fa.hcvHepatitisC,fa.hdl,fa.hematies,fa.hematiesHece,
+                fa.hematocrito,fa.hemoGlico,fa.hemoglobina,fa.hepatitisA,fa.hepatitisB,
+                fa.huevos,fa.imc,fa.inmunoglobulinaE,fa.ldl,fa.leucocitos,
+                fa.leucocitosOrina,fa.leucosistosPmn,fa.levaduraOri,fa.levadurasHece,fa.lumbar,
+                fa.mamografia,fa.marihuana,fa.metaAnfetamina,fa.morfina,fa.neurologia,
+                fa.nro,fa.nroRuc,fa.ocupacion,fa.odontograma,fa.oftalmologia,
+                fa.oriAspecto,fa.oriColor,fa.oriDensidad,fa.oriPh,fa.orinaAlbuminia,
+                fa.orinaAzucar,fa.osteo,fa.otorrino,fa.otoscopia,fa.pEsfuerzo,
+                fa.paciente,fa.pam,fa.papanicolau,fa.pase,fa.pase2,
+                fa.periAbdominal,fa.peso,fa.pigmentosBiliares,fa.piocitos,
+                fa.plaquetas,fa.plomo,fa.presion,fa.psa,fa.psicologia,
+                fa.puestoPostula,fa.quiste,fa.rayosx,fa.razonSocial,fa.reco1,
+                fa.reco2,fa.reco3,fa.reco4,fa.reco5,fa.reco6,
+                fa.reco7,fa.reco8,fa.reco9,fa.reco10,fa.restricciones,
+                fa.riesgoCoronario,fa.rpr,fa.talla,fa.tarifa,fa.tgo,
+                fa.tgp,fa.thevenon,fa.tipoExa,fa.tipoPase,fa.tipoPase2,
+                fa.tolueno,fa.tratamientoMedico,fa.traumatologia,fa.trichomonas,fa.trigliceridos,
+                fa.trofozoitos,fa.ureaSanguinea,fa.urobilinogeno,fa.vdrl,fa.vih,
+                fa.vldl,fa.xileno,fa.observaciones,fa.adjunto,fa.enviado,lc.nomb_clinica,
+                v.fechaFbrAmarilla,v.fechaDifTD1,v.fechaDifTD2,v.fechaDifTD3,v.fechaDifTR1,v.fechaHepAD1,
+                v.fechaHepAD2,v.fechaHepAR1,v.fechaHepBD1,v.fechaHepBD2,v.fechaHepBD3,v.fechaInflR1,
+                v.fechaInflR2,v.fechaPolioD1,v.fechaTrivD1,v.fechaRabD1,v.fechaRabD2,v.fechaRabD3,
+                v.fechaRabR1,v.fechaTifoR1,v.fechaTifoR2,v.fechaNeumR1,v.fechaNeumR2,v.fechaCovidD1,
+                v.fechaCovidD2,v.fechaCovidD3,v.fechaCovidD4
+            FROM fichas_api AS fa
+            LEFT JOIN rrhh.tabla_aquarius AS fe ON fa.dni=fe.dni
+            LEFT JOIN fichas_empleados AS f ON fa.dni = f.dni
+            LEFT JOIN fichas_vacunacion AS v ON fa.dni=v.dni
+            LEFT JOIN lista_clinicas AS lc ON lc.id = fa.clinica
+            WHERE (fa.dni=? OR NOT EXISTS(SELECT idreg FROM fichas_api fa4 WHERE fa4.dni=?))/* AND fe.ccostos LIKE '$ccostos%' AND (fe.estado='$activo'OR fe.estado='$cesado') GROUP BY fe.dni */ORDER BY fa.paciente";
+            }
+            else{
+                $sql ="SELECT fe.cut,fa.paciente AS empleadonomb,fe.correo,fe.dni,fe.dcargo AS cargo,fe.dcostos AS ccostos,f.direccion,f.telefono,
+                fa.edad,fe.dsede AS sede,fa.codSexo AS sexo,fa.fecNaci AS fecnac,fe.estado,
+                fa.idreg,fa.acidoUrico,fa.aglutinaciones,fa.alergias,fa.anfetaminas,fa.antFamiliares,
+                fa.antece1,fa.antece2,fa.antece3,fa.antece4,fa.antece5,
+                fa.antece6,fa.aptitud,fa.atencion,fa.audiometria,fa.benceno,
+                fa.benzodiacepinas,fa.bilirrubina,fa.bk,fa.carboxihemo,fa.cardiologia,
+                fa.cea,fa.celulasEpiteliales,fa.centroCosto,fa.cervical,fa.cheFrca,
+                fa.cheFrre,fa.cilindros,fa.cirugias,fa.cocaina,fa.coccidias,
+                fa.cod1,fa.cod2,fa.cod3,fa.cod4,fa.cod5,
+                fa.cod6,fa.cod7,fa.cod8,fa.cod9,fa.cod10,
+                fa.codPaci,fa.codSexo,fa.colTotalHdl,fa.colesterol,fa.coprocultivo,
+                fa.creatinina,fa.cristales,fa.cuerposCetonicos,fa.dermatologia,fa.desAseg,
+                fa.diagno1,fa.diagno2,fa.diagno3,fa.diagno4,fa.diagno5,
+                fa.diagno7,fa.diagno6,fa.diagno8,fa.diagno9,fa.diagno10,
+                fa.eAspecto,fa.eColor,fa.eConsistencia,fa.eMucus,DATE_ADD(fa.fecha,INTERVAL 1 YEAR) AS sgtefecha,
+                fa.ecoAbdominal,fa.edad,fa.ekg,fa.empresa,fa.espirometria,
+                fa.estado,fa.estadoNutricional,fa.expoFactorRiesgo,fa.fecNaci,fa.fecPase,
+                MAX(fa.fecha) AS fecha,fa.filamentoMucoide,fa.fosfaAlca,fa.germenes,fa.ginecologia,
+                fa.glucosa,fa.gotaGruesa,fa.grasaCorporal,fa.grupoSangre,fa.habiAfisica,
+                fa.habiTabaco,fa.hcvHepatitisC,fa.hdl,fa.hematies,fa.hematiesHece,
+                fa.hematocrito,fa.hemoGlico,fa.hemoglobina,fa.hepatitisA,fa.hepatitisB,
+                fa.huevos,fa.imc,fa.inmunoglobulinaE,fa.ldl,fa.leucocitos,
+                fa.leucocitosOrina,fa.leucosistosPmn,fa.levaduraOri,fa.levadurasHece,fa.lumbar,
+                fa.mamografia,fa.marihuana,fa.metaAnfetamina,fa.morfina,fa.neurologia,
+                fa.nro,fa.nroRuc,fa.ocupacion,fa.odontograma,fa.oftalmologia,
+                fa.oriAspecto,fa.oriColor,fa.oriDensidad,fa.oriPh,fa.orinaAlbuminia,
+                fa.orinaAzucar,fa.osteo,fa.otorrino,fa.otoscopia,fa.pEsfuerzo,
+                fa.paciente,fa.pam,fa.papanicolau,fa.pase,fa.pase2,
+                fa.periAbdominal,fa.peso,fa.pigmentosBiliares,fa.piocitos,
+                fa.plaquetas,fa.plomo,fa.presion,fa.psa,fa.psicologia,
+                fa.puestoPostula,fa.quiste,fa.rayosx,fa.razonSocial,fa.reco1,
+                fa.reco2,fa.reco3,fa.reco4,fa.reco5,fa.reco6,
+                fa.reco7,fa.reco8,fa.reco9,fa.reco10,fa.restricciones,
+                fa.riesgoCoronario,fa.rpr,fa.talla,fa.tarifa,fa.tgo,
+                fa.tgp,fa.thevenon,fa.tipoExa,fa.tipoPase,fa.tipoPase2,
+                fa.tolueno,fa.tratamientoMedico,fa.traumatologia,fa.trichomonas,fa.trigliceridos,
+                fa.trofozoitos,fa.ureaSanguinea,fa.urobilinogeno,fa.vdrl,fa.vih,
+                fa.vldl,fa.xileno,fa.observaciones,fa.adjunto,fa.enviado,lc.nomb_clinica,
+                v.fechaFbrAmarilla,v.fechaDifTD1,v.fechaDifTD2,v.fechaDifTD3,v.fechaDifTR1,v.fechaHepAD1,
+                v.fechaHepAD2,v.fechaHepAR1,v.fechaHepBD1,v.fechaHepBD2,v.fechaHepBD3,v.fechaInflR1,
+                v.fechaInflR2,v.fechaPolioD1,v.fechaTrivD1,v.fechaRabD1,v.fechaRabD2,v.fechaRabD3,
+                v.fechaRabR1,v.fechaTifoR1,v.fechaTifoR2,v.fechaNeumR1,v.fechaNeumR2,v.fechaCovidD1,
+                v.fechaCovidD2,v.fechaCovidD3,v.fechaCovidD4
+            FROM fichas_api AS fa
+            LEFT JOIN rrhh.tabla_aquarius AS fe ON fa.dni=fe.dni
+            LEFT JOIN fichas_empleados AS f ON fa.dni = f.dni
+            LEFT JOIN fichas_vacunacion AS v ON fa.dni=v.dni
+            LEFT JOIN lista_clinicas AS lc ON lc.id = fa.clinica
+            WHERE (fa.dni=? OR NOT EXISTS(SELECT idreg FROM fichas_api fa4 WHERE fa4.dni=?)) AND fe.ccostos LIKE '$ccostos%' AND (fe.estado='$activo'OR fe.estado='$cesado') GROUP BY fe.dni ORDER BY fa.paciente";
+            }
+             
             $statement = $pdo->prepare($sql);
             $statement ->execute(array($dni,$dni));
             $result = $statement ->fetchAll();
@@ -1247,7 +1314,7 @@
         }
         
     }
-
+    //ver la edad por sql luego e.e
     function retornoBase($pdo){
         try{
             $respuesta = false;
@@ -1336,12 +1403,61 @@
         try {
             $respuesta = false;
             $lista = [];
-            $sql = "SELECT fa.dni, fa.fecha, lc.nomb_clinica, fa.aptitud, fa.peso, fa.talla, fa.imc, fa.estadoNutricional, fa.enviado 
-                    FROM `fichas_api` AS fa 
-                    LEFT JOIN lista_clinicas as lc on lc.id = fa.clinica
-                    RIGHT JOIN rrhh.tabla_aquarius AS f ON f.dni = fa.dni
-                    WHERE (fa.tipoExa LIKE '%PERIODICO' OR fa.tipoExa LIKE '%EMOA') AND f.ccostos LIKE '0200%'
-                    ORDER BY fa.dni,fa.fecha ASC";
+            $sql = "SELECT s.dni, 
+                    MAX(CASE WHEN rownum = 1 THEN s.fecha END) as fecha1, 
+                    MAX(CASE WHEN rownum = 1 THEN s.clinica END) as clinica1, 
+                    MAX(CASE WHEN rownum = 1 THEN s.peso END) as peso1, 
+                    MAX(CASE WHEN rownum = 1 THEN s.talla END) as talla1, 
+                    MAX(CASE WHEN rownum = 1 THEN s.imc END) as imc1, 
+                    MAX(CASE WHEN rownum = 1 THEN s.aptitud END) as aptitud1, 
+                    MAX(CASE WHEN rownum = 1 THEN s.estadoNutricional END) as estadoNutricional1, 
+                    MAX(CASE WHEN rownum = 1 THEN s.enviado END) as enviado1,
+                    MAX(CASE WHEN rownum = 1 THEN DATE_ADD(s.fecha, INTERVAL 2 YEAR) END) AS programado1,
+                    MAX(CASE WHEN rownum = 2 THEN s.fecha END) as fecha2, 
+                    MAX(CASE WHEN rownum = 2 THEN s.clinica END) as clinica2,
+                    MAX(CASE WHEN rownum = 2 THEN s.peso END) as peso2, 
+                    MAX(CASE WHEN rownum = 2 THEN s.talla END) as talla2, 
+                    MAX(CASE WHEN rownum = 2 THEN s.imc END) as imc2, 
+                    MAX(CASE WHEN rownum = 2 THEN s.aptitud END) as aptitud2, 
+                    MAX(CASE WHEN rownum = 2 THEN s.estadoNutricional END) as estadoNutricional2, 
+                    MAX(CASE WHEN rownum = 2 THEN s.enviado END) as enviado2, 
+                    MAX(CASE WHEN rownum = 2 THEN DATE_ADD(s.fecha, INTERVAL 2 YEAR) END) AS programado2,
+                    MAX(CASE WHEN rownum = 3 THEN s.fecha END) as fecha3, 
+                    MAX(CASE WHEN rownum = 3 THEN s.clinica END) as clinica3, 
+                    MAX(CASE WHEN rownum = 3 THEN s.peso END) as peso3, 
+                    MAX(CASE WHEN rownum = 3 THEN s.talla END) as talla3, 
+                    MAX(CASE WHEN rownum = 3 THEN s.imc END) as imc3, 
+                    MAX(CASE WHEN rownum = 3 THEN s.aptitud END) as aptitud3, 
+                    MAX(CASE WHEN rownum = 3 THEN s.estadoNutricional END) as estadoNutricional3, 
+                    MAX(CASE WHEN rownum = 3 THEN s.enviado END) as enviado3,
+                    MAX(CASE WHEN rownum = 3 THEN DATE_ADD(s.fecha, INTERVAL 2 YEAR) END) AS programado3,
+                    MAX(CASE WHEN rownum = 4 THEN s.fecha END) as fecha4, 
+                    MAX(CASE WHEN rownum = 4 THEN s.clinica END) as clinica4, 
+                    MAX(CASE WHEN rownum = 4 THEN s.peso END) as peso4, 
+                    MAX(CASE WHEN rownum = 4 THEN s.talla END) as talla4, 
+                    MAX(CASE WHEN rownum = 4 THEN s.imc END) as imc4, 
+                    MAX(CASE WHEN rownum = 4 THEN s.aptitud END) as aptitud4,
+                    MAX(CASE WHEN rownum = 4 THEN s.estadoNutricional END) as estadoNutricional4,  
+                    MAX(CASE WHEN rownum = 4 THEN s.enviado END) as enviado4,
+                    MAX(CASE WHEN rownum = 4 THEN DATE_ADD(s.fecha, INTERVAL 2 YEAR) END) AS programado4,
+                    MAX(CASE WHEN rownum = 5 THEN s.fecha END) as fecha5, 
+                    MAX(CASE WHEN rownum = 5 THEN s.clinica END) as clinica5,
+                    MAX(CASE WHEN rownum = 5 THEN s.peso END) as peso5, 
+                    MAX(CASE WHEN rownum = 5 THEN s.talla END) as talla5, 
+                    MAX(CASE WHEN rownum = 5 THEN s.imc END) as imc5, 
+                    MAX(CASE WHEN rownum = 5 THEN s.aptitud END) as aptitud5, 
+                    MAX(CASE WHEN rownum = 5 THEN s.estadoNutricional END) as estadoNutricional5, 
+                    MAX(CASE WHEN rownum = 5 THEN s.enviado END) as enviado5,
+                    MAX(CASE WHEN rownum = 5 THEN DATE_ADD(s.fecha, INTERVAL 2 YEAR) END) AS programado5
+                    FROM (SELECT fa.dni, fa.fecha, lc.nomb_clinica AS clinica,
+                        fa.peso,fa.talla,fa.imc,fa.aptitud,fa.enviado,fa.estadoNutricional,
+                        @row:=if(@prev=fa.dni, @row,0) + 1 as rownum, @prev:=fa.dni 
+                        FROM fichas_api AS fa 
+                        LEFT JOIN lista_clinicas AS lc ON lc.id=fa.clinica, 
+                        (SELECT @row:=0, @prev:=null) r  
+                        WHERE fa.tipoExa LIKE '%PERIODICO' AND fa.centroCosto LIKE '0200%' 
+                        ORDER BY fa.dni, fa.fecha ) s 
+                    GROUP BY s.dni ORDER BY s.dni,s.fecha";
             $statement = $pdo->prepare($sql);//ORDER BY DATE ASC
             $statement ->execute();
             $result = $statement ->fetchAll();
@@ -1350,14 +1466,51 @@
                 foreach($result as $row) {
                     $lista[] = array(
                         "dni"=>$row['dni'],
-                        "fechap"=>date("d/m/Y", strtotime($row['fecha'])),
-                        "nomb_clinica"=>$row['nomb_clinica'],
-                        "aptitud"=>$row['aptitud'],
-                        "peso"=>$row['peso'],
-                        "talla"=>$row['talla'],
-                        "imc"=>$row['imc'],
-                        "estadoNutricional"=>$row['estadoNutricional'],
-                        "enviado"=>$row['enviado']
+                        "fechap1"=>date("d/m/Y", strtotime($row['fecha1'])),
+                        "clinica1"=>$row['clinica1'],
+                        "aptitud1"=>$row['aptitud1'],
+                        "peso1"=>$row['peso1'],
+                        "talla1"=>$row['talla1'],
+                        "imc1"=>$row['imc1'],
+                        "estadoNutricional1"=>$row['estadoNutricional1'],
+                        "enviado1"=>$row['enviado1'],
+                        "programado1"=>date("d/m/Y", strtotime($row['programado1'])),
+                        "fechap2"=>date("d/m/Y", strtotime($row['fecha2'])),
+                        "clinica2"=>$row['clinica2'],
+                        "aptitud2"=>$row['aptitud2'],
+                        "peso2"=>$row['peso2'],
+                        "talla2"=>$row['talla2'],
+                        "imc2"=>$row['imc2'],
+                        "estadoNutricional2"=>$row['estadoNutricional2'],
+                        "enviado2"=>$row['enviado2'],
+                        "programado2"=>date("d/m/Y", strtotime($row['programado2'])),
+                        "fechap3"=>date("d/m/Y", strtotime($row['fecha3'])),
+                        "clinica3"=>$row['clinica3'],
+                        "aptitud3"=>$row['aptitud3'],
+                        "peso3"=>$row['peso3'],
+                        "talla3"=>$row['talla3'],
+                        "imc3"=>$row['imc3'],
+                        "estadoNutricional3"=>$row['estadoNutricional3'],
+                        "enviado3"=>$row['enviado3'],
+                        "programado3"=>date("d/m/Y", strtotime($row['programado3'])),
+                        "fechap4"=>date("d/m/Y", strtotime($row['fecha4'])),
+                        "clinica4"=>$row['clinica4'],
+                        "aptitud4"=>$row['aptitud4'],
+                        "peso4"=>$row['peso4'],
+                        "talla4"=>$row['talla4'],
+                        "imc4"=>$row['imc4'],
+                        "estadoNutricional4"=>$row['estadoNutricional4'],
+                        "enviado4"=>$row['enviado4'],
+                        "programado4"=>date("d/m/Y", strtotime($row['programado4'])),
+                        "fechap5"=>date("d/m/Y", strtotime($row['fecha5'])),
+                        "clinica5"=>$row['clinica5'],
+                        "aptitud5"=>$row['aptitud5'],
+                        "peso5"=>$row['peso5'],
+                        "talla5"=>$row['talla5'],
+                        "imc5"=>$row['imc5'],
+                        "estadoNutricional5"=>$row['estadoNutricional5'],
+                        "enviado5"=>$row['enviado5'],
+                        "programado5"=>date("d/m/Y", strtotime($row['programado5'])),
                     );
                 }
             }
@@ -1375,23 +1528,157 @@
             $na = count($a);
             $d = retornoPeriodico($pdo);
             $nd = count($d);
-            $r=0;
-            for($g=0;$g<$na;$g++){
-                for($p=0;$p<$nd;$p++){
-                    for($z=0;$z<5;$z++){}
-                    $fechap1 = $a[$g]['dni']==$d[$p]['dni'] ? $d[$p]['fechap'] : "";
-                        //$fechap1 = ;
-                    
-                    $salida= array(
-                       // "fecha" => $test,
-                       "dni"=>$a[$g]['dni'],
-                       "fechap"=> $fechap1
-                    );
-                    array_push($lista,$salida);
+            if($na>0){
+                for($g=0;$g<$na;$g++){
+                    for($p=0;$p<$nd;$p++){
+                       // $fechap1 = $a[$g]['dni']==rtrim($d[$p]['dni']) ? "seee" : "nooo";
+                        $fechap1 = $a[$g]['dni']==rtrim($d[$p]['dni']) ? $d[$p]['fechap1'] : "";
+                        $clinica1 = $a[$g]['dni']==rtrim($d[$p]['dni']) ? $d[$p]['clinica1'] : "";
+                        $aptitud1 = $a[$g]['dni']==rtrim($d[$p]['dni']) ? $d[$p]['aptitud1'] : "";
+                        $peso1 = $a[$g]['dni']==rtrim($d[$p]['dni']) ? $d[$p]['peso1'] : "";
+                        $talla1 = $a[$g]['dni']==rtrim($d[$p]['dni']) ? $d[$p]['talla1'] : "";
+                        $imc1 = $a[$g]['dni']==rtrim($d[$p]['dni']) ? $d[$p]['imc1'] : "";
+                        $estadoNutricional1 = $a[$g]['dni']==rtrim($d[$p]['dni']) ? $d[$p]['estadoNutricional1'] : "";
+                        $enviado1 = $a[$g]['dni']==rtrim($d[$p]['dni']) ? $d[$p]['enviado1'] : "";
+                        $programado1 = $a[$g]['dni']==rtrim($d[$p]['dni']) ? $d[$p]['programado1'] : "";
+                        $fechap2 = $a[$g]['dni']==rtrim($d[$p]['dni']) ? $d[$p]['fechap2'] : "";
+                        $clinica2 = $a[$g]['dni']==rtrim($d[$p]['dni']) ? $d[$p]['clinica2'] : "";
+                        $aptitud2 = $a[$g]['dni']==rtrim($d[$p]['dni']) ? $d[$p]['aptitud2'] : "";
+                        $peso2 = $a[$g]['dni']==rtrim($d[$p]['dni']) ? $d[$p]['peso2'] : "";
+                        $talla2 = $a[$g]['dni']==rtrim($d[$p]['dni']) ? $d[$p]['talla2'] : "";
+                        $imc2 = $a[$g]['dni']==rtrim($d[$p]['dni']) ? $d[$p]['imc2'] : "";
+                        $estadoNutricional2 = $a[$g]['dni']==rtrim($d[$p]['dni']) ? $d[$p]['estadoNutricional2'] : "";
+                        $enviado2 = $a[$g]['dni']==rtrim($d[$p]['dni']) ? $d[$p]['enviado2'] : "";
+                        $programado2 = $a[$g]['dni']==rtrim($d[$p]['dni']) ? $d[$p]['programado2'] : "";
+                        $fechap3 = $a[$g]['dni']==rtrim($d[$p]['dni']) ? $d[$p]['fechap3'] : "";
+                        $clinica3 = $a[$g]['dni']==rtrim($d[$p]['dni']) ? $d[$p]['clinica3'] : "";
+                        $aptitud3 = $a[$g]['dni']==rtrim($d[$p]['dni']) ? $d[$p]['aptitud3'] : "";
+                        $peso3 = $a[$g]['dni']==rtrim($d[$p]['dni']) ? $d[$p]['peso3'] : "";
+                        $talla3 = $a[$g]['dni']==rtrim($d[$p]['dni']) ? $d[$p]['talla3'] : "";
+                        $imc3 = $a[$g]['dni']==rtrim($d[$p]['dni']) ? $d[$p]['imc3'] : "";
+                        $estadoNutricional3 = $a[$g]['dni']==rtrim($d[$p]['dni']) ? $d[$p]['estadoNutricional3'] : "";
+                        $enviado3 = $a[$g]['dni']==rtrim($d[$p]['dni']) ? $d[$p]['enviado3'] : "";
+                        $programado3 = $a[$g]['dni']==rtrim($d[$p]['dni']) ? $d[$p]['programado3'] : "";
+                        $fechap4 = $a[$g]['dni']==rtrim($d[$p]['dni']) ? $d[$p]['fechap4'] : "";
+                        $clinica4 = $a[$g]['dni']==rtrim($d[$p]['dni']) ? $d[$p]['clinica4'] : "";
+                        $aptitud4 = $a[$g]['dni']==rtrim($d[$p]['dni']) ? $d[$p]['aptitud4'] : "";
+                        $peso4 = $a[$g]['dni']==rtrim($d[$p]['dni']) ? $d[$p]['peso4'] : "";
+                        $talla4 = $a[$g]['dni']==rtrim($d[$p]['dni']) ? $d[$p]['talla4'] : "";
+                        $imc4 = $a[$g]['dni']==rtrim($d[$p]['dni']) ? $d[$p]['imc4'] : "";
+                        $estadoNutricional4 = $a[$g]['dni']==rtrim($d[$p]['dni']) ? $d[$p]['estadoNutricional4'] : "";
+                        $enviado4 = $a[$g]['dni']==rtrim($d[$p]['dni']) ? $d[$p]['enviado4'] : "";
+                        $programado4 = $a[$g]['dni']==rtrim($d[$p]['dni']) ? $d[$p]['programado4'] : "";
+                        $fechap5 = $a[$g]['dni']==rtrim($d[$p]['dni']) ? $d[$p]['fechap5'] : "";
+                        $clinica5 = $a[$g]['dni']==rtrim($d[$p]['dni']) ? $d[$p]['clinica5'] : "";
+                        $aptitud5 = $a[$g]['dni']==rtrim($d[$p]['dni']) ? $d[$p]['aptitud5'] : "";
+                        $peso5 = $a[$g]['dni']==rtrim($d[$p]['dni']) ? $d[$p]['peso5'] : "";
+                        $talla5 = $a[$g]['dni']==rtrim($d[$p]['dni']) ? $d[$p]['talla5'] : "";
+                        $imc5 = $a[$g]['dni']==rtrim($d[$p]['dni']) ? $d[$p]['imc5'] : "";
+                        $estadoNutricional5 = $a[$g]['dni']==rtrim($d[$p]['dni']) ? $d[$p]['estadoNutricional5'] : "";
+                        $enviado5 = $a[$g]['dni']==rtrim($d[$p]['dni']) ? $d[$p]['enviado5'] : "";
+                        $programado5 = $a[$g]['dni']==rtrim($d[$p]['dni']) ? $d[$p]['programado5'] : "";
+                        $lista[]= array(
+                           // "fecha" => $test,
+                           "empleadonomb"=>$a[$g]['empleadonomb'],
+                            "fecnac" => $a[$g]['fecnac'],
+                            "edad"=>$a[$g]['edad'],
+                            "dni"=>$a[$g]['dni'],
+                            "ccostos"=>$a[$g]['ccostos'],
+                            "cargo"=>$a[$g]['cargo'],
+                            "empresa"=>"SEPCON",
+                            "correo"=>$a[$g]['correo'],
+                            "telefono"=>$a[$g]['telefono'],
+                            "grupoSangre"=>$a[$g]['grupoSangre'],
+                            "alergias"=>$a[$g]['alergias'],
+                            "fecha"=>$a[$g]['fecha'],//revisar
+                            "nomb_clinica"=>$a[$g]['nomb_clinica'],
+                            "aptitud"=>$a[$g]['aptitud'],
+                            "peso"=>$a[$g]['peso'],
+                            "talla"=>$a[$g]['talla'],
+                            "imc"=>$a[$g]['imc'],
+                            "estadoNutricional"=>$a[$g]['estadoNutricional'],
+                            "enviado"=>$a[$g]['enviado'],
+                            "programadopre"=>$a[$g]['programadopre'],
+                           "fechap1"=> $fechap1,
+                           "clinica1"=> $clinica1,
+                           "aptitud1"=> $aptitud1,
+                           "peso1"=> $peso1,
+                           "talla1"=> $talla1,
+                           "imc1"=> $imc1,
+                           "estadoNutricional1"=> $estadoNutricional1,
+                           "enviado1"=> $enviado1,
+                           "programado1"=>$programado1,
+                           "fechap2"=> $fechap2,
+                           "clinica2"=> $clinica2,
+                           "aptitud2"=> $aptitud2,
+                           "peso2"=> $peso2,
+                           "talla2"=> $talla2,
+                           "imc2"=> $imc2,
+                           "estadoNutricional2"=> $estadoNutricional2,
+                           "enviado2"=> $enviado2,
+                           "programado2"=>$programado2,
+                           "fechap3"=> $fechap3,
+                           "clinica3"=> $clinica3,
+                           "aptitud3"=> $aptitud3,
+                           "peso3"=> $peso3,
+                           "talla3"=> $talla3,
+                           "imc3"=> $imc3,
+                           "estadoNutricional3"=> $estadoNutricional3,
+                           "enviado3"=> $enviado3,
+                           "programado3"=>$programado3,
+                           "fechap4"=> $fechap4,
+                           "clinica4"=> $clinica4,
+                            "aptitud4"=> $aptitud4,
+                           "peso4"=> $peso4,
+                           "talla4"=> $talla4,
+                           "imc4"=> $imc4,
+                           "estadoNutricional4"=> $estadoNutricional4,
+                           "enviado4"=> $enviado4,
+                           "programado4"=>$programado4,
+                           "fechap5"=> $fechap5,
+                           "clinica5"=> $clinica5,
+                           "aptitud5"=> $aptitud5,
+                           "peso5"=> $peso5,
+                           "talla5"=> $talla5,
+                           "imc5"=> $imc5,
+                           "estadoNutricional5"=> $estadoNutricional5,
+                           "enviado5"=> $enviado5,
+                           "programado5"=>$programado5,
+                           "fechaFbrAmarilla" =>$a[$g]['fechaFbrAmarilla'],
+                            "fechaDifTD1" =>$a[$g]['fechaDifTD1'],
+                            "fechaDifTD2" =>$a[$g]['fechaDifTD2'],
+                            "fechaDifTD3" =>$a[$g]['fechaDifTD3'],
+                            "fechaDifTR1" =>$a[$g]['fechaDifTR1'],
+                            "fechaHepAD1" =>$a[$g]['fechaHepAD1'],
+                            "fechaHepAD2" =>$a[$g]['fechaHepAD2'],
+                            "fechaHepAR1" =>$a[$g]['fechaHepAR1'],
+                            "fechaHepBD1" =>$a[$g]['fechaHepBD1'],
+                            "fechaHepBD2" =>$a[$g]['fechaHepBD2'],
+                            "fechaHepBD3" =>$a[$g]['fechaHepBD3'],
+                            "fechaInflR1" =>$a[$g]['fechaInflR1'],
+                            "fechaInflR2" =>$a[$g]['fechaInflR2'],
+                            "fechaPolioD1" =>$a[$g]['fechaPolioD1'],
+                            "fechaTrivD1" =>$a[$g]['fechaTrivD1'],
+                            "fechaRabD1" =>$a[$g]['fechaRabD1'],
+                            "fechaRabD2" =>$a[$g]['fechaRabD2'],
+                            "fechaRabD3" =>$a[$g]['fechaRabD3'],
+                            "fechaRabR1" =>$a[$g]['fechaRabR1'],
+                            "fechaTifoR1" =>$a[$g]['fechaTifoR1'],
+                            "fechaTifoR2" =>$a[$g]['fechaTifoR2'],
+                            "fechaNeumR1" =>$a[$g]['fechaNeumR1'],
+                            "fechaNeumR2" =>$a[$g]['fechaNeumR2'],
+                            "fechaCovidD1" =>$a[$g]['fechaCovidD1'],
+                            "fechaCovidD2" =>$a[$g]['fechaCovidD2'],
+                            "fechaCovidD3" =>$a[$g]['fechaCovidD3'],
+                            "fechaCovidD4" =>$a[$g]['fechaCovidD4']
+                                );
+                      //  array_push($lista,$salida);
+                      //$lista[] = array($d[$p]['dni']);
 
+                    }
                 }
             }
-            return $salida;
+            return $lista;
         } catch(PDOException $th) {
             echo $th->getMessage();
             return false;
@@ -1430,19 +1717,20 @@
         }
     }
 
-    function union006($pdo){
+    function union006($pdo){//vercomo intercambia con el js
         try{
             $respuesta = false;
             $lista = [];
-            $a=retornoBase($pdo);
+            $f=retornoBase($pdo);
             $b=retornoRetiro($pdo); 
             $d=retornoPeriodico($pdo);
-            $f= unionPeriodico($pdo);
+            $a= unionPeriodico($pdo);
             $na = count($a);
             $nb = count($b);
+            $nf = count($f);
             $c = 0; 
             if($na>0){
-                for($m=0;$m<$na;$m++){
+                for($m=0;$m<$nf;$m++){
                     $c++;
                     for($o=0;$o<$nb;$o++){
                         $fecha_r = $a[$m]['dni']==$b[$o]['dni'] ? $b[$o]['fechar'] : "";
@@ -1455,7 +1743,6 @@
                             "fecnac" => $a[$m]['fecnac'],
                             "dni"=>$a[$m]['dni'],
                             "edad"=>$a[$m]['edad'],
-                            "dni"=>$a[$m]['dni'],
                             "ccostos"=>$a[$m]['ccostos'],
                             "cargo"=>$a[$m]['cargo'],
                             "empresa"=>"SEPCON",
@@ -1472,37 +1759,82 @@
                             "estadoNutricional"=>$a[$m]['estadoNutricional'],
                             "enviado"=>$a[$m]['enviado'],
                             "programadopre"=>$a[$m]['programadopre'],
-                            "retiro" =>$fecha_r,
+                            "f_per1"=>$a[$m]['fechap1'],
+                            "f_cln1"=>$a[$m]['clinica1'],
+                            "f_act1"=>$a[$m]['aptitud1'],
+                            "f_pes1"=>$a[$m]['peso1'],
+                            "f_tal1"=>$a[$m]['talla1'],
+                            "f_imc1"=>$a[$m]['imc1'],
+                            "f_est1"=>$a[$m]['estadoNutricional1'],
+                            "f_env1"=>$a[$m]['enviado1'],
+                            "programado1"=>$a[$m]['programado1'],
+                            "f_per2"=>$a[$m]['fechap2'],
+                            "f_cln2"=>$a[$m]['clinica2'],
+                            "f_act2"=>$a[$m]['aptitud2'],
+                            "f_pes2"=>$a[$m]['peso2'],
+                            "f_tal2"=>$a[$m]['talla2'],
+                            "f_imc2"=>$a[$m]['imc2'],
+                            "f_est2"=>$a[$m]['estadoNutricional2'],
+                            "f_env2"=>$a[$m]['enviado2'],
+                            "programado2"=>$a[$m]['programado2'],
+                            "fechap3"=>$a[$m]['fechap3'],
+                            "clinica3"=>$a[$m]['clinica3'],
+                            "aptitud3"=>$a[$m]['aptitud3'],
+                            "peso3"=>$a[$m]['peso3'],
+                            "talla3"=>$a[$m]['talla3'],
+                            "imc3"=>$a[$m]['imc3'],
+                            "estadoNutricional3"=>$a[$m]['estadoNutricional3'],
+                            "enviado3"=>$a[$m]['enviado3'],
+                            "programado3"=>$a[$m]['programado3'],
+                            "fechap4"=>$a[$m]['fechap4'],
+                            "clinica4"=>$a[$m]['clinica4'],
+                            "aptitud4"=>$a[$m]['aptitud4'],
+                            "peso4"=>$a[$m]['peso4'],
+                            "talla4"=>$a[$m]['talla4'],
+                            "imc4"=>$a[$m]['imc4'],
+                            "estadoNutricional4"=>$a[$m]['estadoNutricional4'],
+                            "enviado4"=>$a[$m]['enviado4'],
+                            "programado4"=>$a[$m]['programado4'],
+                            "fechap5"=>$a[$m]['fechap5'],
+                            "clinica5"=>$a[$m]['clinica5'],
+                            "aptitud5"=>$a[$m]['aptitud5'],
+                            "peso5"=>$a[$m]['peso5'],
+                            "talla5"=>$a[$m]['talla5'],
+                            "imc5"=>$a[$m]['imc5'],
+                            "estadoNutricional5"=>$a[$m]['estadoNutricional5'],
+                            "enviado5"=>$a[$m]['enviado5'],
+                            "programado5"=>$a[$m]['programado5'],
+                            "f_retiro" =>$fecha_r,
                             "clinica_r"=>$clinica_r,
                             "observ_r" =>$observ_r,
-                            "enviado_r" =>$enviado_r,
-                            "fechaFbrA" =>$a[$m]['fechaFbrAmarilla'],
-                            "fechaDTD1" =>$a[$m]['fechaDifTD1'],
-                            "fechaDTD2" =>$a[$m]['fechaDifTD2'],
-                            "fechaDTD3" =>$a[$m]['fechaDifTD3'],
-                            "fechaDTR1" =>$a[$m]['fechaDifTR1'],
-                            "fechaHAD1" =>$a[$m]['fechaHepAD1'],
-                            "fechaHAD2" =>$a[$m]['fechaHepAD2'],
-                            "fechaHAR1" =>$a[$m]['fechaHepAR1'],
-                            "fechaHBD1" =>$a[$m]['fechaHepBD1'],
-                            "fechaHBD2" =>$a[$m]['fechaHepBD2'],
-                            "fechaHBD3" =>$a[$m]['fechaHepBD3'],
-                            "fechaIFR1" =>$a[$m]['fechaInflR1'],
-                            "fechaIFR2" =>$a[$m]['fechaInflR2'],
-                            "fechaPLD1" =>$a[$m]['fechaPolioD1'],
-                            "fechaTVD1" =>$a[$m]['fechaTrivD1'],
-                            "fechaRBD1" =>$a[$m]['fechaRabD1'],
-                            "fechaRBD2" =>$a[$m]['fechaRabD2'],
-                            "fechaRBD3" =>$a[$m]['fechaRabD3'],
-                            "fechaRBR1" =>$a[$m]['fechaRabR1'],
-                            "fechaTFR1" =>$a[$m]['fechaTifoR1'],
-                            "fechaTFR2" =>$a[$m]['fechaTifoR2'],
-                            "fechaNMR1" =>$a[$m]['fechaNeumR1'],
-                            "fechaNMR2" =>$a[$m]['fechaNeumR2'],
-                            "fechaCVD1" =>$a[$m]['fechaCovidD1'],
-                            "fechaCVD2" =>$a[$m]['fechaCovidD2'],
-                            "fechaCVD3" =>$a[$m]['fechaCovidD3'],
-                            "fechaCVD4" =>$a[$m]['fechaCovidD4']);
+                            "f_envr" =>$enviado_r,
+                            "fechaFbrAmarilla" =>$a[$m]['fechaFbrAmarilla'],
+                            "fechaDifTD1" =>$a[$m]['fechaDifTD1'],
+                            "fechaDifTD2" =>$a[$m]['fechaDifTD2'],
+                            "fechaDifTD3" =>$a[$m]['fechaDifTD3'],
+                            "fechaDifTR1" =>$a[$m]['fechaDifTR1'],
+                            "fechaHepAD1" =>$a[$m]['fechaHepAD1'],
+                            "fechaHepAD2" =>$a[$m]['fechaHepAD2'],
+                            "fechaHepAR1" =>$a[$m]['fechaHepAR1'],
+                            "fechaHepBD1" =>$a[$m]['fechaHepBD1'],
+                            "fechaHepBD2" =>$a[$m]['fechaHepBD2'],
+                            "fechaHepBD3" =>$a[$m]['fechaHepBD3'],
+                            "fechaInflR1" =>$a[$m]['fechaInflR1'],
+                            "fechaInflR2" =>$a[$m]['fechaInflR2'],
+                            "fechaPolioD1" =>$a[$m]['fechaPolioD1'],
+                            "fechaTrivD1" =>$a[$m]['fechaTrivD1'],
+                            "fechaRabD1" =>$a[$m]['fechaRabD1'],
+                            "fechaRabD2" =>$a[$m]['fechaRabD2'],
+                            "fechaRabD3" =>$a[$m]['fechaRabD3'],
+                            "fechaRabR1" =>$a[$m]['fechaRabR1'],
+                            "fechaTifoR1" =>$a[$m]['fechaTifoR1'],
+                            "fechaTifoR2" =>$a[$m]['fechaTifoR2'],
+                            "fechaNeumR1" =>$a[$m]['fechaNeumR1'],
+                            "fechaNeumR2" =>$a[$m]['fechaNeumR2'],
+                            "fechaCovidD1" =>$a[$m]['fechaCovidD1'],
+                            "fechaCovidD2" =>$a[$m]['fechaCovidD2'],
+                            "fechaCovidD3" =>$a[$m]['fechaCovidD3'],
+                            "fechaCovidD4" =>$a[$m]['fechaCovidD4']);
                         array_push($lista,$salida);
                     }  
                 }
@@ -1513,7 +1845,8 @@
             }
             $salida = array("respuesta"=>$respuesta,
                                 "lista" => $lista,
-                                "DB" => $f);
+                                "DB" => $f,
+                                "conteo"=> $d);
     
                 return $salida; 
         }catch(PDOException $th) {
@@ -1525,16 +1858,75 @@
 
     function formatoTablas001($pdo,$ccostos,$dni,$activo,$cesado){
         try{
-            $cc =  ["0200","0300","0600"];
+            $cc =  ["0200","0300","0600","2830","3100"];
             $respuesta = false;
             $lista = [];
             if($activo==1){
-                $estado = "AC";
+                $estadoAc = "AC";
             }
-            elseif ($cesado == 1) {
-                $estado = "CE";
+            elseif($activo==0){
+                $estadoAc = "";
             }
-            $sql = "SELECT fe.cut,fa.paciente AS empleadonomb,fe.correo,fe.dni,fe.dcargo AS cargo,fe.dcostos AS ccostos,f.direccion,f.telefono,
+            if ($cesado == 1) {
+                $estadoCe = "CE";
+            }
+            elseif ($cesado == 0) {
+                $estadoCe = "";
+            }
+            if($dni != "null"){
+                $test = "hay un valor";
+                $sql = "SELECT fe.cut,fa.paciente AS empleadonomb,fe.correo,fe.dni,fe.dcargo AS cargo,fe.dcostos AS ccostos,f.direccion,f.telefono,
+                        fa.edad,fe.dsede AS sede,fa.codSexo AS sexo,fa.fecNaci AS fecnac,fe.estado,
+                        fa.idreg,fa.acidoUrico,fa.aglutinaciones,fa.alergias,fa.anfetaminas,fa.antFamiliares,
+                        fa.antece1,fa.antece2,fa.antece3,fa.antece4,fa.antece5,
+                        fa.antece6,fa.aptitud,fa.atencion,fa.audiometria,fa.benceno,
+                        fa.benzodiacepinas,fa.bilirrubina,fa.bk,fa.carboxihemo,fa.cardiologia,
+                        fa.cea,fa.celulasEpiteliales,fa.centroCosto,fa.cervical,fa.cheFrca,
+                        fa.cheFrre,fa.cilindros,fa.cirugias,fa.cocaina,fa.coccidias,
+                        fa.cod1,fa.cod2,fa.cod3,fa.cod4,fa.cod5,
+                        fa.cod6,fa.cod7,fa.cod8,fa.cod9,fa.cod10,
+                        fa.codPaci,fa.codSexo,fa.colTotalHdl,fa.colesterol,fa.coprocultivo,
+                        fa.creatinina,fa.cristales,fa.cuerposCetonicos,fa.dermatologia,fa.desAseg,
+                        fa.diagno1,fa.diagno2,fa.diagno3,fa.diagno4,fa.diagno5,
+                        fa.diagno7,fa.diagno6,fa.diagno8,fa.diagno9,fa.diagno10,
+                        fa.eAspecto,fa.eColor,fa.eConsistencia,fa.eMucus,DATE_ADD(fa.fecha,INTERVAL 1 YEAR) AS sgtefecha,
+                        fa.ecoAbdominal,fa.edad,fa.ekg,fa.empresa,fa.espirometria,
+                        fa.estado,fa.estadoNutricional,fa.expoFactorRiesgo,fa.fecNaci,fa.fecPase,
+                        fa.fecha AS fecha,fa.filamentoMucoide,fa.fosfaAlca,fa.germenes,fa.ginecologia,
+                        fa.glucosa,fa.gotaGruesa,fa.grasaCorporal,fa.grupoSangre,fa.habiAfisica,
+                        fa.habiTabaco,fa.hcvHepatitisC,fa.hdl,fa.hematies,fa.hematiesHece,
+                        fa.hematocrito,fa.hemoGlico,fa.hemoglobina,fa.hepatitisA,fa.hepatitisB,
+                        fa.huevos,fa.imc,fa.inmunoglobulinaE,fa.ldl,fa.leucocitos,
+                        fa.leucocitosOrina,fa.leucosistosPmn,fa.levaduraOri,fa.levadurasHece,fa.lumbar,
+                        fa.mamografia,fa.marihuana,fa.metaAnfetamina,fa.morfina,fa.neurologia,
+                        fa.nro,fa.nroRuc,fa.ocupacion,fa.odontograma,fa.oftalmologia,
+                        fa.oriAspecto,fa.oriColor,fa.oriDensidad,fa.oriPh,fa.orinaAlbuminia,
+                        fa.orinaAzucar,fa.osteo,fa.otorrino,fa.otoscopia,fa.pEsfuerzo,
+                        fa.paciente,fa.pam,fa.papanicolau,fa.pase,fa.pase2,
+                        fa.periAbdominal,fa.peso,fa.pigmentosBiliares,fa.piocitos,
+                        fa.plaquetas,fa.plomo,fa.presion,fa.psa,fa.psicologia,
+                        fa.puestoPostula,fa.quiste,fa.rayosx,fa.razonSocial,fa.reco1,
+                        fa.reco2,fa.reco3,fa.reco4,fa.reco5,fa.reco6,
+                        fa.reco7,fa.reco8,fa.reco9,fa.reco10,fa.restricciones,
+                        fa.riesgoCoronario,fa.rpr,fa.talla,fa.tarifa,fa.tgo,
+                        fa.tgp,fa.thevenon,fa.tipoExa,fa.tipoPase,fa.tipoPase2,
+                        fa.tolueno,fa.tratamientoMedico,fa.traumatologia,fa.trichomonas,fa.trigliceridos,
+                        fa.trofozoitos,fa.ureaSanguinea,fa.urobilinogeno,fa.vdrl,fa.vih,
+                        fa.vldl,fa.xileno,fa.observaciones,fa.adjunto,fa.enviado,lc.nomb_clinica,
+                        v.fechaFbrAmarilla,v.fechaDifTD1,v.fechaDifTD2,v.fechaDifTD3,v.fechaDifTR1,v.fechaHepAD1,
+                        v.fechaHepAD2,v.fechaHepAR1,v.fechaHepBD1,v.fechaHepBD2,v.fechaHepBD3,v.fechaInflR1,
+                        v.fechaInflR2,v.fechaPolioD1,v.fechaTrivD1,v.fechaRabD1,v.fechaRabD2,v.fechaRabD3,
+                        v.fechaRabR1,v.fechaTifoR1,v.fechaTifoR2,v.fechaNeumR1,v.fechaNeumR2,v.fechaCovidD1,
+                        v.fechaCovidD2,v.fechaCovidD3,v.fechaCovidD4
+                    FROM fichas_api AS fa
+                    LEFT JOIN rrhh.tabla_aquarius AS fe ON fa.dni=fe.dni
+                    LEFT JOIN fichas_empleados AS f ON fa.dni = f.dni
+                    LEFT JOIN fichas_vacunacion AS v ON fa.dni=v.dni
+                    LEFT JOIN lista_clinicas AS lc ON lc.id = fa.clinica
+                    WHERE (fa.dni=? OR NOT EXISTS(SELECT idreg FROM fichas_api fa4 WHERE fa4.dni=?)) /*AND fe.ccostos LIKE '$cc[$ccostos]%' AND (fe.estado='$estadoCe' OR fe.estado='$estadoAc') GROUP BY fe.dni*/ ORDER BY fa.paciente";  
+            }else {
+                $test = "no hay un valor";
+                $sql = "SELECT fe.cut,fa.paciente AS empleadonomb,fe.correo,fe.dni,fe.dcargo AS cargo,fe.dcostos AS ccostos,f.direccion,f.telefono,
                         fa.edad,fe.dsede AS sede,fa.codSexo AS sexo,fa.fecNaci AS fecnac,fe.estado,
                         fa.idreg,fa.acidoUrico,fa.aglutinaciones,fa.alergias,fa.anfetaminas,fa.antFamiliares,
                         fa.antece1,fa.antece2,fa.antece3,fa.antece4,fa.antece5,
@@ -1582,7 +1974,9 @@
                     LEFT JOIN fichas_empleados AS f ON fa.dni = f.dni
                     LEFT JOIN fichas_vacunacion AS v ON fa.dni=v.dni
                     LEFT JOIN lista_clinicas AS lc ON lc.id = fa.clinica
-                    WHERE (fa.dni=? OR NOT EXISTS(SELECT idreg FROM fichas_api fa4 WHERE fa4.dni=?)) AND fe.ccostos LIKE '$cc[$ccostos]%' AND fe.estado='$estado' GROUP BY fe.dni ORDER BY fa.paciente";            
+                    WHERE (fa.dni=? OR NOT EXISTS(SELECT idreg FROM fichas_api fa4 WHERE fa4.dni=?)) AND fe.ccostos LIKE '$cc[$ccostos]%' AND (fe.estado='$estadoCe' OR fe.estado='$estadoAc') GROUP BY fe.dni ORDER BY fa.paciente";  
+            }
+                      
             $statement = $pdo->prepare($sql);
             $statement ->execute(array($dni,$dni));
             $result = $statement ->fetchAll();
@@ -1822,7 +2216,7 @@
             }
             $salida = array("respuesta"=>$respuesta,
                             "lista" => $lista,
-                            "DB" => $estado);
+                            "test"=>$test);
 
             return $salida; 
         }catch(PDOException $th) {

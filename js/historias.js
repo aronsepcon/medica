@@ -455,7 +455,7 @@ function listadoDni($e){
                         $documento__identidad.value =dataJson.lista[0].dni == null ? dataJson.datos[0].dni : dataJson.lista[0].dni;
                         $cargo__trabajador.value = dataJson.lista[0].cargo == null ? dataJson.datos[0].cargo : dataJson.lista[0].cargo;
                         $centro_costos.value = dataJson.lista[0].ccostos == null ? dataJson.datos[0].ccostos.slice(0,4) +" "+dataJson.datos[0].sede : dataJson.lista[0].ccostos;
-                        $edad__trabajador.value = dataJson.lista[0].edad == null ? edad : dataJson.lista[0].edad;//aqui xd
+                        $edad__trabajador.value = edad;//aqui xd
                         $sede__trabajador.value = dataJson.lista[0].sede == null ? dataJson.datos[0].sucursal : dataJson.lista[0].sede;
                         $sexo__trabajador.value = dataJson.lista[0].sexo == null ? dataJson.datos[0].sexo : dataJson.lista[0].sexo;
                         $fecha__nacimiento.value = dataJson.lista[0].fecnac == null ? dataJson.datos[0].nacimiento.slice(0,10) : dataJson.lista[0].fecnac;//aqui tmb

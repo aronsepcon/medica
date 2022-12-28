@@ -7,6 +7,9 @@ const $buscar_acceso = document.getElementById('buscar_acceso');
 const $nombre_acceso = document.getElementById("nombre_acceso");
 const $dar_acceso = document.getElementById('dar_acceso');
 const $elegir_acceso = document.getElementById('elegir_acceso');
+const $nombre_terceros = document.getElementById('nombre_terceros');
+const $ruc_terceros = document.getElementById('ruc_terceros');
+const $registrar_terceros = document.getElementById('registrar_terceros');
 
 $buscar_acceso.onkeydown = (e) =>{
     var keycode = e.keyCode || e.which;
@@ -73,5 +76,33 @@ $dar_acceso.onclick = (e) => {
         } catch (error) {
             mostrarMensaje(error,"msj_error");
         }
+    }
+}
+
+$registrar_terceros.onclick = (e) => {
+    e.preventDefault();
+
+    try {
+        let formData = new FormData();
+        formData.append("ruc",$ruc_terceros.value);
+        formData.append("nombre",$nombre_terceros.value);
+        formData.append("funcion","registrarTerceros");
+        fetch('../inc/consultasmedicas.inc.php',{
+            method: "POST",
+            body:formData,
+        })
+        .then(function(response){
+            return response.json();
+        })
+        .then(dataJson => {
+            if (dataJson.respuesta){
+                mostrarMensaje("Se ha Registrado el RUC","msj_correct");
+            }
+            else{
+                mostrarMensaje("Hubo un problema","msj_error");
+            }
+        })
+    } catch (error) {
+        mostrarMensaje(error,"msj_error");
     }
 }

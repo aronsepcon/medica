@@ -37,24 +37,16 @@ $formato.onchange = (e) => {
 $exportar.onclick = (e) => {
     e.preventDefault();
     
-    if(($activo_sc.checked==false && $cesado_sc.checked ==false) || ($activo_sc.checked==true && $cesado_sc.checked ==true)){
+    if(($activo_sc.checked==false && $cesado_sc.checked ==false)/* || ($activo_sc.checked==true && $cesado_sc.checked ==true)*/){
         mostrarMensaje("Elegir entre Activos o Cesados","msj_error");
         throw "opciones";
     }
     let data = new FormData();
-    //    data.append("funcion","formato");
-  /* if($ccostos==0){
-        data.append("ccostos","0200");
-    }else if($ccostos==1){
-        data.append("ccostos","2800");
-    }else if($ccostos==2){
-        data.append("ccostos","2600");
-    }*/
-
     if($formato.value==0){
         let activo = $activo_sc.checked == true ? 1 : 0;
         let cesado = $cesado_sc.checked == true ? 1 : 0;
         let dni = $dni_formato.value == "" ? null : $dni_formato.value;
+        data.append("ccostos",$ccostos.value);
         data.append("activo",activo);
         data.append("cesado",cesado);
         data.append("dni",dni);
@@ -110,17 +102,17 @@ $probar.onclick = (e) =>{
 
 $buscar.onclick = (e) =>{
     e.preventDefault();
-    if(($activo_sc.checked==false && $cesado_sc.checked ==false) || ($activo_sc.checked==true && $cesado_sc.checked ==true)){
+    if(($activo_sc.checked==false && $cesado_sc.checked ==false) /*|| ($activo_sc.checked==true && $cesado_sc.checked ==true)*/){
         mostrarMensaje("Elegir entre Activos o Cesados","msj_error");
         throw "opciones";
     }
 
     let formData = new FormData();
-    formData.append("ccostos",$ccostos.value);
     if($formato.value==0){
         let dni = $dni_formato.value == "" ? null : $dni_formato.value;
         let activo = $activo_sc.checked == true ? 1 : 0;
         let cesado = $cesado_sc.checked == true ? 1 : 0;
+        formData.append("ccostos",$ccostos.value);
         formData.append("dni",dni);
         formData.append("activo",activo);
         formData.append("cesado",cesado);
@@ -137,7 +129,10 @@ $buscar.onclick = (e) =>{
                 $tabla_formato_001.innerHTML="";
                 for(let index =0;index < dataJson.lista.length;index++){
                     let tr = document.createElement("tr");
-                    let $DTD3 = dataJson.lista[index].fechaDTD3 == null ? "" : dataJson.lista[index].fechaDifTD3;
+                    let $FA = dataJson.lista[index].fechaFbrA == null ? "" : dataJson.lista[index].fechaFbrA;
+                    let $DTD1 = dataJson.lista[index].fechaDTD1 == null ? "" : dataJson.lista[index].fechaDTD1;
+                    let $DTD2 = dataJson.lista[index].fechaDTD2 == null ? "" : dataJson.lista[index].fechaDTD2;
+                    let $DTD3 = dataJson.lista[index].fechaDTD3 == null ? "" : dataJson.lista[index].fechaDTD3;
                     tr.innerHTML = `<td>${index+1}</td>
                                     <td>${""}</td>
                                     <td>${dataJson.lista[index].codPaci}</td>
@@ -172,8 +167,58 @@ $buscar.onclick = (e) =>{
                                     <td>${dataJson.lista[index].audiometria}</td>
                                     <td>${dataJson.lista[index].osteo}</td>
                                     <td>${dataJson.lista[index].odontograma}</td>
-                                    
-
+                                    <td>${dataJson.lista[index].ekg}</td>
+                                    <td>${dataJson.lista[index].pEsfuerzo}</td>
+                                    <td>${dataJson.lista[index].riesgoCoronario}</td>
+                                    <td>${dataJson.lista[index].psicologia}</td>
+                                    <td>${""}</td>
+                                    <td>${""}</td>
+                                    <td>${""}</td>
+                                    <td>${""}</td>
+                                    <td>${""}</td>
+                                    <td>${dataJson.lista[index].gotaGruesa}</td>
+                                    <td>${dataJson.lista[index].leucocitos}</td>
+                                    <td>${dataJson.lista[index].plaquetas}</td>
+                                    <td>${dataJson.lista[index].colesterol}</td>
+                                    <td>${dataJson.lista[index].hdl}</td>
+                                    <td>${dataJson.lista[index].ldl}</td>
+                                    <td>${dataJson.lista[index].trigliceridos}</td>
+                                    <td>${dataJson.lista[index].tgp}</td>
+                                    <td>${dataJson.lista[index].glucosa}</td>
+                                    <td>${dataJson.lista[index].ureaSanguinea}</td>
+                                    <td>${dataJson.lista[index].acidoUrico}</td>
+                                    <td>${dataJson.lista[index].creatinina}</td>
+                                    <td>${dataJson.lista[index].vdrl}</td>
+                                    <td>${""}</td>
+                                    <td>${""}</td>
+                                    <td>${""}</td>
+                                    <td>${""}</td>
+                                    <td>${""}</td>
+                                    <td>${""}</td>
+                                    <td>${dataJson.lista[index].diagno1}</td>
+                                    <td>${dataJson.lista[index].cod1}</td>
+                                    <td>${dataJson.lista[index].diagno2}</td>
+                                    <td>${dataJson.lista[index].cod2}</td>
+                                    <td>${dataJson.lista[index].diagno3}</td>
+                                    <td>${dataJson.lista[index].cod3}</td>
+                                    <td>${dataJson.lista[index].diagno4}</td>
+                                    <td>${dataJson.lista[index].cod4}</td>
+                                    <td>${dataJson.lista[index].diagno5}</td>
+                                    <td>${dataJson.lista[index].cod5}</td>
+                                    <td>${dataJson.lista[index].diagno6}</td>
+                                    <td>${dataJson.lista[index].cod6}</td>
+                                    <td>${""}</td>
+                                    <td>${""}</td>
+                                    <td>${""}</td>
+                                    <td>${""}</td>
+                                    <td>${""}</td>
+                                    <td>${""}</td>
+                                    <td>${""}</td>
+                                    <td>${""}</td>
+                                    <td>${""}</td>
+                                    <td>${$FA}</td>
+                                    <td>${$DTD1}</td>
+                                    <td>${$DTD2}</td>
                                     <td>${$DTD3}</td>`;
                     $tabla_formato_001.appendChild(tr);
                 }
@@ -183,7 +228,7 @@ $buscar.onclick = (e) =>{
         })
     }
     else if($formato.value==1){
-        formData.append("funcion","formatosTablas");
+        formData.append("funcion","union006");
         fetch('../inc/consultasvistas.inc.php',{
             method: "POST",
             body:formData,
@@ -197,9 +242,9 @@ $buscar.onclick = (e) =>{
                 for(let index =0;index < dataJson.lista.length;index++){
                     console.log(dataJson.lista[index].fechaDifTD3);
                     let tr = document.createElement("tr");
-                    let $DTD3 = dataJson.lista[index].fechaDifTD3 == "01/01/1970" ? "" : dataJson.lista[index].fechaDifTD3;
-                    tr.innerHTML = `<td>${index+1}</td>
-                                    <td>${dataJson.lista[index].empleadonomb}</td>
+                    let $DTD3 = dataJson.lista[index].fechaDTD3 == "01/01/1970" ? "" : dataJson.lista[index].fechaDTD3;
+                    tr.innerHTML = `<td>${dataJson.lista[index].num}</td>
+                                    <td>${dataJson.lista[index].nombres}</td>
                                     <td>${dataJson.lista[index].fecnac}</td>
                                     <td>${dataJson.lista[index].dni}</td>
                                     <td>${dataJson.lista[index].edad}</td>
