@@ -16,6 +16,7 @@ const $buscar = document.getElementById("buscar");
 const $tabla_formato_006 = document.getElementById("tabla_formato_006");
 const $tabla_formato_001 = document.getElementById("tabla_formato_001");
 const $tabla_006 = document.getElementById("tabla_006");
+const $tabla_006_oficina = document.getElementById("tabla_006_oficina");
 const $tabla_001 = document.getElementById("tabla_001");
 
 $formato.onchange = (e) => {
@@ -23,13 +24,25 @@ $formato.onchange = (e) => {
 
     if($formato.value==0){
         console.log($formato.value);
+        console.log($ccostos.value)
         $tabla_006.style.display = "none";
+        $tabla_006_oficina.style.display = "none";
         $tabla_001.style.display = "block";
     }
     else if($formato.value==1){
         console.log($formato.value);
+        console.log($ccostos.value);
         $tabla_006.style.display = "block";
+        $tabla_006_oficina.style.display = "none";
         $tabla_001.style.display = "none";
+    }
+    else if($formato.value==1 && ($ccostos.value==0 || $ccostos.value==1 || $ccostos.value==2)){
+        console.log($formato.value);
+        console.log($ccostos.value);
+        $tabla_006.style.display = "none";
+        $tabla_001.style.display = "none";
+        $tabla_006_oficina.style.display = "block";
+
     }
 
 }
@@ -115,7 +128,6 @@ $buscar.onclick = (e) =>{
         formData.append("activo",activo);
         formData.append("cesado",cesado);
     if($formato.value==0){
-
         formData.append("funcion","formatoTablas001");
         fetch('../inc/consultasvistas.inc.php',{
             method: "POST",
@@ -295,6 +307,9 @@ $buscar.onclick = (e) =>{
                 mostrarMensaje("No se encontraron examenes","msj_error");
             }
         })
+    }
+    else if($formato.value==1 && ($ccostos.value==0 || $ccostos.value==1 || $ccostos.value==0)){
+
     }
     
 }

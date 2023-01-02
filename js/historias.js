@@ -524,16 +524,16 @@ $actualizarReg.onclick = (e) => {
 
 $nombres_trabajador.onkeypress = (e) => {
     var keycode = e.keyCode || e.which;
-  if (keycode == 13) {
-    try {
-        if ($nombres_trabajador.value == "" && $documento_trabajador.value == "") throw "Ingrese un valor";
-        $documento_trabajador.value = "";
-        listarNombres(e.target.value);
+    if (keycode == 13) {
+        try {
+            if ($nombres_trabajador.value == "" && $documento_trabajador.value == "") throw "Ingrese un valor";
+            $documento_trabajador.value = "";
+            listarNombres(e.target.value);
 
-    } catch (error) {
-        mostrarMensaje(error,"msj_error");
+        } catch (error) {
+            mostrarMensaje(error,"msj_error");
+        }
     }
-  }
 }
 
 function listarNombres($e){

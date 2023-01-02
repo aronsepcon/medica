@@ -48,9 +48,9 @@
             <ul>
                 <li><a href="#" title="Ir Inicio"><i class="fas fa-home"></i></a></li>
                 <li><a href="#" id="historias" title="Historias Clínicas"><i class="far fa-file-alt"></i></a></li>
-                <li><a href="#" id="subcontratas" title="Subcontratas" ><i class='fas fa-hard-hat'></i></a></li>
+                <li><a href="#" id="subcontratas" title="Subcontratas" ><i class="fas fa-users"></i></a></li>
                 <li><a href="#" id="estadisticas" title="Estadisticas"><i class="fas fa-chart-bar"></i></a></li>
-                <li><a href="#" title="Control de medicamentos"><i class="fas fa-box"></i></a></li>
+                <li><a href="#" id="medicamentos" title="Control de medicamentos"><i class="fas fa-box"></i></a></li>
                 <li><a href="#" id="atenciones" title="Atenciones Médicas"><i class="fas fa-user-md"></i></a></li><!-- target="frame__loader"-->
                 <li><a href="#" title="Subida" id="configuracion"><i class="fas fa-file-upload"></i></a></li>
             <?php if(($_SESSION['acceso']==1 || $_SESSION['acceso']==2) && trim($_SESSION['sede'])=='LIMA'){?>
@@ -69,12 +69,20 @@
                 <?php include_once( '../php/subcontratas.inc.php'); ?>
             </div>
 
-            <div id="ficha__cargar" class="fichas oculto">
-                <?php include_once( '../php/cargarHistorias.inc.php' ); ?>
-            </div>
-
             <div id="cargar__estadisticas" class="fichas oculto">
                 <?php include_once('../php/formatos.inc.php'); ?>
+            </div>
+            
+            <div id="inventario__medicamentos" class="fichas oculto">
+                <?php include_once('../php/medicamentos.inc.php'); ?>
+            </div>
+
+            <div id="ficha__atenciones" class="fichas oculto">
+                <?php include_once('../php/atenciones.inc.php'); ?>
+            </div>
+            
+            <div id="ficha__cargar" class="fichas oculto">
+                <?php include_once( '../php/cargarHistorias.inc.php' ); ?>
             </div>
 
             <div id="permisos_panel" class="fichas oculto">

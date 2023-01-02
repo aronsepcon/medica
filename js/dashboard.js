@@ -7,6 +7,8 @@ const $loader = document.getElementById('main__loader');
 const $subcontratas = document.getElementById('subcontratas');
 const $ficha__historias = document.getElementById('ficha__historias');
 const $ficha__subcontratas = document.getElementById('ficha__subcontratas');
+const $inventario__medicamentos = document.getElementById('inventario__medicamentos');
+const $ficha__atenciones = document.getElementById('ficha__atenciones');
 
 const $ficha__cargar = document.getElementById('ficha__cargar');
 const $configuracion = document.getElementById('configuracion');
@@ -15,7 +17,8 @@ const $permisos = document.getElementById('permisos1');
 const $permisos_panel = document.getElementById('permisos_panel');
 const $cargar__estadisticas = document.getElementById('cargar__estadisticas');
 const $estadisticas = document.getElementById('estadisticas');
-
+const $medicamentos = document.getElementById('medicamentos');
+const $atenciones = document.getElementById('atenciones');
 
 $historias.onclick =(e) => {
     e.preventDefault();
@@ -48,6 +51,18 @@ $estadisticas.onclick = (e) => {
     fadeOut($permisos_panel);
 
     return false;
+}
+
+$medicamentos.onclick = (e) => {
+    e.preventDefault();
+
+    fadeIn($inventario__medicamentos);
+}
+
+$atenciones.onclick = (e) => {
+    e.preventDefault();
+
+    fadeIn($ficha__atenciones);
 }
 
 $configuracion.onclick =(e) => {

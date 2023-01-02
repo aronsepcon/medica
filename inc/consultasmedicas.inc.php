@@ -109,7 +109,7 @@
             //$correo_remitente = "examenesmedicos@sepcon.net";//$_session['sede'] y $_session['acceso']   1 --- enfermeria/2 --- medicos/ //3 --- admin (zarai y saul)
             $destino = $correo;
             $title = utf8_decode($asunto);
-            $entrada = "b9Vz0Ho7Uu7Kj9Z";//cambiar la clave
+            $entrada = "y5Ff1Ks9Hc5Xd6Q";//cambiar la clave
 
             //Create a new PHPMailer instance
             $mail = new PHPMailer;

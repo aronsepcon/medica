@@ -23,11 +23,11 @@
         <div>
             <span>Centro de Costo</span>
             <select name="" id="ccostos">
-                <option value="0">0200</option>
-                <option value="1">0300</option>
-                <option value="2">0600</option>
-                <option value="3">2830</option>
-                <option value="4">3100</option>
+                <option value="0">0200 - Administracion de Oficina</option>
+                <option value="1">0300 - Mantenimiento de Equipos Pucallpa</option>
+                <option value="2">0600 - Almacenes Lurin</option>
+                <option value="3">2830 - PPC Procesos Varios Malvinas</option>
+                <option value="4">3100 - Pisco Operation Assurance</option>
             </select>
             <span class="span_formato">Formato</span>
             <select name="" id="formato">

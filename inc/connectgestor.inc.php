@@ -1,11 +1,11 @@
 <?php 
 /*
-    $dsn = "mysql:dbname=;host=192.168.1.30";
+    $dsn = "mysql:dbname=ibis;host=192.168.1.30";
 	$user = "remoto";
 	$password = "s3pc0n2020";
 
 */
-	$dsn = "mysql:dbname=;host=localhost";
+	$dsn = "mysql:dbname=ibis;host=localhost";
 	$user = "root";
 	$password = "";
 

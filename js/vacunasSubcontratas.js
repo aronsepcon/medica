@@ -6,9 +6,9 @@ import {validar} from "./funciones.js";
 //import {listarexamenes} from "./historias";
 ///esto puede servir para llamar a la funcion de forma mas directa uu
 const $documento_trabajador = document.getElementById('documento_trabajador_sc');
-const $subida_vacunas = document.querySelectorAll(".subida_vacunas");
-const $ficha_vacunas = document.getElementById("ficha_vacunas");
-const $cierre_form_vac = document.getElementById("cierre_form_vac");
+const $subida_vacunas = document.querySelectorAll(".subida_vacunas_s");
+const $ficha_vacunas = document.getElementById("ficha_vacunas_s");
+const $cierre_form_vac = document.getElementById("cierre_form_vac_s");
 const $fecha_vacuna = document.getElementById("fecha_vacuna");
 const $subida_imagen = document.getElementById("subida_imagen");
 const $envio_vacuna = document.getElementById("envio_vacuna");
@@ -88,7 +88,7 @@ const $frame__adjunto = document.getElementById('frame__adjunto');
 const $ficha__vistaprevia = document.getElementById('ficha__vistaprevia');
 
 const $abrir_pestañas = document.getElementById("abrir_pestañas");
-const $pestañas = document.getElementById("pestañas");
+const $pestañas = document.getElementById("pestañas_s");
 const $cierre_pestañas = document.getElementById("cierre_pestañas");
 const $pestañas_rabia = document.getElementById("pestañas_rabia");
 const $cierre_pestañas_rabia = document.getElementById("cierre_pestañas_rabia");
@@ -204,8 +204,7 @@ $tab.forEach(function($tab){
 var selected="tab4";//crear uno parecido a show para rabia e.e
 var disp="tab-content-r4";
 
-function show(a,b)
-{
+function show(a,b){
     document.getElementById(selected).style.backgroundColor = "rgb(150,150,150)";
     document.getElementById(disp).style.display = "none";
     document.getElementById(a).style.backgroundColor = "rgb(48, 37, 123)";       

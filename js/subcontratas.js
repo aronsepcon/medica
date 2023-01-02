@@ -160,10 +160,10 @@ const $empresa__trabajador_sc = document.getElementById('empresa__trabajador_sc'
             mostrarMensaje(error,"msj_error");
         }
     }
-    /*
+    
     $documento_trabajador_sc.onkeydown = (e) => {
-        var keycode = e.key ;
-        if (keycode === 'Enter') {
+        let kCode = e.key ;
+        if (kCode === 'Enter') {
             try {
                 if ($documento_trabajador_sc.value == "") throw "Ingrese el numero de documento";
 
@@ -174,7 +174,7 @@ const $empresa__trabajador_sc = document.getElementById('empresa__trabajador_sc'
                 mostrarMensaje(error,"msj_error");
             }
         }
-    }*/
+    }
   
     function listadoDni($e){
         try {

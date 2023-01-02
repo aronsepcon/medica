@@ -1265,3 +1265,87 @@ input[name = "filtrado"]{
   grid-template-columns: 0.22fr 0.45fr;
   grid-template-rows: 10px;
 }*/
+
+#funciones__vitales input{
+  width: 35px;
+}
+
+#atencion__medica_usuario .atencion__medica-2-50cols {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 30px 1fr;
+  grid-template-columns: 1fr 1fr;
+  -webkit-column-gap: 30px;
+     -moz-column-gap: 30px;
+          column-gap: 30px;
+  margin-top: 20px;
+}
+#atencion__medica_usuario .atencion__medica-2-50cols .seccion__izquierda div {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+  margin-bottom: 1rem;
+}
+#atencion__medica_usuario .atencion__medica-2-50cols .seccion__derecha div div {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+  margin-bottom: 1rem;
+}
+
+#atencion__medica_usuario{
+  overflow: auto;
+}
+
+.diag_caja div{
+  display: grid;
+  grid-template-columns: 0.1fr 0.1fr;
+}
+
+.eval_extra {
+  display: grid;
+  grid-template-columns: 0.1fr 0.1fr;
+}
+
+.caja-union-4-25cols{
+  width: 610px;
+}
+
+.pre_3 div{
+  width: 8px;
+}
+
+.caja-4cols{
+  display: grid;
+  -ms-grid-columns: 1fr 30px 1fr;
+  grid-template-columns: 0.4fr 0.2fr 0.4fr 101fr;
+}
+
+.diag_caja{
+  width: 265px;
+}
+
+.inventario_tablas {
+  margin-top: 10px;
+  width: 100%;
+  max-height: 62vh;
+  overflow: auto;
+}
+.inventario_tablas table {
+  font-size: 0.9rem;
+  border-collapse: collapse;
+}
+.inventario_tablas table thead {
+  background-color: #2B69A7;
+  color: #fff;
+}
+.inventario_tablas table tbody {
+  font-family: system;
+  font-size: 0.8rem;
+  line-height: 1rem !important;
+}
+.inventario_tablas table tbody tr {
+  border-bottom: 1px solid #c2c2c2;
+}
