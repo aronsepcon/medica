@@ -607,7 +607,6 @@ $tabla__examenes_body.addEventListener("click", e=>{
     
     registro = e.target.parentElement.getAttribute("href");
     let adjunto =  e.target.parentElement.dataset.atach;
-    
         if ( accion == "previewFile" ){        
             if(adjunto=="null"){
                 fadeIn($form_ingreso)  //por aqui se debe buscar              
@@ -616,7 +615,7 @@ $tabla__examenes_body.addEventListener("click", e=>{
                 fadeIn($ficha__vistaprevia);
                 }
         }else if (accion == "uploadFile"){
-            $uploadPdf.click(); 
+                test();
         }else if (accion == "sendMail") {
             try {
                 let examen = e.target.parentElement.dataset.examen,
@@ -652,113 +651,113 @@ $tabla__examenes_body.addEventListener("click", e=>{
                     }else{
                         mostrarMensaje("Verifique el N°. Documento","msj_error");
                     }
+                    })
+                } catch (error) {
+                    mostrarMensaje("Verifique el N°. Documento","msj_error");
+                } 
+        }else if(accion=="abrirHistoria"){
+            try{
+                let id = e.target.parentElement.getAttribute("href");
+                let data2 = new FormData();
+                data2.append("documento",$documento_trabajador.value);
+                data2.append("id",id);
+                data2.append("funcion","historiaClinica");
+                fetch('../inc/consultasmedicas.inc.php',{
+                    method: "POST",
+                    body:data2,
                 })
-        } catch (error) {
-            mostrarMensaje("Verifique el N°. Documento","msj_error");
-        } 
-    }else if(accion=="abrirHistoria"){
-        try{
-            let id = e.target.parentElement.getAttribute("href");
-            let data2 = new FormData();
-            data2.append("documento",$documento_trabajador.value);
-            data2.append("id",id);
-            data2.append("funcion","historiaClinica");
-            fetch('../inc/consultasmedicas.inc.php',{
-                method: "POST",
-                body:data2,
-            })
-            .then(function(response){
-                return response.json();
-            })
-            .then(dataJson => {
-                if(dataJson.respuesta){
-                    $idreg_hc.value = dataJson.lista[0].id;
-                    $documento_hc.value = dataJson.lista[0].dni;
-                    $nombre_hc.value = dataJson.lista[0].nombres;
-                    $telefono_hc.value = dataJson.lista[0].telefono;
-                    $fecnac_hc.value = dataJson.lista[0].fecnac;
-                    $fecha_hc.value = dataJson.lista[0].fecha;
-                    $sgtefecha.value = dataJson.lista[0].sgtefecha;
-                    $ccostos_hc.value = dataJson.lista[0].ccostos;
-                    $cargo_hc.value = dataJson.lista[0].cargo;
-                    $tipoExa_hc.value = dataJson.lista[0].tipo;
-                    $clinica_hc.value = dataJson.lista[0].clinica;
-                    $pase_hc.value = dataJson.lista[0].pase;
-                    $aptitud_hc.value = dataJson.lista[0].aptitud;
-                    $edad_hc.value = dataJson.lista[0].edad;
-                    $empresa_hc.value = dataJson.lista[0].empresa;
-                    $peso_hc.value = dataJson.lista[0].peso;
-                    $pEsfuerzo_hc.value = dataJson.lista[0].pEsfuerzo;
-                    $imc_hc.value = dataJson.lista[0].imc;
-                    $sangre_hc.value = dataJson.lista[0].sangre;
-                    $talla_hc.value = dataJson.lista[0].talla;
-                    $sexo_hc.value = dataJson.lista[0].sexo;
-                    $alergias_hc.value = dataJson.lista[0].alergias;
-                    $estadoNut_hc.value = dataJson.lista[0].estadoNutricional;
-                    $espiro_hc.value = dataJson.lista[0].espirometria;
-                    $evOftalmo_hc.value = dataJson.lista[0].oftalmologia;
-                    $evAudio_hc.value = dataJson.lista[0].audiometria;
-                    $evOsteo_hc.value = dataJson.lista[0].osteo;
-                    $exRayX_hc.value = dataJson.lista[0].rayosx;
-                    $exPsi_hc.value = dataJson.lista[0].psicologia;
-                    $gota_hc.value = dataJson.lista[0].gotaGruesa;
-                    $plaquetas_hc.value = dataJson.lista[0].plaquetas;
-                    $colesterol_hc.value = dataJson.lista[0].colesterol
-                    $hdl_hc.value = dataJson.lista[0].hdl;
-                    $ldl_hc.value = dataJson.lista[0].ldl;
-                    $triglic_hc.value = dataJson.lista[0].trigliceridos;
-                    $tgp_hc.value = dataJson.lista[0].tgp;
-                    $tgo_hc.value = dataJson.lista[0].tgo;
-                    $glucosa_hc.value = dataJson.lista[0].glucosa;
-                    $urea_hc.value = dataJson.lista[0].ureaSanguinea;
-                    $acUrico_hc.value = dataJson.lista[0].acidoUrico
-                    $creatinina_hc.value = dataJson.lista[0].creatinina;
-                    $vdrl_hc.value = dataJson.lista[0].vdrl;
-                    $rpr_hc.value = dataJson.lista[0].rpr;
-                    $leucocitos_hc.value = dataJson.lista[0].leucocitos;
-                    $hepB_hc.value = dataJson.lista[0].hepatitisB;
-                    $diag_hc_1.value = dataJson.lista[0].diagno1;
-                    $diag_hc_2.value = dataJson.lista[0].diagno2;
-                    $diag_hc_3.value = dataJson.lista[0].diagno3;
-                    $diag_hc_4.value = dataJson.lista[0].diagno4;
-                    $diag_hc_5.value = dataJson.lista[0].diagno5;
-                    $diag_hc_6.value = dataJson.lista[0].diagno6;
-                    $fa_hc.value = dataJson.lista[0].fechaFbrA;
-                    $dt_d1_hc.value = dataJson.lista[0].fechaDTD1;
-                    $dt_d2_hc.value = dataJson.lista[0].fechaDTD2;
-                    $dt_d3_hc.value = dataJson.lista[0].fechaDTD3;
-                    $dt_r1_hc.value = dataJson.lista[0].fechaDTR1;
-                    $ha_d1_hc.value = dataJson.lista[0].fechaHAD1;
-                    $ha_d2_hc.value = dataJson.lista[0].fechaHAD2;
-                    $ha_r1_hc.value = dataJson.lista[0].fechaHAR1;
-                    $hb_d1_hc.value = dataJson.lista[0].fechaHBD1;
-                    $hb_d2_hc.value = dataJson.lista[0].fechaHBD2;
-                    $hb_d3_hc.value = dataJson.lista[0].fechaHBD3;
-                    $if_r1_hc.value = dataJson.lista[0].fechaIFR1;
-                    $if_r2_hc.value = dataJson.lista[0].fechaIFR2;
-                    $pm_d1_hc.value = dataJson.lista[0].fechaPLD1;
-                    $tv_d1_hc.value = dataJson.lista[0].fechaTVD1;
-                    $rb_d1_hc.value = dataJson.lista[0].fechaRBD1;
-                    $rb_d2_hc.value = dataJson.lista[0].fechaRBD2;
-                    $rb_d3_hc.value = dataJson.lista[0].fechaRBD3;
-                    $rb_r1_hc.value = dataJson.lista[0].fechaRBR1;
-                    $tf_r1_hc.value = dataJson.lista[0].fechaTFR1;
-                    $tf_r2_hc.value = dataJson.lista[0].fechaTFR2;
-                    $nm_r1_hc.value = dataJson.lista[0].fechaNMR1;
-                    $nm_r1_hc.value = dataJson.lista[0].fechaNMR2;
-                    $cv_d1_hc.value = dataJson.lista[0].fechaCVD1;
-                    $cv_d2_hc.value = dataJson.lista[0].fechaCVD2;
-                    $cv_d3_hc.value = dataJson.lista[0].fechaCVD3;
-                    $cv_d4_hc.value = dataJson.lista[0].fechaCVD4;
-                    
+                .then(function(response){
+                    return response.json();
+                })
+                .then(dataJson => {
+                    if(dataJson.respuesta){
+                        $idreg_hc.value = dataJson.lista[0].id;
+                        $documento_hc.value = dataJson.lista[0].dni;
+                        $nombre_hc.value = dataJson.lista[0].nombres;
+                        $telefono_hc.value = dataJson.lista[0].telefono;
+                        $fecnac_hc.value = dataJson.lista[0].fecnac;
+                        $fecha_hc.value = dataJson.lista[0].fecha;
+                        $sgtefecha.value = dataJson.lista[0].sgtefecha;
+                        $ccostos_hc.value = dataJson.lista[0].ccostos;
+                        $cargo_hc.value = dataJson.lista[0].cargo;
+                        $tipoExa_hc.value = dataJson.lista[0].tipo;
+                        $clinica_hc.value = dataJson.lista[0].clinica;
+                        $pase_hc.value = dataJson.lista[0].pase;
+                        $aptitud_hc.value = dataJson.lista[0].aptitud;
+                        $edad_hc.value = dataJson.lista[0].edad;
+                        $empresa_hc.value = dataJson.lista[0].empresa;
+                        $peso_hc.value = dataJson.lista[0].peso;
+                        $pEsfuerzo_hc.value = dataJson.lista[0].pEsfuerzo;
+                        $imc_hc.value = dataJson.lista[0].imc;
+                        $sangre_hc.value = dataJson.lista[0].sangre;
+                        $talla_hc.value = dataJson.lista[0].talla;
+                        $sexo_hc.value = dataJson.lista[0].sexo;
+                        $alergias_hc.value = dataJson.lista[0].alergias;
+                        $estadoNut_hc.value = dataJson.lista[0].estadoNutricional;
+                        $espiro_hc.value = dataJson.lista[0].espirometria;
+                        $evOftalmo_hc.value = dataJson.lista[0].oftalmologia;
+                        $evAudio_hc.value = dataJson.lista[0].audiometria;
+                        $evOsteo_hc.value = dataJson.lista[0].osteo;
+                        $exRayX_hc.value = dataJson.lista[0].rayosx;
+                        $exPsi_hc.value = dataJson.lista[0].psicologia;
+                        $gota_hc.value = dataJson.lista[0].gotaGruesa;
+                        $plaquetas_hc.value = dataJson.lista[0].plaquetas;
+                        $colesterol_hc.value = dataJson.lista[0].colesterol
+                        $hdl_hc.value = dataJson.lista[0].hdl;
+                        $ldl_hc.value = dataJson.lista[0].ldl;
+                        $triglic_hc.value = dataJson.lista[0].trigliceridos;
+                        $tgp_hc.value = dataJson.lista[0].tgp;
+                        $tgo_hc.value = dataJson.lista[0].tgo;
+                        $glucosa_hc.value = dataJson.lista[0].glucosa;
+                        $urea_hc.value = dataJson.lista[0].ureaSanguinea;
+                        $acUrico_hc.value = dataJson.lista[0].acidoUrico
+                        $creatinina_hc.value = dataJson.lista[0].creatinina;
+                        $vdrl_hc.value = dataJson.lista[0].vdrl;
+                        $rpr_hc.value = dataJson.lista[0].rpr;
+                        $leucocitos_hc.value = dataJson.lista[0].leucocitos;
+                        $hepB_hc.value = dataJson.lista[0].hepatitisB;
+                        $diag_hc_1.value = dataJson.lista[0].diagno1;
+                        $diag_hc_2.value = dataJson.lista[0].diagno2;
+                        $diag_hc_3.value = dataJson.lista[0].diagno3;
+                        $diag_hc_4.value = dataJson.lista[0].diagno4;
+                        $diag_hc_5.value = dataJson.lista[0].diagno5;
+                        $diag_hc_6.value = dataJson.lista[0].diagno6;
+                        $fa_hc.value = dataJson.lista[0].fechaFbrA;
+                        $dt_d1_hc.value = dataJson.lista[0].fechaDTD1;
+                        $dt_d2_hc.value = dataJson.lista[0].fechaDTD2;
+                        $dt_d3_hc.value = dataJson.lista[0].fechaDTD3;
+                        $dt_r1_hc.value = dataJson.lista[0].fechaDTR1;
+                        $ha_d1_hc.value = dataJson.lista[0].fechaHAD1;
+                        $ha_d2_hc.value = dataJson.lista[0].fechaHAD2;
+                        $ha_r1_hc.value = dataJson.lista[0].fechaHAR1;
+                        $hb_d1_hc.value = dataJson.lista[0].fechaHBD1;
+                        $hb_d2_hc.value = dataJson.lista[0].fechaHBD2;
+                        $hb_d3_hc.value = dataJson.lista[0].fechaHBD3;
+                        $if_r1_hc.value = dataJson.lista[0].fechaIFR1;
+                        $if_r2_hc.value = dataJson.lista[0].fechaIFR2;
+                        $pm_d1_hc.value = dataJson.lista[0].fechaPLD1;
+                        $tv_d1_hc.value = dataJson.lista[0].fechaTVD1;
+                        $rb_d1_hc.value = dataJson.lista[0].fechaRBD1;
+                        $rb_d2_hc.value = dataJson.lista[0].fechaRBD2;
+                        $rb_d3_hc.value = dataJson.lista[0].fechaRBD3;
+                        $rb_r1_hc.value = dataJson.lista[0].fechaRBR1;
+                        $tf_r1_hc.value = dataJson.lista[0].fechaTFR1;
+                        $tf_r2_hc.value = dataJson.lista[0].fechaTFR2;
+                        $nm_r1_hc.value = dataJson.lista[0].fechaNMR1;
+                        $nm_r1_hc.value = dataJson.lista[0].fechaNMR2;
+                        $cv_d1_hc.value = dataJson.lista[0].fechaCVD1;
+                        $cv_d2_hc.value = dataJson.lista[0].fechaCVD2;
+                        $cv_d3_hc.value = dataJson.lista[0].fechaCVD3;
+                        $cv_d4_hc.value = dataJson.lista[0].fechaCVD4;
+                        
 
-                    fadeIn($historia_clinica);
-                }
-            })
-        }catch (error) {
-            mostrarMensaje("Verifique el N°. Documento","msj_error");
-        } 
-    }
+                        fadeIn($historia_clinica);
+                    }
+                })
+            }catch (error) {
+                mostrarMensaje("Verifique el N°. Documento","msj_error");
+            } 
+        }
     return false;
 })
 
@@ -781,42 +780,44 @@ $tabla__atenciones_body.addEventListener("click", e=>{
         }
     }
 })*/
-
-$uploadPdf.onchange = (e) => {
-    e.preventDefault();
-    try {
-        if (validar($uploadPdf)) throw 'Archivo inválido. No se permite la extensión ';
-
-        const formData = new FormData();
-        formData.append('fileUpload',$uploadPdf.files[0]);
-        formData.append('indice',registro);
-        fetch ('../inc/cargarHistoriaMedica.inc.php',{
-            method: 'POST',
-            body: formData
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.respuesta) {
-                mostrarMensaje("Documento subido","msj_correct");
-                listarExamenes();
-                let adjunto = "../hc/"+data.archivo;
-               // console.log(adjunto);
-                $frame__adjunto.setAttribute("src", adjunto);
-                //$opcion2.click();
-                //Window.location.reload();
-            }else{
-                mostrarMensaje("Hubo un error al subir el archivo","msj_error");
-            }
-        })
-        .catch(error => {
-            console.error(error);
-        })
-    }catch (error) {
-        mostrarMensaje(error,"msj_error");
+function test(){
+    $uploadPdf.onchange = (e) => {
+        e.preventDefault();
+        try {
+            if (validar($uploadPdf)) throw 'Archivo inválido. No se permite la extensión ';
+    
+            const formData = new FormData();
+            formData.append('fileUpload',$uploadPdf.files[0]);
+            formData.append('indice',registro);
+            fetch ('../inc/cargarHistoriaMedica.inc.php',{
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.respuesta) {
+                    mostrarMensaje("Documento subido","msj_correct");
+                    listarExamenes();
+                    let adjunto = "../hc/"+data.archivo;
+                   // console.log(adjunto);
+                    $frame__adjunto.setAttribute("src", adjunto);
+                    //$opcion2.click();
+                    //Window.location.reload();
+                }else{
+                    mostrarMensaje("Hubo un error al subir el archivo","msj_error");
+                }
+            })
+            .catch(error => {
+                console.error(error);
+            })
+        }catch (error) {
+            mostrarMensaje(error,"msj_error");
+        }
+    
+        return false;
     }
-
-    return false;
 }
+
 
 $mail__cancel.onclick = (e) => {
     e.preventDefault();

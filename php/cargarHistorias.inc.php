@@ -43,21 +43,7 @@
                 <form action="" id="subcontratasForm">
                     <input type="text" id="nro__ruc" class="oculto">
                     <label for="">RUC</label>
-                    <select name="" id="lista_subc">
-                        <option value="1">AISLASISTEMAS SAC</option>
-                        <option value="2">ALERCOGE SAC</option>
-                        <option value="3">ASEC PERU SAC</option>
-                        <option value="4">ATLAS COPCO PERU SAC</option>
-                        <option value="5">CATHODIC PROTECTION OF PERU SAC</option>
-                        <option value="6">CERTIFICACIONES Y CALIBRACIONES SAC</option>
-                        <option value="7">EMMERSON PROCESS MANAGEMENT DEL PERU SAC</option>
-                        <option value="8">FIMA MONTAJES SAC</option>
-                        <option value="9">FIMA SA</option>
-                        <option value="10">GERDIPAC INDUSTRIAL EIRL</option>
-                        <option value="11">HUERTA MINING SERVICE SAC</option>
-                        <option value="12">IMARK SOLUCIONES INTEGRALES SAC</option>
-                        <option value="13">AISLASISTEMAS.SAC</option>
-                    </select>
+                    <select name="" id="lista_terceros"></select>
                     <label for="fecha__inicio__subc">Fecha Inicio</label>
                     <input type="date" name="fecha__inicio__subc" id="fecha__inicio__subc" value="<?php echo date('Y-m-d')?>">
                     <label for="fecha__final__subc">Fecha Final</label>
@@ -122,7 +108,7 @@
                     <input type="file" name="file" id="subidaMasiva" accept=".xls,.xlsx" multiple>
                     <div id="formUpload__data" class="oculto">
                         <div id="formUpload__data__process">
-                            <a href="#" id="btn__uploadPDF"></i></a>
+                            <a href="#" id="btn__uploadPDF"></i></a><!--revisar luego-->
                         </div>
                     </div>
                     <progress id="carga_subida_excel" value="0" max="100" class="oculto"></progress>

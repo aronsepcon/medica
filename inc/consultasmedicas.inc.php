@@ -32,8 +32,7 @@
         }
         else if($_POST['funcion'] == "actualizarExamen"){
             echo json_encode(actualizarExamen($pdo, $_POST['examen']));
-        }
-        else if($_POST['funcion'] == "actualizarPase"){
+        }else if($_POST['funcion'] == "actualizarPase"){
             echo json_encode(actualizarPase($pdo,$_POST['num_pase'],
                                         $_POST['lote56'],$_POST['obs_pase'],
                                         $_POST['nombre'],$_POST['documento'],
@@ -156,15 +155,18 @@
             $clinica = strtoupper($clinica);
 
             $message  = "<html><body>";
-            $message .= "<p>Estimad@ $nombre</p>";
-            $message .= "<p>Por la presente y en cumplimiento de lo <strong>Establecido en la Ley 29783 Art. 49 y 71, además de la DS-011-2019-TR en su Art. 13</strong>, se adjunta el Legajo de su Examen Médico Ocupacional realizado:</p>"; 
+            $message .= "<p>Estimado(a) $nombre</p>";
+            $message .= "<p>Por medio de la presente, habiendo sido informado sobre los resultados y hallazgos del Examen Médico Ocupacional realizado por su persona, adjuntamos al presente, la copia de su Legajo Médico Ocupacional emitido segun:</p>"; 
             $message .= "<p>Fecha : $fecha</p>";
             $message .= "<p>Clínica :  $clinica</p>";
-            $message .= "<p>Tener en consideración los Diagnósticos y Recomendaciones que se encuentra detallado en su examen médico.</p>";
+            $message .= "<p>Cabe precisar que, todas las recomendaciones y/o restricciones brindadas por el Médico Ocupacional respecto a la evaluación médica, deben ser cumplidas y/o subsanadas a fin de poder continuar con la condición de aptitud otorgada.</p>";
+            $message .= "<p>Todo esto se realiza en cumplimiento a lo establecido en la <strong>Ley 29783 Art. 49 y 71</strong>, Decreto Supremo 005-2012-TR <strong>y Decreto Supremo 011-2019-TR en su Art. 13.</strong><p>";
+            $message .= "<p>En caso de tener alguna duda o inquietud adicional, le solicitamos pueda comunicarse con el personal del Área de Salud Ocupacional de su Proyecto y/o Sede, así como con el  Personal de Salud Ocupacional Corporativo.</p>";
+            $message .= "<p>Dr. Saul Vela. Anexo 1120. Celular: 955907306</p>";
+            $message .= "<p>Lic. Zarai Orihuela. Anexo: 1315. Celular: 985493244</p>";
             $message .= "<p><span style='color:red;'>Favor de confirmar la recepción del email con copia a</span>
                             <span style='color:blue;'>examenesmedicos@sepcon.net</span>
                         </p>";
-            $message .= "<p>Saludos</p>";
             $message .= "</body></html>"; 
 
             $mail->Subject = $title;
@@ -173,7 +175,7 @@
 
             //Enviamos el Mensaje 
             if($mail->send()){
-                $actualizados = actualizarExamen($pdo,$id);
+                actualizarExamen($pdo,$id);
                 $respuesta = true;
                 $enviado = true;
                 $mail->ClearAddresses();
@@ -184,7 +186,8 @@
             return array("respuesta"=>$respuesta,
                         "enviado"=>$enviado,
                         "adjunto"=>$adjunto,
-                        "actualizado"=> $actualizados
+                        "id"=>$destino
+                        //"actualizado"=> $actualizados
                         );//crear nueva pestaña para correos, ver como validar y enviar
         } catch (PDOException $th) {
             echo $th->getMessage();
@@ -839,13 +842,13 @@
                     $cut=uniqid();//rand(100000,999999);//preguntar la mejor opcion U:
                 }
                 $sql = "INSERT INTO fichas_empleados SET cut=?,empleadonomb=?,correo=?,dni=?,cargo=?,
-                    	    ccostos=?,edad=?,sede=?,sexo=?,fecnac=?,estado=?,direccion=?,telefono=?,empresa=?
-                        ON DUPLICATE KEY UPDATE empleadonomb=?,correo=?,cargo=?,ccostos=?,edad=?,sede=?,
+                    	    ccostos=?,sede=?,sexo=?,fecnac=?,estado=?,direccion=?,telefono=?,empresa=?
+                        ON DUPLICATE KEY UPDATE empleadonomb=?,correo=?,cargo=?,ccostos=?,sede=?,
                             sexo=?,fecnac=?,estado=?,direccion=?,telefono=?,empresa=?";
                 $statement = $pdo->prepare($sql);
-                $statement ->execute(array($cut,$empleado,$correo,$dni,$cargo,$ccostos,$edad,$sede,
+                $statement ->execute(array($cut,$empleado,$correo,$dni,$cargo,$ccostos,$sede,
                                         $sexo,$fecnac,$estado,$direccion,$telefono,$empresa,$empleado,$correo,
-                                        $cargo,$ccostos,$edad,$sede,$sexo,$fecnac,$estado,$direccion,
+                                        $cargo,$ccostos,$sede,$sexo,$fecnac,$estado,$direccion,
                                         $telefono,$empresa));
                 $respuesta = array("respuesta"  => true,
                                     "clase"     =>"msj_correct",
@@ -1234,7 +1237,7 @@
                 foreach($result as $row) {
                     $salida = array("id"=>$row['id'],
                                     "ruc"=>$row['ruc'],
-                                    );
+                                    "nombre"=>$row['nombre']);
                 array_push($lista,$salida);
                 }  
                 $respuesta = true;

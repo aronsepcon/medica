@@ -2,6 +2,7 @@ import {mostrarMensaje} from "./funciones.js";
 import {fadeIn} from "./funciones.js";
 import {fadeOut} from "./funciones.js";
 import { validar } from "./funciones.js";
+import {listarVacunas} from "./vacunasSubcontratas.js";
 
 (function(){
 const $opcion1_sc = document.getElementById('opcion1_sc');
@@ -121,6 +122,7 @@ const $empresa__trabajador_sc = document.getElementById('empresa__trabajador_sc'
 
             $opcion4_sc.classList.add('resaltado');
             $pagina4_sc.classList.remove('oculto');
+            listarVacunas();
 
         }catch(error){
             mostrarMensaje(error,"msj_error");
@@ -190,7 +192,7 @@ const $empresa__trabajador_sc = document.getElementById('empresa__trabajador_sc'
                 })
                 .then(dataJson=>{
                     if(dataJson.respuesta){
-                        
+                        listarVacunas();
                         $numero__registro_sc.value = dataJson.lista[0].cut;
                         $nombres__apellidos_sc.value = dataJson.lista[0].nombres;
                         $correo__electronico_sc.value = dataJson.lista[0].correo ;
@@ -297,7 +299,7 @@ const $empresa__trabajador_sc = document.getElementById('empresa__trabajador_sc'
                                     <td>${$sangre_tipo}</td>
                                     <td><a href="${dataJson.lista[index].id}" data-accion="abrirHistoria"><i class="fas fa-address-book"></a></td>
                                     <td class="textoCentro">
-                                        <a href="${dataJson.lista[index].id}" data-accion="sendMail" 
+                                        <a href="${dataJson.lista[index].id}" data-accion="" 
                                                                               data-examen="${dataJson.lista[index].tipo}" 
                                                                               data-fecha="${dataJson.lista[index].fecha}"
                                                                               data-adjunto="${dataJson.lista[index].adjunto}"
@@ -306,16 +308,14 @@ const $empresa__trabajador_sc = document.getElementById('empresa__trabajador_sc'
                                                                               title="${$titulo_enviado}">${$icono_enviado}</a>
                                     </td>
                                     <td class="textoCentro">
-                                        <a href="${dataJson.lista[index].id}" data-accion="previewFile" data-atach="${dataJson.lista[index].adjunto}">
+                                        <a href="${dataJson.lista[index].id}" data-accion="" data-atach="${dataJson.lista[index].adjunto}">
                                             <i class="fas fa-eye"></i>
                                         </a>
                                     </td>
                                     <td class="textoCentro">
-                                        <a href="${dataJson.lista[index].id}" data-accion="uploadFile">
-                                            ${$icono_cargado}
-                                        </a>
+                                       
                                     </td>`;
-    
+                                //sendMail, previewFile, uploadFile
                     $tabla__examenes_body.appendChild(tr);
                 }
             }else{

@@ -476,5 +476,6 @@
     </section>
 </section>
 <script src="../js/subcontratas.js?v<?php echo $random;?>" type="module"></script>    
+<script src="../js/vacunasSubcontratas.js?v<?php echo $random;?>" type="module"></script>    
 </body>
 </html>

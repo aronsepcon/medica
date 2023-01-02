@@ -22,6 +22,8 @@ $historias.onclick =(e) => {
 
     fadeIn($ficha__historias);
     fadeOut($cargar__estadisticas);
+    fadeOut($ficha__subcontratas);
+    fadeOut($permisos_panel);
 
     return false;
 }
@@ -51,9 +53,10 @@ $estadisticas.onclick = (e) => {
 $configuracion.onclick =(e) => {
     e.preventDefault();
 
-    $ficha__historias.style.display = "none";
-
+    //$ficha__historias.style.display = "none";
+    fadeOut($ficha__historias);
     fadeIn($ficha__cargar);
+    fadeOut($ficha__subcontratas);
 
     return false;
 }
@@ -63,6 +66,7 @@ $permisos.onclick = (e) => {
 
     //$permisos_panel.display = "block";
     fadeOut($ficha__cargar);
+    fadeOut($ficha__subcontratas);
     fadeOut($cargar__estadisticas);
     fadeOut($ficha__historias);
     fadeIn($permisos_panel);

@@ -41,15 +41,15 @@ $exportar.onclick = (e) => {
         mostrarMensaje("Elegir entre Activos o Cesados","msj_error");
         throw "opciones";
     }
+    let activo = $activo_sc.checked == true ? 1 : 0;
+    let cesado = $cesado_sc.checked == true ? 1 : 0;
+    let dni = $dni_formato.value == "" ? null : $dni_formato.value;
     let data = new FormData();
-    if($formato.value==0){
-        let activo = $activo_sc.checked == true ? 1 : 0;
-        let cesado = $cesado_sc.checked == true ? 1 : 0;
-        let dni = $dni_formato.value == "" ? null : $dni_formato.value;
         data.append("ccostos",$ccostos.value);
         data.append("activo",activo);
         data.append("cesado",cesado);
         data.append("dni",dni);
+    if($formato.value==0){
         data.append("funcion","formato_001");
     }
     else if($formato.value==1){
@@ -106,16 +106,16 @@ $buscar.onclick = (e) =>{
         mostrarMensaje("Elegir entre Activos o Cesados","msj_error");
         throw "opciones";
     }
-
+    let dni = $dni_formato.value == "" ? null : $dni_formato.value;
+    let activo = $activo_sc.checked == true ? 1 : 0;
+    let cesado = $cesado_sc.checked == true ? 1 : 0;
     let formData = new FormData();
-    if($formato.value==0){
-        let dni = $dni_formato.value == "" ? null : $dni_formato.value;
-        let activo = $activo_sc.checked == true ? 1 : 0;
-        let cesado = $cesado_sc.checked == true ? 1 : 0;
         formData.append("ccostos",$ccostos.value);
         formData.append("dni",dni);
         formData.append("activo",activo);
         formData.append("cesado",cesado);
+    if($formato.value==0){
+
         formData.append("funcion","formatoTablas001");
         fetch('../inc/consultasvistas.inc.php',{
             method: "POST",
@@ -242,12 +242,52 @@ $buscar.onclick = (e) =>{
                 for(let index =0;index < dataJson.lista.length;index++){
                     console.log(dataJson.lista[index].fechaDifTD3);
                     let tr = document.createElement("tr");
-                    let $DTD3 = dataJson.lista[index].fechaDTD3 == "01/01/1970" ? "" : dataJson.lista[index].fechaDTD3;
-                    tr.innerHTML = `<td>${dataJson.lista[index].num}</td>
-                                    <td>${dataJson.lista[index].nombres}</td>
+                    let $DTD3 = dataJson.lista[index].fechaDifTD3 == "01/01/1970" ? "" : dataJson.lista[index].fechaDifTD3;
+                    tr.innerHTML = `<td>${index+1}</td>
+                                    <td>${dataJson.lista[index].empleadonomb}</td>
                                     <td>${dataJson.lista[index].fecnac}</td>
                                     <td>${dataJson.lista[index].dni}</td>
                                     <td>${dataJson.lista[index].edad}</td>
+                                    <td>${dataJson.lista[index].ccostos}</td>
+                                    <td>${dataJson.lista[index].cargo}</td>
+                                    <td>${dataJson.lista[index].empresa}</td>
+                                    <td>${dataJson.lista[index].correo}</td>
+                                    <td>${dataJson.lista[index].telefono}</td>
+                                    <td>${dataJson.lista[index].grupoSangre}</td>
+                                    <td>${dataJson.lista[index].alergias}</td>
+                                    <td>${dataJson.lista[index].fecha}</td>
+                                    <td>${dataJson.lista[index].nomb_clinica}</td>
+                                    <td>${dataJson.lista[index].aptitud}</td>
+                                    <td>${dataJson.lista[index].peso}</td>
+                                    <td>${dataJson.lista[index].talla}</td>
+                                    <td>${dataJson.lista[index].imc}</td>
+                                    <td>${dataJson.lista[index].estadoNutricional}</td>
+                                    <td>${dataJson.lista[index].enviado}</td>
+                                    <td>${dataJson.lista[index].programadopre}</td>
+                                    <td>${dataJson.lista[index].fechap1}</td>
+                                    <td>${dataJson.lista[index].clinica1}</td>
+                                    <td>${dataJson.lista[index].aptitud1}</td>
+                                    <td>${dataJson.lista[index].peso1}</td>
+                                    <td>${dataJson.lista[index].talla1}</td>
+                                    <td>${dataJson.lista[index].imc1}</td>
+                                    <td>${dataJson.lista[index].estadoNutricional1}</td>
+                                    <td>${dataJson.lista[index].enviado1}</td>
+                                    <td>${dataJson.lista[index].programado1}</td>
+                                    <td>${dataJson.lista[index].fechap2}</td>
+                                    <td>${dataJson.lista[index].clinica2}</td>
+                                    <td>${dataJson.lista[index].aptitud2}</td>
+                                    <td>${dataJson.lista[index].peso2}</td>
+                                    <td>${dataJson.lista[index].talla2}</td>
+                                    <td>${dataJson.lista[index].imc2}</td>
+                                    <td>${dataJson.lista[index].estadoNutricional2}</td>
+                                    <td>${dataJson.lista[index].enviado2}</td>
+                                    <td>${dataJson.lista[index].programado2}</td>
+                                    <td>${dataJson.lista[index].fechar}</td>
+                                    <td>${dataJson.lista[index].nomb_clinicar}</td>
+                                    <td>${dataJson.lista[index].observaciones}</td>
+                                    <td>${dataJson.lista[index].fechaFbrAmarilla}</td>
+                                    <td>${dataJson.lista[index].fechaDifTD1}</td>
+                                    <td>${dataJson.lista[index].fechaDifTD2}</td>
                                     <td>${$DTD3}</td>`;
                     $tabla_formato_006.appendChild(tr);
                 }

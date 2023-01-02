@@ -17,6 +17,7 @@ const $btnUpdateSubcontratas = document.getElementById("btnUpdateSubcontratas");
 const $fecha__inicio__subc = document.getElementById("fecha__inicio__subc");
 const $fecha__final__subc = document.getElementById("fecha__final__subc");
 const $nro__doc_subc = document.getElementById("nro__doc_subc");
+const $lista_terceros = document.getElementById("lista_terceros");
 
 const $nro__doc = document.getElementById("nro__doc");
 const $subida_masiva_excel=document.getElementById("subidaMasiva");
@@ -36,6 +37,41 @@ $btn__upload.onclick = (e) => {
 
     return false;
 }
+
+$lista_terceros.onclick = (e) => {
+    e.preventDefault();
+
+    try {
+
+        const formData = new FormData();
+        formData.append("funcion","listaSubContratas");
+        fetch('../inc/consultasmedicas.inc.php',{
+            method: "POST",
+            body:formData,
+        })
+        .then(function(response){
+            return response.json();
+        })
+        .then(dataJson => {
+            if($lista_terceros.value==""){
+                if (dataJson.respuesta){
+                    //console.log(dataJson.lista.length);
+                    for(let i=0;i<dataJson.lista.length;i++){
+                        let opt = document.createElement('option');
+                        opt.innerHTML = dataJson.lista[i].nombre;
+                        opt.value= dataJson.lista[i].ruc;
+                        $lista_terceros.appendChild(opt);
+                    }
+                    console.log($lista_terceros.value);
+                }
+            }
+               
+        });    
+    } catch (error) {
+        mostrarMensaje(error,"msj_error");
+    }
+}
+
 /*
 $btn__uploadSerfarmed.onclick = (e) => {
     e.preventDefault();
@@ -310,29 +346,13 @@ const getDataMedex = (tokenMedex) => {
 }
 
 const getDataSubContratas = (tokenMedex) => {
-    let data = new FormData();
-    data.append("funcion","listaSubContratas");
-    fetch('../inc/consultasmedicas.inc.php',{
-        method: "POST",
-        body:data,
-    })
-    .then(  function(response){
-        return response.json();
-    })
-    .then(dataJson=>{
-        if(dataJson.respuesta){
-            let ruc = $lista_subc.value;
-            let num_ruc;
-            for(let row=0;row<dataJson.lista.length;row++){
-                if(dataJson.lista[row].id == ruc){
-                    $nro__ruc.value = dataJson.lista[row].ruc;
-                }
-            }
+  
+            let ruc = $lista_terceros.value;
             let inicio_sc = $fecha__inicio__subc.value;
             let final_sc = $fecha__final__subc.value;
             let documento_sc = $nro__doc_subc.value=="" ? "-": $nro__doc_subc.value;
-
-            let url = 'https://www.medex.com.pe/ApiCitas/api/ResultadoDigitalExt/GetBaseDatos/'+$nro__ruc.value+'/'+inicio_sc+'/'+final_sc+'/'+ documento_sc;
+            //validar para elegir un ruc, sino q exiga o bloquee
+            let url = 'https://www.medex.com.pe/ApiCitas/api/ResultadoDigitalExt/GetBaseDatos/'+ruc+'/'+inicio_sc+'/'+final_sc+'/'+ documento_sc;
             let token = "Bearer " + tokenMedex;
 
             fetch(url, {
@@ -349,10 +369,6 @@ const getDataSubContratas = (tokenMedex) => {
                 mostrarMensaje("Registros Actualizados: " + response.length,"msj_info");
                 $modal__esperar.style.display = "none";
             });
-
-        }
-    });
-   
 }
 
 const passDatatoMaster = (ApiResult) => {
