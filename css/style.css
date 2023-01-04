@@ -1349,3 +1349,21 @@ input[name = "filtrado"]{
 .inventario_tablas table tbody tr {
   border-bottom: 1px solid #c2c2c2;
 }
+
+.progress-container {
+  height: 0.8rem;
+  width: 32rem;
+  border-radius: 0.4rem;
+
+  background: #ffe;
+}
+
+.progress-container .progress {
+  height: 100%;
+  width: 0;
+  border-radius: 0.4rem;
+
+  background: #ff4754;
+
+  transition: width 0.4s ease;
+}

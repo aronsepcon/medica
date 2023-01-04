@@ -44,7 +44,10 @@
         <div>
             <button type="button" id="buscar">Buscar</button>
             <button type="button" id="exportar">Exportar</button>
-            <button type="button" id="probar" >Probar</button>
+            <button type="button" id="probar" class="oculto" >Probar</button>
+            <div class="progress-container">
+                <div class="progress"></div>
+            </div>
             <a href="" id="descarga_formato" class="oculto" download></a>
         </div>
         <div class="historias__tabla bars oculto" id="tabla_006">

@@ -18,6 +18,7 @@ const $tabla_formato_001 = document.getElementById("tabla_formato_001");
 const $tabla_006 = document.getElementById("tabla_006");
 const $tabla_006_oficina = document.getElementById("tabla_006_oficina");
 const $tabla_001 = document.getElementById("tabla_001");
+const progressbar = document.querySelector(".progress");
 
 $formato.onchange = (e) => {
     e.preventDefault();
@@ -44,8 +45,11 @@ $formato.onchange = (e) => {
         $tabla_006_oficina.style.display = "block";
 
     }
-
 }
+
+const changeProgress = (progress) => {
+    progressbar.style.width = `${progress}%`;
+  };  
 
 $exportar.onclick = (e) => {
     e.preventDefault();
@@ -54,6 +58,7 @@ $exportar.onclick = (e) => {
         mostrarMensaje("Elegir entre Activos o Cesados","msj_error");
         throw "opciones";
     }
+    changeProgress(22);
     let activo = $activo_sc.checked == true ? 1 : 0;
     let cesado = $cesado_sc.checked == true ? 1 : 0;
     let dni = $dni_formato.value == "" ? null : $dni_formato.value;
@@ -68,13 +73,14 @@ $exportar.onclick = (e) => {
     else if($formato.value==1){
         data.append("funcion","formato_006");
     }
-
+    changeProgress(45);
     fetch('../inc/consultasvistas.inc.php',{
         method: "POST",
         body:data,
     })
     .then(function(response){
         if(response.status==200){
+            changeProgress(75);//ver si puede ser 5 en lugar de 4
             if($formato.value==0){
                 $descarga_formato.href = "../formatos/Formato 001.xlsx";
                 $descarga_formato.download = "PSPC-120-X-PR-001-FR-001_0 Registro de Evaluaciones Ocupacionales";  
@@ -85,6 +91,7 @@ $exportar.onclick = (e) => {
             }
             setTimeout(()=>{
                 $descarga_formato.click();
+                changeProgress(100);
             },3000);//testear la cantidad de tiempo
         }
         else{
@@ -119,6 +126,7 @@ $buscar.onclick = (e) =>{
         mostrarMensaje("Elegir entre Activos o Cesados","msj_error");
         throw "opciones";
     }
+    changeProgress(22);
     let dni = $dni_formato.value == "" ? null : $dni_formato.value;
     let activo = $activo_sc.checked == true ? 1 : 0;
     let cesado = $cesado_sc.checked == true ? 1 : 0;
@@ -128,16 +136,19 @@ $buscar.onclick = (e) =>{
         formData.append("activo",activo);
         formData.append("cesado",cesado);
     if($formato.value==0){
+        changeProgress(45);
         formData.append("funcion","formatoTablas001");
         fetch('../inc/consultasvistas.inc.php',{
             method: "POST",
             body:formData,
         })
         .then(function(response){
+            changeProgress(75);
             return response.json();
         })
         .then(dataJson => {
             if(dataJson.respuesta){
+                changeProgress(100);
                 $tabla_formato_001.innerHTML="";
                 for(let index =0;index < dataJson.lista.length;index++){
                     let tr = document.createElement("tr");
@@ -240,16 +251,19 @@ $buscar.onclick = (e) =>{
         })
     }
     else if($formato.value==1){
+        changeProgress(45);
         formData.append("funcion","union006");
         fetch('../inc/consultasvistas.inc.php',{
             method: "POST",
             body:formData,
         })
         .then(function(response){
+            changeProgress(75);
             return response.json();
         })
         .then(dataJson => {
             if(dataJson.respuesta){
+                changeProgress(100);
                 $tabla_formato_006.innerHTML="";
                 for(let index =0;index < dataJson.lista.length;index++){
                     console.log(dataJson.lista[index].fechaDifTD3);

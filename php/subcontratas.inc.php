@@ -18,92 +18,188 @@
     <title>Document</title>
 </head>
 <body>
-<div class="modal" id="ficha__vistaprevia">    
+<div class="modal" id="ficha__vistaprevia_s">    
     <div class="inside h90p">
-        <button type="button" id="cierre_form_ing">X</button>
-        <iframe src="" id="frame__adjunto"></iframe>
+        <button type="button" id="cierre_form_ing_s">X</button>
+        <iframe src="" id="frame__adjunto_s"></iframe>
     </div>    
 </div>
-<div class="modal" id="ficha__vistaprevia_vac">  
+<div class="modal" id="ficha__vistaprevia_vac_s">  
     <div class="inside h90p">
-        <button type="button" id="cierre_form_vp_vac">X</button>
-        <div class="pest_sup" id="pest_sup_vac">
+        <button type="button" id="cierre_form_vp_vac_s">X</button>
+        <div class="pest_sup" id="pest_sup_vac_s">
             <a href="#" value="vac" class="alejar"><i class="fas fa-minus"></i></a>
             <a href="#" value="vac" class="acercar"><i class="fas fa-plus"></i></a>
-            <a href="#" id="descarga_vac" download><i class="fas fa-download desc"></i></a>
+            <a href="#" id="descarga_vac_s" download><i class="fas fa-download desc"></i></a>
         </div>
-        <div class="marco" id="marco">
-            <img src="" id="imagen" alt="">
+        <div class="marco" id="marco_s">
+            <img src="" id="imagen_s" alt="">
         </div>
     </div>    
 </div>
 <div class="modal" id="pestañas_s">
         <div class="inside h90p">
-            <button type="button" id="cierre_pestañas">X</button>
+            <button type="button" id="cierre_pestañas_s">X</button>
                 <div class="tab-container">
-                    <a href="#" id="tab1" class="tab" value="tab1,tab-content-r1">Pestaña 1</a>
-                    <a href="#" id="tab2" class="tab" value="tab2,tab-content-r2">Pestaña 2</a>
-                    <a href="#" id="tab3" class="tab" value="tab3,tab-content-r3">Pestaña 3</a>
-                    <a href="#" id="tab4" class="tab" value="tab4,tab-content-r4">Pestaña 4</a>         
+                    <a href="#" id="tab1_s" class="tab_s" value="tab1_s,tab-content-r1_s">Pestaña 1</a>
+                    <a href="#" id="tab2_s" class="tab_s" value="tab2_s,tab-content-r2">Pestaña 2</a>
+                    <a href="#" id="tab3_s" class="tab_s" value="tab3_s,tab-content-r3_s">Pestaña 3</a>
+                    <a href="#" id="tab4_s" class="tab_s" value="tab4_s,tab-content-r4_s">Pestaña 4</a>         
                 </div>
-                <div class="tab-content"  id="tab-content-r4">
-                        <div class="pest_sup" id="pest_sup_r4">
-                            <a href="#" value="r4" class="alejar"><i class="fas fa-minus"></i></a>
-                            <a href="#" value="r4" class="acercar"><i class="fas fa-plus"></i></a>
-                            <a href="#" id="descarga" download><i class="fas fa-download desc"></i></a>
-                        </div>
-                        <div class="marco" id="marco_r4">
-                            <img src="" class="img_pestaña" id="imagen_pestaña_r4" alt="">  
-                        </div>
-                        <iframe src="" id="adjunto_pestaña_r4" ></iframe>      
+                <div class="tab-content"  id="tab-content-r4_s">
+                    <div class="pest_sup" id="pest_sup_r4_s">
+                        <a href="#" value="r4" class="alejar"><i class="fas fa-minus"></i></a>
+                        <a href="#" value="r4" class="acercar"><i class="fas fa-plus"></i></a>
+                        <a href="#" id="descarga_s" download><i class="fas fa-download desc"></i></a>
+                    </div>
+                    <div class="marco" id="marco_r4_s">
+                        <img src="" class="img_pestaña" id="imagen_pestaña_r4_s" alt="">  
+                    </div>
+                    <iframe src="" id="adjunto_pestaña_r4_s" ></iframe>      
                 </div>
                 <div class="tab-content" id="tab-content-r3">
-                        <div class="pest_sup" id="pest_sup_r3">
+                        <div class="pest_sup" id="pest_sup_r3_s">
                             <a href="#" value="r3" class="alejar"><i class="fas fa-minus"></i></a>
                             <a href="#" value="r3" class="acercar"><i class="fas fa-plus"></i></a>
-                            <a href="#" id="descarga_2" download><i class="fas fa-download desc"></i></a>
+                            <a href="#" id="descarga_2_s" download><i class="fas fa-download desc"></i></a>
                         </div>
-                        <div class="marco" id="marco_r3">
-                            <img src="" class="img_pestaña" id="imagen_pestaña_r3" alt=""> 
+                        <div class="marco" id="marco_r3_s">
+                            <img src="" class="img_pestaña" id="imagen_pestaña_r3_s" alt=""> 
                         </div>    
 
-                        <iframe src="" id="adjunto_pestaña_r3" ></iframe>   
+                        <iframe src="" id="adjunto_pestaña_r3_s" ></iframe>   
                 </div>
                 <div class="tab-content" id="tab-content-r2">
-                        <div class="pest_sup" id="pest_sup_r2">
+                        <div class="pest_sup" id="pest_sup_r2_s">
                             <a href="#" value="r2" class="alejar"><i class="fas fa-minus"></i></a>
                             <a href="#" value="r2" class="acercar"><i class="fas fa-plus"></i></a>
-                            <a href="" id="descarga_3" download><i class="fas fa-download desc"></i></a>
+                            <a href="" id="descarga_3_s" download><i class="fas fa-download desc"></i></a>
                         </div>
-                        <div class="marco" id="marco_r2">
-                            <img src="" class="img_pestaña" id="imagen_pestaña_r2" alt=""> 
+                        <div class="marco" id="marco_r2_s">
+                            <img src="" class="img_pestaña" id="imagen_pestaña_r2_s" alt=""> 
                         </div>
-                        <iframe src="" id="adjunto_pestaña_r2" ></iframe>    
+                        <iframe src="" id="adjunto_pestaña_r2_s" ></iframe>    
                 </div>
                 <div class="tab-content" id="tab-content-r1">
-                        <div class="pest_sup" id="pest_sup_r1">
+                        <div class="pest_sup" id="pest_sup_r1_s">
                             <a href="#" value="r1" class="alejar"><i class="fas fa-minus"></i></a>
                             <a href="#" value="r1" class="acercar"><i class="fas fa-plus"></i></a>
-                            <a href="#" id="descarga_1" download><i class="fas fa-download desc"></i></a>
+                            <a href="#" id="descarga_1_s" download><i class="fas fa-download desc"></i></a>
                         </div>
-                        <div class="marco" id="marco_r1">
-                            <img src="" class="img_pestaña" id="imagen_pestaña" alt="">
+                        <div class="marco" id="marco_r1_s">
+                            <img src="" class="img_pestaña" id="imagen_pestaña_s" alt="">
                         </div>
-                        <iframe src="" id="adjunto_pestaña_r1"></iframe>
+                        <iframe src="" id="adjunto_pestaña_r1_s"></iframe>
                 </div> 
+        </div>
+    </div>
+    <div class="modal" id="pestañas_rabia_s">
+        <div class="inside h90p">
+            <button type="button" id="cierre_pestañas_rabia_s">X</button>
+                <div class="tab-container">
+                    <a href="#" id="tab1_r" class="tab_r" value="tab1_r,tab-content-rab-r1">Pestaña 1</a>
+                    <a href="#" id="tab2_r" class="tab_r" value="tab2_r,tab-content-rab-r2">Pestaña 2</a>
+                    <a href="#" id="tab3_r" class="tab_r" value="tab3_r,tab-content-rab-r3">Pestaña 3</a>
+                    <a href="#" id="tab4_r" class="tab_r" value="tab4_r,tab-content-rab-r4">Pestaña 4</a>
+                    <a href="#" id="tab5" class="tab_r" value="tab5,tab-content-r5">Pestaña 5</a>
+                    <a href="#" id="tab6" class="tab_r" value="tab6,tab-content-r6">Pestaña 6</a>
+                    <a href="#" id="tab7" class="tab_r" value="tab7,tab-content-r7">Pestaña 7</a>
+                </div>
+                <div class="tab-content" id="tab-content-r7">
+                    <div class="pest_sup" id="pest_sup_rab_7">
+                        <a href="#" value="r7_rab" class="alejar"><i class="fas fa-minus"></i></a>
+                        <a href="#" value="r7_rab" class="acercar"><i class="fas fa-plus"></i></a>
+                        <a href="" id="descarga_rab_7" download><i class="fas fa-download desc"></i></a>
+                    </div>
+                    <div class="marco" id="marco_rabia_r7">
+                        <img src="" id="imagen_pestaña_rabia_r7" alt="">
+                    </div>
+                    <iframe src="" id="adjunto_pestaña_rabia_r7"></iframe>
+                </div>
+                <div class="tab-content" id="tab-content-r6">
+                    <div class="pest_sup" id="pest_sup_rab_6">
+                        <a href="#" value="r6_rab" class="alejar"><i class="fas fa-minus"></i></a>
+                        <a href="#" value="r6_rab" class="acercar"><i class="fas fa-plus"></i></a>
+                        <a href="" id="descarga_rab_6" download><i class="fas fa-download desc"></i></a>
+                    </div>
+                    <div class="marco" id="marco_rabia_r6">
+                        <img src="" id="imagen_pestaña_rabia_r6" alt="">
+                    </div>
+                    <iframe src="" id="adjunto_pestaña_rabia_r6"></iframe>
+                </div>
+
+                <div class="tab-content" id="tab-content-r5">
+                    <div class="pest_sup" id="pest_sup_rab_5">
+                        <a href="#" value="r5_rab" class="alejar"><i class="fas fa-minus"></i></a>
+                        <a href="#" value="r5_rab" class="acercar"><i class="fas fa-plus"></i></a>
+                        <a href="" id="descarga_rab_5" download><i class="fas fa-download desc"></i></a>
+                    </div>
+                    <div class="marco" id="marco_rabia_r5">
+                        <img src="" id="imagen_pestaña_rabia_r5" alt="">
+                    </div>
+                    <iframe src="" id="adjunto_pestaña_rabia_r5"></iframe>
+                </div>
+               
+                <div class="tab-content" id="tab-content-rab-r4">
+                    <div class="pest_sup" id="pest_sup_rab_4">
+                        <a href="#" value="r4_rab" class="alejar"><i class="fas fa-minus"></i></a>
+                        <a href="#" value="r4_rab" class="acercar"><i class="fas fa-plus"></i></a>
+                        <a href="" id="descarga_rab_4" download><i class="fas fa-download desc"></i></a>
+                    </div>
+                    <div class="marco" id="marco_rabia_r4">
+                        <img src="" id="imagen_pestaña_rabia_r4" alt="">
+                    </div>
+                    <iframe src="" id="adjunto_pestaña_rabia_r4"></iframe>
+                </div>
+                
+                <div class="tab-content" id="tab-content-rab-r3">
+                    <div class="pest_sup" id="pest_sup_rab_3"> 
+                        <a href="#" value="r3_rab" class="alejar"><i class="fas fa-minus"></i></a>
+                        <a href="#" value="r3_rab" class="acercar"><i class="fas fa-plus"></i></a>
+                        <a href="" id="descarga_rab_3" download><i class="fas fa-download desc"></i></a>
+                    </div>
+                    <div class="marco" id="marco_rabia_r3">
+                        <img src="" id="imagen_pestaña_rabia_r3" alt="">
+                    </div>
+                    <iframe src="" id="adjunto_pestaña_rabia_r3"></iframe>
+                </div>
+        
+                <div class="tab-content" id="tab-content-rab-r2">
+                    <div class="pest_sup" id="pest_sup_rab_2">
+                        <a href="#" value="r2_rab" class="alejar"><i class="fas fa-minus"></i></a>
+                        <a href="#" value="r2_rab" class="acercar"><i class="fas fa-plus"></i></a>
+                        <a href="" id="descarga_rab_2" download><i class="fas fa-download desc"></i></a>
+                    </div>
+                    <div class="marco" id="marco_rabia_r2">
+                        <img src="" id="imagen_pestaña_rabia_r2" alt="">
+                    </div>
+                    <iframe src="" id="adjunto_pestaña_rabia_r2"></iframe>
+                </div>
+        
+                <div class="tab-content" id="tab-content-rab-r1">
+                    <div class="pest_sup" id="pest_sup_rab_1">
+                        <a href="#" value="r1_rab" class="alejar"><i class="fas fa-minus"></i></a>
+                        <a href="#" value="r1_rab" class="acercar"><i class="fas fa-plus"></i></a>
+                        <a href="" id="descarga_rab_1" download><i class="fas fa-download desc"></i></a>
+                    </div>
+                    <div class="marco" id="marco_rabia_r1">
+                        <img src="" id="imagen_pestaña_rabia" alt="">
+                    </div>
+                    <iframe src="" id="adjunto_pestaña_rabia_r1"></iframe>
+                </div>
         </div>
     </div>
 <div class="modal" id="ficha_vacunas_s">
     <div class="inside w30porcen h15p">
         <div>
-            <input type="hidden" name="nombre_vacuna" id="nombre_vacuna">
+            <input type="text" name="nombre_vacuna" id="nombre_vacuna_s">
             <button type="button" id="cierre_form_vac_s" class="cierre_form">X</button>
-            <input type="date" id="fecha_vacuna" class="fecha_vacuna">
+            <input type="date" id="fecha_vacuna_s" class="fecha_vacuna">
             <div>
-                <input type="file" name="file" id="subida_imagen" accept=".jpg,.jpeg,.png,.pdf" >                      
+                <input type="file" name="file" id="subida_imagen_s" accept=".jpg,.jpeg,.png,.pdf" >                      
             </div>
             <div class="opciones">
-                <center><button type="button" id="envio_vacuna">Enviar</button></center>
+                <center><button type="button" id="envio_vacuna_s">Enviar</button></center>
             </div>
         </div>
     </div>
@@ -251,10 +347,10 @@
                                 </div>
                                 <div class="separacion">
                                     <span>D1</span>
-                                    <input type="date" name="fiebre_amarilla__d1" id="fiebre_amarilla__d1" class="fecha_vac" readonly>
-                                    <a href="" id="vista_previa_vac" class="vista_previa_vac" value="fiebre amarilla"><i class="fas fa-eye"></i></a>
-                                    <a href="" class="subida_vacunas_s" value="fiebre amarilla"><i class="fas fa-upload" id="icono_fbra"></i></a><!--cambiar id a class-->
-                                    <input type="text" name="fiebre_amarilla__cnf" id="fiebre_amarilla__cnf" class="validarInmunidad" readonly>
+                                    <input type="date" name="fiebre_amarilla__d1" id="fiebre_amarilla__d1_s" class="fecha_vac" readonly>
+                                    <a href="" id="vista_previa_vac_s" class="vista_previa_vac_s" value="fiebre amarilla"><i class="fas fa-eye"></i></a>
+                                    <a href="" class="subida_vacunas_s" value="fiebre amarilla"><i class="fas fa-upload" id="icono_fbra_s"></i></a><!--cambiar id a class-->
+                                    <input type="text" name="fiebre_amarilla__cnf" id="fiebre_amarilla_s__cnf" class="validarInmunidad_s" readonly>
                                 </div>
                             </div>
                             <br>
@@ -264,23 +360,23 @@
                                 </div>
                                 <div class="columnas_8">
                                     <span>D1</span>
-                                    <input type="date" name="fiebre__d1" id="fiebre__d1" class="fecha_vac" readonly>
-                                    <a href="" class="vista_previa_vac" value="difteTet_D1"><i class="fas fa-eye"></i></a>
-                                    <a href="" class="subida_vacunas_s" value="difteTet_D1"><i class="fas fa-upload" id="icono_dt_d1"></i></a>
+                                    <input type="date" name="fiebre__d1" id="fiebre__d1_s" class="fecha_vac" readonly>
+                                    <a href="" class="vista_previa_vac_s" value="difteTet_D1"><i class="fas fa-eye"></i></a>
+                                    <a href="" class="subida_vacunas_s" value="difteTet_D1"><i class="fas fa-upload" id="icono_dt_d1_s"></i></a>
                                     <span>D2</span>
-                                    <input type="date" name="fiebre__d2" id="fiebre__d2" class="fecha_vac" readonly>
-                                    <a href="" class="vista_previa_vac" value="difteTet_D2"><i class="fas fa-eye"></i></a>
-                                    <a href="" class="subida_vacunas_s" value="difteTet_D2"><i class="fas fa-upload" id="icono_dt_d2"></i></a>
+                                    <input type="date" name="fiebre__d2" id="fiebre__d2_s" class="fecha_vac" readonly>
+                                    <a href="" class="vista_previa_vac_s" value="difteTet_D2"><i class="fas fa-eye"></i></a>
+                                    <a href="" class="subida_vacunas_s" value="difteTet_D2"><i class="fas fa-upload" id="icono_dt_d2_s"></i></a>
                                     <span>D3</span>
-                                    <input type="date" name="fiebre__d3" id="fiebre__d3" class="fecha_vac" readonly>
-                                    <a href="" class="vista_previa_vac" value="difteTet_D3"><i class="fas fa-eye"></i></a>
-                                    <a href="" class="subida_vacunas_s" value="difteTet_D3"><i class="fas fa-upload" id="icono_dt_d3" ></i></a>
+                                    <input type="date" name="fiebre__d3" id="fiebre__d3_s" class="fecha_vac" readonly>
+                                    <a href="" class="vista_previa_vac_s" value="difteTet_D3"><i class="fas fa-eye"></i></a>
+                                    <a href="" class="subida_vacunas_s" value="difteTet_D3"><i class="fas fa-upload" id="icono_dt_d3_s" ></i></a>
                                     <span>R1</span>
-                                    <input type="date" name="fiebre__r1" id="fiebre__r1" class="fecha_vac" readonly>
-                                    <a href="" class="vista_previa_vac" value="difteTet_R1"><i class="fas fa-eye"></i></a>
-                                    <a href="" class="subida_vacunas_s" value="difteTet_R1"><i class="fas fa-upload" id="icono_dt_r1"></i></a>
+                                    <input type="date" name="fiebre__r1" id="fiebre__r1_s" class="fecha_vac" readonly>
+                                    <a href="" class="vista_previa_vac_s" value="difteTet_R1"><i class="fas fa-eye"></i></a>
+                                    <a href="" class="subida_vacunas_s" value="difteTet_R1"><i class="fas fa-upload" id="icono_dt_r1_s"></i></a>
                                     <span>R2</span>
-                                    <input type="date" name="fiebre__r2" id="fiebre__r2" class="R2" readonly>
+                                    <input type="date" name="fiebre__r2" id="fiebre__r2_s" class="R2" readonly>
                                     <a href="" class="subida_vacunas_s" value="difteTet_R2"><i class="fas fa-upload"></i></a>
                                 </div>
                             </div>
@@ -291,19 +387,19 @@
                                 </div>
                                 <div class="columnas_8">
                                     <span>D1</span>
-                                    <input type="date" name="hepatitis_A__d1" id="hepatitis_A__d1" class="fecha_vac" readonly>
-                                    <a href="" class="vista_previa_vac" value="HepatitisA_D1"><i class="fas fa-eye"></i></a>
-                                    <a href="" class="subida_vacunas_s" value="HepatitisA_D1"><i class="fas fa-upload" id="icono_ha_d1"></i></a>
+                                    <input type="date" name="hepatitis_A__d1" id="hepatitis_A__d1_s" class="fecha_vac" readonly>
+                                    <a href="" class="vista_previa_vac_s" value="HepatitisA_D1"><i class="fas fa-eye"></i></a>
+                                    <a href="" class="subida_vacunas_s" value="HepatitisA_D1"><i class="fas fa-upload" id="icono_ha_d1_s"></i></a>
                                     <span>D2</span>
-                                    <input type="date" name="hepatitis_A__d2" id="hepatitis_A__d2" class="fecha_vac" readonly>
-                                    <a href="" class="vista_previa_vac" value="HepatitisA_D2"><i class="fas fa-eye"></i></a>
-                                    <a href="" class="subida_vacunas_s" value="HepatitisA_D2"><i class="fas fa-upload" id="icono_ha_d2"></i></a>
+                                    <input type="date" name="hepatitis_A__d2" id="hepatitis_A__d2_s" class="fecha_vac" readonly>
+                                    <a href="" class="vista_previa_vac_s" value="HepatitisA_D2"><i class="fas fa-eye"></i></a>
+                                    <a href="" class="subida_vacunas_s" value="HepatitisA_D2"><i class="fas fa-upload" id="icono_ha_d2_s"></i></a>
                                     <span>R1</span>
-                                    <input type="date" name="hepatitis_A__r1" id="hepatitis_A__r1" class="fecha_vac" readonly>
-                                    <a href="" class="vista_previa_vac" value="HepatitisA_R1"><i class="fas fa-eye"></i></a>
-                                    <a href="" class="subida_vacunas_s" value="HepatitisA_R1"><i class="fas fa-upload" id="icono_ha_r1"></i></a>
+                                    <input type="date" name="hepatitis_A__r1" id="hepatitis_A__r1_s" class="fecha_vac" readonly>
+                                    <a href="" class="vista_previa_vac_s" value="HepatitisA_R1"><i class="fas fa-eye"></i></a>
+                                    <a href="" class="subida_vacunas_s" value="HepatitisA_R1"><i class="fas fa-upload" id="icono_ha_r1_s"></i></a>
                                     <span>R2</span>
-                                    <input type="date" name="hepatitis_A__r2" id="hepatitis_A__r2" class="R2" readonly>
+                                    <input type="date" name="hepatitis_A__r2" id="hepatitis_A__r2_s" class="R2" readonly>
                                     <a href="" class="subida_vacunas_s" value="HepatitisA_R2"><i class="fas fa-upload"></i></a>
                                 </div>
                             </div>
@@ -315,20 +411,20 @@
                                 <div >
                                     <div class="columnas_8">
                                         <span>D1</span>
-                                        <input type="date" name="hepatitis_B__d1" id="hepatitis_B__d1" class="fecha_vac" readonly>
-                                        <a href="" class="vista_previa_vac" value="HepatitisB_D1"><i class="fas fa-eye"></i></a>
-                                        <a href="" class="subida_vacunas_s" value="HepatitisB_D1"><i class="fas fa-upload" id="icono_hb_d1"></i></a>
+                                        <input type="date" name="hepatitis_B__d1" id="hepatitis_B__d1_s" class="fecha_vac" readonly>
+                                        <a href="" class="vista_previa_vac_s" value="HepatitisB_D1"><i class="fas fa-eye"></i></a>
+                                        <a href="" class="subida_vacunas_s" value="HepatitisB_D1"><i class="fas fa-upload" id="icono_hb_d1_s"></i></a>
                                         <span>D2</span>
-                                        <input type="date" name="hepatitis_B__d2" id="hepatitis_B__d2" class="fecha_vac" readonly>
-                                        <a href="" class="vista_previa_vac" value="HepatitisB_D2"><i class="fas fa-eye"></i></a>
-                                        <a href="" class="subida_vacunas_s" value="HepatitisB_D2"><i class="fas fa-upload" id="icono_hb_d2"></i></a>
+                                        <input type="date" name="hepatitis_B__d2" id="hepatitis_B__d2_s" class="fecha_vac" readonly>
+                                        <a href="" class="vista_previa_vac_s" value="HepatitisB_D2"><i class="fas fa-eye"></i></a>
+                                        <a href="" class="subida_vacunas_s" value="HepatitisB_D2"><i class="fas fa-upload" id="icono_hb_d2_s"></i></a>
                                     </div>
                                     <div class="separacion hepb_sep">
                                         <span>D3</span>
-                                        <input type="date" name="hepatitis_B__d3" id="hepatitis_B__d3" class="fecha_vac" readonly>
-                                        <a href="" class="vista_previa_vac" value="HepatitisB_D3"><i class="fas fa-eye"></i></a>
-                                        <a href="" class="subida_vacunas_s" value="HepatitisB_D3"><i class="fas fa-upload" id="icono_hb_d3"></i></a>
-                                        <input type="text" name="hepatitis_B__r1" id="hepatitis_B__r1" class="validarInmunidad" readonly>
+                                        <input type="date" name="hepatitis_B__d3" id="hepatitis_B__d3_s" class="fecha_vac" readonly>
+                                        <a href="" class="vista_previa_vac_s" value="HepatitisB_D3"><i class="fas fa-eye"></i></a>
+                                        <a href="" class="subida_vacunas_s" value="HepatitisB_D3"><i class="fas fa-upload" id="icono_hb_d3_s"></i></a>
+                                        <input type="text" name="hepatitis_B__r1" id="hepatitis_B__r1_s" class="validarInmunidad_s" readonly>
                                     </div>
                                 </div>
                             </div>
@@ -339,11 +435,11 @@
                                 </div>
                                 <div class="columnas_8">
                                     <span>R1</span>
-                                    <input type="date" name="influenza__r1" id="influenza__r1" class="fecha_vac" readonly>
-                                    <a href="" class="vista_previa_vac" value="Influenza_R1"><i class="fas fa-eye"></i></a>
-                                    <a href="" class="subida_vacunas_s" value="Influenza_R1"><i class="fas fa-upload" id="icono_if_r1"></i></a>
+                                    <input type="date" name="influenza__r1" id="influenza__r1_s" class="fecha_vac" readonly>
+                                    <a href="" class="vista_previa_vac_s" value="Influenza_R1"><i class="fas fa-eye"></i></a>
+                                    <a href="" class="subida_vacunas_s" value="Influenza_R1"><i class="fas fa-upload" id="icono_if_r1_s"></i></a>
                                     <span>R2</span>
-                                    <input type="date" name="influenza__r2" id="influenza__r2" class="R2" readonly>
+                                    <input type="date" name="influenza__r2" id="influenza__r2_s" class="R2" readonly>
                                     <a href="" class="subida_vacunas_s" value="Influenza_R2"><i class="fas fa-upload"></i></a>
                                 </div>
                             </div>
@@ -354,10 +450,10 @@
                                 </div>
                                 <div class="separacion">
                                     <span>D1</span>
-                                    <input type="date" name="poliomelitis__d1" id="poliomelitis__d1" class="fecha_vac" readonly>
-                                    <a href="" class="vista_previa_vac" value="Polio_D1"><i class="fas fa-eye"></i></a>
-                                    <a href="" class="subida_vacunas_s" value="Polio_D1"><i class="fas fa-upload" id="icono_pl_r1"></i></a>
-                                    <input type="text" name="poliomelitis__r1" id="poliomelitis__r1" class="validarInmunidad" readonly>
+                                    <input type="date" name="poliomelitis__d1" id="poliomelitis__d1_s" class="fecha_vac" readonly>
+                                    <a href="" class="vista_previa_vac_s" value="Polio_D1"><i class="fas fa-eye"></i></a>
+                                    <a href="" class="subida_vacunas_s" value="Polio_D1"><i class="fas fa-upload" id="icono_pl_r1_s"></i></a>
+                                    <input type="text" name="poliomelitis__r1" id="poliomelitis__r1_s" class="validarInmunidad_s" readonly>
                                 </div>
                             </div>
                             <br>    
@@ -367,10 +463,10 @@
                                 </div>
                                 <div class="separacion">
                                     <span>D1</span>
-                                    <input type="date" name="trivirica__d1" id="trivirica__d1" class="fecha_vac" readonly>
-                                    <a href="" class="vista_previa_vac" value="Trivirica_D1"><i class="fas fa-eye"></i></a>
-                                    <a href="" class="subida_vacunas_s" value="Trivirica_D1"><i class="fas fa-upload" id="icono_tv_r1"></i></a>
-                                    <input type="text" name="trivirica__r1" id="trivirica__r1" class="validarInmunidad" readonly>
+                                    <input type="date" name="trivirica__d1" id="trivirica__d1_s" class="fecha_vac" readonly>
+                                    <a href="" class="vista_previa_vac_s" value="Trivirica_D1"><i class="fas fa-eye"></i></a>
+                                    <a href="" class="subida_vacunas_s" value="Trivirica_D1"><i class="fas fa-upload" id="icono_tv_r1_s"></i></a>
+                                    <input type="text" name="trivirica__r1" id="trivirica__r1_s" class="validarInmunidad_s" readonly>
                                 </div>
                             </div>
                             <br>        
@@ -380,23 +476,23 @@
                                 </div>
                                 <div class="columnas_8">
                                     <span>D1</span>
-                                    <input type="date" name="rabia__d1" id="rabia__d1" class="fecha_vac" readonly>
-                                    <a href="" class="vista_previa_vac" value="Rabia_D1"><i class="fas fa-eye"></i></a>
-                                    <a href="" class="subida_vacunas_s" value="Rabia_D1"><i class="fas fa-upload" id="icono_rb_d1"></i></a>
+                                    <input type="date" name="rabia__d1" id="rabia__d1_s" class="fecha_vac" readonly>
+                                    <a href="" class="vista_previa_vac_s" value="Rabia_D1"><i class="fas fa-eye"></i></a>
+                                    <a href="" class="subida_vacunas_s" value="Rabia_D1"><i class="fas fa-upload" id="icono_rb_d1_s"></i></a>
                                     <span>D2</span>
-                                    <input type="date" name="rabia__d2" id="rabia__d2" class="fecha_vac" readonly>
-                                    <a href="" class="vista_previa_vac" value="Rabia_D2"><i class="fas fa-eye"></i></a>
-                                    <a href="" class="subida_vacunas_s" value="Rabia_D2"><i class="fas fa-upload" id="icono_rb_d2"></i></a>
+                                    <input type="date" name="rabia__d2" id="rabia__d2_s" class="fecha_vac" readonly>
+                                    <a href="" class="vista_previa_vac_s" value="Rabia_D2"><i class="fas fa-eye"></i></a>
+                                    <a href="" class="subida_vacunas_s" value="Rabia_D2"><i class="fas fa-upload" id="icono_rb_d2_s"></i></a>
                                     <span>D3</span>
-                                    <input type="date" name="rabia__d3" id="rabia__d3" class="fecha_vac" readonly>
-                                    <a href="" class="vista_previa_vac" value="Rabia_D3"><i class="fas fa-eye"></i></a>
-                                    <a href="" class="subida_vacunas_s" value="Rabia_D3"><i class="fas fa-upload" id="icono_rb_d3"></i></a>
+                                    <input type="date" name="rabia__d3" id="rabia__d3_s" class="fecha_vac" readonly>
+                                    <a href="" class="vista_previa_vac_s" value="Rabia_D3"><i class="fas fa-eye"></i></a>
+                                    <a href="" class="subida_vacunas_s" value="Rabia_D3"><i class="fas fa-upload" id="icono_rb_d3_s"></i></a>
                                     <span>R1</span>
-                                    <input type="date" name="rabia__r1" id="rabia__r1" class="fecha_vac" readonly>
-                                    <a href="" class="vista_previa_vac" value="Rabia_R1"><i class="fas fa-eye"></i></a>
-                                    <a href="" class="subida_vacunas_s" value="Rabia_R1"><i class="fas fa-upload" id="icono_rb_r1"></i></a><!--subidaR1-->
+                                    <input type="date" name="rabia__r1" id="rabia__r1_s" class="fecha_vac" readonly>
+                                    <a href="" class="vista_previa_vac_s" value="Rabia_R1"><i class="fas fa-eye"></i></a>
+                                    <a href="" class="subida_vacunas_s" value="Rabia_R1"><i class="fas fa-upload" id="icono_rb_r1_s"></i></a><!--subidaR1-->
                                     <span>R2</span>
-                                    <input type="date" name="rabia__r2" id="rabia__r2" class="R2" readonly>
+                                    <input type="date" name="rabia__r2" id="rabia__r2_s" class="R2" readonly>
                                     <a href="" class="subida_vacunas_s" value="Rabia_R2"><i class="fas fa-upload"></i></a><!--subidaR2-->                                    
                                 </div>
                             </div>
@@ -407,11 +503,11 @@
                                 </div>
                                 <div class="columnas_8">
                                     <span>R1</span>
-                                    <input type="date" name="tifoidea__d1" id="tifoidea__r1" class="fecha_vac" readonly>
-                                    <a href="" class="vista_previa_vac" value="Tifoidea_R1"><i class="fas fa-eye"></i></a>
-                                    <a href="" class="subida_vacunas_s"  value="Tifoidea_R1"><i class="fas fa-upload" id="icono_tf_r1"></i></a>
+                                    <input type="date" name="tifoidea__d1" id="tifoidea__r1_s" class="fecha_vac" readonly>
+                                    <a href="" class="vista_previa_vac_s" value="Tifoidea_R1"><i class="fas fa-eye"></i></a>
+                                    <a href="" class="subida_vacunas_s"  value="Tifoidea_R1"><i class="fas fa-upload" id="icono_tf_r1_s"></i></a>
                                     <span>R2</span>
-                                    <input type="date" name="tifoidea__r1" id="tifoidea__r2" class="R2" readonly>
+                                    <input type="date" name="tifoidea__r1" id="tifoidea__r2_s" class="R2" readonly>
                                     <a href="" class="subida_vacunas_s"  value="Tifoidea_R2"><i class="fas fa-upload"></i></a>
                                 </div>
                             </div>
@@ -422,11 +518,11 @@
                                 </div>
                                 <div class="columnas_8">
                                     <span>R1</span>
-                                    <input type="date" name="neumococo__d1" id="neumococo__r1" class="fecha_vac" readonly>
-                                    <a href="" class="vista_previa_vac"  value="Neumococo_R1"><i class="fas fa-eye"></i></a>
-                                    <a href="" class="subida_vacunas_s" value="Neumococo_R1"><i class="fas fa-upload" id="icono_nm_r1"></i></a>
+                                    <input type="date" name="neumococo__d1" id="neumococo__r1_s" class="fecha_vac" readonly>
+                                    <a href="" class="vista_previa_vac_s"  value="Neumococo_R1"><i class="fas fa-eye"></i></a>
+                                    <a href="" class="subida_vacunas_s" value="Neumococo_R1"><i class="fas fa-upload" id="icono_nm_r1_s"></i></a>
                                     <span>R2</span>
-                                    <input type="date" name="neumococo__r1" id="neumococo__r2" class="R2" readonly>
+                                    <input type="date" name="neumococo__r1" id="neumococo__r2_s" class="R2" readonly>
                                     <a href="" class="subida_vacunas_s" value="Neumococo_R2"><i class="fas fa-upload"></i></a>
                                 </div>
                             </div>
@@ -437,21 +533,21 @@
                                 </div>
                                 <div class="columnas_8">
                                     <span>D1</span>
-                                    <input type="date" name="covid__d1" id="covid__d1" class="fecha_vac" readonly>
-                                    <a href="" class="vista_previa_vac" value="COVID_D1"><i class="fas fa-eye"></i></a>
-                                    <a href="" class="subida_vacunas_s" value="COVID_D1"><i class="fas fa-upload" id="icono_cv_d1"></i></a>
+                                    <input type="date" name="covid__d1" id="covid__d1_s" class="fecha_vac" readonly>
+                                    <a href="" class="vista_previa_vac_s" value="COVID_D1"><i class="fas fa-eye"></i></a>
+                                    <a href="" class="subida_vacunas_s" value="COVID_D1"><i class="fas fa-upload" id="icono_cv_d1_s"></i></a>
                                     <span>D2</span>
-                                    <input type="date" name="covid__d2" id="covid__d2" class="fecha_vac" readonly>
-                                    <a href="" class="vista_previa_vac" value="COVID_D2"><i class="fas fa-eye"></i></a>
-                                    <a href="" class="subida_vacunas_s" value="COVID_D2"><i class="fas fa-upload" id="icono_cv_d2"></i></a>
+                                    <input type="date" name="covid__d2" id="covid__d2_s" class="fecha_vac" readonly>
+                                    <a href="" class="vista_previa_vac_s" value="COVID_D2"><i class="fas fa-eye"></i></a>
+                                    <a href="" class="subida_vacunas_s" value="COVID_D2"><i class="fas fa-upload" id="icono_cv_d2_s"></i></a>
                                     <span>D3</span>
-                                    <input type="date" name="covid__d3" id="covid__d3" class="fecha_vac" readonly>
-                                    <a href="" class="vista_previa_vac" value="COVID_D3"><i class="fas fa-eye"></i></a>
-                                    <a href="" class="subida_vacunas_s" value="COVID_D3"><i class="fas fa-upload" id="icono_cv_d3"></i></a>
+                                    <input type="date" name="covid__d3" id="covid__d3_s" class="fecha_vac" readonly>
+                                    <a href="" class="vista_previa_vac_s" value="COVID_D3"><i class="fas fa-eye"></i></a>
+                                    <a href="" class="subida_vacunas_s" value="COVID_D3"><i class="fas fa-upload" id="icono_cv_d3_s"></i></a>
                                     <span>D4</span>
-                                    <input type="date" name="covid__d4" id="covid__d4" class="fecha_vac" readonly>
-                                    <a href="" class="vista_previa_vac" value="COVID_D4"><i class="fas fa-eye"></i></a>
-                                    <a href="" class="subida_vacunas_s" value="COVID_D4"><i class="fas fa-upload" id="icono_cv_d4"></i></a>
+                                    <input type="date" name="covid__d4" id="covid__d4_s" class="fecha_vac" readonly>
+                                    <a href="" class="vista_previa_vac_s" value="COVID_D4"><i class="fas fa-eye"></i></a>
+                                    <a href="" class="subida_vacunas_s" value="COVID_D4"><i class="fas fa-upload" id="icono_cv_d4_s"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -474,7 +570,7 @@
                             </div>
                             <div>
                                 <span>Nombre</span>
-                                <input type="text" id="nombre_pase" readonly>
+                                <input type="text" id="nombre_pase_s" readonly>
                             </div>
                             <div>
                                 <span>DNI</span>

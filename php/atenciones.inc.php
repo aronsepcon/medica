@@ -1,5 +1,11 @@
 <?php
+   $random = rand(0,1000);
 
+   if($_SESSION['logged'] == false){
+       session_unset();
+       session_destroy();
+       header('location: ../index.php');
+   }
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -18,6 +24,7 @@
             <button type="button" id="cierre_atencion_med">X</button>
             <div><h1>Atencion Médica</h1></div>
             <div>
+                <input type="text" class="oculto" id="dni_paciente">
                 <label for="fecha__atencion">Fecha :</label>
                 <input type="date" name="fecha__atencion" id="fecha__atencion">
                 <select name="" id="hora__atencion">
@@ -44,7 +51,7 @@
                         <label for="presion__arterial">P.A.:</label>
                         <input type="text" name="presion__arterial" id="presion__arterial">
                         <span>/</span>
-                        <input type="text">
+                        <input type="text" id="mmhg_atencion">
                         <span>mmHg</span>
 
                         <label for="frecuencia__cardiaca">F.C.:</label>
@@ -190,11 +197,11 @@
             <hr>
             <div>
                 <label for="">Observaciones</label> 
-                <textarea name="" id="" cols="30" rows="10"></textarea>
+                <textarea name="" id="observaciones_atencion" cols="30" rows="10"></textarea>
             </div>
             <hr>
             <div>
-                <button>Guardar</button>
+                <button id="guardar_atencion">Guardar</button>
                 <button id="retorno_atencion">Regresar</button>
             </div>
         </div>

@@ -9,66 +9,66 @@ const $documento_trabajador = document.getElementById('documento_trabajador_sc')
 const $subida_vacunas = document.querySelectorAll(".subida_vacunas_s");
 const $ficha_vacunas = document.getElementById("ficha_vacunas_s");
 const $cierre_form_vac = document.getElementById("cierre_form_vac_s");
-const $fecha_vacuna = document.getElementById("fecha_vacuna");
-const $subida_imagen = document.getElementById("subida_imagen");
-const $envio_vacuna = document.getElementById("envio_vacuna");
-const $nombre_vacuna = document.getElementById("nombre_vacuna");
-const $nombre_trabajador = document.getElementById('nombre_pase');
+const $fecha_vacuna = document.getElementById("fecha_vacuna_s");
+const $subida_imagen = document.getElementById("subida_imagen_s");
+const $envio_vacuna = document.getElementById("envio_vacuna_s");
+const $nombre_vacuna = document.getElementById("nombre_vacuna_s");
+const $nombre_trabajador = document.getElementById('nombre_pase_s');
 
 const $adj_val_dt = document.getElementById('adj_val_dt');
 
-const $fiebre_amarilla__d1 = document.getElementById("fiebre_amarilla__d1");
-const $difteria__d1 = document.getElementById("fiebre__d1");
-const $difteria__d2 = document.getElementById("fiebre__d2");
-const $difteria__d3 = document.getElementById("fiebre__d3");
-const $difteria__r1 = document.getElementById("fiebre__r1");
-const $difteria__r2 = document.getElementById("fiebre__r2");
+const $fiebre_amarilla__d1 = document.getElementById("fiebre_amarilla__d1_s");
+const $difteria__d1 = document.getElementById("fiebre__d1_s");
+const $difteria__d2 = document.getElementById("fiebre__d2_s");
+const $difteria__d3 = document.getElementById("fiebre__d3_s");
+const $difteria__r1 = document.getElementById("fiebre__r1_s");
+const $difteria__r2 = document.getElementById("fiebre__r2_s");
 
-const $hepatitis_A__d1 = document.getElementById("hepatitis_A__d1");
-const $hepatitis_A__d2 = document.getElementById("hepatitis_A__d2");
-const $hepatitis_A__r1 = document.getElementById("hepatitis_A__r1");
-const $hepatitis_A__r2 = document.getElementById("hepatitis_A__r2");
+const $hepatitis_A__d1 = document.getElementById("hepatitis_A__d1_s");
+const $hepatitis_A__d2 = document.getElementById("hepatitis_A__d2_s");
+const $hepatitis_A__r1 = document.getElementById("hepatitis_A__r1_s");
+const $hepatitis_A__r2 = document.getElementById("hepatitis_A__r2_s");
 
-const $hepatitis_B__d1 = document.getElementById("hepatitis_B__d1");
-const $hepatitis_B__d2 = document.getElementById("hepatitis_B__d2");
-const $hepatitis_B__d3 = document.getElementById("hepatitis_B__d3");
+const $hepatitis_B__d1 = document.getElementById("hepatitis_B__d1_s");
+const $hepatitis_B__d2 = document.getElementById("hepatitis_B__d2_s");
+const $hepatitis_B__d3 = document.getElementById("hepatitis_B__d3_s");
 
-const $influenza__r1 = document.getElementById("influenza__r1");
-const $influenza__r2 = document.getElementById("influenza__r2");
+const $influenza__r1 = document.getElementById("influenza__r1_s");
+const $influenza__r2 = document.getElementById("influenza__r2_s");
 
-const $poliomelitis__d1 = document.getElementById("poliomelitis__d1");
-const $trivirica__d1 = document.getElementById("trivirica__d1");
+const $poliomelitis__d1 = document.getElementById("poliomelitis__d1_s");
+const $trivirica__d1 = document.getElementById("trivirica__d1_s");
 
-const $rabia__d1 = document.getElementById("rabia__d1");
-const $rabia__d2 = document.getElementById("rabia__d2");
-const $rabia__d3 = document.getElementById("rabia__d3");
-const $rabia__r1 = document.getElementById("rabia__r1");
-const $rabia__r2 = document.getElementById("rabia__r2");
+const $rabia__d1 = document.getElementById("rabia__d1_s");
+const $rabia__d2 = document.getElementById("rabia__d2_s");
+const $rabia__d3 = document.getElementById("rabia__d3_s");
+const $rabia__r1 = document.getElementById("rabia__r1_s");
+const $rabia__r2 = document.getElementById("rabia__r2_s");
 
-const $tifoidea__r1 = document.getElementById("tifoidea__r1");
-const $tifoidea__r2 = document.getElementById("tifoidea__r2");
+const $tifoidea__r1 = document.getElementById("tifoidea__r1_s");
+const $tifoidea__r2 = document.getElementById("tifoidea__r2_s");
 
-const $neumococo__r1 = document.getElementById("neumococo__r1");
-const $neumococo__r2 = document.getElementById("neumococo__r2");
+const $neumococo__r1 = document.getElementById("neumococo__r1_s");
+const $neumococo__r2 = document.getElementById("neumococo__r2_s");
 
-const $covid__d1 = document.getElementById("covid__d1");
-const $covid__d2 = document.getElementById("covid__d2");
-const $covid__d3 = document.getElementById("covid__d3");
-const $covid__d4 = document.getElementById("covid__d4");
+const $covid__d1 = document.getElementById("covid__d1_s");
+const $covid__d2 = document.getElementById("covid__d2_s");
+const $covid__d3 = document.getElementById("covid__d3_s");
+const $covid__d4 = document.getElementById("covid__d4_s");
 
-const $validacion_Fiebre_Amar=document.getElementById("fiebre_amarilla__cnf");
-const $hepatitis_B__r1 = document.getElementById("hepatitis_B__r1");
-const $poliomelitis__r1 = document.getElementById("poliomelitis__r1");
-const $trivirica__r1 = document.getElementById("trivirica__r1");
-const $validarInmunidad = document.querySelectorAll(".validarInmunidad");
+const $validacion_Fiebre_Amar=document.getElementById("fiebre_amarilla_s__cnf");
+const $hepatitis_B__r1 = document.getElementById("hepatitis_B__r1_s");
+const $poliomelitis__r1 = document.getElementById("poliomelitis__r1_s");
+const $trivirica__r1 = document.getElementById("trivirica__r1_s");
+const $validarInmunidad_s = document.querySelectorAll(".validarInmunidad_s");//cambiar tmb la variable
 const $fecha_vac = document.querySelectorAll(".fecha_vac");
 const $icono_subida = document.querySelectorAll(".fas fa-upload");
-const $descarga = document.getElementById("descarga");
+const $descarga = document.getElementById("descarga_s");
 
-const $pest_sup_r1 = document.getElementById("pest_sup_r1");
-const $pest_sup_r2 = document.getElementById("pest_sup_r2");
-const $pest_sup_r3 = document.getElementById("pest_sup_r3");
-const $pest_sup_r4 = document.getElementById("pest_sup_r4");
+const $pest_sup_r1 = document.getElementById("pest_sup_r1_s");
+const $pest_sup_r2 = document.getElementById("pest_sup_r2_s");
+const $pest_sup_r3 = document.getElementById("pest_sup_r3_s");
+const $pest_sup_r4 = document.getElementById("pest_sup_r4_s");
 
 const $pest_sup_rab_r1 = document.getElementById("pest_sup_rab_1");
 const $pest_sup_rab_r2 = document.getElementById("pest_sup_rab_2");
@@ -78,29 +78,30 @@ const $pest_sup_rab_r5 = document.getElementById("pest_sup_rab_5");
 const $pest_sup_rab_r6 = document.getElementById("pest_sup_rab_6");
 const $pest_sup_rab_r7 = document.getElementById("pest_sup_rab_7");
 
-const $cierre_form_vp_vac = document.getElementById("cierre_form_vp_vac");
-const $ficha__vistaprevia_vac = document.getElementById("ficha__vistaprevia_vac");
-const $vista_previa_vac = document.querySelectorAll(".vista_previa_vac");
+const $cierre_form_vp_vac = document.getElementById("cierre_form_vp_vac_s");
+const $ficha__vistaprevia_vac = document.getElementById("ficha__vistaprevia_vac_s");
+const $vista_previa_vac = document.querySelectorAll(".vista_previa_vac_s");
 //const $vista_previa_vac = document.getElementById("vista_previa_vac");
 const $frame__adjunto_vac = document.getElementById("frame__adjunto_vac");
-const $display_image = document.getElementById("imagen");
-const $frame__adjunto = document.getElementById('frame__adjunto');
-const $ficha__vistaprevia = document.getElementById('ficha__vistaprevia');
+const $display_image = document.getElementById("imagen_s");
+const $frame__adjunto = document.getElementById('frame__adjunto_s');
+const $ficha__vistaprevia = document.getElementById('ficha__vistaprevia_s');
 
 const $abrir_pestañas = document.getElementById("abrir_pestañas");
 const $pestañas = document.getElementById("pestañas_s");
-const $cierre_pestañas = document.getElementById("cierre_pestañas");
-const $pestañas_rabia = document.getElementById("pestañas_rabia");
-const $cierre_pestañas_rabia = document.getElementById("cierre_pestañas_rabia");
+const $cierre_form_ing = document.getElementById('cierre_form_ing_s');
+const $cierre_pestañas = document.getElementById("cierre_pestañas_s");
+const $pestañas_rabia = document.getElementById("pestañas_rabia_s");
+const $cierre_pestañas_rabia = document.getElementById("cierre_pestañas_rabia_s");
 
-const $img_pestaña = document.querySelectorAll(".img_pestaña");
+const $img_pestaña = document.querySelectorAll(".img_pestaña_s");
 const $acercar = document.querySelectorAll(".acercar");
 const $alejar = document.querySelectorAll(".alejar");
 
-const $display_image_pest_r1 = document.getElementById("imagen_pestaña");
-const $display_image_pest_r2 = document.getElementById("imagen_pestaña_r2");
-const $display_image_pest_r3 = document.getElementById("imagen_pestaña_r3");
-const $display_image_pest_r4 = document.getElementById("imagen_pestaña_r4");
+const $display_image_pest_r1 = document.getElementById("imagen_pestaña_s");
+const $display_image_pest_r2 = document.getElementById("imagen_pestaña_r2_s");
+const $display_image_pest_r3 = document.getElementById("imagen_pestaña_r3_s");
+const $display_image_pest_r4 = document.getElementById("imagen_pestaña_r4_s");
 
 const $display_image_pest_rabia = document.getElementById("imagen_pestaña_rabia");
 const $display_image_pest_rabia_r2 = document.getElementById("imagen_pestaña_rabia_r2");
@@ -110,10 +111,10 @@ const $display_image_pest_rabia_r5 = document.getElementById("imagen_pestaña_ra
 const $display_image_pest_rabia_r6 = document.getElementById("imagen_pestaña_rabia_r6");
 const $display_image_pest_rabia_r7 = document.getElementById("imagen_pestaña_rabia_r7");
 
-const $adjunto_pestaña_r1 = document.getElementById("adjunto_pestaña_r1");
-const $adjunto_pestaña_r2 = document.getElementById("adjunto_pestaña_r2");
-const $adjunto_pestaña_r3 = document.getElementById("adjunto_pestaña_r3");
-const $adjunto_pestaña_r4 = document.getElementById("adjunto_pestaña_r4");
+const $adjunto_pestaña_r1 = document.getElementById("adjunto_pestaña_r1_s");
+const $adjunto_pestaña_r2 = document.getElementById("adjunto_pestaña_r2_s");
+const $adjunto_pestaña_r3 = document.getElementById("adjunto_pestaña_r3_s");
+const $adjunto_pestaña_r4 = document.getElementById("adjunto_pestaña_r4_s");
 
 const $adjunto_pestaña_rabia_r1 = document.getElementById("adjunto_pestaña_rabia_r1");
 const $adjunto_pestaña_rabia_r2 = document.getElementById("adjunto_pestaña_rabia_r2");
@@ -123,10 +124,10 @@ const $adjunto_pestaña_rabia_r5 = document.getElementById("adjunto_pestaña_rab
 const $adjunto_pestaña_rabia_r6 = document.getElementById("adjunto_pestaña_rabia_r6");
 const $adjunto_pestaña_rabia_r7 = document.getElementById("adjunto_pestaña_rabia_r7");
 
-const $tab1 = document.getElementById("tab1"); 
-const $tab2 = document.getElementById("tab2"); 
-const $tab3 = document.getElementById("tab3"); 
-const $tab4 = document.getElementById("tab4"); 
+const $tab1 = document.getElementById("tab1_s"); 
+const $tab2 = document.getElementById("tab2_s"); 
+const $tab3 = document.getElementById("tab3_s"); 
+const $tab4 = document.getElementById("tab4_s"); 
 
 $subida_vacunas.forEach(function($subida_vacunas){
     $subida_vacunas.onclick = (e) => {
@@ -138,6 +139,13 @@ $subida_vacunas.forEach(function($subida_vacunas){
         return false;
     }
 });
+
+
+$cierre_form_ing.onclick = (e) => {
+    e.preventDefault();
+
+    fadeOut($ficha__vistaprevia);
+}
 
 $abrir_pestañas.onclick = (e) => {
     e.preventDefault();
@@ -190,7 +198,7 @@ $vista_previa_vac.forEach(function($vista_previa_vac){
     }
 });
 
-const $tab = document.querySelectorAll(".tab");
+const $tab = document.querySelectorAll(".tab_s");
 
 $tab.forEach(function($tab){
     $tab.onclick = (e) => {
@@ -201,8 +209,8 @@ $tab.forEach(function($tab){
     }
 })
 
-var selected="tab4";//crear uno parecido a show para rabia e.e
-var disp="tab-content-r4";
+var selected="tab4_s";//crear uno parecido a show para rabia e.e
+var disp="tab-content-r4_s";
 
 function show(a,b){
     document.getElementById(selected).style.backgroundColor = "rgb(150,150,150)";
@@ -213,7 +221,7 @@ function show(a,b){
     disp=b;
 }
 
-const $tab_r = document.querySelectorAll(".tab_r");
+const $tab_r = document.querySelectorAll(".tab_r");//para la rabia 
 
 $tab_r.forEach(function($tab_r){
     $tab_r.onclick = (e) => {
@@ -260,13 +268,13 @@ function mostrarImagen($value){
                             let adj1=dataJson.adjunto[0].split('.');
                             console.log(adj1[1]);
                             if(adj1[1]=="jpeg"){
-                                document.getElementById("marco_r4").style.display = "block";
+                                document.getElementById("marco_r4_s").style.display = "block";
                                 $display_image_pest_r4.src="../vacunas/"+dataJson.adjunto[0];//adjunto[0]
                                 $adjunto_pestaña_r4.style.display = 'none';
                                 $display_image_pest_r4.style.display = 'block';
                                 $pest_sup_r4.style.display = 'block';
                             }else if(adj1[1]=="pdf"){
-                                document.getElementById("marco_r4").style.display = "none";
+                                document.getElementById("marco_r4_s").style.display = "none";
                                 $adjunto_pestaña_r4.style.display = 'block';
                                 $display_image_pest_r4.style.display = 'none';
                                 $pest_sup_r4.style.display = 'none';
@@ -281,19 +289,19 @@ function mostrarImagen($value){
                             $tab3.style.display="inline";
                             let adj2=dataJson.adjunto[1].split('.');//si es null no lo abre U:
                             if(adj2[1]=="jpeg"){
-                                document.getElementById("marco_r3").style.display = "block";
+                                document.getElementById("marco_r3_s").style.display = "block";
                                 $display_image_pest_r3.src="../vacunas/"+dataJson.adjunto[1];//adjunto[0]
                                 $adjunto_pestaña_r3.style.display = 'none';
                                 $display_image_pest_r3.style.display = 'block';
                                 $pest_sup_r3.style.display = 'block';
                             }else if(adj2[1]=="pdf"){
-                                document.getElementById("marco_r3").style.display = "none";
+                                document.getElementById("marco_r3_s").style.display = "none";
                                 $adjunto_pestaña_r3.style.display = 'block';
                                 $display_image_pest_r3.style.display = 'none';     
                                 $pest_sup_r3.style.display = 'none';                        
                                 $adjunto_pestaña_r3.setAttribute("src","../vacunas/"+dataJson.adjunto[1]);
                             }
-                            (document.getElementById("descarga_2")).setAttribute("href","../vacunas/"+dataJson.adjunto[1]);
+                            (document.getElementById("descarga_2_s")).setAttribute("href","../vacunas/"+dataJson.adjunto[1]);
                         }
 
                         if(dataJson.adjunto[2]==null){
@@ -302,20 +310,20 @@ function mostrarImagen($value){
                             $tab2.style.display='inline';
                             let adj3=dataJson.adjunto[2].split('.');
                             if(adj3[1]=="jpeg"){
-                                document.getElementById("marco_r2").style.display = "block";
+                                document.getElementById("marco_r2_s").style.display = "block";
                                 $display_image_pest_r2.src="../vacunas/"+dataJson.adjunto[2];//adjunto[0]
                                 $adjunto_pestaña_r2.style.display = 'none';
                                 $display_image_pest_r2.style.display = 'block';
                                 $pest_sup_r2.style.display = 'block';                        
                             }
                             else if(adj3[1]=="pdf"){
-                                document.getElementById("marco_r2").style.display = "none";
+                                document.getElementById("marco_r2_s").style.display = "none";
                                 $adjunto_pestaña_r2.style.display = 'block';
                                 $display_image_pest_r2.style.display = 'none';  
                                 $pest_sup_r2.style.display = 'none';
                                 $adjunto_pestaña_r2.setAttribute("src","../vacunas/"+dataJson.adjunto[2]);
                             }
-                            (document.getElementById("descarga_3")).setAttribute("href","../vacunas/"+dataJson.adjunto[2]);
+                            (document.getElementById("descarga_3_s")).setAttribute("href","../vacunas/"+dataJson.adjunto[2]);
                             console.log(dataJson.adjunto[2]);
                         }
                         
@@ -325,20 +333,20 @@ function mostrarImagen($value){
                             $tab1.style.display='inline';
                             let adj4=dataJson.adjunto[3].split('.');
                             if(adj4[1]=="jpeg"){
-                                document.getElementById("marco_r1").style.display = "block";
+                                document.getElementById("marco_r1_s").style.display = "block";
                                 $adjunto_pestaña_r1.style.display = 'none';
                                 $display_image_pest_r1.style.display = 'block';
                                 $pest_sup_r1.style.display = 'block';                        
                                 $display_image_pest_r1.src="../vacunas/"+dataJson.adjunto[3];//empieza en el ultima --- complicado U:
                             }
                             else if(adj4[1]=="pdf"){
-                                document.getElementById("marco_r1").style.display = "none";
+                                document.getElementById("marco_r1_s").style.display = "none";
                                 $adjunto_pestaña_r1.style.display = 'block';
                                 $display_image_pest_r1.style.display = 'none';   
                                 $pest_sup_r1.style.display = 'none';                                               
                                 $adjunto_pestaña_r1.setAttribute("src","../vacunas/"+dataJson.adjunto[3]);
                             }
-                            (document.getElementById("descarga_1")).setAttribute("href","../vacunas/"+dataJson.adjunto[3]);
+                            (document.getElementById("descarga_1_s")).setAttribute("href","../vacunas/"+dataJson.adjunto[3]);
                         }
                     
                         fadeIn($pestañas);
@@ -496,17 +504,17 @@ function mostrarImagen($value){
                     }else{
                         let formatos = (dataJson.adjunto).split('.');
                         if(formatos[1]=="pdf"){
-                            document.getElementById("marco").style.display = "none";
-                            (document.getElementById("pest_sup_vac")).style.display = "none"
+                            document.getElementById("marco_s").style.display = "none";
+                            (document.getElementById("pest_sup_vac_s")).style.display = "none"
                             $frame__adjunto.setAttribute("src",'../vacunas/'+dataJson.adjunto);
                             fadeIn($ficha__vistaprevia);
                         }else if(formatos[1]=="jpeg"){
-                            document.getElementById("marco").style.display = "block";
+                            document.getElementById("marco_s").style.display = "block";
                             $display_image.src = "../vacunas/"+dataJson.adjunto;
-                            (document.getElementById("pest_sup_vac")).style.display = "block"
+                            (document.getElementById("pest_sup_vac_s")).style.display = "block"
                             console.log(dataJson.adjunto);    
                             fadeIn($ficha__vistaprevia_vac);
-                            (document.getElementById("descarga_vac")).setAttribute("href","../vacunas/"+dataJson.adjunto);
+                            (document.getElementById("descarga_vac_s")).setAttribute("href","../vacunas/"+dataJson.adjunto);
                         }
                         else{
                             mostrarMensaje("Existe un problema","msj_error");
@@ -745,64 +753,64 @@ export function listarVacunas(){
           }
 
             if(dataJson.adjuntoFbrAmarilla!=null){
-                document.getElementById("icono_fbra").style.color="green";
+                document.getElementById("icono_fbra_s").style.color="green";
             }else{
-                document.getElementById("icono_fbra").style.color="";
+                document.getElementById("icono_fbra_s").style.color="";
             }
             if(dataJson.adjuntoDifTD1!=null){
-                document.getElementById("icono_dt_d1").style.color="green";
+                document.getElementById("icono_dt_d1_s").style.color="green";
             }else{
-                document.getElementById("icono_dt_d1").style.color="";
+                document.getElementById("icono_dt_d1_s").style.color="";
             }
 
             if(dataJson.adjuntoDifTD2!=null){
-                document.getElementById("icono_dt_d2").style.color="green";
+                document.getElementById("icono_dt_d2_s").style.color="green";
                 $difteria__d2.style.fontStyle="";
                 $difteria__d2.style.color="";
                 $difteria__d2.style.fontWeight = "";
             }else if(dataJson.adjuntoDifTD2==null && $difteria__d2.value!=""){
-                document.getElementById("icono_dt_d2").style.color="";
+                document.getElementById("icono_dt_d2_s").style.color="";
                 $difteria__d2.style.fontStyle="italic";
                 $difteria__d2.style.color="red";
                 $difteria__d2.style.fontWeight = "bold";
             }else{
-                document.getElementById("icono_dt_d2").style.color="";
+                document.getElementById("icono_dt_d2_s").style.color="";
                 $difteria__d2.style.fontStyle="";
                 $difteria__d2.style.fontWeight = "";
                 $difteria__d2.style.color="";
             }
             
             if(dataJson.adjuntoDifTD3!=null){
-                document.getElementById("icono_dt_d3").style.color="green";
+                document.getElementById("icono_dt_d3_s").style.color="green";
                 $difteria__d3.style.fontStyle="";
                 $difteria__d3.style.color="";
                 $difteria__d3.style.fontWeight = "";
             }else if(dataJson.adjuntoDifTD3==null && $difteria__d3.value!=""){
-                document.getElementById("icono_dt_d3").style.color="";
+                document.getElementById("icono_dt_d3_s").style.color="";
                 $difteria__d3.style.fontStyle="italic";
                 $difteria__d3.style.color="red";
                 $difteria__d3.style.fontWeight = "bold";
             }else{
-                document.getElementById("icono_dt_d3").style.color="";
+                document.getElementById("icono_dt_d3_s").style.color="";
                 $difteria__d3.style.fontStyle="";
                 $difteria__d3.style.color="";
                 $difteria__d3.style.fontWeight = "";
             }
 
             if(dataJson.adjuntoDifTR1!=null){
-                document.getElementById("icono_dt_r1").style.color="green";
+                document.getElementById("icono_dt_r1_s").style.color="green";
                 $difteria__r1.style.fontStyle="";
                 $difteria__r1.style.color="";
                 $difteria__r1.style.fontWeight = "";
                 $difteria__r2.style.color = "red";
             }else if(dataJson.adjuntoDifTR1==null && $difteria__r1.value!=""){
-                document.getElementById("icono_dt_r1").style.color="";
+                document.getElementById("icono_dt_r1_s").style.color="";
                 $difteria__r1.style.fontStyle="italic";
                 $difteria__r1.style.color="red";
                 $difteria__r1.style.fontWeight = "bold";
                 $difteria__r2.style.color = "";
             }else{
-                document.getElementById("icono_dt_r1").style.color="";
+                document.getElementById("icono_dt_r1_s").style.color="";
                 $difteria__r1.style.fontStyle="";
                 $difteria__r1.style.color="";
                 $difteria__r1.style.fontWeight = "";
@@ -810,45 +818,45 @@ export function listarVacunas(){
             }
             
             if(dataJson.adjuntoHepAD1!=null){
-                document.getElementById("icono_ha_d1").style.color="green";
+                document.getElementById("icono_ha_d1_s").style.color="green";
             }else{
-                document.getElementById("icono_ha_d1").style.color="";
+                document.getElementById("icono_ha_d1_s").style.color="";
 
             }
 
             if(dataJson.adjuntoHepAD2!=null && $hepatitis_A__d2.value!=""){
-                document.getElementById("icono_ha_d2").style.color="green";
+                document.getElementById("icono_ha_d2_s").style.color="green";
                 $hepatitis_A__d2.style.fontStyle="";
                 $hepatitis_A__d2.style.color="";
                 $hepatitis_A__d2.style.fontWeight = "";
             }else if(dataJson.adjuntoHepAD2==null && $hepatitis_A__d2.value!=""){
-                document.getElementById("icono_ha_d2").style.color="";
+                document.getElementById("icono_ha_d2_s").style.color="";
                 $hepatitis_A__d2.style.fontStyle="italic";
                 $hepatitis_A__d2.style.color="red";
                 $hepatitis_A__d2.style.fontWeight = "bold";
             }
             else{
-                document.getElementById("icono_ha_d2").style.color="";
+                document.getElementById("icono_ha_d2_s").style.color="";
                 $hepatitis_A__d2.style.fontStyle="";
                 $hepatitis_A__d2.style.fontWeight = "";
                 $hepatitis_A__d2.style.color="";
             }
 
             if(dataJson.adjuntoHepAR1!=null && $hepatitis_A__r1.value!=""){
-                document.getElementById("icono_ha_r1").style.color="green";
+                document.getElementById("icono_ha_r1_s").style.color="green";
                 $hepatitis_A__r1.style.fontStyle="";
                 $hepatitis_A__r1.style.fontWeight = "";
                 $hepatitis_A__r1.style.color="";
                 $hepatitis_A__r2.style.color = "red";
             }
             else if(dataJson.adjuntoHepAR1==null && $hepatitis_A__r1.value!=""){
-                document.getElementById("icono_ha_r1").style.color="";
+                document.getElementById("icono_ha_r1_s").style.color="";
                 $hepatitis_A__r1.style.fontStyle="italic";
                 $hepatitis_A__r1.style.fontWeight = "bold";
                 $hepatitis_A__r1.style.color="red";
                 $hepatitis_A__r2.style.color = "";
             }else{
-                document.getElementById("icono_ha_r1").style.color="";
+                document.getElementById("icono_ha_r1_s").style.color="";
                 $hepatitis_A__r1.style.fontStyle="";
                 $hepatitis_A__r1.style.fontWeight = "";
                 $hepatitis_A__r1.style.color="";
@@ -856,79 +864,79 @@ export function listarVacunas(){
             }
 
             if(dataJson.adjuntoHepBD1!=null){
-                document.getElementById("icono_hb_d1").style.color="green";
+                document.getElementById("icono_hb_d1_s").style.color="green";
             }else{
-                document.getElementById("icono_hb_d1").style.color="";
+                document.getElementById("icono_hb_d1_s").style.color="";
             }
 
             if(dataJson.adjuntoHepBD2!=null && $hepatitis_B__d2.value!=""){
-                document.getElementById("icono_hb_d2").style.color="green";
+                document.getElementById("icono_hb_d2_s").style.color="green";
                 $hepatitis_B__d2.style.fontStyle="";
                 $hepatitis_B__d2.style.fontWeight = "";
                 $hepatitis_B__d2.style.color="";
 
             }else if(dataJson.adjuntoHepBD2==null && $hepatitis_B__d2.value!=""){
-                document.getElementById("icono_hb_d2").style.color="";
+                document.getElementById("icono_hb_d2_s").style.color="";
                 $hepatitis_B__d2.style.fontStyle="italic";
                 $hepatitis_B__d2.style.fontWeight = "bold";
                 $hepatitis_B__d2.style.color="red";
             }else{
-                document.getElementById("icono_hb_d2").style.color="";
+                document.getElementById("icono_hb_d2_s").style.color="";
                 $hepatitis_B__d2.style.fontStyle="";
                 $hepatitis_B__d2.style.fontWeight = "";
                 $hepatitis_B__d2.style.color="";
             }
             
             if(dataJson.adjuntoHepBD3!=null && $hepatitis_B__d3.value!=""){
-                document.getElementById("icono_hb_d3").style.color="green";
+                document.getElementById("icono_hb_d3_s").style.color="green";
                 $hepatitis_B__d3.style.fontStyle="";
                 $hepatitis_B__d3.style.fontWeight = "";
                 $hepatitis_B__d3.style.color="";
             }else if(dataJson.adjuntoHepBD3==null && $hepatitis_B__d3.value!=""){
-                document.getElementById("icono_hb_d3").style.color="";
+                document.getElementById("icono_hb_d3_s").style.color="";
                 $hepatitis_B__d3.style.fontStyle="italic";
                 $hepatitis_B__d3.style.fontWeight = "bold";
                 $hepatitis_B__d3.style.color="red";
             }else{
-                document.getElementById("icono_hb_d3").style.color="";
+                document.getElementById("icono_hb_d3_s").style.color="";
                 $hepatitis_B__d3.style.fontStyle="";
                 $hepatitis_B__d3.style.fontWeight = "";
                 $hepatitis_B__d3.style.color="";
             }
 
             if(dataJson.adjuntoInflR1!=null){
-                document.getElementById("icono_if_r1").style.color="green";
+                document.getElementById("icono_if_r1_s").style.color="green";
                 $influenza__r2.style.color = "red";
             }else{
-                document.getElementById("icono_if_r1").style.color="";
+                document.getElementById("icono_if_r1_s").style.color="";
                 $influenza__r2.style.color = "";
             }
 
             if(dataJson.adjuntoPolioD1!=null){
-                document.getElementById("icono_pl_r1").style.color="green";
+                document.getElementById("icono_pl_r1_s").style.color="green";
             }else{
-                document.getElementById("icono_pl_r1").style.color="";
+                document.getElementById("icono_pl_r1_s").style.color="";
             }
 
             if(dataJson.adjuntoTrivD1!=null){
-                document.getElementById("icono_tv_r1").style.color="green";
+                document.getElementById("icono_tv_r1_s").style.color="green";
             }else{
-                document.getElementById("icono_tv_r1").style.color="";
+                document.getElementById("icono_tv_r1_s").style.color="";
             }
            
             if(dataJson.adjuntoTifoR1!=null){
-                document.getElementById("icono_tf_r1").style.color="green";
+                document.getElementById("icono_tf_r1_s").style.color="green";
                 $tifoidea__r2.style.color = "red";
             }else{
-                document.getElementById("icono_tf_r1").style.color="";
+                document.getElementById("icono_tf_r1_s").style.color="";
                 $tifoidea__r2.style.color = "";
             }
             
             if(dataJson.adjuntoNeumR1!=null){
-                document.getElementById("icono_nm_r1").style.color="green";
+                document.getElementById("icono_nm_r1_s").style.color="green";
                 $neumococo__r2.style.color = "red";
             }else{
-                document.getElementById("icono_nm_r1").style.color="";
+                document.getElementById("icono_nm_r1_s").style.color="";
                 $neumococo__r2.style.color = "";
             }
 
@@ -939,62 +947,60 @@ export function listarVacunas(){
           $rabia__r2.value =  dataJson.fechaRBR2;
 
         if(dataJson.adjuntoRabD1!=null){
-            document.getElementById("icono_rb_d1").style.color="green";
+            document.getElementById("icono_rb_d1_s").style.color="green";
         }else{
-            document.getElementById("icono_rb_d1").style.color="";
+            document.getElementById("icono_rb_d1_s").style.color="";
         }
         
         if(dataJson.adjuntoRabD2!=null && $rabia__d2.value!=""){
-            document.getElementById("icono_rb_d2").style.color="green";
+            document.getElementById("icono_rb_d2_s").style.color="green";
             $rabia__d2.style.fontStyle="";
             $rabia__d2.style.fontWeight = "";
             $rabia__d2.style.color="";
         }
         else if(dataJson.adjuntoRabD2==null && $rabia__d2.value!=""){
-            document.getElementById("icono_rb_d2").style.color="";
+            document.getElementById("icono_rb_d2_s").style.color="";
             $rabia__d2.style.fontStyle="italic";
             $rabia__d2.style.fontWeight = "bold";
             $rabia__d2.style.color="red";
         }else{
-            document.getElementById("icono_rb_d2").style.color="";
+            document.getElementById("icono_rb_d2_s").style.color="";
             $rabia__d2.style.fontStyle="";
             $rabia__d2.style.fontWeight = "";
             $rabia__d2.style.color="";
         }
 
         if(dataJson.adjuntoRabD3!=null && $rabia__d3.value!=""){
-            document.getElementById("icono_rb_d3").style.color="green";
+            document.getElementById("icono_rb_d3_s").style.color="green";
             $rabia__d3.style.fontStyle="";
             $rabia__d3.style.fontWeight = "";
             $rabia__d3.style.color="";
-        }
-        else if(dataJson.adjuntoRabD3==null && $rabia__d3.value!=""){
-            document.getElementById("icono_rb_d3").style.color="";
+        }else if(dataJson.adjuntoRabD3==null && $rabia__d3.value!=""){
+            document.getElementById("icono_rb_d3_s").style.color="";
             $rabia__d3.style.fontStyle="italic";
             $rabia__d3.style.fontWeight = "bold";
             $rabia__d3.style.color="red";
         }else{
-            document.getElementById("icono_rb_d3").style.color="";
+            document.getElementById("icono_rb_d3_s").style.color="";
             $rabia__d3.style.fontStyle="";
             $rabia__d3.style.fontWeight = "";
             $rabia__d3.style.color="";
         }
         
         if(dataJson.adjuntoRabR1!=null  && $rabia__r1.value!=""){
-            document.getElementById("icono_rb_r1").style.color="green"; 
+            document.getElementById("icono_rb_r1_s").style.color="green"; 
             $rabia__r1.style.fontStyle="";
             $rabia__r1.style.fontWeight = "";
             $rabia__r1.style.color="";
             $rabia__r2.style.color = "red";
-        }
-        else if(dataJson.adjuntoRabR1==null && $rabia__r1.value!=""){
-            document.getElementById("icono_rb_r1").style.color="";
+        }else if(dataJson.adjuntoRabR1==null && $rabia__r1.value!=""){
+            document.getElementById("icono_rb_r1_s").style.color="";
             $rabia__r1.style.fontStyle="italic";
             $rabia__r1.style.fontWeight = "bold";
             $rabia__r1.style.color="red";
             $rabia__r2.style.color = "";
         }else{
-            document.getElementById("icono_rb_r1").style.color="";
+            document.getElementById("icono_rb_r1_s").style.color="";
             $rabia__r1.style.fontStyle="";
             $rabia__r1.style.fontWeight = "";
             $rabia__r1.style.color="";
@@ -1013,58 +1019,56 @@ export function listarVacunas(){
           $covid__d4.value =  dataJson.fechaCVD4;
         
         if(dataJson.adjuntoCovidD1!=null){
-            document.getElementById("icono_cv_d1").style.color="green";
+            document.getElementById("icono_cv_d1_s").style.color="green";
         }else{
-            document.getElementById("icono_cv_d1").style.color="";
+            document.getElementById("icono_cv_d1_s").style.color="";
         }
 
         if(dataJson.adjuntoCovidD2!=null && $covid__d2.value!=""){
-            document.getElementById("icono_cv_d2").style.color="green"; 
+            document.getElementById("icono_cv_d2_s").style.color="green"; 
             $covid__d2.style.fontStyle="";
             $covid__d2.style.fontWeight = "";
             $covid__d2.style.color="";
         }
         else if(dataJson.adjuntoCovidD2==null && $covid__d2.value!=""){
-            document.getElementById("icono_cv_d2").style.color="";
+            document.getElementById("icono_cv_d2_s").style.color="";
             $covid__d2.style.fontStyle="italic";
             $covid__d2.style.fontWeight = "bold";
             $covid__d2.style.color="red";
         }else{
-            document.getElementById("icono_cv_d2").style.color="";
+            document.getElementById("icono_cv_d2_s").style.color="";
             $covid__d2.style.fontStyle="";
             $covid__d2.style.fontWeight = "";
             $covid__d2.style.color="";
         }
         if(dataJson.adjuntoCovidD3!=null && $covid__d3.value!=""){
-            document.getElementById("icono_cv_d3").style.color="green";
+            document.getElementById("icono_cv_d3_s").style.color="green";
             $covid__d3.style.fontStyle="";
             $covid__d3.style.fontWeight = "";
             $covid__d3.style.color="";
-        }
-        else if(dataJson.adjuntoCovidD3==null && $covid__d3.value!=""){
-            document.getElementById("icono_cv_d3").style.color="";
+        }else if(dataJson.adjuntoCovidD3==null && $covid__d3.value!=""){
+            document.getElementById("icono_cv_d3_s").style.color="";
             $covid__d3.style.fontStyle="italic";
             $covid__d3.style.fontWeight = "bold";
             $covid__d3.style.color="red";
-        }
-        else{
-            document.getElementById("icono_cv_d3").style.color="";
+        }else{
+            document.getElementById("icono_cv_d3_s").style.color="";
             $covid__d3.style.fontStyle="";
             $covid__d3.style.fontWeight = "";
             $covid__d3.style.color="";
         } 
         if(dataJson.adjuntoCovidD4!=null && $covid__d4.value!=""){
-            document.getElementById("icono_cv_d4").style.color="green";
+            document.getElementById("icono_cv_d4_s").style.color="green";
             $covid__d4.style.fontStyle="";
             $covid__d4.style.fontWeight = "";
             $covid__d4.style.color="";
         }else if(dataJson.adjuntoCovidD4==null && $covid__d4.value!=""){
-            document.getElementById("icono_cv_d4").style.color="";
+            document.getElementById("icono_cv_d4_s").style.color="";
             $covid__d4.style.fontStyle="italic";
             $covid__d4.style.fontWeight = "bold";
             $covid__d4.style.color="red";
         }else{
-            document.getElementById("icono_cv_d4").style.color="";
+            document.getElementById("icono_cv_d4_s").style.color="";
             $covid__d4.style.fontStyle="";
             $covid__d4.style.fontWeight = "";
             $covid__d4.style.color="";
@@ -1076,12 +1080,12 @@ export function listarVacunas(){
             $hepatitis_B__r1.value = "SIN INMUNIZAR";
         }
 
-        $validarInmunidad.forEach(function($validarInmunidad){
-            if($validarInmunidad.value=="INMUNIZADO"){
-                $validarInmunidad.style.color = "green";
+        $validarInmunidad_s.forEach(function($validarInmunidad_s){
+            if($validarInmunidad_s.value=="INMUNIZADO"){
+                $validarInmunidad_s.style.color = "green";
             }
             else{
-                $validarInmunidad.style.color = "red";
+                $validarInmunidad_s.style.color = "red";
             }
         });
 

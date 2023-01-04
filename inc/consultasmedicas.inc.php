@@ -71,6 +71,16 @@
             echo json_encode(listaSubContratas($pdo));
         }else if($_POST['funcion'] == "registrarTerceros"){
             echo json_encode(registrarTerceros($pdo,$_POST['ruc'],$_POST['nombre']));
+        }else if($_POST['funcion'] == "generarAtencion"){
+            echo json_encode(generarAtencion($pdo,$_POST['documento'],$_POST['fecha__atencion'],
+                                                $_POST['hora__atencion'],$_POST['presion__arterial'],
+                                                $_POST['mmhg_atencion'],$_POST['frecuencia__cardiaca'],
+                                                $_POST['frecuencia__respiratoria'],$_POST['temperatura'],
+                                                $_POST['motivo__atencion'],$_POST['tipo__atencion'],
+                                                $_POST['anamnesis'],$_POST['diagnostico__secundario'],
+                                                $_POST['mec__acc__trab'],$_POST['parte__cuerpo'],
+                                                $_POST['Clasificacion'],$_POST['factor__riesgo'],
+                                                $_POST['Clasificacion__trabajo'],$_POST['observaciones_atencion']));
         }
     }
 
@@ -1272,4 +1282,27 @@
         }   
     }
 
+    function generarAtencion($pdo,$dni,$fecha,$hora,$presion,$mmhg,$frecCard,$fresp,$temp,$motivo,$tipo,
+    $anamnesis,$diagSec,$mecAccTrab,$parteCuerpo,$clasificAcc,$factorRiesgo,$clasificRiesgo,
+    $observaciones){
+        try {
+            $id = uniqid();
+            $sql = "INSERT INTO `atencion_medica` SET `id`=?, `dni`=?, `fecha`=?, `hora`=?, `presion`=?, `mmhg`=?,
+                `frecuenciaCard`=?, `frecuenciaResp`=?, `temperatura`=?,`motivoAtencion`=?, `tipoAtencion`=?, 
+                `anamnesis`=?, `diagnSecundario`=?, `mecAccTrab`=?, `parteCuerpo`=?, 
+                `clasificAcc`=?, `factorRiesgo`=?,`clasificRiesgo`=?, `observaciones`=?";
+            $statement = $pdo->prepare($sql);
+            $statement ->execute(array($id,$dni,$fecha,$hora,$presion,$mmhg,$frecCard,$fresp,$temp,$motivo,$tipo,
+                        $anamnesis,$diagSec,$mecAccTrab,$parteCuerpo,$clasificAcc,$factorRiesgo,$clasificRiesgo,
+                        $observaciones));
+            $respuesta = array("respuesta"  => true,
+                                "clase"     =>"msj_correct",
+                                "error"     =>"no hay error",
+                                "sql"       =>$sql);
+            return $respuesta;
+        }  catch(PDOException $th) {
+            echo $th->getMessage();
+            return false;
+        }   
+    }
 ?>
