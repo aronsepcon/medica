@@ -111,7 +111,6 @@
                             <a href="#" id="btn__uploadPDF"></i></a><!--revisar luego-->
                         </div>
                     </div>
-                    <progress id="carga_subida_excel" value="0" max="100" class="oculto"></progress>
                 </form>
             </div>
 
@@ -130,6 +129,9 @@
            
 
         </section>
+        <div class="progress-container">
+            <div class="progress_carga"></div>
+        </div>
     </section>
     <script src="../js/carga.js?v<?php echo $random;?>" type="module"></script>
 </body>

@@ -17,6 +17,8 @@ const $guardar_atencion = document.getElementById('guardar_atencion');
 const $modal_inventario = document.getElementById('modal_inventario');
 const $tabla_inventario = document.getElementById('tabla_inventario');
 
+const $numero__registro_atencion = document.getElementById('numero__registro_atencion');
+
 const $dni_paciente = document.getElementById('dni_paciente');
 const $fecha__atencion = document.getElementById('fecha__atencion');
 const $hora__atencion = document.getElementById('hora__atencion');
@@ -35,12 +37,24 @@ const $Clasificacion = document.getElementById('Clasificacion');
 const $factor__riesgo = document.getElementById('factor__riesgo');
 const $Clasificacion__trabajo = document.getElementById('Clasificacion__trabajo');
 const $observaciones_atencion = document.getElementById('observaciones_atencion');
+const $id_prod_inv = document.getElementById('id_prod_inv');
+const $nombre_prod_inv = document.getElementById('nombre_prod_inv');
+const $stock_prod_inv = document.getElementById('stock_prod_inv');
+const $agregar_trat = document.getElementById('agregar_trat');
+const $cant_prod = document.getElementById('cant_prod');
+const $lista_receta = document.getElementById('lista_receta');
+const $indicaciones_inv = document.getElementById('indicaciones_inv');
 
 $RegistrarAtencion.onclick = (e) => {
     e.preventDefault();
 
-    fadeIn($atencion__medica);
-    console.log($dni_paciente.value);
+    if($numero__registro_atencion.value == ""){
+        mostrarMensaje("Ingrese un usuario","msj_error");
+    }
+    else{
+        fadeIn($atencion__medica);
+    }
+   
 
     return false;
 }
@@ -116,6 +130,7 @@ function listarAtenciones($e){
             let año = edad1.getUTCFullYear();
             let edad = Math.abs(año-1970);
 
+            $numero__registro_atencion.value = dataJson.datos[0].cut;
             $edad__trabajador_atencion.value = edad;
             $dni_paciente.value = dataJson.datos[0].dni;
         }
@@ -126,10 +141,64 @@ $tabla_inventario.addEventListener("click", e=>{
     e.preventDefault();
     let accion =  e.target.parentElement.dataset.accion;
     let idreg = e.target.parentElement.getAttribute("href");
+    console.log(idreg);
     if(accion=="enviarInventario"){
-
+        console.log(idreg);
+        let data5= new FormData();
+        data5.append("id",idreg);
+        data5.append("funcion","inventarioPorId");
+        fetch('../inc/consultasgestor.inc.php',{
+            method: "POST",
+            body: data5,
+        })
+        .then(function(response){
+            return response.json();
+        })
+        .then(dataJson =>{
+            if(dataJson.respuesta){
+                $id_prod_inv.value = dataJson.lista[0].idcprod;
+                $nombre_prod_inv.value = dataJson.lista[0].cdesprod;
+                $stock_prod_inv.value = dataJson.lista[0].nund;
+                console.log($id_prod_inv.value );
+            }else{
+                console.log("error");
+            }
+        })
     }
 });
+let count = 0;
+let tw = document.createElement("tr");
+let arreglo = [];
+
+$agregar_trat.onclick = (e) =>{
+    e.preventDefault();
+    try {
+        console.log($stock_prod_inv.value);
+        if($cant_prod.value>$stock_prod_inv.value){
+            mostrarMensaje("No se dispone de stock","msj_error");
+        }else{
+            $lista_receta.innerHTML = "";
+            tw.innerHTML = `<td>${""}</td>
+                            <td>${$nombre_prod_inv.value}</td>
+                            <td>${""}</td>
+                            <td>${""}</td>
+                            <td>${$cant_prod.value}</td>
+                            <td>${$indicaciones_inv.value}</td>`;
+            $lista_receta.appendChild(tw);
+            count++;
+            arreglo.push([$id_prod_inv.value,$nombre_prod_inv.value,$cant_prod.value,$indicaciones_inv.value]);
+            console.log(arreglo);
+           /* $id_prod_inv.value = "";
+            $nombre_prod_inv.value = "";
+            $stock_prod_inv.value = "";
+            $indicaciones_inv.value = "";
+            $cant_prod.value = "";*/
+        }
+        
+    } catch (error) {
+        mostrarMensaje(error,"msj_error");
+    }
+}
 
 function listarInventario($nomb){
     let data2 = new FormData();
@@ -172,8 +241,10 @@ function listarInventario($nomb){
 $guardar_atencion.onclick = (e) => {
     e.preventDefault();
     try {
+        console.log(arreglo.length);
         let formData = new FormData();
         formData.append("documento",$dni_paciente.value);
+        formData.append("receta",JSON.stringify(arreglo));
         formData.append("fecha__atencion",$fecha__atencion.value);
         formData.append("hora__atencion",$hora__atencion.value);
         formData.append("presion__arterial",$presion__arterial.value);
@@ -203,6 +274,7 @@ $guardar_atencion.onclick = (e) => {
             if(dataJson.respuesta){
                 console.log(dataJson.respuesta);
                 mostrarMensaje("Se ha registrado la atencion","msj_correct");
+                fadeOut($atencion__medica);
             }
         })
         console.log($dni_paciente.value);

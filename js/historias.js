@@ -1037,24 +1037,24 @@ function listarConsultas(){
         dataJson => {
             if (dataJson.respuesta){
                 $tabla__atenciones_body.innerHTML = "";
-                /*
+                
                 for (let index = 0; index < dataJson.lista.length; index++) {
                     let tr = document.createElement("tr");
                     let $restricciones = dataJson.lista[index].restricciones == null ? " " : dataJson.lista[index].restricciones;
                     let $recomendaciones = dataJson.lista[index].recomendaciones == null ? " " : dataJson.lista[index].recomendaciones;
                    //cambiar estas columnas y sus variables a consultar
                     tr.innerHTML = `<td>${dataJson.lista[index].id}</td>
-                                    <td class="pl10px">${dataJson.lista[index].tipo}</td>
+                                    <td class="pl10px">${dataJson.lista[index].hora}</td>
                                     <td>${dataJson.lista[index].fecha}</td>
                                     <td>${$recomendaciones}</td>
                                     <td>${dataJson.lista[index].alergias}</td>
                                     <td class="textoCentro">
-                                        <a href="${dataJson.lista[index].id}" data-accion="previewFile" data-atach="${dataJson.lista[index].adjunto}">
+                                        <a href="${dataJson.lista[index].id}" data-accion="previewFile" data-atach="${""}">
                                             <i class="fas fa-eye"></i>
                                         </a>
                                     </td>`;
                     $tabla__atenciones_body.appendChild(tr);
-                }*/
+                }
             }else{
                 mostrarMensaje("No se encontraron examenes","msj_error");
             }

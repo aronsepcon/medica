@@ -70,13 +70,13 @@ const $pest_sup_r2 = document.getElementById("pest_sup_r2_s");
 const $pest_sup_r3 = document.getElementById("pest_sup_r3_s");
 const $pest_sup_r4 = document.getElementById("pest_sup_r4_s");
 
-const $pest_sup_rab_r1 = document.getElementById("pest_sup_rab_1");
-const $pest_sup_rab_r2 = document.getElementById("pest_sup_rab_2");
-const $pest_sup_rab_r3 = document.getElementById("pest_sup_rab_3");
-const $pest_sup_rab_r4 = document.getElementById("pest_sup_rab_4");
-const $pest_sup_rab_r5 = document.getElementById("pest_sup_rab_5");
-const $pest_sup_rab_r6 = document.getElementById("pest_sup_rab_6");
-const $pest_sup_rab_r7 = document.getElementById("pest_sup_rab_7");
+const $pest_sup_rab_r1 = document.getElementById("pest_sup_rab_1_s");
+const $pest_sup_rab_r2 = document.getElementById("pest_sup_rab_2_s");
+const $pest_sup_rab_r3 = document.getElementById("pest_sup_rab_3_s");
+const $pest_sup_rab_r4 = document.getElementById("pest_sup_rab_4_s");
+const $pest_sup_rab_r5 = document.getElementById("pest_sup_rab_5_s");
+const $pest_sup_rab_r6 = document.getElementById("pest_sup_rab_6_s");
+const $pest_sup_rab_r7 = document.getElementById("pest_sup_rab_7_s");
 
 const $cierre_form_vp_vac = document.getElementById("cierre_form_vp_vac_s");
 const $ficha__vistaprevia_vac = document.getElementById("ficha__vistaprevia_vac_s");
@@ -103,26 +103,26 @@ const $display_image_pest_r2 = document.getElementById("imagen_pestaña_r2_s");
 const $display_image_pest_r3 = document.getElementById("imagen_pestaña_r3_s");
 const $display_image_pest_r4 = document.getElementById("imagen_pestaña_r4_s");
 
-const $display_image_pest_rabia = document.getElementById("imagen_pestaña_rabia");
-const $display_image_pest_rabia_r2 = document.getElementById("imagen_pestaña_rabia_r2");
-const $display_image_pest_rabia_r3 = document.getElementById("imagen_pestaña_rabia_r3");
-const $display_image_pest_rabia_r4 = document.getElementById("imagen_pestaña_rabia_r4");
-const $display_image_pest_rabia_r5 = document.getElementById("imagen_pestaña_rabia_r5");
-const $display_image_pest_rabia_r6 = document.getElementById("imagen_pestaña_rabia_r6");
-const $display_image_pest_rabia_r7 = document.getElementById("imagen_pestaña_rabia_r7");
+const $display_image_pest_rabia = document.getElementById("imagen_pestaña_rabia_s");
+const $display_image_pest_rabia_r2 = document.getElementById("imagen_pestaña_rabia_r2_s");
+const $display_image_pest_rabia_r3 = document.getElementById("imagen_pestaña_rabia_r3_s");
+const $display_image_pest_rabia_r4 = document.getElementById("imagen_pestaña_rabia_r4_s");
+const $display_image_pest_rabia_r5 = document.getElementById("imagen_pestaña_rabia_r5_s");
+const $display_image_pest_rabia_r6 = document.getElementById("imagen_pestaña_rabia_r6_s");
+const $display_image_pest_rabia_r7 = document.getElementById("imagen_pestaña_rabia_r7_s");
 
 const $adjunto_pestaña_r1 = document.getElementById("adjunto_pestaña_r1_s");
 const $adjunto_pestaña_r2 = document.getElementById("adjunto_pestaña_r2_s");
 const $adjunto_pestaña_r3 = document.getElementById("adjunto_pestaña_r3_s");
 const $adjunto_pestaña_r4 = document.getElementById("adjunto_pestaña_r4_s");
 
-const $adjunto_pestaña_rabia_r1 = document.getElementById("adjunto_pestaña_rabia_r1");
-const $adjunto_pestaña_rabia_r2 = document.getElementById("adjunto_pestaña_rabia_r2");
-const $adjunto_pestaña_rabia_r3 = document.getElementById("adjunto_pestaña_rabia_r3");
-const $adjunto_pestaña_rabia_r4 = document.getElementById("adjunto_pestaña_rabia_r4");
-const $adjunto_pestaña_rabia_r5 = document.getElementById("adjunto_pestaña_rabia_r5");
-const $adjunto_pestaña_rabia_r6 = document.getElementById("adjunto_pestaña_rabia_r6");
-const $adjunto_pestaña_rabia_r7 = document.getElementById("adjunto_pestaña_rabia_r7");
+const $adjunto_pestaña_rabia_r1 = document.getElementById("adjunto_pestaña_rabia_r1_s");
+const $adjunto_pestaña_rabia_r2 = document.getElementById("adjunto_pestaña_rabia_r2_s");
+const $adjunto_pestaña_rabia_r3 = document.getElementById("adjunto_pestaña_rabia_r3_s");
+const $adjunto_pestaña_rabia_r4 = document.getElementById("adjunto_pestaña_rabia_r4_s");
+const $adjunto_pestaña_rabia_r5 = document.getElementById("adjunto_pestaña_rabia_r5_s");
+const $adjunto_pestaña_rabia_r6 = document.getElementById("adjunto_pestaña_rabia_r6_s");
+const $adjunto_pestaña_rabia_r7 = document.getElementById("adjunto_pestaña_rabia_r7_s");
 
 const $tab1 = document.getElementById("tab1_s"); 
 const $tab2 = document.getElementById("tab2_s"); 
@@ -221,7 +221,7 @@ function show(a,b){
     disp=b;
 }
 
-const $tab_r = document.querySelectorAll(".tab_r");//para la rabia 
+const $tab_r = document.querySelectorAll(".tab_r_s");//para la rabia 
 
 $tab_r.forEach(function($tab_r){
     $tab_r.onclick = (e) => {
@@ -232,7 +232,7 @@ $tab_r.forEach(function($tab_r){
     }
 })
 
-var selectedR="tab7";//crear uno parecido a show para rabia e.e
+var selectedR="tab7_s";//crear uno parecido a show para rabia e.e
 var dispR="tab-content-r7";
 
 function showR(a,b)
@@ -353,87 +353,87 @@ function mostrarImagen($value){
                         
                     }else if($value=="Rabia_R1"){
                         if(dataJson.adjunto[0]==null){
-                            document.getElementById("tab7").style.display="none";
+                            document.getElementById("tab7_s").style.display="none";
                             $pest_sup_rab_r7.style.display = 'none';
                         }else{
-                            document.getElementById("tab7").style.display="inline";
+                            document.getElementById("tab7_s").style.display="inline";
                             let adj7 = dataJson.adjunto[0].split('.');
                             if(adj7[1]=="jpeg"){
-                                document.getElementById("marco_rabia_r7").style.display = "block";
+                                document.getElementById("marco_rabia_r7_s").style.display = "block";
                                 $display_image_pest_rabia_r7.style.display = "block";
                                 $adjunto_pestaña_rabia_r7.style.display = "none";
                                 $pest_sup_rab_r7.style.display = 'block';
                                 $display_image_pest_rabia_r7.src="../vacunas/"+dataJson.adjunto[0];
                             }
                             else if(adj7[1]=="pdf"){
-                                document.getElementById("marco_rabia_r7").style.display = "none";
+                                document.getElementById("marco_rabia_r7_s").style.display = "none";
                                 $display_image_pest_rabia_r7.style.display = "none";
                                 $adjunto_pestaña_rabia_r7.style.display = "block";
                                 $pest_sup_rab_r7.style.display = 'none';
                                 $adjunto_pestaña_rabia_r7.setAttribute("src","../vacunas/"+dataJson.adjunto[0]);
                             }
-                            (document.getElementById("descarga_rab_7")).setAttribute("href","../vacunas/"+dataJson.adjunto[0]);
+                            (document.getElementById("descarga_rab_7_s")).setAttribute("href","../vacunas/"+dataJson.adjunto[0]);
                         }
                         if(dataJson.adjunto[1]==null){
-                            document.getElementById("tab6").style.display="none";
+                            document.getElementById("tab6_s").style.display="none";
                         }else{
-                            document.getElementById("tab6").style.display="inline";
+                            document.getElementById("tab6_s").style.display="inline";
                             let adj6 = dataJson.adjunto[1].split('.');
                             if(adj6[1]=="jpeg"){
-                                document.getElementById("marco_rabia_r6").style.display = "block";
+                                document.getElementById("marco_rabia_r6_s").style.display = "block";
                                 $display_image_pest_rabia_r6.style.display = "block";
                                 $adjunto_pestaña_rabia_r6.style.display = "none";
                                 $pest_sup_rab_r6.style.display = 'block';
                                 $display_image_pest_rabia_r6.src="../vacunas/"+dataJson.adjunto[1];
                             }else if(adj6[1]=="pdf"){
-                                document.getElementById("marco_rabia_r6").style.display = "none";
+                                document.getElementById("marco_rabia_r6_s").style.display = "none";
                                 $display_image_pest_rabia_r6.style.display = "none";
                                 $adjunto_pestaña_rabia_r6.style.display = "block";
                                 $pest_sup_rab_r6.style.display = 'none';
                                 $adjunto_pestaña_rabia_r6.setAttribute("src","../vacunas/"+dataJson.adjunto[1]);
                             }
-                            (document.getElementById("descarga_rab_6")).setAttribute("href","../vacunas/"+dataJson.adjunto[1]);
+                            (document.getElementById("descarga_rab_6_s")).setAttribute("href","../vacunas/"+dataJson.adjunto[1]);
                         }
                         if(dataJson.adjunto[2]==null){
-                            document.getElementById("tab5").style.display="none";
+                            document.getElementById("tab5_s").style.display="none";
                         }else{
-                            document.getElementById("tab5").style.display="inline";
+                            document.getElementById("tab5_s").style.display="inline";
                             let adj5 = dataJson.adjunto[2].split('.');
                             if(adj5[1]=="jpeg"){
-                                document.getElementById("marco_rabia_r5").style.display = "block";
+                                document.getElementById("marco_rabia_r5_s").style.display = "block";
                                 $display_image_pest_rabia_r5.style.display = "block";
                                 $adjunto_pestaña_rabia_r5.style.display = "none";
                                 $pest_sup_rab_r5.style.display = 'block';
                                 $display_image_pest_rabia_r5.src="../vacunas/"+dataJson.adjunto[2];
                             }else if(adj5[1]=="pdf"){
-                                document.getElementById("marco_rabia_r5").style.display = "none";
+                                document.getElementById("marco_rabia_r5_s").style.display = "none";
                                 $display_image_pest_rabia_r5.style.display = "none";
                                 $adjunto_pestaña_rabia_r5.style.display = "block";
                                 $pest_sup_rab_r5.style.display = 'none';
                                 $adjunto_pestaña_rabia_r5.setAttribute("src","../vacunas/"+dataJson.adjunto[2]);
                             }
-                            (document.getElementById("descarga_rab_5")).setAttribute("href","../vacunas/"+dataJson.adjunto[2]);
+                            (document.getElementById("descarga_rab_5_s")).setAttribute("href","../vacunas/"+dataJson.adjunto[2]);
                         }
 
                         if(dataJson.adjunto[3]==null){
-                            document.getElementById("tab4_r").style.display='none';
+                            document.getElementById("tab4_r_s").style.display='none';
                         }else{
                             let adj4 = dataJson.adjunto[3].split('.');
                             if(adj4[1]=="jpeg"){
-                                document.getElementById("marco_rabia_r4").style.display = "block";
+                                document.getElementById("marco_rabia_r4_s").style.display = "block";
                                 $display_image_pest_rabia_r4.style.display = "block";
                                 $adjunto_pestaña_rabia_r4.style.display = "none";
                                 $pest_sup_rab_r4.style.display = 'block';
                                 $display_image_pest_rabia_r4.src="../vacunas/"+dataJson.adjunto[3];
                             }else if(adj4[1]=="pdf"){
-                                document.getElementById("marco_rabia_r4").style.display = "none";
+                                document.getElementById("marco_rabia_r4_s").style.display = "none";
                                 $display_image_pest_rabia_r4.style.display = "none";
                                 $adjunto_pestaña_rabia_r4.style.display = "block";
                                 $pest_sup_rab_r4.style.display = 'none';
                                 $adjunto_pestaña_rabia_r4.setAttribute("src","../vacunas/"+dataJson.adjunto[3]);
 
                             }
-                            (document.getElementById("descarga_rab_4")).setAttribute("href","../vacunas/"+dataJson.adjunto[3]);
+                            (document.getElementById("descarga_rab_4_s")).setAttribute("href","../vacunas/"+dataJson.adjunto[3]);
                         }
 
                         if(dataJson.adjunto[4]==null){
@@ -441,62 +441,62 @@ function mostrarImagen($value){
                         }else{
                             let adj3 = dataJson.adjunto[4].split('.');
                             if(adj3[1]=="jpeg"){
-                                document.getElementById("marco_rabia_r3").style.display = "block";
+                                document.getElementById("marco_rabia_r3_s").style.display = "block";
                                 $display_image_pest_rabia_r3.style.display = "block";
                                 $adjunto_pestaña_rabia_r3.style.display = "none";
                                 $pest_sup_rab_r3.style.display = 'block';
                                 $display_image_pest_rabia_r3.src="../vacunas/"+dataJson.adjunto[4];
                             }else if(adj3[1]=="pdf"){
-                                document.getElementById("marco_rabia_r3").style.display = "none";
+                                document.getElementById("marco_rabia_r3_s").style.display = "none";
                                 $display_image_pest_rabia_r3.style.display = "none";
                                 $adjunto_pestaña_rabia_r3.style.display = "block";
                                 $pest_sup_rab_r3.style.display = 'none';
                                 $adjunto_pestaña_rabia_r3.setAttribute("src","../vacunas/"+dataJson.adjunto[4]);
                             }
-                            (document.getElementById("descarga_rab_3")).setAttribute("href","../vacunas/"+dataJson.adjunto[4]);
+                            (document.getElementById("descarga_rab_3_s")).setAttribute("href","../vacunas/"+dataJson.adjunto[4]);
                         }
 
                         if(dataJson.adjunto[5]==null){//aqui es 5
-                            document.getElementById("tab2_r").style.display="none";
+                            document.getElementById("tab2_r_s").style.display="none";
                         }else{
-                            document.getElementById("tab2_r").style.display="inline";
+                            document.getElementById("tab2_r_s").style.display="inline";
                             let adj2 = dataJson.adjunto[5].split('.');
                             if(adj2[1]=="jpeg"){
-                                document.getElementById("marco_rabia_r2").style.display = "block";
+                                document.getElementById("marco_rabia_r2_s").style.display = "block";
                                 $display_image_pest_rabia_r2.style.display = "block";
                                 $adjunto_pestaña_rabia_r2.style.display = "none";
                                 $pest_sup_rab_r2.style.display = 'block';
                                 $display_image_pest_rabia_r2.src="../vacunas/"+dataJson.adjunto[5];
                             }
                             else if(adj2[1]=="pdf"){
-                                document.getElementById("marco_rabia_r2").style.display = "none";
+                                document.getElementById("marco_rabia_r2_s").style.display = "none";
                                 $display_image_pest_rabia_r2.style.display = "none";
                                 $adjunto_pestaña_rabia_r2.style.display = "block";
                                 $pest_sup_rab_r2.style.display = 'none';
                                 $adjunto_pestaña_rabia_r2.setAttribute("src","../vacunas/"+dataJson.adjunto[5]);
                             }
-                            (document.getElementById("descarga_rab_2")).setAttribute("href","../vacunas/"+dataJson.adjunto[5]);
+                            (document.getElementById("descarga_rab_2_s")).setAttribute("href","../vacunas/"+dataJson.adjunto[5]);
                         }
 
                         if(dataJson.adjunto[6]==null){
-                            document.getElementById("tab1_r").style.display="none";
+                            document.getElementById("tab1_r_s").style.display="none";
                         }else{
-                            document.getElementById("tab1_r").style.display="inline";
+                            document.getElementById("tab1_r_s").style.display="inline";
                             let adj1 = dataJson.adjunto[6].split('.');
                             if(adj1[1]=="jpeg"){
-                                document.getElementById("marco_rabia_r1").style.display = "block";
+                                document.getElementById("marco_rabia_r1_s").style.display = "block";
                                 $display_image_pest_rabia.style.display = "block";
                                 $adjunto_pestaña_rabia_r1.style.display = "none";
                                 $pest_sup_rab_r1.style.display = 'block';
                                 $display_image_pest_rabia.src="../vacunas/"+dataJson.adjunto[6];
                             }else if(adj1[1]=="pdf"){
-                                document.getElementById("marco_rabia_r1").style.display = "none";
+                                document.getElementById("marco_rabia_r1_s").style.display = "none";
                                 $display_image_pest_rabia.style.display = "none" ;
                                 $adjunto_pestaña_rabia_r1.style.display = "block";
                                 $pest_sup_rab_r1.style.display = 'none';
                                 $adjunto_pestaña_rabia_r1.setAttribute("src","../vacunas/"+dataJson.adjunto[6]);
                             }
-                            (document.getElementById("descarga_rab_1")).setAttribute("href","../vacunas/"+dataJson.adjunto[6]);
+                            (document.getElementById("descarga_rab_1_s")).setAttribute("href","../vacunas/"+dataJson.adjunto[6]);
                         }
                         
                         fadeIn($pestañas_rabia); 

@@ -72,7 +72,7 @@
         }else if($_POST['funcion'] == "registrarTerceros"){
             echo json_encode(registrarTerceros($pdo,$_POST['ruc'],$_POST['nombre']));
         }else if($_POST['funcion'] == "generarAtencion"){
-            echo json_encode(generarAtencion($pdo,$_POST['documento'],$_POST['fecha__atencion'],
+            echo json_encode(generarAtencion($pdo,$_POST['documento'],$_POST['receta'],$_POST['fecha__atencion'],
                                                 $_POST['hora__atencion'],$_POST['presion__arterial'],
                                                 $_POST['mmhg_atencion'],$_POST['frecuencia__cardiaca'],
                                                 $_POST['frecuencia__respiratoria'],$_POST['temperatura'],
@@ -365,37 +365,28 @@
             $retiroo =  'RETIRO';
             //cambiar la consulta de aqui
             $sql ="SELECT   
-                fichas_api.tipoExa, 
-                fichas_api.fecha, 
-                fichas_api.aptitud,
-                fichas_api.reco1, 
-                fichas_api.observaciones,
-                fichas_api.idreg,
-                fichas_api.adjunto,
-                fichas_api.enviado,
-                fichas_api.alergias,
-                fichas_api.grupoSangre,
-                fichas_api.clinica,
-                fichas_api.paciente
+                atencion_medica.id, 
+                atencion_medica.fecha, 
+                atencion_medica.hora,
+                atencion_medica.diagnSecundario, 
+                atencion_medica.motivoAtencion,
+                atencion_medica.tipoAtencion
             FROM
-                fichas_api 
+                atencion_medica 
             WHERE
-                fichas_api.dni = ? 
-            ORDER BY fichas_api.fecha DESC, CASE WHEN fichas_api.tipoExa = ? THEN 3 ELSE 1 END ASC";//PROBAR CON LIKE
+                atencion_medica.dni = ? ";//PROBAR CON LIKE
             $statement = $pdo->prepare($sql);
-            $statement ->execute(array($doc,$retiroo));
+            $statement ->execute(array($doc));
             $result = $statement ->fetchAll();
             $rowCount = $statement -> rowcount(); //hassta maso por aqi
-
             if ($rowCount>0){
                 foreach($result as $row){       //cambiar las columnas a usar        
-                    $salida = array("id"=>$row['idreg'],
-                                    "tipo"=>$row['tipoExa'], 
+                    $salida = array("id"=>$row['id'],
+                                    "hora"=>$row['hora'], 
                                     "fecha"=>date("d/m/Y", strtotime($row['fecha'])),
-                                    "recomendaciones"=>$row['reco1'],
-                                    "restricciones"=>$row['observaciones'],
-                                    "alergias"=>$row['alergias'],
-                                    "adjunto"=>$row['adjunto']);
+                                    "recomendaciones"=>$row['diagnSecundario'],
+                                    "restricciones"=>$row['motivoAtencion'],
+                                    "alergias"=>$row['tipoAtencion']);
                     array_push($lista, $salida);
                 }
                 $respuesta = true;
@@ -404,7 +395,8 @@
             }
 
             $salida = array("respuesta"=>$respuesta,
-                            "lista" => $lista);
+                            "lista" => $lista,
+                        "sql"=>$sql);
 
             return $salida; 
         }catch(PDOException $th){
@@ -1282,10 +1274,12 @@
         }   
     }
 
-    function generarAtencion($pdo,$dni,$fecha,$hora,$presion,$mmhg,$frecCard,$fresp,$temp,$motivo,$tipo,
+    function generarAtencion($pdo,$dni,$receta,$fecha,$hora,$presion,$mmhg,$frecCard,$fresp,$temp,$motivo,$tipo,
     $anamnesis,$diagSec,$mecAccTrab,$parteCuerpo,$clasificAcc,$factorRiesgo,$clasificRiesgo,
     $observaciones){
         try {
+            $arreglo = json_decode($receta);
+            $na = count($arreglo);
             $id = uniqid();
             $sql = "INSERT INTO `atencion_medica` SET `id`=?, `dni`=?, `fecha`=?, `hora`=?, `presion`=?, `mmhg`=?,
                 `frecuenciaCard`=?, `frecuenciaResp`=?, `temperatura`=?,`motivoAtencion`=?, `tipoAtencion`=?, 
@@ -1295,14 +1289,32 @@
             $statement ->execute(array($id,$dni,$fecha,$hora,$presion,$mmhg,$frecCard,$fresp,$temp,$motivo,$tipo,
                         $anamnesis,$diagSec,$mecAccTrab,$parteCuerpo,$clasificAcc,$factorRiesgo,$clasificRiesgo,
                         $observaciones));
+            for($i=0;$i<$na;$i++){
+                $idprod= $arreglo[$i][0];
+                $nomb = $arreglo[$i][1];
+                $cant = $arreglo[$i][2];
+                $ind  = $arreglo[$i][3];
+                generarRecetas($pdo,$id,$idprod,$nomb,$cant,$ind);
+            }
             $respuesta = array("respuesta"  => true,
                                 "clase"     =>"msj_correct",
                                 "error"     =>"no hay error",
-                                "sql"       =>$sql);
+                                "sql"       =>$arreglo[0][0]);
             return $respuesta;
         }  catch(PDOException $th) {
             echo $th->getMessage();
             return false;
         }   
+    }
+
+    function generarRecetas($pdo,$id,$idprod,$nomb,$cant,$ind){
+        try {//VER SI NECESITA UN ID
+            $sql = "INSERT INTO `receta_atencion` SET `idAtencion`=?, `idprod`=?, `nombreProd`=?, `cantidad`=?, `indicaciones`=?";
+            $statement = $pdo->prepare($sql);
+            $statement ->execute(array($id,$idprod,$nomb,$cant,$ind));
+        } catch(PDOException $th) {
+            echo $th->getMessage();
+            return false;
+        }
     }
 ?>

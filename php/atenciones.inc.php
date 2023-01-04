@@ -154,16 +154,17 @@
             <div>
                 <h3>Tratamiento</h3>
                 <input type="text" id="id_prod_inv" class="oculto">
+                <input type="text" id="stock_prod_inv" class="oculto">
                 <label for="producto">Producto</label>
-                <input type="text" >
+                <input type="text" id="nombre_prod_inv" readonly>
                 <a href="#" id="modal_inventario"><i class="fas fa-search"></i></a>
                 <label for="">Cantidad</label>
-                <input type="text">
+                <input type="text" id="cant_prod">
                 <div>
                     <label for="">Indicaciones</label>
-                    <textarea name="" id="" cols="20" rows="4"></textarea>
+                    <textarea name="" id="indicaciones_inv" cols="20" rows="4"></textarea>
                 </div>
-                <button>Agregar</button>
+                <button id="agregar_trat">Agregar</button>
                 <div class="historias__tabla"> 
                     <table>
                         <thead>
@@ -176,6 +177,7 @@
                                 <th>Indicaciones</th>
                             </tr>
                         </thead>
+                        <tbody id="lista_receta"></tbody>
                     </table>
                 </div>
             </div>
@@ -214,20 +216,22 @@
                 <input type="text" id="producto_inventario">
                 <button  id="lista_medicamentos">Buscar</button>
             </div>
-            <table>
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th>Nombre Generico</th>
-                        <th>Nombre Comercial</th>
-                        <th>Tipo</th>
-                        <th>Unidad de Medida</th>
-                        <th>Presentacion</th>
-                        <th>Stock</th>
-                    </tr>
-                </thead>
-                <tbody id="tabla_inventario"></tbody>
-            </table>
+            <div class="historias__tabla">
+                <table>
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Nombre Generico</th>
+                            <th>Nombre Comercial</th>
+                            <th>Tipo</th>
+                            <th>Unidad de Medida</th>
+                            <th>Presentacion</th>
+                            <th>Stock</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla_inventario"></tbody>
+                </table>
+            </div>
         </section>
     </div>
     <section class="historias__cuerpo">

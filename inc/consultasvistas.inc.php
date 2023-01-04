@@ -1904,7 +1904,7 @@
             }
             $salida = array("respuesta"=>$respuesta,
                             "lista" => $lista,
-                            "test"=>$sql);
+                            "test"=>$dni);
 
             return $salida; 
         }catch(PDOException $th) {

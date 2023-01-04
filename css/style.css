@@ -1225,7 +1225,7 @@ input[name = "filtrado"]{
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
-  width: 90%;
+  width: 66%;
   border-radius: 20px;
   -webkit-box-shadow: 2px 3px 5px #a2a2a2;
   box-shadow: 2px 3px 5px #a2a2a2;
@@ -1366,4 +1366,30 @@ input[name = "filtrado"]{
   background: #ff4754;
 
   transition: width 0.4s ease;
+}
+
+.separacion .validarInmunidad{
+  width: 140px;
+}
+
+.progress-container .progress_carga {
+  height: 100%;
+  width: 0;
+  border-radius: 0.4rem;
+
+  background: #ff4754;
+
+  transition: width 0.4s ease;
+}
+
+.grid_hc{
+  display: grid;
+  grid-template-columns:1fr 1fr;
+
+}
+
+.caja_vacunas{
+  margin-left: 3px;
+  margin-top: 20px;
+
 }

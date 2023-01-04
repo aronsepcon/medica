@@ -472,14 +472,16 @@
                         <input type="text" readonly>
                     </div>
                 </div>
-                <div class="caja">
+                <div class="caja_vacunas caja">
                     <label for="">Vacunas</label>
-                    <div>
+                    <div class="grid_hc">
                         <label for="">Fiebre Amarilla</label>
-                        <label for="">D1</label>
-                        <input type="date" id="fa_hc" readonly>
+                        <div>
+                            <label for="">D1</label>
+                            <input type="date" id="fa_hc" readonly>
+                        </div>
                     </div>
-                    <div>
+                    <div class="grid_hc">
                         <label for="">Difteria Tetano</label>
                         <div>
                             <label for="">D1</label>
@@ -492,76 +494,94 @@
                             <input type="date" id="dt_r1_hc" readonly>
                         </div>
                     </div>
-                    <div>
+                    <div class="grid_hc">
                         <label for="">Hepatitis A</label>
-                        <label for="">D1</label>
-                        <input type="date" id="ha_d1_hc" readonly>
-                        <label for="">D2</label>
-                        <input type="date" id="ha_d2_hc" readonly>
-                        <label for="">R1</label>
-                        <input type="date" id="ha_r1_hc" readonly>
+                        <div>
+                            <label for="">D1</label>
+                            <input type="date" id="ha_d1_hc" readonly>
+                            <label for="">D2</label>
+                            <input type="date" id="ha_d2_hc" readonly>
+                            <label for="">R1</label>
+                            <input type="date" id="ha_r1_hc" readonly>
+                        </div>
                     </div>
-                    <div>
+                    <div class="grid_hc">
                         <label for="">Hepatitis B</label>
-                        <label for="">D1</label>
-                        <input type="date" id="hb_d1_hc" readonly>
-                        <label for="">D2</label>
-                        <input type="date" id="hb_d2_hc" readonly>
-                        <label for="">D3</label>
-                        <input type="date" id="hb_d3_hc" readonly>                
+                        <div>
+                            <label for="">D1</label>
+                            <input type="date" id="hb_d1_hc" readonly>
+                            <label for="">D2</label>
+                            <input type="date" id="hb_d2_hc" readonly>
+                            <label for="">D3</label>
+                            <input type="date" id="hb_d3_hc" readonly> 
+                        </div>               
                     </div>
-                    <div>
+                    <div class="grid_hc">
                         <label for="">Influenza</label>
-                        <label for="">R1</label>
-                        <input type="date" id="if_r1_hc" readonly>
-                        <label for="">R2</label>
-                        <input type="date" id="if_r2_hc" readonly>             
+                        <div>
+                            <label for="">R1</label>
+                            <input type="date" id="if_r1_hc" readonly>
+                            <label for="">R2</label>
+                            <input type="date" id="if_r2_hc" readonly>  
+                        </div>     
                     </div>
-                    <div>
+                    <div class="grid_hc">
                         <label for="">Poliomelitis</label>
-                        <label for="">D1</label>
-                        <input type="date" id="pm_d1_hc" readonly>
+                        <div>
+                            <label for="">D1</label>
+                            <input type="date" id="pm_d1_hc" readonly>
+                        </div>
                     </div> 
-                    <div>
+                    <div class="grid_hc">
                         <label for="">Trivirica</label>
-                        <label for="">D1</label>
-                        <input type="date" id="tv_d1_hc" readonly>
+                        <div>
+                            <label for="">D1</label>
+                            <input type="date" id="tv_d1_hc" readonly>
+                        </div>
                     </div>
-                    <div>
+                    <div class="grid_hc">
                         <label for="">Rabia</label>
-                        <label for="">D1</label>
-                        <input type="date" id="rb_d1_hc" readonly>
-                        <label for="">D2</label>
-                        <input type="date" id="rb_d2_hc" readonly>
-                        <label for="">D3</label>
-                        <input type="date" id="rb_d3_hc" readonly>
-                        <label for="">R1</label>
-                        <input type="date" id="rb_r1_hc" readonly>
+                        <div>
+                            <label for="">D1</label>
+                            <input type="date" id="rb_d1_hc" readonly>
+                            <label for="">D2</label>
+                            <input type="date" id="rb_d2_hc" readonly>
+                            <label for="">D3</label>
+                            <input type="date" id="rb_d3_hc" readonly>
+                            <label for="">R1</label>
+                            <input type="date" id="rb_r1_hc" readonly>
+                        </div>
                     </div>
-                    <div>
+                    <div class="grid_hc">
                         <label for="">Tifoidea</label>
-                        <label for="">R1</label>
-                        <input type="date" id="tf_r1_hc" readonly>
-                        <label for="">R2</label>
-                        <input type="date" id="tf_r2_hc" readonly> 
+                        <div>
+                            <label for="">R1</label>
+                            <input type="date" id="tf_r1_hc" readonly>
+                            <label for="">R2</label>
+                            <input type="date" id="tf_r2_hc" readonly> 
+                        </div>
                     </div>
-                    <div>
+                    <div class="grid_hc">
                         <label for="">Neumococo</label>
-                        <label for="">R1</label>
-                        <input type="date" id="nm_r1_hc" readonly>
-                        <label for="">R2</label>
-                        <input type="date" id="nm_r2_hc" readonly>                 
+                        <div>
+                            <label for="">R1</label>
+                            <input type="date" id="nm_r1_hc" readonly>
+                            <label for="">R2</label>
+                            <input type="date" id="nm_r2_hc" readonly> 
+                        </div>
                     </div>
-                    <div>
+                    <div class="grid_hc">
                         <label for="">COVID</label>
-                        <label for="">D1</label>
-                        <input type="date" id="cv_d1_hc" readonly>
-                        <label for="">D2</label>
-                        <input type="date" id="cv_d2_hc" readonly>
-                        <label for="">D3</label>
-                        <input type="date" id="cv_d3_hc" readonly>
-                        <label for="">D4</label>
-                        <input type="date" id="cv_d4_hc" readonly>                
+                        <div>
+                            <label for="">D1</label>
+                            <input type="date" id="cv_d1_hc" readonly>
+                            <label for="">D2</label>
+                            <input type="date" id="cv_d2_hc" readonly>
+                            <label for="">D3</label>
+                            <input type="date" id="cv_d3_hc" readonly>
+                            <label for="">D4</label>
+                            <input type="date" id="cv_d4_hc" readonly>  
+                        </div>
                     </div>
                 </div>
             </div>

@@ -6,6 +6,7 @@ import {validar} from "./funciones.js";
 const $btn__upload = document.getElementById("btn__upload");
 const $btn__uploadSerfarmed = document.getElementById("btn__uploadSerfarmed");
 const $btn__uploadAmericas = document.getElementById("btn__uploadAmericas");
+const progressbar = document.querySelector(".progress_carga");
 const $fileUpload = document.getElementById("fileUpload");
 const $btnUpdateMedex = document.getElementById("btnUpdateMedex");
 const $fecha__inicio__medex = document.getElementById("fecha__inicio__medex");
@@ -27,8 +28,6 @@ const $modal__esperar = document.getElementById("modal__esperar");
 
 const $uploadFile = document.getElementById("uploadFile");
 const $carga_subida = document.getElementById("carga_subida");
-const $carga_subida_excel = document.getElementById("carga_subida_excel");
-
 
 $btn__upload.onclick = (e) => {
     e.preventDefault();
@@ -119,6 +118,10 @@ $fileUpload.onchange = (e) => {
     return false;
 }*/
 
+const changeProgress = (progress) => {
+    progressbar.style.width = `${progress}%`;
+  };  
+
 $elegirClinicaExcel.onchange = (e) => {
     e.preventDefault();
     $fileUpload.onchange = (e) => {
@@ -129,6 +132,7 @@ $elegirClinicaExcel.onchange = (e) => {
 
         try {
             if (validar($fileUpload)) throw 'Archivo inválido. No se permite la extensión ';
+            changeProgress(25);
             const formData = new FormData();
             formData.append('fileUpload',$fileUpload.files[0]);
             switch($elegirClinicaExcel.value){
@@ -148,7 +152,9 @@ $elegirClinicaExcel.onchange = (e) => {
             })
             .then(response => response.json())
             .then(data => {
+                changeProgress(50);
                 if (data.respuesta) {
+                    changeProgress(100);
                     mostrarMensaje("Historias Actualizadas","msj_correct");
                 }else{
                     mostrarMensaje("Hubo un error al actualizar","msj_error");
@@ -165,17 +171,14 @@ $elegirClinicaExcel.onchange = (e) => {
         
     }
 }
-
-function progresoCarga(){
-
-}
-
+let avance=20;
+let carga_subida_excel=0;
 $subida_masiva_excel.onchange = (e) => {
     e.preventDefault();
    // let i=0;
     var totalFiles = $subida_masiva_excel.files.length;
     let r=0;
-	
+   
     for(let i=0;i<$subida_masiva_excel.files.length;i++){
         r=r+$subida_masiva_excel.files[i].size;
     }
@@ -185,17 +188,15 @@ $subida_masiva_excel.onchange = (e) => {
             mostrarMensaje("Limite 20 archivos","msj_error");//mostrar exceso
         }
         else{//hasta aqui se reemplaza por un for y un while ----> validar tamaño tmb U:
-            $carga_subida_excel.value=0;
             try {
                 if(validar($subida_masiva_excel)) throw 'Archivo no valido';
-                
+                changeProgress(20);
                 const formData = new FormData();
 
                 for(var index=0; index<totalFiles; index++){
-                    let avance = (100*$subida_masiva_excel.files[index].size)/r;//devuelve un array listando cada uno
-                    console.log("el total es:"+avance);
-                    $carga_subida_excel.value = $carga_subida_excel.value+avance;
-
+                    
+                    carga_subida_excel = 80/totalFiles;
+                    avance = avance+carga_subida_excel;
                     formData.append('fileUpload',$subida_masiva_excel.files[index]);
                     fetch ('../inc/importarMasivaExcel.inc.php',{
                         //formData.append('subida_masiva_excel',$subida_masiva_excel.files);
@@ -206,6 +207,7 @@ $subida_masiva_excel.onchange = (e) => {
                         .then(response => response.json())
                         .then(data => {
                             if (data.respuesta) {
+                                changeProgress(avance);
                                 mostrarMensaje("Historias Actualizadas" ,"msj_correct");
                             }else{
                                 mostrarMensaje("Hubo un error al actualizar","msj_error");
@@ -215,7 +217,6 @@ $subida_masiva_excel.onchange = (e) => {
                             console.error(error);
                         })
                 }
-
             } catch (error) {
                 mostrarMensaje(error,"msj_error");
             }
@@ -241,16 +242,15 @@ $uploadFile.onchange = (e) =>{//para la carga masiva de PDFs
             mostrarMensaje("Limite 20MB de archivos","msj_error");//mostrar exceso
         }
         else{
-            $carga_subida.value=0;
 
             try {
                 if(validar($uploadFile)) throw 'Archivo no valido';
+                changeProgress(20);
                 const formData = new FormData();//poneer red lenta para testear uu
 
                 for(var index=0; index<totalFiles;index++){
-
-                    let avance = (100*$uploadFile.files[index].size)/r;
-                    $carga_subida.value = $carga_subida.value+avance;
+                    carga_subida_excel = 80/totalFiles;
+                    avance = avance+carga_subida_excel;
                     formData.append('files', $uploadFile.files[index]);
                     fetch('../inc/importarMasivaPdf.inc.php',{
                         method: 'POST',
@@ -261,6 +261,7 @@ $uploadFile.onchange = (e) =>{//para la carga masiva de PDFs
                         if (data.respuesta) {
                             mostrarMensaje("Documento subido","msj_correct");
                             $uploadFile.files.value = 0;
+                            changeProgress(avance);
                         }else{
                             mostrarMensaje("Hubo un error al subir el archivo","msj_error");
                         }
