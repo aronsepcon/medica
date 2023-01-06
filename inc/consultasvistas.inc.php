@@ -14,6 +14,8 @@
             echo json_encode(formatoTablas001($pdo,$_POST['ccostos'],$_POST['dni'],$_POST['activo'],$_POST['cesado']));
         }else if($_POST['funcion']=="union006"){
             echo json_encode(union006($pdo,$_POST['ccostos'],$_POST['dni'],$_POST['activo'],$_POST['cesado']));
+        }else if($_POST['funcion']=="unionTabla001"){
+            echo json_encode(unionTabla001($pdo,$_POST['ccostos'],$_POST['dni'],$_POST['activo'],$_POST['cesado']));
         }
     }
 
@@ -253,7 +255,7 @@
                 }
                 $r = 0;
                 $fila = 9;
-                $c = formato($pdo,$cc[$ccostos],$dni,$estadoAc,$estadoCe);//aqui pasar el centro de costos,dni y estados
+                $c = formato($pdo,$cc[$ccostos],$dni,$activo,$cesado);//aqui pasar el centro de costos,dni y estados
                 $nc = count($c);
         
                 for($j=0;$j<$nc;$j++){//revisar las fechas y etc
@@ -612,7 +614,8 @@
             }
             $r = 1;
             $fila = 8;
-            $n = formato001($pdo,$centrosAdm[$ccostos],$dni,$estadoAc,$estadoCe);
+           // $n = formato001($pdo,$centrosAdm[$ccostos],$dni,$estadoAc,$estadoCe);
+            $n = unionFormato001($pdo,$ccostos,$dni,$activo,$cesado);
             $nc = count($n);
             $spreadsheet->getActiveSheet()-> setCellValue('AI3',date("d/m/Y"));
             for($m=0;$m<=$nc;$m++){
@@ -1080,7 +1083,58 @@
             echo $th->getMessage();
             return false;
         }
+    }
 
+    function unionFormato001($pdo,$ccostos,$dni,$activo,$cesado){
+        try{
+            if($activo==1){
+                $estadooo="AC";//validar esto
+            }
+            else if($cesado==1){
+                $estadooo="CE";//validar esto
+            }
+            $cc =  ["0200","0300","0600","2830","3100"];
+            $a = baseApi($cc[$ccostos],$estadooo);
+            $b = consulta001($pdo,$dni);
+            $na = count($a);    
+            if($na>0){
+                $keyed = array_column($b,NULL,'dni'); 
+                foreach($a as &$sa){
+                    $sa += isset($keyed[$sa['dni']]) ? $keyed[$sa['dni']] : ['dni'=>null,"dni"=>"","fecnac"=>"","sexo"=>"","direccion"=>"", "edad"=>"", "telefono"=>"","id"=>"","acidoUrico"=>"","aglutinaciones"=>"","alergias"=>"","anfetaminas"=>"","antFamiliares"=>"","antece1"=>"","antece2"=>"","antece3"=>"","antece4"=>"","antece5"=>"","antece6"=>"","aptitud"=>"","atencion"=>"","audiometria"=>"","benceno"=>"","benzodiacepinas"=>"","bilirrubina"=>"","bk"=>"","carboxihemo"=>"","cardiologia"=>"","cea"=>"","celulasEpiteliales"=>"","centrocostos"=>"","cervical"=>"","cheFrca"=>"","cheFrre"=>"","cilindros"=>"","cirugias"=>"","cocaina"=>"","coccidias"=>"","cod1"=>"","cod2"=>"","cod3"=>"","cod4"=>"","cod5"=>"","cod6"=>"","cod7"=>"","cod8"=>"","cod9"=>"","cod10"=>"","codPaci"=>"","codSexo"=>"","colTotalHdl"=>"","colesterol"=>"","coprocultivo"=>"","creatinina"=>"","cristales"=>"","cuerposCetonicos"=>"","dermatologia"=>"","desAseg"=>"","diagno1"=>"","diagno2"=>"", "diagno3"=>"","diagno4"=>"","diagno5"=>"","diagno6"=>"","diagno7"=>"","diagno8"=>"","diagno9"=>"","diagno10"=>"","eAspecto"=>"","eColor"=>"","eConsistencia"=>"","eMucus"=>"","ecoAbdominal"=>"","edad"=>"","ekg"=>"","empresa"=>"","espirometria"=>"","estado"=>"","estadoNutricional"=>"","expoFactorRiesgo"=>"","fecNaci"=>"","fecPase"=>"","fecha"=>"","sgtefecha"=>"","filamentoMucoide"=>"","fosfaAlca"=>"","germenes"=>"","ginecologia"=>"","glucosa"=>"","gotaGruesa"=>"","grasaCorporal"=>"","sangre"=>"","habiAfisica"=>"","habiTabaco"=>"","hcvHepatitisC"=>"","hdl"=>"","hematiesHece"=>"","hematocrito"=>"","hemoGlico"=>"","hemoglobina"=>"","hepatitisA"=>"","hepatitisB"=>"","huevos"=>"","imc"=>"","inmunoglobulinaE"=>"","ldl"=>"","leucocitos"=>"","leucocitosOrina"=>"","leucosistosPmn"=>"","levaduraOri"=>"","levadurasHece"=>"","lumbar"=>"","mamografia"=>"","marihuana"=>"","metaAnfetamina"=>"","morfina"=>"","neurologia"=>"","nro"=>"","nroRuc"=>"","ocupacion"=>"","odontograma"=>"","oftalmologia"=>"","oriAspecto"=>"","oriColor"=>"","oriDensidad"=>"","oriPh"=>"","orinaAlbuminia"=>"","orinaAzucar"=>"","osteo"=>"","otorrino"=>"","otoscopia"=>"","pEsfuerzo"=>"","paciente"=>"","pam"=>"","papanicolau"=>"","pase"=>"","pase2"=>"","periAbdominal"=>"","peso"=>"","pigmentosBiliares"=>"","piocitos"=>"","plaquetas"=>"","plomo"=>"","presion"=>"","psa"=>"","psicologia"=>"","puestoPostula"=>"","quiste"=>"","rayosx"=>"","razonSocial"=>"","recomendaciones1"=>"","recomendaciones2"=>"","recomendaciones3"=>"","recomendaciones4"=>"","recomendaciones5"=>"","recomendaciones6"=>"","recomendaciones7"=>"","recomendaciones8"=>"","recomendaciones9"=>"","recomendaciones10"=>"","restricciones"=>"","riesgoCoronario"=>"","rpr"=>"","talla"=>"","tarifa"=>"","tgo"=>"","tgp"=>"","thevenon"=>"","tipo"=>"","tipoPase"=>"","tipoPase2"=>"","tolueno"=>"","tratamientoMedico"=>"","traumatologia"=>"","trichomonas"=>"","trigliceridos"=>"","trofozoitos"=>"","ureaSanguinea"=>"","urobilinogeno"=>"","vdrl"=>"","vih"=>"","vldl"=>"","xileno"=>"","observaciones"=>"","enviado"=>"","adjunto"=>"","clinica"=>"","fechaFbrA" =>"","fechaDTD1" =>"","fechaDTD2" =>"","fechaDTD3" =>"","fechaDTR1" =>"","fechaHAD1" =>"","fechaHAD2" =>"","fechaHAR1" =>"","fechaHBD1" =>"","fechaHBD2" =>"","fechaHBD3" =>"","fechaIFR1" =>"","fechaIFR2" =>"","fechaPLD1" =>"","fechaTVD1" =>"","fechaRBD1" =>"","fechaRBD2" =>"","fechaRBD3" =>"","fechaRBR1" =>"","fechaTFR1" =>"","fechaTFR2" =>"","fechaNMR1" =>"","fechaNMR2" =>"","fechaCVD1" =>"","fechaCVD2" =>"","fechaCVD3" =>"","fechaCVD4" =>""];
+                }
+            }
+            
+                return $a; 
+            
+        }catch(PDOException $th) {
+            echo $th->getMessage();
+            return false;
+        }
+    }
+
+    function baseApi($ccostos,$estado){
+        try{
+            $url = "http://sicalsepcon.net/api/testapi.php?cc=".$ccostos."&estado=".$estado;
+            $json_data = file_get_contents($url);
+            $lista = json_decode($json_data,true);
+
+            $nreg = count($lista);
+
+            $existe = $nreg >= 1 ? true : false;
+
+           // if($existe){
+/*
+                return array(
+                    "lista"=>$lista,
+                    "existe"=>$existe
+                );*/
+                return $lista;
+         //   }else {
+       //         return array("existe" => $existe);
+         //     }
+        }catch (PDOException $th) {
+            echo "Error: " . $th->getMessage();
+        }
     }
 
     function formatosTablas($pdo,$ccostos){//q es esto
@@ -1220,13 +1274,119 @@
         }
         
     }
+
+    function retornoPreocupacional($pdo){
+        try{
+            $lista = [];
+            $sql = "SELECT `fa`.`fecNaci` AS `fecnac`,`fa`.`dni` AS `dni`, DATE_FORMAT(FROM_DAYS(DATEDIFF(now(),fa.fecNaci)), '%Y')+0 AS edad, fa.tipoExa,
+            `f`.`correo` AS `correo`,`f`.`telefono` AS `telefono`,`fa`.`grupoSangre` AS `grupoSangre`,`fa`.`alergias` AS `alergias`,
+            MAX(`fa`.`fecha`) AS `fecha`,`lc`.`nomb_clinica` AS `nomb_clinica`,`fa`.`aptitud` AS `aptitud`,`fa`.`peso` AS `peso`,`fa`.`talla` AS `talla`,`fa`.`imc` AS `imc`,
+            `fa`.`estadoNutricional` AS `estadoNutricional`,`fa`.`enviado` AS `enviado`,DATE_ADD(`fa`.`fecha`,interval 1 year) AS `programadopre`,
+            v.fechaFbrAmarilla,v.fechaDifTD1,v.fechaDifTD2,v.fechaDifTD3,v.fechaDifTR1,v.fechaHepAD1,
+            v.fechaHepAD2,v.fechaHepAR1,v.fechaHepBD1,v.fechaHepBD2,v.fechaHepBD3,v.fechaInflR1,
+            v.fechaInflR2,v.fechaPolioD1,v.fechaTrivD1,v.fechaRabD1,v.fechaRabD2,v.fechaRabD3,
+            v.fechaRabR1,v.fechaTifoR1,v.fechaTifoR2,v.fechaNeumR1,v.fechaNeumR2,v.fechaCovidD1,
+            v.fechaCovidD2,v.fechaCovidD3,v.fechaCovidD4
+            from `medica`.`fichas_api` `fa` 
+            left join `medica`.`lista_clinicas` `lc` on(`lc`.`id` = `fa`.`clinica`)
+            left join fichas_empleados AS f ON f.dni = fa.dni
+            LEFT JOIN fichas_vacunacion AS v ON fa.dni=v.dni
+            WHERE (`fa`.`tipoExa` like '%PREOCUPACIONAL' or `fa`.`tipoExa` like '%EMPO') GROUP BY dni ORDER BY empleadonomb";
+            $statement = $pdo->prepare($sql);
+            $statement ->execute();
+            $result = $statement ->fetchAll();
+            $rowCount = $statement -> rowcount();
+            
+            if ($rowCount > 0) {
+                foreach($result as $row) {
+                    $lista[]= array(
+                        "dni"=>rtrim($row['dni']),
+                        "fecnac"=> date("d/m/Y", strtotime($row['fecnac'])),
+                        "edad"=> $row['edad'],
+                        "empresa"=>"SEPCON",
+                        "correo"=>$row['correo'],
+                        "telefono"=>$row['telefono'],
+                        "grupoSangre"=>$row['grupoSangre'],
+                        "alergias"=>$row['alergias'],
+                        "fechap"=>date("d/m/Y", strtotime($row['fecha'])),
+                        "nomb_clinica"=>$row['nomb_clinica'],
+                        "aptitud"=>$row['aptitud'],
+                        "peso"=>$row['peso'],
+                        "talla"=>$row['talla'],
+                        "imc"=>$row['imc'],
+                        "estadoNutricional"=>$row['estadoNutricional'],
+                        "enviado"=>$row['enviado'],
+                        "programadopre"=>date("d/m/Y", strtotime($row['programadopre'])),
+                        "fechaFbrAmarilla"=>date("d/m/Y", strtotime($row['fechaFbrAmarilla'])),
+                        "fechaDifTD1"=>date("d/m/Y", strtotime($row['fechaDifTD1'])),
+                        "fechaDifTD2"=>date("d/m/Y", strtotime($row['fechaDifTD2'])),
+                        "fechaDifTD3"=>date("d/m/Y", strtotime($row['fechaDifTD3'])),
+                        "fechaDifTR1"=> date("d/m/Y", strtotime($row['fechaDifTR1'])),                        
+                        "fechaHepAD1"=>date("d/m/Y", strtotime($row['fechaHepAD1'])),   
+                        "fechaHepAD2"=>date("d/m/Y", strtotime($row['fechaHepAD2'])),   
+                        "fechaHepAR1"=>date("d/m/Y", strtotime($row['fechaHepAR1'])),   
+                        "fechaHepBD1"=>date("d/m/Y", strtotime($row['fechaHepBD1'])),   
+                        "fechaHepBD2"=>date("d/m/Y", strtotime($row['fechaHepBD2'])),   
+                        "fechaHepBD3"=>date("d/m/Y", strtotime($row['fechaHepBD3'])),   
+                        "fechaInflR1"=>date("d/m/Y", strtotime($row['fechaInflR1'])),   
+                        "fechaInflR2"=>date("d/m/Y", strtotime($row['fechaInflR2'])),   
+                        "fechaPolioD1"=>date("d/m/Y", strtotime($row['fechaPolioD1'])),   
+                        "fechaTrivD1"=>date("d/m/Y", strtotime($row['fechaTrivD1'])),
+                        "fechaRabD1"=>date("d/m/Y", strtotime($row['fechaRabD1'])),
+                        "fechaRabD2"=>date("d/m/Y", strtotime($row['fechaRabD2'])),
+                        "fechaRabD3"=>date("d/m/Y", strtotime($row['fechaRabD3'])),
+                        "fechaRabR1"=>date("d/m/Y", strtotime($row['fechaRabR1'])),                        
+                        "fechaTifoR1"=>date("d/m/Y", strtotime($row['fechaTifoR1'])),   
+                        "fechaTifoR2"=>date("d/m/Y", strtotime($row['fechaTifoR2'])),   
+                        "fechaNeumR1"=>date("d/m/Y", strtotime($row['fechaNeumR1'])),   
+                        "fechaNeumR2"=>date("d/m/Y", strtotime($row['fechaNeumR2'])),   
+                        "fechaCovidD1"=>date("d/m/Y", strtotime($row['fechaCovidD1'])),   
+                        "fechaCovidD2"=>date("d/m/Y", strtotime($row['fechaCovidD2'])),   
+                        "fechaCovidD3"=>date("d/m/Y", strtotime($row['fechaCovidD3'])),
+                        "fechaCovidD4"=>date("d/m/Y", strtotime($row['fechaCovidD4'])),
+                        );
+                    }
+                }
+                return $lista;
+        }catch(PDOException $th) {
+            echo $th->getMessage();
+            return false;
+        }
+    }
+    
+    function unionBase($pdo,$ccostos,$activo,$cesado){
+        try{
+            if($activo==1){
+                $estadooo="AC";//validar esto
+            }
+            else if($cesado==1){
+                $estadooo="CE";//validar esto
+            }
+            $a = baseApi($ccostos,$estadooo);
+            $na = count($a);
+            $b = retornoPreocupacional($pdo);
+           // if($na>0){
+                $keyed = array_column($b,NULL,'dni'); 
+                foreach($a as &$sa){
+                    $sa += isset($keyed[$sa['dni']]) ? $keyed[$sa['dni']] : ['dni'=>null,'dni'=>"", "fecnac"=>"" ,"dni"=>"","edad"=>"" ,"empresa"=>"","correo"=>"","telefono"=>"","grupoSangre"=>"","alergias"=>"","fechap"=>"","nomb_clinica"=>"","aptitud"=>"","peso"=>"","talla"=>"","imc"=>"","estadoNutricional"=>"","enviado"=>"","programadopre"=>"","fechaFbrAmarilla"=>"","fechaDifTD1"=>"","fechaDifTD2"=>"","fechaDifTD3"=>"","fechaDifTR1"=>"","fechaHepAD1"=>"","fechaHepAD2"=>"","fechaHepAR1"=>"","fechaHepBD1"=>"",   "fechaHepBD2"=>"",   "fechaHepBD3"=>"",   "fechaInflR1"=>"",   "fechaInflR2"=>"",   "fechaPolioD1"=>"",   "fechaTrivD1"=>"","fechaRabD1"=>"","fechaRabD2"=>"","fechaRabD3"=>"","fechaRabR1"=>"","fechaTifoR1"=>"",   "fechaTifoR2"=>"",   "fechaNeumR1"=>"",   "fechaNeumR2"=>"",   "fechaCovidD1"=>"",   "fechaCovidD2"=>"","fechaCovidD3"=>"","fechaCovidD4"=>""];
+                }
+           // }
+                return $a;
+        }catch(PDOException $th) {
+            echo $th->getMessage();
+            return false;
+        }
+       
+
+    }
+    
     //ver la edad por sql luego e.e
     function retornoBase($pdo,$ccostos,$dni,$activo,$cesado){//$ccostos,$dni,$activo,$cesado
         try{
             $respuesta = false;
             $lista = [];
-            $sql = "SELECT `fa`.`paciente` AS `empleadonomb`,`fa`.`fecNaci` AS `fecnac`,`fe`.`dni` AS `dni`, DATE_FORMAT(FROM_DAYS(DATEDIFF(now(),fa.fecNaci)), '%Y')+0 AS edad,`fe`.`ccostos` AS `ccostos`, fa.tipoExa,
-                    `fe`.`dcargo` AS `cargo`,`fe`.`correo` AS `correo`,`f`.`telefono` AS `telefono`,`fa`.`grupoSangre` AS `grupoSangre`,`fa`.`alergias` AS `alergias`,
+            $sql = "SELECT `fa`.`fecNaci` AS `fecnac`,`fa`.`dni` AS `dni`, DATE_FORMAT(FROM_DAYS(DATEDIFF(now(),fa.fecNaci)), '%Y')+0 AS edad, fa.tipoExa,
+                    `f`.`correo` AS `correo`,`f`.`telefono` AS `telefono`,`fa`.`grupoSangre` AS `grupoSangre`,`fa`.`alergias` AS `alergias`,
                     MAX(`fa`.`fecha`) AS `fecha`,`lc`.`nomb_clinica` AS `nomb_clinica`,`fa`.`aptitud` AS `aptitud`,`fa`.`peso` AS `peso`,`fa`.`talla` AS `talla`,`fa`.`imc` AS `imc`,
                     `fa`.`estadoNutricional` AS `estadoNutricional`,`fa`.`enviado` AS `enviado`,DATE_ADD(`fa`.`fecha`,interval 1 year) AS `programadopre`,
                     v.fechaFbrAmarilla,v.fechaDifTD1,v.fechaDifTD2,v.fechaDifTD3,v.fechaDifTR1,v.fechaHepAD1,
@@ -1235,7 +1395,6 @@
                     v.fechaRabR1,v.fechaTifoR1,v.fechaTifoR2,v.fechaNeumR1,v.fechaNeumR2,v.fechaCovidD1,
                     v.fechaCovidD2,v.fechaCovidD3,v.fechaCovidD4
                     from `medica`.`fichas_api` `fa` 
-                    CROSS join `rrhh`.`tabla_aquarius` `fe` on(`fa`.`dni` = `fe`.`dni`)
                     left join `medica`.`lista_clinicas` `lc` on(`lc`.`id` = `fa`.`clinica`)
                     left join fichas_empleados AS f ON f.dni = fa.dni
                     LEFT JOIN fichas_vacunacion AS v ON fa.dni=v.dni
@@ -1249,12 +1408,9 @@
             if ($rowCount > 0) {
                 foreach($result as $row) {
                     $lista[]= array(
-                        "empleadonomb"=>$row['empleadonomb'],
                         "fecnac"=> date("d/m/Y", strtotime($row['fecnac'])),
                         "dni"=>$row['dni'],
                         "edad"=> $row['edad'],
-                        "ccostos"=>$row['ccostos'],
-                        "cargo"=>$row['cargo'],
                         "empresa"=>"SEPCON",
                         "correo"=>$row['correo'],
                         "telefono"=>$row['telefono'],
@@ -1433,7 +1589,8 @@
     function unionPeriodico($pdo,$ccostos,$dni,$activo,$cesado){//validar todo xc
         try {
             $lista = []; 
-            $a = retornoBase($pdo,$ccostos,$dni,$activo,$cesado);
+            //$a = retornoBase($pdo,$ccostos,$dni,$activo,$cesado);
+            $a = unionBase($pdo,$ccostos,$activo,$cesado);
             $na = count($a);
             $d = retornoPeriodico($pdo,$ccostos);
             $nd = count($d);
@@ -1507,10 +1664,13 @@
             elseif ($cesado == 0) {
                 $estadoCe = "";
             }
+            $v = retornoPreocupacional($pdo);
             $f=retornoBase($pdo,$cc[$ccostos],$dni,$estadoAc,$estadoCe);//$ccostos,$dni,$activo,$cesado
             $b=retornoRetiro($pdo,$cc[$ccostos]); //,$ccostos
             $d=retornoPeriodico($pdo,$cc[$ccostos]);//$ccostos
-            $a= unionPeriodico($pdo,$cc[$ccostos],$dni,$estadoAc,$estadoCe);//$ccostos,$dni,$activo,$cesado
+            //a= unionPeriodico($pdo,$cc[$ccostos],$dni,$estadoAc,$estadoCe);//$ccostos,$dni,$activo,$cesado
+            $a= unionPeriodico($pdo,$cc[$ccostos],$dni,$activo,$cesado);//
+            $w = unionBase($pdo,$cc[$ccostos],$activo,$cesado);
             $na = count($a);
             $nb = count($b);
             $nf = count($f);
@@ -1529,7 +1689,8 @@
                                 "lista" => $a,
                                 "retiro"=>$b,
                                 "union" => $a,
-                                "base" => $f,
+                                "base" => $w,
+                                "preoc"=>$v,
                                 "periodico"=> $d);
     
                 return $salida; 
@@ -1540,11 +1701,338 @@
        
     }
 
+    function consulta001($pdo,$dni){
+        try{
+            $lista = [];
+            $sql = "SELECT fa.dni,f.direccion,f.telefono,
+                        DATE_FORMAT(FROM_DAYS(DATEDIFF(now(),fa.fecNaci)),'%Y')+0 AS edad,fa.codSexo AS sexo,fa.fecNaci AS fecnac,
+                        fa.idreg,fa.acidoUrico,fa.aglutinaciones,fa.alergias,fa.anfetaminas,fa.antFamiliares,
+                        fa.antece1,fa.antece2,fa.antece3,fa.antece4,fa.antece5,
+                        fa.antece6,fa.aptitud,fa.atencion,fa.audiometria,fa.benceno,
+                        fa.benzodiacepinas,fa.bilirrubina,fa.bk,fa.carboxihemo,fa.cardiologia,
+                        fa.cea,fa.celulasEpiteliales,fa.centroCosto,fa.cervical,fa.cheFrca,
+                        fa.cheFrre,fa.cilindros,fa.cirugias,fa.cocaina,fa.coccidias,
+                        fa.cod1,fa.cod2,fa.cod3,fa.cod4,fa.cod5,
+                        fa.cod6,fa.cod7,fa.cod8,fa.cod9,fa.cod10,
+                        fa.codPaci,fa.codSexo,fa.colTotalHdl,fa.colesterol,fa.coprocultivo,
+                        fa.creatinina,fa.cristales,fa.cuerposCetonicos,fa.dermatologia,fa.desAseg,
+                        fa.diagno1,fa.diagno2,fa.diagno3,fa.diagno4,fa.diagno5,
+                        fa.diagno7,fa.diagno6,fa.diagno8,fa.diagno9,fa.diagno10,
+                        fa.eAspecto,fa.eColor,fa.eConsistencia,fa.eMucus,DATE_ADD(fa.fecha,INTERVAL 1 YEAR) AS sgtefecha,
+                        fa.ecoAbdominal,fa.ekg,fa.empresa,fa.espirometria,
+                        fa.estado,fa.estadoNutricional,fa.expoFactorRiesgo,fa.fecNaci,fa.fecPase,
+                        MAX(fa.fecha) AS fecha,fa.filamentoMucoide,fa.fosfaAlca,fa.germenes,fa.ginecologia,
+                        fa.glucosa,fa.gotaGruesa,fa.grasaCorporal,fa.grupoSangre,fa.habiAfisica,
+                        fa.habiTabaco,fa.hcvHepatitisC,fa.hdl,fa.hematies,fa.hematiesHece,
+                        fa.hematocrito,fa.hemoGlico,fa.hemoglobina,fa.hepatitisA,fa.hepatitisB,
+                        fa.huevos,fa.imc,fa.inmunoglobulinaE,fa.ldl,fa.leucocitos,
+                        fa.leucocitosOrina,fa.leucosistosPmn,fa.levaduraOri,fa.levadurasHece,fa.lumbar,
+                        fa.mamografia,fa.marihuana,fa.metaAnfetamina,fa.morfina,fa.neurologia,
+                        fa.nro,fa.nroRuc,fa.ocupacion,fa.odontograma,fa.oftalmologia,
+                        fa.oriAspecto,fa.oriColor,fa.oriDensidad,fa.oriPh,fa.orinaAlbuminia,
+                        fa.orinaAzucar,fa.osteo,fa.otorrino,fa.otoscopia,fa.pEsfuerzo,
+                        fa.paciente,fa.pam,fa.papanicolau,fa.pase,fa.pase2,
+                        fa.periAbdominal,fa.peso,fa.pigmentosBiliares,fa.piocitos,
+                        fa.plaquetas,fa.plomo,fa.presion,fa.psa,fa.psicologia,
+                        fa.puestoPostula,fa.quiste,fa.rayosx,fa.razonSocial,fa.reco1,
+                        fa.reco2,fa.reco3,fa.reco4,fa.reco5,fa.reco6,
+                        fa.reco7,fa.reco8,fa.reco9,fa.reco10,fa.restricciones,
+                        fa.riesgoCoronario,fa.rpr,fa.talla,fa.tarifa,fa.tgo,
+                        fa.tgp,fa.thevenon,fa.tipoExa,fa.tipoPase,fa.tipoPase2,
+                        fa.tolueno,fa.tratamientoMedico,fa.traumatologia,fa.trichomonas,fa.trigliceridos,
+                        fa.trofozoitos,fa.ureaSanguinea,fa.urobilinogeno,fa.vdrl,fa.vih,
+                        fa.vldl,fa.xileno,fa.observaciones,fa.adjunto,fa.enviado,lc.nomb_clinica,
+                        v.fechaFbrAmarilla,v.fechaDifTD1,v.fechaDifTD2,v.fechaDifTD3,v.fechaDifTR1,v.fechaHepAD1,
+                        v.fechaHepAD2,v.fechaHepAR1,v.fechaHepBD1,v.fechaHepBD2,v.fechaHepBD3,v.fechaInflR1,
+                        v.fechaInflR2,v.fechaPolioD1,v.fechaTrivD1,v.fechaRabD1,v.fechaRabD2,v.fechaRabD3,
+                        v.fechaRabR1,v.fechaTifoR1,v.fechaTifoR2,v.fechaNeumR1,v.fechaNeumR2,v.fechaCovidD1,
+                        v.fechaCovidD2,v.fechaCovidD3,v.fechaCovidD4
+                    FROM fichas_api AS fa
+                    LEFT JOIN fichas_empleados AS f ON fa.dni = f.dni
+                    LEFT JOIN fichas_vacunacion AS v ON fa.dni=v.dni
+                    LEFT JOIN lista_clinicas AS lc ON lc.id = fa.clinica
+                    WHERE (fa.dni=? OR NOT EXISTS(SELECT idreg FROM fichas_api fa4 WHERE fa4.dni=?)) /*AND /*fe.ccostos LIKE '0200%' AND fe.estado='ac'*/ GROUP BY fa.dni ORDER BY fa.paciente";  
+                    $statement = $pdo->prepare($sql);
+                    $statement ->execute(array($dni,$dni));
+                    $result = $statement ->fetchAll();
+                    $rowCount = $statement -> rowcount();
+        
+                    if ($rowCount > 0) {
+                        foreach($result as $row) {
+                            
+                            $today = date("Y-m-d");
+                            $diff = date_diff(date_create($row['fecnac']), date_create($today));
+                            $edad=$diff->format('%y');
+                            $lista[] = array( "dni"=>rtrim($row['dni']),
+                                            "fecnac"=>$row['fecnac'],
+                                            "sexo"=>$row['sexo'],
+                                            "direccion"=>$row['direccion'],
+                                            "edad"=>$row['edad'],
+                                            "telefono"=>$row['telefono'],
+                                            "id"=>$row['idreg'],
+                                            "acidoUrico"=>$row['acidoUrico'],
+                                            "aglutinaciones"=>$row['aglutinaciones'],
+                                            "alergias"=>$row['alergias'],
+                                            "anfetaminas"=>$row['anfetaminas'],
+                                            "antFamiliares"=>$row['antFamiliares'],
+                                            "antece1"=>$row['antece1'],
+                                            "antece2"=>$row['antece2'],
+                                            "antece3"=>$row['antece3'],
+                                            "antece4"=>$row['antece4'],
+                                            "antece5"=>$row['antece5'],
+                                            "antece6"=>$row['antece6'],
+                                            "aptitud"=>$row['aptitud'],
+                                            "atencion"=>$row['atencion'],
+                                            "audiometria"=>$row['audiometria'],
+                                            "benceno"=>$row['benceno'],
+                                            "benzodiacepinas"=>$row['benzodiacepinas'],
+                                            "bilirrubina"=>$row['bilirrubina'],
+                                            "bk"=>$row['bk'],
+                                            "carboxihemo"=>$row['carboxihemo'],
+                                            "cardiologia"=>$row['cardiologia'],
+                                            "cea"=>$row['cea'],
+                                            "celulasEpiteliales"=>$row['celulasEpiteliales'],
+                                            "centrocostos"=>$row['centroCosto'],
+                                            "cervical"=>$row['cervical'],
+                                            "cheFrca"=>$row['cheFrca'],
+                                            "cheFrre"=>$row['cheFrre'],
+                                            "cilindros"=>$row['cilindros'],
+                                            "cirugias"=>$row['cirugias'],
+                                            "cocaina"=>$row['cocaina'],
+                                            "coccidias"=>$row['coccidias'],
+                                            "cod1"=>$row['cod1'],
+                                            "cod2"=>$row['cod2'],
+                                            "cod3"=>$row['cod3'],
+                                            "cod4"=>$row['cod4'],
+                                            "cod5"=>$row['cod5'],
+                                            "cod6"=>$row['cod6'],
+                                            "cod7"=>$row['cod7'],
+                                            "cod8"=>$row['cod8'],
+                                            "cod9"=>$row['cod9'],
+                                            "cod10"=>$row['cod10'],
+                                            "codPaci"=>$row['codPaci'],
+                                            "codSexo"=>$row['codSexo'],
+                                            "colTotalHdl"=>$row['colTotalHdl'],
+                                            "colesterol"=>$row['colesterol'],
+                                            "coprocultivo"=>$row['coprocultivo'],
+                                            "creatinina"=>$row['creatinina'],
+                                            "cristales"=>$row['cristales'],
+                                            "cuerposCetonicos"=>$row['cuerposCetonicos'],
+                                            "dermatologia"=>$row['dermatologia'],
+                                            "desAseg"=>$row['desAseg'],
+                                            "diagno1"=>$row['diagno1'],
+                                            "diagno2"=>$row['diagno2'],
+                                            "diagno3"=>$row['diagno3'],
+                                            "diagno4"=>$row['diagno4'],
+                                            "diagno5"=>$row['diagno5'],
+                                            "diagno6"=>$row['diagno6'],
+                                            "diagno7"=>$row['diagno7'],
+                                            "diagno8"=>$row['diagno8'],
+                                            "diagno9"=>$row['diagno9'],
+                                            "diagno10"=>$row['diagno10'],
+                                            "eAspecto"=>$row['eAspecto'],
+                                            "eColor"=>$row['eColor'],
+                                            "eConsistencia"=>$row['eConsistencia'],
+                                            "eMucus"=>$row['eMucus'],
+                                            "ecoAbdominal"=>$row['ecoAbdominal'],
+                                            "edad"=>$row['edad'],
+                                            "ekg"=>$row['ekg'],
+                                            "empresa"=>$row['empresa'],
+                                            "espirometria"=>$row['espirometria'],
+                                            "estado"=>$row['estado'],
+                                            "estadoNutricional"=>$row['estadoNutricional'],
+                                            "expoFactorRiesgo"=>$row['expoFactorRiesgo'],
+                                            "fecNaci"=>$row['fecNaci'],
+                                            "fecPase"=>$row['fecPase'],
+                                            "fecha"=>date("d/m/Y", strtotime($row['fecha'])),
+                                            "sgtefecha"=>date("d/m/Y", strtotime($row['sgtefecha'])),
+                                            "filamentoMucoide"=>$row['filamentoMucoide'],
+                                            "fosfaAlca"=>$row['fosfaAlca'],
+                                            "germenes"=>$row['germenes'],
+                                            "ginecologia"=>$row['ginecologia'],
+                                            "glucosa"=>$row['glucosa'],
+                                            "gotaGruesa"=>$row['gotaGruesa'],
+                                            "grasaCorporal"=>$row['grasaCorporal'],
+                                            "sangre"=>$row['grupoSangre'],
+        
+                                            "habiAfisica"=>$row['habiAfisica'],
+                                            "habiTabaco"=>$row['habiTabaco'],
+                                            "hcvHepatitisC"=>$row['hcvHepatitisC'],
+                                            "hdl"=>$row['hdl'],
+                                            "hematiesHece"=>$row['hematiesHece'],
+                                            "hematocrito"=>$row['hematocrito'],
+                                            "hemoGlico"=>$row['hemoGlico'],
+                                            "hemoglobina"=>$row['hemoglobina'],
+                                            "hepatitisA"=>$row['hepatitisA'],
+                                            "hepatitisB"=>$row['hepatitisB'],
+                                            "huevos"=>$row['huevos'],
+                                            "imc"=>$row['imc'],
+                                            "inmunoglobulinaE"=>$row['inmunoglobulinaE'],
+                                            "ldl"=>$row['ldl'],
+                                            "leucocitos"=>$row['leucocitos'],
+                                            "leucocitosOrina"=>$row['leucocitosOrina'],
+                                            "leucosistosPmn"=>$row['leucosistosPmn'],
+                                            "levaduraOri"=>$row['levaduraOri'],
+                                            "levadurasHece"=>$row['levadurasHece'],
+                                            "lumbar"=>$row['lumbar'],
+                                            "mamografia"=>$row['mamografia'],
+                                            "marihuana"=>$row['marihuana'],
+                                            "metaAnfetamina"=>$row['metaAnfetamina'],
+                                            "morfina"=>$row['morfina'],
+                                            "neurologia"=>$row['neurologia'],
+                                            "nro"=>$row['nro'],
+                                            "nroRuc"=>$row['nroRuc'],
+                                            "ocupacion"=>$row['ocupacion'],
+                                            "odontograma"=>$row['odontograma'],
+                                            "oftalmologia"=>$row['oftalmologia'],
+                                            "oriAspecto"=>$row['oriAspecto'],
+                                            "oriColor"=>$row['oriColor'],
+                                            "oriDensidad"=>$row['oriDensidad'],
+                                            "oriPh"=>$row['oriPh'],
+                                            "orinaAlbuminia"=>$row['orinaAlbuminia'],
+                                            "orinaAzucar"=>$row['orinaAzucar'],
+                                            "osteo"=>$row['osteo'],
+                                            "otorrino"=>$row['otorrino'],
+                                            "otoscopia"=>$row['otoscopia'],
+                                            "pEsfuerzo"=>$row['pEsfuerzo'],
+                                            "paciente"=>$row['paciente'],
+        
+                                            "pam"=>$row['pam'],
+                                            "papanicolau"=>$row['papanicolau'],
+                                            "pase"=>$row['pase'],
+                                            "pase2"=>$row['pase2'],
+                                            "periAbdominal"=>$row['periAbdominal'],
+                                            "peso"=>$row['peso'],
+                                            "pigmentosBiliares"=>$row['pigmentosBiliares'],
+                                            "piocitos"=>$row['piocitos'],
+                                            "plaquetas"=>$row['plaquetas'],
+                                            "plomo"=>$row['plomo'],
+                                            "presion"=>$row['presion'],
+                                            "psa"=>$row['psa'],
+                                            "psicologia"=>$row['psicologia'],
+                                            "puestoPostula"=>$row['puestoPostula'],
+                                            "quiste"=>$row['quiste'],
+                                            "rayosx"=>$row['rayosx'],
+                                            "razonSocial"=>$row['razonSocial'],
+                                            "recomendaciones1"=>$row['reco1'],
+                                            "recomendaciones2"=>$row['reco2'],                                    
+                                            "recomendaciones3"=>$row['reco3'],
+                                            "recomendaciones4"=>$row['reco4'],
+                                            "recomendaciones5"=>$row['reco5'],
+                                            "recomendaciones6"=>$row['reco6'],
+                                            "recomendaciones7"=>$row['reco7'],
+                                            "recomendaciones8"=>$row['reco8'],
+                                            "recomendaciones9"=>$row['reco9'],
+                                            "recomendaciones10"=>$row['reco10'],
+                                            "restricciones"=>$row['restricciones'],
+                                            "riesgoCoronario"=>$row['riesgoCoronario'],
+                                            "rpr"=>$row['rpr'],
+                                            "talla"=>$row['talla'],
+                                            "tarifa"=>$row['tarifa'],
+                                            "tgo"=>$row['tgo'],
+                                            "tgp"=>$row['tgp'],
+                                            "thevenon"=>$row['thevenon'],
+                                            "tipo"=>$row['tipoExa'], 
+        
+                                            "tipoPase"=>$row['tipoPase'],
+                                            "tipoPase2"=>$row['tipoPase2'],
+                                            "tolueno"=>$row['tolueno'],
+                                            "tratamientoMedico"=>$row['tratamientoMedico'],
+                                            "traumatologia"=>$row['traumatologia'],
+                                            "trichomonas"=>$row['trichomonas'],
+                                            "trigliceridos"=>$row['trigliceridos'],
+                                            "trofozoitos"=>$row['trofozoitos'],
+                                            "ureaSanguinea"=>$row['ureaSanguinea'],
+                                            "urobilinogeno"=>$row['urobilinogeno'],
+                                            "vdrl"=>$row['vdrl'],
+                                            "vih"=>$row['vih'],
+                                            "vldl"=>$row['vldl'],
+                                            "xileno"=>$row['xileno'],
+                                            "observaciones"=>$row['observaciones'],//ver el resto U:
+                                            "enviado"=>$row['enviado'],
+                                            "adjunto"=>$row['adjunto'],
+                                            "clinica"=>$row['nomb_clinica'],//cambiar a nombre clinica
+        
+                                            "fechaFbrA" =>$row['fechaFbrAmarilla'],
+                                            "fechaDTD1" =>$row['fechaDifTD1'],
+                                            "fechaDTD2" =>$row['fechaDifTD2'],
+                                            "fechaDTD3" =>$row['fechaDifTD3'],
+                                            "fechaDTR1" =>$row['fechaDifTR1'],
+                                            "fechaHAD1" =>$row['fechaHepAD1'],
+                                            "fechaHAD2" =>$row['fechaHepAD2'],
+                                            "fechaHAR1" =>$row['fechaHepAR1'],
+                                            "fechaHBD1" =>$row['fechaHepBD1'],
+                                            "fechaHBD2" =>$row['fechaHepBD2'],
+                                            "fechaHBD3" =>$row['fechaHepBD3'],
+                                            "fechaIFR1" =>$row['fechaInflR1'],
+                                            "fechaIFR2" =>$row['fechaInflR2'],
+                                            "fechaPLD1" =>$row['fechaPolioD1'],
+                                            "fechaTVD1" =>$row['fechaTrivD1'],
+                                            "fechaRBD1" =>$row['fechaRabD1'],
+                                            "fechaRBD2" =>$row['fechaRabD2'],
+                                            "fechaRBD3" =>$row['fechaRabD3'],
+                                            "fechaRBR1" =>$row['fechaRabR1'],
+                                            "fechaTFR1" =>$row['fechaTifoR1'],
+                                            "fechaTFR2" =>$row['fechaTifoR2'],
+                                            "fechaNMR1" =>$row['fechaNeumR1'],
+                                            "fechaNMR2" =>$row['fechaNeumR2'],
+                                            "fechaCVD1" =>$row['fechaCovidD1'],
+                                            "fechaCVD2" =>$row['fechaCovidD2'],
+                                            "fechaCVD3" =>$row['fechaCovidD3'],
+                                            "fechaCVD4" =>$row['fechaCovidD4'],
+                            );
+                        }
+                    }
+                    return $lista;
+        }catch(PDOException $th) {
+            echo $th->getMessage();
+            return false;
+        }
+    }
+
+    function unionTabla001($pdo,$ccostos,$dni,$activo,$cesado){
+        try{
+            if($activo==1){
+                $estadooo="AC";//validar esto
+            }
+            else if($cesado==1){
+                $estadooo="CE";//validar esto
+            }
+            $cc =  ["0200","0300","0600","2830","3100"];
+            $a = baseApi($cc[$ccostos],$estadooo);
+            $b = consulta001($pdo,$dni);
+            $na = count($a);    
+            if($na>0){
+                $keyed = array_column($b,NULL,'dni'); 
+                foreach($a as &$sa){
+                    $sa += isset($keyed[$sa['dni']]) ? $keyed[$sa['dni']] : ['dni'=>null,"dni"=>"","fecnac"=>"","sexo"=>"","direccion"=>"", "edad"=>"", "telefono"=>"","id"=>"","acidoUrico"=>"","aglutinaciones"=>"","alergias"=>"","anfetaminas"=>"","antFamiliares"=>"","antece1"=>"","antece2"=>"","antece3"=>"","antece4"=>"","antece5"=>"","antece6"=>"","aptitud"=>"","atencion"=>"","audiometria"=>"","benceno"=>"","benzodiacepinas"=>"","bilirrubina"=>"","bk"=>"","carboxihemo"=>"","cardiologia"=>"","cea"=>"","celulasEpiteliales"=>"","centrocostos"=>"","cervical"=>"","cheFrca"=>"","cheFrre"=>"","cilindros"=>"","cirugias"=>"","cocaina"=>"","coccidias"=>"","cod1"=>"","cod2"=>"","cod3"=>"","cod4"=>"","cod5"=>"","cod6"=>"","cod7"=>"","cod8"=>"","cod9"=>"","cod10"=>"","codPaci"=>"","codSexo"=>"","colTotalHdl"=>"","colesterol"=>"","coprocultivo"=>"","creatinina"=>"","cristales"=>"","cuerposCetonicos"=>"","dermatologia"=>"","desAseg"=>"","diagno1"=>"","diagno2"=>"", "diagno3"=>"","diagno4"=>"","diagno5"=>"","diagno6"=>"","diagno7"=>"","diagno8"=>"","diagno9"=>"","diagno10"=>"","eAspecto"=>"","eColor"=>"","eConsistencia"=>"","eMucus"=>"","ecoAbdominal"=>"","edad"=>"","ekg"=>"","empresa"=>"","espirometria"=>"","estado"=>"","estadoNutricional"=>"","expoFactorRiesgo"=>"","fecNaci"=>"","fecPase"=>"","fecha"=>"","sgtefecha"=>"","filamentoMucoide"=>"","fosfaAlca"=>"","germenes"=>"","ginecologia"=>"","glucosa"=>"","gotaGruesa"=>"","grasaCorporal"=>"","sangre"=>"","habiAfisica"=>"","habiTabaco"=>"","hcvHepatitisC"=>"","hdl"=>"","hematiesHece"=>"","hematocrito"=>"","hemoGlico"=>"","hemoglobina"=>"","hepatitisA"=>"","hepatitisB"=>"","huevos"=>"","imc"=>"","inmunoglobulinaE"=>"","ldl"=>"","leucocitos"=>"","leucocitosOrina"=>"","leucosistosPmn"=>"","levaduraOri"=>"","levadurasHece"=>"","lumbar"=>"","mamografia"=>"","marihuana"=>"","metaAnfetamina"=>"","morfina"=>"","neurologia"=>"","nro"=>"","nroRuc"=>"","ocupacion"=>"","odontograma"=>"","oftalmologia"=>"","oriAspecto"=>"","oriColor"=>"","oriDensidad"=>"","oriPh"=>"","orinaAlbuminia"=>"","orinaAzucar"=>"","osteo"=>"","otorrino"=>"","otoscopia"=>"","pEsfuerzo"=>"","paciente"=>"","pam"=>"","papanicolau"=>"","pase"=>"","pase2"=>"","periAbdominal"=>"","peso"=>"","pigmentosBiliares"=>"","piocitos"=>"","plaquetas"=>"","plomo"=>"","presion"=>"","psa"=>"","psicologia"=>"","puestoPostula"=>"","quiste"=>"","rayosx"=>"","razonSocial"=>"","recomendaciones1"=>"","recomendaciones2"=>"","recomendaciones3"=>"","recomendaciones4"=>"","recomendaciones5"=>"","recomendaciones6"=>"","recomendaciones7"=>"","recomendaciones8"=>"","recomendaciones9"=>"","recomendaciones10"=>"","restricciones"=>"","riesgoCoronario"=>"","rpr"=>"","talla"=>"","tarifa"=>"","tgo"=>"","tgp"=>"","thevenon"=>"","tipo"=>"","tipoPase"=>"","tipoPase2"=>"","tolueno"=>"","tratamientoMedico"=>"","traumatologia"=>"","trichomonas"=>"","trigliceridos"=>"","trofozoitos"=>"","ureaSanguinea"=>"","urobilinogeno"=>"","vdrl"=>"","vih"=>"","vldl"=>"","xileno"=>"","observaciones"=>"","enviado"=>"","adjunto"=>"","clinica"=>"","fechaFbrA" =>"","fechaDTD1" =>"","fechaDTD2" =>"","fechaDTD3" =>"","fechaDTR1" =>"","fechaHAD1" =>"","fechaHAD2" =>"","fechaHAR1" =>"","fechaHBD1" =>"","fechaHBD2" =>"","fechaHBD3" =>"","fechaIFR1" =>"","fechaIFR2" =>"","fechaPLD1" =>"","fechaTVD1" =>"","fechaRBD1" =>"","fechaRBD2" =>"","fechaRBD3" =>"","fechaRBR1" =>"","fechaTFR1" =>"","fechaTFR2" =>"","fechaNMR1" =>"","fechaNMR2" =>"","fechaCVD1" =>"","fechaCVD2" =>"","fechaCVD3" =>"","fechaCVD4" =>""];
+                }
+                $respuesta = true;
+            }
+            else{
+                $respuesta = false;
+            }
+            $salida = array("respuesta"=>$respuesta,
+                                "lista" => $a,
+                                "c"=>$na,
+                                "retiro"=>$b);
+                return $salida; 
+            
+        }catch(PDOException $th) {
+            echo $th->getMessage();
+            return false;
+        }
+    }
+
     function formatoTablas001($pdo,$ccostos,$dni,$activo,$cesado){
         try{
+            $estadooo="AC";
             $cc =  ["0200","0300","0600","2830","3100"];
             $respuesta = false;
             $lista = [];
+            //$R = baseApi($cc[$ccostos],$estadooo);
+            //$x = unionTabla001($pdo,$cc[$ccostos],$dni,$activo,$cesado);
+            //$y = consulta001($pdo,$dni);
             if($activo==1){
                 $estadoAc = "AC";
             }
@@ -1559,8 +2047,8 @@
             }
             if($dni != "null"){
                 $test = "hay un valor";
-                $sql = "SELECT fe.cut,fa.paciente AS empleadonomb,fe.correo,fe.dni,fe.dcargo AS cargo,fe.dcostos AS ccostos,f.direccion,f.telefono,
-                        DATE_FORMAT(FROM_DAYS(DATEDIFF(now(),fa.fecNaci)),'%Y')+0 AS edad,fe.dsede AS sede,fa.codSexo AS sexo,fa.fecNaci AS fecnac,fe.estado,
+                $sql = "SELECT fa.dni,f.direccion,f.telefono,
+                        DATE_FORMAT(FROM_DAYS(DATEDIFF(now(),fa.fecNaci)),'%Y')+0 AS edad,fa.codSexo AS sexo,fa.fecNaci AS fecnac,
                         fa.idreg,fa.acidoUrico,fa.aglutinaciones,fa.alergias,fa.anfetaminas,fa.antFamiliares,
                         fa.antece1,fa.antece2,fa.antece3,fa.antece4,fa.antece5,
                         fa.antece6,fa.aptitud,fa.atencion,fa.audiometria,fa.benceno,
@@ -1603,14 +2091,13 @@
                         v.fechaRabR1,v.fechaTifoR1,v.fechaTifoR2,v.fechaNeumR1,v.fechaNeumR2,v.fechaCovidD1,
                         v.fechaCovidD2,v.fechaCovidD3,v.fechaCovidD4
                     FROM fichas_api AS fa
-                    LEFT JOIN rrhh.tabla_aquarius AS fe ON fa.dni=fe.dni
                     LEFT JOIN fichas_empleados AS f ON fa.dni = f.dni
                     LEFT JOIN fichas_vacunacion AS v ON fa.dni=v.dni
                     LEFT JOIN lista_clinicas AS lc ON lc.id = fa.clinica
-                    WHERE (fa.dni=? OR NOT EXISTS(SELECT idreg FROM fichas_api fa4 WHERE fa4.dni=?)) /*AND fe.ccostos LIKE '$cc[$ccostos]%' AND (fe.estado='$estadoCe' OR fe.estado='$estadoAc') GROUP BY fe.dni*/ ORDER BY fa.paciente";  
+                    WHERE (fa.dni=? OR NOT EXISTS(SELECT idreg FROM fichas_api fa4 WHERE fa4.dni=?)) /*AND fe.ccostos LIKE '$cc[$ccostos]%' AND (fe.estado='$estadoCe' OR fe.estado='$estadoAc') GROUP BY fe.dni*/ ORDER BY fa.fecha DESC";  
             }else {
                 $test = "no hay un valor";
-                $sql = "SELECT fe.cut,fa.paciente AS empleadonomb,fe.correo,fe.dni,fe.dcargo AS cargo,fe.dcostos AS ccostos,f.direccion,f.telefono,
+                $sql = "SELECT fa.dni,f.direccion,f.telefono,
                         DATE_FORMAT(FROM_DAYS(DATEDIFF(now(),fa.fecNaci)),'%Y')+0 AS edad,fe.dsede AS sede,fa.codSexo AS sexo,fa.fecNaci AS fecnac,fe.estado,
                         fa.idreg,fa.acidoUrico,fa.aglutinaciones,fa.alergias,fa.anfetaminas,fa.antFamiliares,
                         fa.antece1,fa.antece2,fa.antece3,fa.antece4,fa.antece5,
@@ -1672,16 +2159,9 @@
                     $today = date("Y-m-d");
                     $diff = date_diff(date_create($row['fecnac']), date_create($today));
                     $edad=$diff->format('%y');
-                    $salida = array("cut"=>$row['cut'],
-                                    "dni"=>$row['dni'],
-                                    "nombres"=>$row['empleadonomb'],
+                    $salida = array( "dni"=>$row['dni'],
                                     "fecnac"=>$row['fecnac'],
-                                    "correo"=>$row['correo'],
                                     "sexo"=>$row['sexo'],
-                                    "cargo"=>$row['cargo'],
-                                    "ccostos"=>$row['ccostos'],
-                                    "sede"=>$row['sede'],
-                                    "estado"=>$row['estado'],
                                     "direccion"=>$row['direccion'],
                                     "edad"=>$row['edad'],
                                     "telefono"=>$row['telefono'],
@@ -1811,7 +2291,7 @@
                                     "otorrino"=>$row['otorrino'],
                                     "otoscopia"=>$row['otoscopia'],
                                     "pEsfuerzo"=>$row['pEsfuerzo'],
-                                    "paciente"=>$row['paciente'],
+                                    "nombres"=>$row['paciente'],
 
                                     "pam"=>$row['pam'],
                                     "papanicolau"=>$row['papanicolau'],
@@ -1904,7 +2384,10 @@
             }
             $salida = array("respuesta"=>$respuesta,
                             "lista" => $lista,
-                            "test"=>$dni);
+                           // "test"=>$R,
+                            //"sql"=>$y,
+                        //    "union"=>$x
+                        );
 
             return $salida; 
         }catch(PDOException $th) {

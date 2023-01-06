@@ -52,7 +52,7 @@
                     <input type="text" name="nro__doc_subc" id="nro__doc_subc">
                     <input type="submit" value="Actualizar" id="btnUpdateSubcontratas">
                 </form>
-                <h2>Excel</h2>
+                <h2>Excel - Individual</h2>
                 <form action="" id="formUpload">
                     <input type="file" name="fileUpload" id="fileUpload" accept=".xls,.xlsx" class="oculto" >
                     <div id="formUpload__data">
@@ -123,15 +123,14 @@
                             <a href="#" id="btn__uploadPDF"></i></a>
                         </div>
                     </div>
-                    <progress id="carga_subida" value="0" max="100" class="oculto"></progress>
                 </form>
             </div>
            
-
+            <div class="progress-container cargahistorias">
+                <div class="progress_carga"></div>
+            </div>
         </section>
-        <div class="progress-container">
-            <div class="progress_carga"></div>
-        </div>
+        
     </section>
     <script src="../js/carga.js?v<?php echo $random;?>" type="module"></script>
 </body>

@@ -21,11 +21,9 @@
 
      echo json_encode($salida);
  
- 
-   /* function returnTable($pdo,$archivo){  */  function returnTable($pdo,$archivo,$validacion){
+     function returnTable($pdo,$archivo,$validacion){
 
-         //$objPHPExcel = \PHPExcel_IOFactory::load($archivo);//llamado para phpexcel--desactualizado y cambiado al de abajo
-         $objPHPExcel = PhpOffice\PhpSpreadsheet\IOFactory::load($archivo);
+        $objPHPExcel = PhpOffice\PhpSpreadsheet\IOFactory::load($archivo);
          $objHoja=$objPHPExcel->getActiveSheet()->toArray(null,true,true,true);
          $contador = 0;
          $valMedex = $objPHPExcel ->getActiveSheet() -> getCell('B2') -> getValue();
@@ -41,23 +39,29 @@
                 if($valSerfarmed == "Id.Atención" && is_numeric($objCelda['D'])){
                     $seisdig =preg_match('/1[0-1][0-9][0-9][0-9][0-9]/',$objCelda['D']);
                     $seisdigven = preg_match('/[0-9][0-9][0-9][0-9][0-9][0-9]/',$objCelda['D']);
-
-                    if($seisdig){    
+                    $ochoPeru = preg_match('/[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]/',$objCelda['D']);
+                    if($seisdig==1){    
                         $dni= str_pad($objCelda['D'],8,0,STR_PAD_LEFT);
                         //[0-9][0-9][0-9][0-9]
                     }
-                    else if($seisdigven){    
+                    if($seisdigven==1){    
                         $dni= str_pad($objCelda['D'],9,0,STR_PAD_LEFT);
                         //[0-9][0-9][0-9][0-9]
-                    }else{
+                    }
+                    if($ochoPeru==1){
+                        $dni =$objCelda['D'];
+                    }
+                    else{//aca es el error
                         $dni= str_pad($objCelda['D'],8,0,STR_PAD_LEFT);
-                    }  
+                    }
+                    //if(substr($objCelda['A'],0,3)==id){$idreg=substr($objCelda['A'],4,11)}else{$idreg=$objCelda['A']}
                     $sql = "INSERT INTO fichas_api SET atencion=?, fecha = STR_TO_DATE(?,'%d/%m/%Y'), paciente=?,dni=?, ocupacion=?, 
                                                             codSexo=?, edad =?, empresa=?,tipoExa=?, aptitud=?, imc=?, diagno1=?, reco1=?, diagno2=?,
                                                             reco2=?,diagno3=?, reco3=?, diagno4=?, reco4=?,diagno5=?, reco5=?,
                                                             diagno6=?, reco6=?, diagno7=?, reco7=?, diagno8=?, reco8=?, diagno9=?, 
                                                             reco9=?, hemoglobina=?, hematocrito=?,grupoSangre=?,glucosa=?, rpr=?, 
-                                                            vdrl=?, clinica=2 ";
+                                                            vdrl=?, clinica=2 ";//mandar el update sino u:
+                                                            
                     $statement = $pdo->prepare($sql);
                     $statement -> execute(array(substr($objCelda['A'],4,11),$objCelda['B'],$objCelda['C'],$dni/*$objCelda['D']*/,$objCelda['E'],$objCelda['F'],
                                                 $objCelda['G'],$objCelda['H'],$objCelda['I'],$objCelda['J'],$objCelda['K'],$objCelda['L'],$objCelda['M'],

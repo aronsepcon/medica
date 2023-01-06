@@ -122,7 +122,7 @@ $probar.onclick = (e) =>{
 
 $buscar.onclick = (e) =>{
     e.preventDefault();
-    if(($activo_sc.checked==false && $cesado_sc.checked ==false) /*|| ($activo_sc.checked==true && $cesado_sc.checked ==true)*/){
+    if(($activo_sc.checked==false && $cesado_sc.checked ==false) || ($activo_sc.checked==true && $cesado_sc.checked ==true)){
         mostrarMensaje("Elegir entre Activos o Cesados","msj_error");
         throw "opciones";
     }
@@ -137,7 +137,13 @@ $buscar.onclick = (e) =>{
         formData.append("cesado",cesado);
     if($formato.value==0){
         changeProgress(45);
-        formData.append("funcion","formatoTablas001");
+    //formData.append("funcion","formatoTablas001");
+        console.log($dni_formato.value);
+        if($dni_formato.value == ""){
+            formData.append("funcion","unionTabla001");
+        }else{
+            formData.append("funcion","formatoTablas001");
+        }
         fetch('../inc/consultasvistas.inc.php',{
             method: "POST",
             body:formData,
@@ -266,22 +272,22 @@ $buscar.onclick = (e) =>{
                 changeProgress(100);
                 $tabla_formato_006.innerHTML="";
                 for(let index =0;index < dataJson.lista.length;index++){
-                    console.log(dataJson.lista[index].fechaDifTD3);
+                    //console.log(dataJson.lista[index].fechap);
                     let tr = document.createElement("tr");
                     let $DTD3 = dataJson.lista[index].fechaDifTD3 == "01/01/1970" ? "" : dataJson.lista[index].fechaDifTD3;
                     tr.innerHTML = `<td>${index+1}</td>
-                                    <td>${dataJson.lista[index].empleadonomb}</td>
+                                    <td>${dataJson.lista[index].nombres}</td>
                                     <td>${dataJson.lista[index].fecnac}</td>
                                     <td>${dataJson.lista[index].dni}</td>
                                     <td>${dataJson.lista[index].edad}</td>
-                                    <td>${dataJson.lista[index].ccostos}</td>
+                                    <td>${dataJson.lista[index].costos}</td>
                                     <td>${dataJson.lista[index].cargo}</td>
                                     <td>${dataJson.lista[index].empresa}</td>
                                     <td>${dataJson.lista[index].correo}</td>
                                     <td>${dataJson.lista[index].telefono}</td>
                                     <td>${dataJson.lista[index].grupoSangre}</td>
                                     <td>${dataJson.lista[index].alergias}</td>
-                                    <td>${dataJson.lista[index].fecha}</td>
+                                    <td>${dataJson.lista[index].fechap}</td>
                                     <td>${dataJson.lista[index].nomb_clinica}</td>
                                     <td>${dataJson.lista[index].aptitud}</td>
                                     <td>${dataJson.lista[index].peso}</td>

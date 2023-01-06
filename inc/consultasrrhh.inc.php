@@ -78,39 +78,24 @@
 
     function buscarEmpleados($pdo,$doc){
         try{
-            $respuesta  = false;
-            $lista =[];
-            $consulta='%'.$doc.'%';
-            $sql ="SELECT  
-                    CONCAT_WS( ' ', tabla_aquarius.apellidos, tabla_aquarius.nombres ) AS nombres,
-                    tabla_aquarius.dsede,
-                    tabla_aquarius.dni,
-                    tabla_aquarius.estado
-                FROM
-                    tabla_aquarius
-                WHERE
-                    CONCAT(tabla_aquarius.apellidos,' ',tabla_aquarius.nombres) LIKE '$consulta'";
-            $statement = $pdo->prepare($sql);
-            $statement ->execute(array($doc));
-            $result = $statement ->fetchAll();
-            $rowCount = $statement -> rowcount();
-            if ($rowCount > 0) {
-                foreach($result as $row){
-                    $salida = array("nombres"   => $row['nombres'],
-                                    "sede"      => $row['dsede'],
-                                    "dni"       => $row['dni'],
-                                    "estado"       => $row['estado']
-                                    );
-                    array_push($lista,$salida);
-                }
-                $respuesta = true;
-            }else{
-                $respuesta =false;
-            }
-            $salida = array("respuesta"=>$respuesta,
-                             "lista" => $lista);
+            $nombres = str_replace(" ","%20",$doc);
+            $url = "http://sicalsepcon.net/api/nombresApi.php?nombres=".$nombres;
+            $json_data = file_get_contents($url);
+            $datos = json_decode($json_data);
 
-            return $salida;
+            $nreg = count($datos);
+
+            $existe = $nreg >= 1 ? true : false;
+            if($existe){
+
+                return array(
+                    "datos"=>$datos,
+                    "existe"=>$existe
+                );
+            }else {
+                return array("existe" => $existe);
+              }
+         
         }catch (PDOException $th) {
             echo "Error: " . $th->getMessage();
             return false;

@@ -1393,3 +1393,7 @@ input[name = "filtrado"]{
   margin-top: 20px;
 
 }
+
+.cargahistorias{
+  position: relative;;
+}

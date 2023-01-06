@@ -332,6 +332,10 @@ $radio__nombre.onclick = (e) =>{
     $centro_costos.value = ""; 
     $sede__trabajador.value = ""; 
     $estado__trabajador.value = ""; 
+    $fecha__nacimiento.value = "";
+    $edad__trabajador.value = "";
+    $direccion__trabajador.value = "";
+    $telefono__trabajador.value = "";
 }
 
 function estiloDni(){
@@ -479,6 +483,51 @@ function listadoDni($e){
                 $estado__trabajador.value =  dataJson.datos[0].estado ;
                 $direccion__trabajador.value =  dataJson.datos[0].direccion ;
                 $telefono__trabajador.value =  dataJson.datos[0].telefono;
+
+               
+                $numero__registro.readOnly = true; 
+                $correo__electronico.readOnly = true;
+                $nombres__apellidos.readOnly = true; 
+                $documento__identidad.readOnly = true;
+                $sexo__trabajador.readOnly = true; 
+                $cargo__trabajador.readOnly = true; 
+                $centro_costos.readOnly = true; 
+                $sede__trabajador.readOnly = true; 
+                $estado__trabajador.readOnly = true; 
+                $fecha__nacimiento.readOnly = true;
+                $edad__trabajador.readOnly = true;
+                $direccion__trabajador.readOnly = true;
+                $telefono__trabajador.readOnly = true;
+            }else{
+                $documento_trabajador.value = "";
+                $nombres_trabajador.value = "";
+                $numero__registro.value = ""; 
+                $correo__electronico.value = "";
+                $nombres__apellidos.value = ""; 
+                $documento__identidad.value = "";
+                $sexo__trabajador.value = ""; 
+                $cargo__trabajador.value = ""; 
+                $centro_costos.value = ""; 
+                $sede__trabajador.value = ""; 
+                $estado__trabajador.value = ""; 
+                $fecha__nacimiento.value = "";
+                $edad__trabajador.value = "";
+                $direccion__trabajador.value = "";
+                $telefono__trabajador.value = "";
+                
+                $numero__registro.readOnly = false; 
+                $correo__electronico.readOnly = false;
+                $nombres__apellidos.readOnly = false; 
+                $documento__identidad.readOnly = false;
+                $sexo__trabajador.readOnly = false; 
+                $cargo__trabajador.readOnly = false; 
+                $centro_costos.readOnly = false; 
+                $sede__trabajador.readOnly = false; 
+                $estado__trabajador.readOnly = false; 
+                $fecha__nacimiento.readOnly = false;
+                $edad__trabajador.readOnly = false;
+                $direccion__trabajador.readOnly = false;
+                $telefono__trabajador.readOnly = false;
             }
         })
 }
@@ -549,19 +598,19 @@ function listarNombres($e){
         return response.json();
     })
     .then(dataJson =>{
-        if(dataJson.respuesta){
+        if(dataJson.existe){
             $tabla__busqueda_body.innerHTML = "";
             
-            for (let index = 0; index < dataJson.lista.length; index++) {
+            for (let index = 0; index < dataJson.datos.length; index++) {
                 //const btn = "<button id='press'  class='Ver'>Ver</button>";
                 let tr = document.createElement("tr");
-                tr.innerHTML =`<td>${dataJson.lista[index].dni}</td>
-                                <td>${dataJson.lista[index].nombres}</td>
-                                <td>${dataJson.lista[index].estado}</td> 
-                                <td>${dataJson.lista[index].sede}</td>
+                tr.innerHTML =`<td>${dataJson.datos[index].dni}</td>
+                                <td>${dataJson.datos[index].nombres}</td>
+                                <td>${dataJson.datos[index].estado}</td> 
+                                <td>${dataJson.datos[index].dsede}</td>
                                 <td>
                                     <a href="" data-accion2="ingreso"
-                                               data-dni="${dataJson.lista[index].dni}">
+                                               data-dni="${dataJson.datos[index].dni}">
                                         <i class="fas fa-address-book"></i>
                                     </a>
                                 </td>`;
