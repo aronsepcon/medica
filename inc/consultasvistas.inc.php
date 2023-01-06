@@ -394,7 +394,7 @@
             $spreadsheet->getActiveSheet()->setCellValue("AE5","OTOSCOPIA");
             $spreadsheet->getActiveSheet()->setCellValue("AF5","EX. AUDIOMETRICO");
             $spreadsheet->getActiveSheet()->setCellValue("AG5","EV. OSTEOMUSCULAR");
-            $spreadsheet->getActiveSheet()->setCellValue("AH3","FECHA DE INICIO");
+           // $spreadsheet->getActiveSheet()->setCellValue("AH3","FECHA DE INICIO");
             $spreadsheet->getActiveSheet()->setCellValue("AH5","EX. ODONTOLOGICO");
             $spreadsheet->getActiveSheet()->setCellValue("AI5","EKG");
             $spreadsheet->getActiveSheet()->setCellValue("AJ5","PRUEBA DE ESFUERZO");
@@ -571,33 +571,61 @@
             $spreadsheet->getActiveSheet()->mergeCells("CE5:CE7"); 
             $spreadsheet->getActiveSheet()->mergeCells("CF5:CF7");
             $spreadsheet->getActiveSheet()->mergeCells("CG6:CG7");
+            $spreadsheet->getActiveSheet()->mergeCells("CH5:CK5");
             $spreadsheet->getActiveSheet()->mergeCells("CH6:CH7");
             $spreadsheet->getActiveSheet()->mergeCells("CI6:CI7");
             $spreadsheet->getActiveSheet()->mergeCells("CJ6:CJ7");
             $spreadsheet->getActiveSheet()->mergeCells("CK6:CK7");
+            $spreadsheet->getActiveSheet()->mergeCells("CL5:CN5");
             $spreadsheet->getActiveSheet()->mergeCells("CL6:CL7");
             $spreadsheet->getActiveSheet()->mergeCells("CM6:CM7");
             $spreadsheet->getActiveSheet()->mergeCells("CN6:CN7");
+            $spreadsheet->getActiveSheet()->mergeCells("CO5:CQ5");
             $spreadsheet->getActiveSheet()->mergeCells("CO6:CO7");
             $spreadsheet->getActiveSheet()->mergeCells("CP6:CP7");
             $spreadsheet->getActiveSheet()->mergeCells("CQ6:CQ7");
+            $spreadsheet->getActiveSheet()->mergeCells("CR5:CS5");
             $spreadsheet->getActiveSheet()->mergeCells("CR6:CR7");
             $spreadsheet->getActiveSheet()->mergeCells("CS6:CS7");
             $spreadsheet->getActiveSheet()->mergeCells("CT6:CT7");
             $spreadsheet->getActiveSheet()->mergeCells("CU6:CU7");
+            $spreadsheet->getActiveSheet()->mergeCells("CV5:CY5");
             $spreadsheet->getActiveSheet()->mergeCells("CV6:CV7");
             $spreadsheet->getActiveSheet()->mergeCells("CW6:CW7");
             $spreadsheet->getActiveSheet()->mergeCells("CX6:CX7");
             $spreadsheet->getActiveSheet()->mergeCells("CY6:CY7");
+            $spreadsheet->getActiveSheet()->mergeCells("CZ5:DA5");
             $spreadsheet->getActiveSheet()->mergeCells("CZ6:CZ7");
             $spreadsheet->getActiveSheet()->mergeCells("DA6:DA7");
+            $spreadsheet->getActiveSheet()->mergeCells("DB5:DC5");
             $spreadsheet->getActiveSheet()->mergeCells("DB6:DB7");
             $spreadsheet->getActiveSheet()->mergeCells("DC6:DC7");
+            $spreadsheet->getActiveSheet()->mergeCells("DD5:DG5");
             $spreadsheet->getActiveSheet()->mergeCells("DD6:DD7");
             $spreadsheet->getActiveSheet()->mergeCells("DE6:DE7"); 
             $spreadsheet->getActiveSheet()->mergeCells("DF6:DF7");
             $spreadsheet->getActiveSheet()->mergeCells("DG6:DG7");
             $spreadsheet->getActiveSheet()->mergeCells("DH5:DH7");
+
+            $styleArray = [
+                'borders'=>[
+                    'allBorders'=>[
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                        'color' => ['argb' => '000000'],
+                    ],
+                ],
+                'alignment'=>[
+                    'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+                    'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                ],
+            ];
+
+            $spreadsheet->getActiveSheet()->getStyle('A5:DH7')->applyFromArray($styleArray);
+
+            $spreadsheet->getActiveSheet()->getStyle('A5:CF7')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
+                ->getStartColor()->setARGB('99AD71');
+            $spreadsheet->getActiveSheet()->getStyle('CG5:DH7')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
+                ->getStartColor()->setARGB('CDBA29');
 
             $centrosAdm = ["0200","0300","0600","2830","3100"];
             if($activo==1){
@@ -617,7 +645,7 @@
            // $n = formato001($pdo,$centrosAdm[$ccostos],$dni,$estadoAc,$estadoCe);
             $n = unionFormato001($pdo,$ccostos,$dni,$activo,$cesado);
             $nc = count($n);
-            $spreadsheet->getActiveSheet()-> setCellValue('AI3',date("d/m/Y"));
+            $spreadsheet->getActiveSheet()-> setCellValue('AI3','FECHA: '.date("d/m/Y"));
             for($m=0;$m<=$nc;$m++){
                 $spreadsheet->getActiveSheet()-> setCellValue('A'.$fila,$r);
                 $spreadsheet->getActiveSheet()-> setCellValue('C'.$fila,$n[$m]['id']);

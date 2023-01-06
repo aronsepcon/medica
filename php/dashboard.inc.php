@@ -73,10 +73,10 @@
                 <?php include_once('../php/formatos.inc.php'); ?>
             </div>
             
-            <div id="inventario__medicamentos" class="fichas oculto">
-                <?php include_once('../php/medicamentos.inc.php'); ?>
-            </div>
-
+            <!--div id="inventario__medicamentos" class="fichas oculto">
+                //<//?php include_once('../php/medicamentos.inc.php'); ?>
+            </div-->
+                
             <div id="ficha__atenciones" class="fichas oculto">
                 <?php include_once('../php/atenciones.inc.php'); ?>
             </div>

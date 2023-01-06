@@ -19,8 +19,12 @@
 </head>
 <body>
 <section class="wrap">
-    <section class="accesos">
-        <h4>Buscar</h4>
+    <nav class="historias__vertical__menu">
+        <a href="#" id="opcionUsuarios" class="opcion_vertical resaltado">Registrar Usuarios</a>
+        <a href="#" id="opcionTerceros" class="opcion_vertical">Registrar Terceros</a>
+    </nav>
+    <section class="accesos" id="acceso1">
+        <h4>Registrar Usuarios</h4>
         <input type="text" name="buscar_acceso" id="buscar_acceso" placeholder="ingrese un dni">
         <div>
             <input type="text" id="nombre_acceso" readonly>
@@ -31,8 +35,8 @@
         </div>
         <button id="dar_acceso">Dar Acceso</button>
     </section>
-    <section>
-        <h4>Terceros</h4>
+    <section class="accesos oculto" id="acceso2">
+        <h4>Registrar Terceros</h4>
         <label for="ruc_terceros">Ruc</label>
         <input type="text" id="ruc_terceros">
         <label for="nombre_terceros">Nombre</label>

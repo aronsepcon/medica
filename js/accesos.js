@@ -10,6 +10,38 @@ const $elegir_acceso = document.getElementById('elegir_acceso');
 const $nombre_terceros = document.getElementById('nombre_terceros');
 const $ruc_terceros = document.getElementById('ruc_terceros');
 const $registrar_terceros = document.getElementById('registrar_terceros');
+const $opcionUsuarios = document.getElementById('opcionUsuarios');
+const $opcionTerceros = document.getElementById('opcionTerceros');
+const $acceso1 = document.getElementById('acceso1');
+const $acceso2 = document.getElementById('acceso2');
+
+$opcionUsuarios.onclick = (e) => {
+    e.preventDefault();
+    document.querySelectorAll(".historias__vertical__menu a").forEach(el => {
+        el.classList.remove('resaltado');
+    });
+
+    document.querySelectorAll(".accesos").forEach(el => {
+        el.classList.add('oculto');
+    })
+
+    $opcionUsuarios.classList.add('resaltado');
+    $acceso1.classList.remove('oculto');
+}
+
+$opcionTerceros.onclick = (e) => {
+    e.preventDefault();
+    document.querySelectorAll(".historias__vertical__menu a").forEach(el => {
+        el.classList.remove('resaltado');
+    });
+
+    document.querySelectorAll(".accesos").forEach(el => {
+        el.classList.add('oculto');
+    })
+
+    $opcionTerceros.classList.add('resaltado');
+    $acceso2.classList.remove('oculto');
+}
 
 $buscar_acceso.onkeydown = (e) =>{
     var keycode = e.keyCode || e.which;

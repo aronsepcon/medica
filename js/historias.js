@@ -720,7 +720,7 @@ $tabla__examenes_body.addEventListener("click", e=>{
                 })
                 .then(dataJson => {
                     if(dataJson.respuesta){
-                        $idreg_hc.value = dataJson.lista[0].id;
+                        $idreg_hc.value = dataJson.lista[0].atencion;
                         $documento_hc.value = dataJson.lista[0].dni;
                         $nombre_hc.value = dataJson.lista[0].nombres;
                         $telefono_hc.value = dataJson.lista[0].telefono;

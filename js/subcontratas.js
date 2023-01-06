@@ -161,9 +161,11 @@ const $empresa__trabajador_sc = document.getElementById('empresa__trabajador_sc'
         }
     }
     
-    $documento_trabajador_sc.onkeydown = (e) => {
-        let kCode = e.key ;
-        if (kCode === 'Enter') {
+    $documento_trabajador_sc.addEventListener('keydown',(e) => {
+    /*.onkeypress = (e) => {
+        let kCode = e.keyCode || e.which;*/
+        e.preventDefault();
+        if (e.code === 'Enter') {
             try {
                 if ($documento_trabajador_sc.value == "") throw "Ingrese el numero de documento";
 
@@ -174,7 +176,7 @@ const $empresa__trabajador_sc = document.getElementById('empresa__trabajador_sc'
                 mostrarMensaje(error,"msj_error");
             }
         }
-    }
+    }, true);
   
     function listadoDni($e){
         try {

@@ -270,26 +270,32 @@
             <div class="caja-4cols">
                 <div class="caja-union-4-25cols">
                     <div class="registro_historia_clinica caja">
-                        <label for="">Nro de Registro</label>
-                        <input type="text" id="idreg" readonly><!--de donde sale?--Igual preguntar luego e.e-->
+                        <div>
+                            <label for="">Nro de Registro</label>
+                            <input type="text" id="idreg" readonly><!--de donde sale?--Igual preguntar luego e.e-->
+                        </div>
                         <div>
                             <label for="">Documento de identidad</label>
                             <input type="text" id="documento_hc" readonly>
                             <label for="">Telefono</label>
                             <input type="text" id="telefono_hc" readonly>
                         </div>
-                        <label for="">Nombre Trabajador</label>
-                        <input type="text" id="nombre_hc" readonly>
+                        <div>
+                            <label for="">Nombre Trabajador</label>
+                            <input type="text" id="nombre_hc" readonly>
+                        </div>
                         <div>
                             <label for="">Fecha de Nacimiento</label>
                             <input type="date" id="fecnac_hc" readonly>
                             <label for="">Area</label>
                             <input type="text" id="area_hc" readonly>
                         </div>
-                        <label for="">Cargo</label>
-                        <input type="text" id="cargo_hc"readonly>
-                        <label for="">Centro de Costos</label>
-                        <input type="text" id="ccostos_hc" readonly> 
+                        <div>
+                            <label for="">Cargo</label>
+                            <input type="text" id="cargo_hc"readonly>
+                            <label for="">Centro de Costos</label>
+                            <input type="text" id="ccostos_hc" readonly> 
+                        </div>
                         <div>
                             <label for="">Cliente/Operador</label>
                             <input type="text" readonly> 

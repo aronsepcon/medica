@@ -54,16 +54,20 @@
                     else{//aca es el error
                         $dni= str_pad($objCelda['D'],8,0,STR_PAD_LEFT);
                     }
-                    //if(substr($objCelda['A'],0,3)==id){$idreg=substr($objCelda['A'],4,11)}else{$idreg=$objCelda['A']}
+                    if(substr($objCelda['A'],0,3)=="Id:"){
+                        $idreg=substr($objCelda['A'],3,11);
+                    }else{
+                        $idreg=ltrim($objCelda['A']);
+                    }
                     $sql = "INSERT INTO fichas_api SET atencion=?, fecha = STR_TO_DATE(?,'%d/%m/%Y'), paciente=?,dni=?, ocupacion=?, 
                                                             codSexo=?, edad =?, empresa=?,tipoExa=?, aptitud=?, imc=?, diagno1=?, reco1=?, diagno2=?,
                                                             reco2=?,diagno3=?, reco3=?, diagno4=?, reco4=?,diagno5=?, reco5=?,
                                                             diagno6=?, reco6=?, diagno7=?, reco7=?, diagno8=?, reco8=?, diagno9=?, 
                                                             reco9=?, hemoglobina=?, hematocrito=?,grupoSangre=?,glucosa=?, rpr=?, 
-                                                            vdrl=?, clinica=2 ";//mandar el update sino u:
-                                                            
+                                                            vdrl=?, clinica=2";//mandar el update sino u:
+                                                            /**/
                     $statement = $pdo->prepare($sql);
-                    $statement -> execute(array(substr($objCelda['A'],4,11),$objCelda['B'],$objCelda['C'],$dni/*$objCelda['D']*/,$objCelda['E'],$objCelda['F'],
+                    $statement -> execute(array($idreg,$objCelda['B'],$objCelda['C'],$dni,$objCelda['E'],$objCelda['F'],
                                                 $objCelda['G'],$objCelda['H'],$objCelda['I'],$objCelda['J'],$objCelda['K'],$objCelda['L'],$objCelda['M'],
                                                 $objCelda['R'],$objCelda['S'],$objCelda['U'],$objCelda['V'],$objCelda['X'],$objCelda['Y'],
                                                 $objCelda['AD'],$objCelda['AE'],$objCelda['AG'], $objCelda['AH'],$objCelda['AM'],
@@ -86,42 +90,7 @@
             //serfarmed
            // else if ($objCelda['B'] !== "ATENCION"){
             case "subidaMedex":
-            /*else*/ if ($valMedex == "ATENCION" && is_numeric($objCelda['E'])){
-                     /*   $sql = "INSERT INTO fichas_medicas SET  atencion = ?,aseguradora = ?,empresa = ?,hc = ?,dni = ?,
-                                                    fec_naci = STR_TO_DATE(?, '%d/%m/%Y'),
-                                                    sexo = ?,ocupacion_actual = ?,puesto_postula = ?,tipo_examen = ?,
-                                                    fecha_examen = STR_TO_DATE(?, '%d/%m/%Y'),
-                                                    habito_1 = ?,habito_2 = ?,alergias = ?,ant_perso1 = ?,
-                                                    ant_perso2 = ?,ant_perso3 = ?,ant_perso4 = ?,ant_perso5 = ?,ant_perso6 = ?,cirugias = ?,
-                                                    ant_familiares = ?,edad = ?,peso = ?,talla = ?,imc = ?,
-                                                    frec_cardiaca = ?,frec_resp = ?,presion = ?,pam = ?,perim_abdominal = ?,
-                                                    grasa_corporal = ?,hemoglobina = ?,leucocitos = ?,colesterol = ?,hdl = ?,
-                                                    ldl = ?,trigliceridos = ?,urea_sanguinea = ?,glucosa = ?,creatinina = ?,
-                                                    acido_urico = ?,tgo = ?,tgp = ?,plaquetas = ?,grupo_sangre = ?,
-                                                    vdrl = ?,cocaina = ?,marihuana = ?,anfetaminas = ?,benzodiacepinas = ?,
-                                                    meta_anfetamina = ?,morfina = ?,bk = ?,psa = ?,cea = ?,
-                                                    aglutinaciones = ?,gota_gruesa = ?,hepatitis_a = ?,hepatiitis_b = ?,hepatitis_c = ?,
-                                                    inmunoglobulina = ?,vih = ?,fosfa_alca = ?,hemo_glico = ?,vldl = ?,
-                                                    col_total = ?,col_ldl = ?,hematocrito = ?,bilirrubina = ?,celulas_epiteliales = ?,
-                                                    leucocitos_orina = ?,hematies = ?,cilindros = ?,cristales = ?,filamento_mucoide = ?,
-                                                    germenes = ?,levadura_ori = ?,trichomonas = ?,glucosa_orina = ?,proteinas = ?,
-                                                    cuerpos_cetonicos = ?,urobilinogeno = ?,pigmentos_biliares = ?,color_orina = ?,aspecto_orina = ?,
-                                                    ph = ?,densidad = ?,coccidias = ?,levaduras_hece = ?,leucositos_pmn = ?,
-                                                    quiste = ?,huevos = ?,piocitos = ?,hematies_hece = ?,trofozoitos = ?,
-                                                    consistencia = ?,aspecto_parasitologico = ?,color_parasitologico = ?,mucus = ?,thevenon = ?,
-                                                    coprocultivo = ?,tolueno = ?,xileno = ?,carboxihemoglobina = ?,fenol = ?,
-                                                    plomo_sangre = ?,audiometria = ?,osteo = ?,rayosx = ?,lumbar = ?,
-                                                    cervical = ?,ekg = ?,p_esfuezo = ?,espirometria = ?,eco_abdominal = ?,
-                                                    papanicolau = ?,mamografia = ?,ginecologia = ?,odontograma = ?,otorrino = ?,
-                                                    traumatologia = ?,oftalmologia = ?,cardiologia = ?,psicologia = ?,dermatoligia = ?,
-                                                    neurologia = ?,diagno1 = ?,cie1 = ?,diagno2 = ?,cie2 = ?,
-                                                    diagno3 = ?,cie3 = ?,diagno4 = ?,cie4 = ?,diagno5 = ?,
-                                                    cie5 = ?,diagno6 = ?,cie6 = ?,diagno7 = ?,cie7 = ?,
-                                                    diagno8 = ?,cie8 = ?,diagno9 = ?,cie9 = ?,diagno10 = ?,
-                                                    cie10 = ?,aptitud = ?,restricciones = ?,fec_pase = ?,tipo1 = ?,
-                                                    pase1 = ?,tipo2 = ?,pase2 = ?,reco1 = ?,reco2 = ?,
-                                                    reco3 = ?,reco4 = ?,reco5 = ?,reco6 = ?,reco7 = ?,
-                                                    reco8 = ?,reco9 = ?,reco10 = ?,estado = ?";*/
+            if ($valMedex == "ATENCION" && is_numeric($objCelda['E'])){
                 $sql = "INSERT INTO fichas_api SET  atencion = ?,desAseg = ?,empresa = ?,codPaci = ?,paciente=?,dni = ?,
                                                     fecNaci = STR_TO_DATE(?, '%d/%m/%Y'),
                                                     codSexo = ?,ocupacion = ?,puestoPostula = ?,tipoExa = ?,

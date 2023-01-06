@@ -17,7 +17,7 @@ const $permisos = document.getElementById('permisos1');
 const $permisos_panel = document.getElementById('permisos_panel');
 const $cargar__estadisticas = document.getElementById('cargar__estadisticas');
 const $estadisticas = document.getElementById('estadisticas');
-const $medicamentos = document.getElementById('medicamentos');
+//const $medicamentos = document.getElementById('medicamentos');
 const $atenciones = document.getElementById('atenciones');
 
 $historias.onclick =(e) => {
@@ -52,17 +52,21 @@ $estadisticas.onclick = (e) => {
 
     return false;
 }
-
+/*
 $medicamentos.onclick = (e) => {
     e.preventDefault();
 
     fadeIn($inventario__medicamentos);
 }
-
+*/
 $atenciones.onclick = (e) => {
     e.preventDefault();
 
     fadeIn($ficha__atenciones);
+    fadeOut($ficha__subcontratas);
+    fadeOut($ficha__cargar);
+    fadeOut($ficha__historias);
+    fadeOut($permisos_panel);
 }
 
 $configuracion.onclick =(e) => {

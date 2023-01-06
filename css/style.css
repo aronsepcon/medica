@@ -1198,7 +1198,7 @@ input[name = "filtrado"]{
 #historia_clinica .caja{
   box-sizing: border-box;
   border: 2px solid #000;
-  margin-top: 20px;
+  margin-top: 8px;
   overflow: auto;
 }
 
@@ -1230,15 +1230,18 @@ input[name = "filtrado"]{
   -webkit-box-shadow: 2px 3px 5px #a2a2a2;
   box-shadow: 2px 3px 5px #a2a2a2;
   padding: 10px;
+  overflow: auto;
 }
 
 .exacaja{
   width: 210px;
+  margin-left: 8px;
 }
 
 .examen{
   display: grid;
   grid-template-columns: repeat(2,100px);
+  row-gap: 5px;
 }
 
 #label_ac{
@@ -1302,11 +1305,13 @@ input[name = "filtrado"]{
 .diag_caja div{
   display: grid;
   grid-template-columns: 0.1fr 0.1fr;
+  row-gap: 5px;
 }
 
 .eval_extra {
   display: grid;
   grid-template-columns: 0.1fr 0.1fr;
+  row-gap: 5px;
 }
 
 .caja-union-4-25cols{
@@ -1325,6 +1330,7 @@ input[name = "filtrado"]{
 
 .diag_caja{
   width: 265px;
+  margin-left: 8px;
 }
 
 .inventario_tablas {
@@ -1373,7 +1379,7 @@ input[name = "filtrado"]{
 }
 
 .progress-container .progress_carga {
-  height: 100%;
+  height: 80%;
   width: 0;
   border-radius: 0.4rem;
 
@@ -1384,16 +1390,38 @@ input[name = "filtrado"]{
 
 .grid_hc{
   display: grid;
-  grid-template-columns:1fr 1fr;
-
+  grid-template-columns:0.6fr 0.81fr;
+  row-gap: 5px;
 }
 
 .caja_vacunas{
-  margin-left: 3px;
+  margin-left: 8px;
   margin-top: 20px;
-
+  width: 260px;
 }
 
 .cargahistorias{
-  position: relative;;
+  position: fixed;
+  bottom:5%;
+  right:4%;
+}
+
+.registro_historia_clinica div{
+  margin-top: 5px;
+}
+
+.eval_caja div{
+  margin-top: 5px;
+}
+
+.pre_3 input{
+  width: 90px;
+}
+
+.grid_hc label{ 
+  text-align: center;
+}
+
+.historias__cuerpo_completo{
+  margin-bottom: 10000px;
 }

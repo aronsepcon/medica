@@ -157,6 +157,12 @@ $buscar.onclick = (e) =>{
                 changeProgress(100);
                 $tabla_formato_001.innerHTML="";
                 for(let index =0;index < dataJson.lista.length;index++){
+                    let fec_nac= new Date(dataJson.lista[index].fecha_nacimiento.slice(0,10)).getTime();
+                    let diff_mes = Date.now()-fec_nac;
+                    let edad1 = new Date(diff_mes);
+                    let año = edad1.getUTCFullYear();
+                    let edad = Math.abs(año-1970);
+
                     let tr = document.createElement("tr");
                     let $FA = dataJson.lista[index].fechaFbrA == null ? "" : dataJson.lista[index].fechaFbrA;
                     let $DTD1 = dataJson.lista[index].fechaDTD1 == null ? "" : dataJson.lista[index].fechaDTD1;
@@ -167,7 +173,7 @@ $buscar.onclick = (e) =>{
                                     <td>${dataJson.lista[index].codPaci}</td>
                                     <td>${dataJson.lista[index].dni}</td>
                                     <td>${dataJson.lista[index].nombres}</td>
-                                    <td>${dataJson.lista[index].edad}</td>
+                                    <td>${edad}</td>
                                     <td>${dataJson.lista[index].sexo}</td>
                                     <td>${dataJson.lista[index].cargo}</td>
                                     <td>${""}</td>
@@ -273,13 +279,19 @@ $buscar.onclick = (e) =>{
                 $tabla_formato_006.innerHTML="";
                 for(let index =0;index < dataJson.lista.length;index++){
                     //console.log(dataJson.lista[index].fechap);
+                    let fec_nac= new Date(dataJson.lista[index].fecha_nacimiento.slice(0,10)).getTime();//cambiarle el formato que jala
+                    let diff_mes = Date.now()-fec_nac;
+                    let edad1 = new Date(diff_mes);
+                    let año = edad1.getUTCFullYear();
+                    let edad = Math.abs(año-1970);
+
                     let tr = document.createElement("tr");
                     let $DTD3 = dataJson.lista[index].fechaDifTD3 == "01/01/1970" ? "" : dataJson.lista[index].fechaDifTD3;
                     tr.innerHTML = `<td>${index+1}</td>
                                     <td>${dataJson.lista[index].nombres}</td>
-                                    <td>${dataJson.lista[index].fecnac}</td>
+                                    <td>${dataJson.lista[index].fecha_nacimiento.slice(0,10)}</td>
                                     <td>${dataJson.lista[index].dni}</td>
-                                    <td>${dataJson.lista[index].edad}</td>
+                                    <td>${edad}</td>
                                     <td>${dataJson.lista[index].costos}</td>
                                     <td>${dataJson.lista[index].cargo}</td>
                                     <td>${dataJson.lista[index].empresa}</td>
