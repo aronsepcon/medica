@@ -18,6 +18,7 @@ const $pagina4_sc = document.getElementById('pagina4_sc');
 const $pagina5_sc = document.getElementById('pagina5_sc');
 
 const $documento_trabajador_sc = document.getElementById('documento_trabajador_sc');
+const $documentos = document.getElementById('documentos');
 const $tabla__examenes_body = document.getElementById('tabla__examenes_body_sc');
 
 const $busqueda_boton_sc = document.getElementById('busqueda_boton_sc');
@@ -161,17 +162,27 @@ const $empresa__trabajador_sc = document.getElementById('empresa__trabajador_sc'
         }
     }
     
+    $documentos.onkeydown = (e) => {
+        if (e.code === 'Enter') {
+            console.log($documentos.value);
+        }
+    }
+
+
     $documento_trabajador_sc.addEventListener('keydown',(e) => {
     /*.onkeypress = (e) => {
         let kCode = e.keyCode || e.which;*/
-        e.preventDefault();
+        //e.preventDefault();
         if (e.code === 'Enter') {
             try {
-                if ($documento_trabajador_sc.value == "") throw "Ingrese el numero de documento";
-
-                //ver el cambio sino asi mas directo         
-                listadoDni(e.target.value);
-                console.log($documento_trabajador_sc.value);
+                if ($documento_trabajador_sc.value == ""){
+                    mostrarMensaje( "Ingrese el numero de documento","msj_error");
+                }else{
+                    listadoDni($documento_trabajador_sc.value);
+                    console.log($documento_trabajador_sc.value);
+                }   
+                    //ver el cambio sino asi mas directo         
+                   
             } catch (error) {
                 mostrarMensaje(error,"msj_error");
             }

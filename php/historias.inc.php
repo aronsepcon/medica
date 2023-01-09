@@ -568,7 +568,7 @@
                         </div>
                     </div>
                     <div class="grid_hc">
-                        <label for="">Neumococo</label>
+                        <label for="" class="labl_vac">Neumococo</label>
                         <div>
                             <label for="">R1</label>
                             <input type="date" id="nm_r1_hc" readonly>

@@ -205,6 +205,7 @@
     </div>
 </div>
 <form class="historias__cuerpo__busqueda"> 
+        <input type="text" id="documentos" placeholder="test" class="oculto">
         <input type="text" id="documento_trabajador_sc" name="documento_trabajador" placeholder="Documento de Identificación" value="42081842">
         <div>
             <a href="#" id="busqueda_boton_sc"><i class="fas fa-search" ></i></a>

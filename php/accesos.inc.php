@@ -37,10 +37,12 @@
     </section>
     <section class="accesos oculto" id="acceso2">
         <h4>Registrar Terceros</h4>
-        <label for="ruc_terceros">Ruc</label>
+        <label for="ruc_terceros">RUC</label>
         <input type="text" id="ruc_terceros">
-        <label for="nombre_terceros">Nombre</label>
-        <input type="text" id="nombre_terceros">
+        <div>
+            <label for="nombre_terceros">Nombre</label>
+            <input type="text" id="nombre_terceros">
+        </div>
         <button id="registrar_terceros">Registrar</button>
     </section>
 </section> 

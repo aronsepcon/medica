@@ -1392,6 +1392,8 @@ input[name = "filtrado"]{
   display: grid;
   grid-template-columns:0.6fr 0.81fr;
   row-gap: 5px;
+  align-items: center;
+  border: solid 1px #000;
 }
 
 .caja_vacunas{
