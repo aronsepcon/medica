@@ -39,6 +39,10 @@ const $edad__trabajador_sc = document.getElementById('edad__trabajador_sc');
 const $direccion__trabajador_sc = document.getElementById('direccion__trabajador_sc');
 const $empresa__trabajador_sc = document.getElementById('empresa__trabajador_sc');
 
+const $hc_subcontrata = document.getElementById('hc_subcontrata');
+const $cierre_historia_clinica_sc = document.getElementById('cierre_historia_clinica_sc');
+const $uploadPdfSc = document.getElementById('uploadPdfSc');
+
     $opcion1_sc.onclick = (e) => {
         e.preventDefault();
 
@@ -161,6 +165,14 @@ const $empresa__trabajador_sc = document.getElementById('empresa__trabajador_sc'
             mostrarMensaje(error,"msj_error");
         }
     }
+
+    $cierre_historia_clinica_sc.onclick = (e) => {
+        e.preventDefault();
+
+        fadeOut($hc_subcontrata);
+
+        return false;
+    }
     
     $documentos.onkeydown = (e) => {
         if (e.code === 'Enter') {
@@ -275,6 +287,53 @@ const $empresa__trabajador_sc = document.getElementById('empresa__trabajador_sc'
         }
     }
     
+    $tabla__examenes_body.addEventListener("click",e =>{
+        e.preventDefault();
+        let accion = e.target.parentElement.dataset.accion;
+        let registro = e.target.parentElement.getAttribute("href");
+        
+        if(accion=="abrirHistoriaSc"){
+            fadeIn($hc_subcontrata);
+        }else if(accion=="uploadFilesc"){
+            cargar();
+        }
+    })
+
+    function cargar(){
+        $uploadPdfSc.onchange = (e) => {
+            e.preventDefault();
+            try {
+                if (validar($uploadPdfSc)) throw 'Archivo inválido. No se permite la extensión ';
+    
+                const formData = new FormData();
+                formData.append('fileUpload',$uploadPdfSc.files[0]);
+                formData.append('indice',registro);
+                fetch ('../inc/cargarHistoriaMedica.inc.php',{
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.respuesta) {
+                        mostrarMensaje("Documento subido","msj_correct");
+                        listarExamenes();
+                       // let adjunto = "../hc/"+data.archivo;
+                    // console.log(adjunto);
+                     //   $frame__adjunto.setAttribute("src", adjunto);
+                    }else{
+                        mostrarMensaje("Hubo un error al subir el archivo","msj_error");
+                    }
+                })
+                .catch(error => {
+                    console.error(error);
+                })
+            } catch (error) {
+                mostrarMensaje(error,"msj_error");
+            }
+            return false;
+        }
+    }
+
     function listarExamenes(){
 
         let data = new FormData();
@@ -310,7 +369,7 @@ const $empresa__trabajador_sc = document.getElementById('empresa__trabajador_sc'
                                     <td>${$restricciones}</td>
                                     <td>${dataJson.lista[index].alergias}</td>
                                     <td>${$sangre_tipo}</td>
-                                    <td><a href="${dataJson.lista[index].id}" data-accion="abrirHistoria"><i class="fas fa-address-book"></a></td>
+                                    <td><a href="${dataJson.lista[index].id}" data-accion="abrirHistoriaSc"><i class="fas fa-address-book"></a></td>
                                     <td class="textoCentro">
                                         <a href="${dataJson.lista[index].id}" data-accion="" 
                                                                               data-examen="${dataJson.lista[index].tipo}" 
@@ -326,7 +385,9 @@ const $empresa__trabajador_sc = document.getElementById('empresa__trabajador_sc'
                                         </a>
                                     </td>
                                     <td class="textoCentro">
-                                       
+                                        <a href="${dataJson.lista[index].id}" data-accion="uploadFilesc">
+                                            ${$icono_cargado}
+                                        </a>
                                     </td>`;
                                 //sendMail, previewFile, uploadFile
                     $tabla__examenes_body.appendChild(tr);

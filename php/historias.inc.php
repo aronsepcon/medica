@@ -1087,12 +1087,14 @@
                             <div>
                                 <span>Lote</span>
                                 <input type="text" id="lote_pase" hidden>
-                                <input type="checkbox" name="lote56" id="lote56">
+                                <input type="checkbox" name="lote56" value="lote56" class="checkVac" id="lote56">
                                 <label for="lote56">56</label>
-                                <input type="checkbox" name="lote88" id="lote88">
+                                <input type="checkbox" name="lote88" value="lote88" class="checkVac" id="lote88">
                                 <label for="lote88">88</label>
-                                <input type="checkbox" name="pisco" id="pisco">
+                                <input type="checkbox" name="pisco" value="pisco" class="checkVac" id="pisco">
                                 <label for="pisco">Pisco</label>
+                                <input type="checkbox" name="pucallpa" value="pucallpa" class="checkVac" id="pucallpa">
+                                <label for="pucallpa">Pucallpa</label>
                             </div>
                             <div class="pase_grid">
                                 <span>Nombre</span>

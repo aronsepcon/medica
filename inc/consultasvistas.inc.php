@@ -1122,8 +1122,9 @@
                 $estadooo="CE";//validar esto
             }
             $cc =  ["0200","0300","0600","2830","3100"];
-            $a = baseApi($cc[$ccostos],$estadooo);
-            $b = consulta001($pdo,$dni);
+            $dc =  ['lima','pucallpa','lurin','malvinas','pisco'];
+            $a = baseApi($dc[$ccostos],$estadooo);
+            $b = consulta001($pdo,$cc[$ccostos],$dni);
             $na = count($a);    
             if($na>0){
                 $keyed = array_column($b,NULL,'dni'); 
@@ -1142,7 +1143,7 @@
 
     function baseApi($ccostos,$estado){
         try{
-            $url = "http://sicalsepcon.net/api/testapi.php?cc=".$ccostos."&estado=".$estado;
+            $url = "http://sicalsepcon.net/api/busquedaSede.php?cc=".$ccostos."&estado=".$estado;
             $json_data = file_get_contents($url);
             $lista = json_decode($json_data,true);
 
@@ -1167,7 +1168,7 @@
 
     function formatosTablas($pdo,$ccostos){//q es esto
         try {
-            $cc = ["0200","0300","0600","2800","2600"];//cambiar por consulta o bd luego 
+            $cc = ["0200","0600","060001","2830","3100"];//cambiar por consulta o bd luego 
             $respuesta = false;
             $lista = [];
             $sql = "SELECT `fe`.`empleadonomb` AS `empleadonomb`,`fe`.`fecnac` AS `fecnac`,`fa`.`dni` AS `dni`, DATE_FORMAT(FROM_DAYS(DATEDIFF(now(),fa.fecNaci)), '%Y')+0 AS edad,`fe`.`ccostos` AS `ccostos`,
@@ -1729,7 +1730,7 @@
        
     }
 
-    function consulta001($pdo,$dni){
+    function consulta001($pdo,$ccostos,$dni){
         try{
             $lista = [];
             $sql = "SELECT fa.dni,f.direccion,f.telefono,
@@ -1779,9 +1780,9 @@
                     LEFT JOIN fichas_empleados AS f ON fa.dni = f.dni
                     LEFT JOIN fichas_vacunacion AS v ON fa.dni=v.dni
                     LEFT JOIN lista_clinicas AS lc ON lc.id = fa.clinica
-                    WHERE (fa.dni=? OR NOT EXISTS(SELECT idreg FROM fichas_api fa4 WHERE fa4.dni=?)) /*AND /*fe.ccostos LIKE '0200%' AND fe.estado='ac'*/ GROUP BY fa.dni ORDER BY fa.paciente";  
+                    WHERE /*(fa.dni=? OR NOT EXISTS(SELECT idreg FROM fichas_api fa4 WHERE fa4.dni=?)) /*AND*/ fa.centroCosto LIKE '$ccostos%' /*AND fe.estado='ac'*/ GROUP BY fa.dni /*ORDER BY fa.paciente*/";  
                     $statement = $pdo->prepare($sql);
-                    $statement ->execute(array($dni,$dni));
+                    $statement ->execute(/*array($dni,$dni)*/);
                     $result = $statement ->fetchAll();
                     $rowCount = $statement -> rowcount();
         
@@ -2026,9 +2027,10 @@
             else if($cesado==1){
                 $estadooo="CE";//validar esto
             }
-            $cc =  ["0200","0300","0600","2830","3100"];
-            $a = baseApi($cc[$ccostos],$estadooo);
-            $b = consulta001($pdo,$dni);
+            $cc =  ["0200","0600","0600.1","2830","3100"];//actaulizar //hablar para q lo pase con 5 digitos u:
+            $dc =  ['lima','pucallpa','lurin','malvinas','pisco'];
+            $a = baseApi($dc[$ccostos],$estadooo);
+            $b = consulta001($pdo,$cc[$ccostos],$dni);
             $na = count($a);    
             if($na>0){
                 $keyed = array_column($b,NULL,'dni'); 

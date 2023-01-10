@@ -929,8 +929,8 @@
         try {
             $respuesta = false;
             $lista = [];
-            $sql = "SELECT fe.cut,fe.empleadonomb,fe.correo,fe.dni,fe.cargo,fe.ccostos,
-                        fe.edad,fe.sede,fe.sexo,fe.fecnac,fe.estado,fe.direccion,fe.telefono,
+            $sql = "SELECT fe.cut,fa.paciente,fe.correo,fe.dni,fe.ccostos,
+                        fa.edad,fe.dsede,fa.codSexo,fa.fecNaci,fe.estado,f.direccion,f.telefono,
                         fa.idreg,fa.acidoUrico,fa.aglutinaciones,fa.alergias,fa.anfetaminas,fa.antFamiliares,
                         fa.antece1,fa.antece2,fa.antece3,fa.antece4,fa.antece5,
                         fa.antece6,fa.aptitud,fa.atencion,fa.audiometria,fa.benceno,
@@ -973,10 +973,11 @@
                         v.fechaRabR1,v.fechaTifoR1,v.fechaTifoR2,v.fechaNeumR1,v.fechaNeumR2,v.fechaCovidD1,
                         v.fechaCovidD2,v.fechaCovidD3,v.fechaCovidD4
                     FROM fichas_api AS fa
-                    LEFT JOIN fichas_empleados AS fe ON fa.dni=fe.dni
+                    LEFT JOIN rrhh.tabla_aquarius AS fe ON fa.dni=fe.dni
                     LEFT JOIN fichas_vacunacion AS v ON fa.dni=v.dni
+                    LEFT JOIN fichas_empleados AS f ON fa.dni=f.dni
                     LEFT JOIN lista_clinicas AS lc ON lc.id = fa.clinica
-                    WHERE fa.idreg=? AND fe.dni=?";
+                    WHERE fa.idreg=? AND fa.dni=?";
             $statement = $pdo->prepare($sql);
             $statement ->execute(array($id,$documento));
             $result = $statement ->fetchAll();
@@ -985,13 +986,12 @@
                 foreach($result as $row){
                     $salida = array("cut"=>$row['cut'],
                                     "dni"=>$row['dni'],
-                                    "nombres"=>$row['empleadonomb'],
-                                    "fecnac"=>$row['fecnac'],
+                                    "nombres"=>$row['paciente'],
+                                    "fecnac"=>$row['fecNaci'],
                                     "correo"=>$row['correo'],
-                                    "sexo"=>$row['sexo'],
-                                    "cargo"=>$row['cargo'],
+                                    "sexo"=>$row['codSexo'],
                                     "ccostos"=>$row['ccostos'],
-                                    "sede"=>$row['sede'],
+                                    "sede"=>$row['dsede'],
                                     "estado"=>$row['estado'],
                                     "direccion"=>$row['direccion'],
                                     "edad"=>$row['edad'],

@@ -30,7 +30,6 @@ const $medicamotivotext = document.getElementById("medicamotivotext");
 const $clinica = document.getElementById("clinica");
 const $clinicaEmoA = document.getElementById("clinicaEmoA");
 
-
 (function(){
     //import {paseMedico} from "./paseMedico.js";
 //import {paseMedico} from "./funciones.js";
@@ -191,7 +190,6 @@ const $cv_d1_hc = document.getElementById('cv_d1_hc');
 const $cv_d2_hc = document.getElementById('cv_d2_hc');
 const $cv_d3_hc = document.getElementById('cv_d3_hc');
 const $cv_d4_hc = document.getElementById('cv_d4_hc');
-
 
 let registro = 0;
 
@@ -397,26 +395,6 @@ $documento_trabajador.onkeypress = (e) => {
 }
 
 function listadoDni($e){
-        let data = new FormData();
-        data.append("documento",$e);
-        data.append("funcion","datosColaborador");
-        listarExamenes();
-        fetch('../inc/consultasrrhh.inc.php',{
-            method: "POST",
-            body:data,
-        })
-        .then(function(response){
-            return response.json();
-        })
-        .then(dataJson => {
-            if (dataJson.respuesta){
-              //  $numero__registro.value = dataJson.cut
-              //  $estado__trabajador.value = dataJson.estado;
-            }else{
-                mostrarMensaje("No se encuentra el DNI","msj_error");
-            }
-        })
-    
         let data2 = new FormData();
             data2.append("doc",$e);
             data2.append("funcion", "datosApi");
@@ -458,7 +436,7 @@ function listadoDni($e){
                         $correo__electronico.value = dataJson.lista[0].correo == null ? dataJson.datos[0].correo : dataJson.lista[0].correo;
                         $documento__identidad.value =dataJson.lista[0].dni == null ? dataJson.datos[0].dni : dataJson.lista[0].dni;
                         $cargo__trabajador.value = dataJson.lista[0].cargo == null ? dataJson.datos[0].cargo : dataJson.lista[0].cargo;
-                        $centro_costos.value = dataJson.lista[0].ccostos == null ? dataJson.datos[0].ccostos.slice(0,4) +" "+dataJson.datos[0].sede : dataJson.lista[0].ccostos;
+                        $centro_costos.value = dataJson.lista[0].ccostos == null ? dataJson.datos[0].ccostos +" "+dataJson.datos[0].sede : dataJson.lista[0].ccostos;
                         $edad__trabajador.value = edad;//aqui xd
                         $sede__trabajador.value = dataJson.lista[0].sede == null ? dataJson.datos[0].sucursal : dataJson.lista[0].sede;
                         $sexo__trabajador.value = dataJson.lista[0].sexo == null ? dataJson.datos[0].sexo : dataJson.lista[0].sexo;
@@ -475,7 +453,7 @@ function listadoDni($e){
                 $correo__electronico.value =  dataJson.datos[0].correo;
                 $documento__identidad.value = dataJson.datos[0].dni; 
                 $cargo__trabajador.value =  dataJson.datos[0].cargo;
-                $centro_costos.value =  dataJson.datos[0].ccostos.slice(0,4) +" "+dataJson.datos[0].sede
+                $centro_costos.value =  dataJson.datos[0].ccostos +" "+dataJson.datos[0].sede
                 $edad__trabajador.value =  edad ;//aqui xd
                 $sede__trabajador.value =  dataJson.datos[0].sucursal;
                 $sexo__trabajador.value = dataJson.datos[0].sexo;
@@ -486,7 +464,6 @@ function listadoDni($e){
 
                
                 $numero__registro.readOnly = true; 
-                $correo__electronico.readOnly = true;
                 $nombres__apellidos.readOnly = true; 
                 $documento__identidad.readOnly = true;
                 $sexo__trabajador.readOnly = true; 
@@ -496,8 +473,7 @@ function listadoDni($e){
                 $estado__trabajador.readOnly = true; 
                 $fecha__nacimiento.readOnly = true;
                 $edad__trabajador.readOnly = true;
-                $direccion__trabajador.readOnly = true;
-                $telefono__trabajador.readOnly = true;
+                
             }else{
                 $documento_trabajador.value = "";
                 $nombres_trabajador.value = "";
@@ -516,7 +492,6 @@ function listadoDni($e){
                 $telefono__trabajador.value = "";
                 
                 $numero__registro.readOnly = false; 
-                $correo__electronico.readOnly = false;
                 $nombres__apellidos.readOnly = false; 
                 $documento__identidad.readOnly = false;
                 $sexo__trabajador.readOnly = false; 
@@ -526,8 +501,6 @@ function listadoDni($e){
                 $estado__trabajador.readOnly = false; 
                 $fecha__nacimiento.readOnly = false;
                 $edad__trabajador.readOnly = false;
-                $direccion__trabajador.readOnly = false;
-                $telefono__trabajador.readOnly = false;
             }
         })
 }
@@ -728,7 +701,7 @@ $tabla__examenes_body.addEventListener("click", e=>{
                         $fecha_hc.value = dataJson.lista[0].fecha;
                         $sgtefecha.value = dataJson.lista[0].sgtefecha;
                         $ccostos_hc.value = dataJson.lista[0].ccostos;
-                        $cargo_hc.value = dataJson.lista[0].cargo;
+                        $cargo_hc.value = dataJson.lista[0].puestoPostula;
                         $tipoExa_hc.value = dataJson.lista[0].tipo;
                         $clinica_hc.value = dataJson.lista[0].clinica;
                         $pase_hc.value = dataJson.lista[0].pase;
@@ -1111,6 +1084,8 @@ function listarConsultas(){
 }
 })()
 
+
+
 export function paseMedico(){
     
     let data2 = new FormData();
@@ -1180,11 +1155,7 @@ export function paseMedico(){
                 $fecha_emo_v.value = dataJson.lista[0].fechaEmo;
                 $fecha_emo.value = dataJson.lista[0].fechaEmo;
             }
-            console.log("emoA1:"+ $fecha_emoA1.value)
-            console.log("emoA2:"+ $fecha_emoA2.value)
-            console.log("emoA3:"+ $fecha_emo.value)
-            console.log("emoA3_v:"+ $fecha_emo_v.value)
-
+     
             $id_pase.value=dataJson.lista[0].id;
             $numero_pase.value=dataJson.lista[0].numero_pase;
             $clinica.value=dataJson.lista[0].clinica;

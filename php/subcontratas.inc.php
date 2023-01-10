@@ -37,6 +37,12 @@
         </div>
     </div>    
 </div>
+<div class="modal" id="hc_subcontrata">
+    <div class="w150porcen hc">
+        <button type="button" id="cierre_historia_clinica_sc">X</button>
+
+    </div>
+</div>
 <div class="modal" id="pestañas_s">
         <div class="inside h90p">
             <button type="button" id="cierre_pestañas_s">X</button>
@@ -224,6 +230,7 @@
             <section class="historias__cuerpo__pagina bars" id="pagina1_sc"> 
                 <div>
                     <form id="formulario_datos_trabajador">
+                        <input type="file" id="uploadPdfSc" accept=".pdf" class="oculto">
                         <div>
                             <h3>Datos del trabajador</h3>
                             <div class="formulario_datos_trabajador_4columnas">
